@@ -1,0 +1,200 @@
+body {
+	margin: 0;
+	padding: 0;
+	/* background: rgb(35, 88, 11) ; */
+	background-attachment: fixed ;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #181B20;
+}
+
+h1, h2, h3 {
+	margin: 0px;
+	padding: 0px;
+	/* text-transform: ; */
+	font-family: 'Abel', sans-serif;
+	font-weight: 400;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 2.4em;
+}
+
+h3 {
+	font-size: 1.6em;
+}
+
+p, ul, ol {
+	margin-top: 0;
+	line-height: 180%;
+}
+
+/* ul, ol {
+} */
+
+a {
+	text-decoration: none;
+	color: #398A12;
+}
+
+.d-flex{
+    display:flex;
+}
+
+.nav-link{
+	color: #181B20;
+	font-weight: 500;
+	font-size: 16px;
+    margin-left: 15px;
+}
+.nav-link:hover{
+	color: rgb(3, 122, 13);
+    font-weight: bold;
+}
+.navbar-brand, .nav-link.active{
+    color:#181B20;
+}
+.navbar-nav{
+    margin-left: 30px;
+}
+.dropdown-item:hover{
+       background-color:#b1e698;
+}
+#header-wrapper {
+	height: 570px;
+	background-color: rgb(44, 77, 44);
+    position: relative;
+	/* background-image: url("images/imgsch.jpg"); */
+	 background-repeat: no-repeat ;
+	 background-attachment: local ;
+	background-position: left bottom;	
+}
+
+#logo h1{
+	color: rgb(163, 243, 169);
+	text-shadow: 2px 1px 1px rgb(16, 59, 2);
+}
+#logo p {
+	/* margin-top: -25px; */
+	font-size: 4em;
+	color: rgb(163, 243, 169);
+	text-shadow: 1px 1px 1px rgb(21, 24, 21);
+}
+.p-Arabic{
+    margin-top: 18px;
+}
+.p-English{
+    margin-top: -20px;
+}
+
+#hero-button, .subscribe-btn{
+    border-color: #5ec52e;
+    color:white;
+}
+#hero-button:hover, .subscribe-btn:hover{
+    background-color: #5ec52e;
+}
+.vision-misson{
+    height: 300px;
+    background-color:#c8f1b5;
+    text-align: center;
+    box-shadow: 1px 1px 3px rgb(16, 59, 2), -1px -1px 3px rgb(16, 59, 2);
+    margin: auto;
+    max-width: 80%;
+}
+
+.vma{
+    position: absolute;
+    top: 480px;  
+}
+.vma h5{
+    font-weight: bold;
+}
+.vision{
+    border-right: 1px solid black;
+}
+
+.anthem-container{
+   margin-top: 160px;
+   margin-bottom: 30px;
+}
+.anthem{
+    text-align: center;
+}
+.anthem .c-text{
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+.anthem .c-title{
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.anthem-english{
+    margin-top: 0;
+}
+.footer{
+    background-color: rgb(44, 77, 44);
+}
+.footer a{
+    color:#c8f1b5;
+}
+.widget-title{
+    color: white;
+}
+.widget p{
+    color:#5ec52e
+}
+.logo-paragh{
+    line-height: 20px;
+    margin-top: 10px;
+}
+.subscribe-btn{
+    background-color: #5ec52e;
+    color:white;
+}
+.text-faint, .text-faint a{
+    color: #4f7260;
+}
+.text-faint a:hover{
+    color: #b1e698;
+    opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+    .vision-misson {
+     height: fit-content;
+    }
+    .anthem .c-text{
+        font-size: 1rem;
+    }
+    .anthem-container{
+        margin-top: 250px;
+     }
+  }
+  @media (max-width: 991px) {
+    .vision {
+     border: none;
+     margin-bottom: 20px;
+    }
+  }
+@media (max-width: 688px) {
+    .vma{
+        top: 520px;  
+    }
+    .anthem-container{
+        margin-top: 350px;
+     }
+  }
+@media (max-width: 480px) {
+    .anthem-container{
+        margin-top: 500px;
+     }
+  }
+
+
+
