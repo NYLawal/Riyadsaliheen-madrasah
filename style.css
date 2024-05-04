@@ -65,7 +65,7 @@ a {
        background-color:#b1e698;
 }
 #header-wrapper {
-	height: 570px;
+	height: 600px;
 	background-color: rgb(44, 77, 44);
     position: relative;
 	/* background-image: url("images/imgsch.jpg"); */
@@ -83,12 +83,6 @@ a {
 	font-size: 4em;
 	color: rgb(163, 243, 169);
 	text-shadow: 1px 1px 1px rgb(21, 24, 21);
-}
-.p-Arabic{
-    margin-top: 18px;
-}
-.p-English{
-    margin-top: -20px;
 }
 
 #hero-button, .subscribe-btn{
@@ -109,7 +103,7 @@ a {
 
 .vma{
     position: absolute;
-    top: 480px;  
+    top: 35rem;  
 }
 .vma h5{
     font-weight: bold;
@@ -119,7 +113,7 @@ a {
 }
 
 .anthem-container{
-   margin-top: 160px;
+   margin-top: 12rem;
    margin-bottom: 30px;
 }
 .anthem{
@@ -164,6 +158,12 @@ a {
     color: #b1e698;
     opacity: 0.5;
 }
+@media (max-width: 991px) {
+    .vision {
+     border: none;
+     margin-bottom: 20px;
+    }
+  }
 
 @media (max-width: 767px) {
     .vision-misson {
@@ -173,28 +173,50 @@ a {
         font-size: 1rem;
     }
     .anthem-container{
-        margin-top: 250px;
+        margin-top: 16rem;
      }
   }
-  @media (max-width: 991px) {
-    .vision {
-     border: none;
-     margin-bottom: 20px;
-    }
-  }
+ 
 @media (max-width: 688px) {
     .vma{
-        top: 520px;  
+        top: 36rem;  
     }
     .anthem-container{
-        margin-top: 350px;
+        margin-top: 20rem;
      }
   }
+  
 @media (max-width: 480px) {
     .anthem-container{
-        margin-top: 500px;
+        margin-top: 24rem;
      }
   }
+
+ 
+  /* .vma{
+    top: 37rem;  
+} */
+@media (max-width: 360px) {
+    .anthem-container{
+        margin-top: 36rem;
+     }
+     .vma{
+        top: 37rem;  
+    }
+  }
+  
+  @media (min-width: 361px) and (max-width: 394px){
+    .anthem-container{
+        margin-top: 30rem;
+     }
+  }
+
+  @media (min-width: 481px) and (max-width: 541px){
+    .anthem-container{
+        margin-top: 36rem;
+     }
+  }
+ 
 
 
 
