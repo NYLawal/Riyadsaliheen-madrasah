@@ -65,21 +65,18 @@ a {
        background-color:#b1e698;
 }
 #header-wrapper {
-	height: 600px;
 	background-color: rgb(44, 77, 44);
-    position: relative;
 	/* background-image: url("images/imgsch.jpg"); */
 	 background-repeat: no-repeat ;
 	 background-attachment: local ;
 	background-position: left bottom;	
 }
 
-#logo h1{
+#welcome h1{
 	color: rgb(163, 243, 169);
 	text-shadow: 2px 1px 1px rgb(16, 59, 2);
 }
-#logo p {
-	/* margin-top: -25px; */
+#welcome p {
 	font-size: 4em;
 	color: rgb(163, 243, 169);
 	text-shadow: 1px 1px 1px rgb(21, 24, 21);
@@ -94,16 +91,15 @@ a {
 }
 .vision-misson{
     height: 300px;
+    color:#181B20;
     background-color:#c8f1b5;
     text-align: center;
     box-shadow: 1px 1px 3px rgb(16, 59, 2), -1px -1px 3px rgb(16, 59, 2);
     margin: auto;
     max-width: 80%;
 }
-
 .vma{
-    position: absolute;
-    top: 35rem;  
+    margin-top: 3em;
 }
 .vma h5{
     font-weight: bold;
@@ -111,9 +107,10 @@ a {
 .vision{
     border-right: 1px solid black;
 }
-
+#header-wrapper button{
+    margin-top: 1.5em;
+}
 .anthem-container{
-   margin-top: 12rem;
    margin-bottom: 30px;
 }
 .anthem{
@@ -139,9 +136,10 @@ a {
 }
 .widget-title{
     color: white;
+    margin-bottom: 1.5rem;
 }
 .widget p{
-    color:#5ec52e
+    color:#71d443
 }
 .logo-paragh{
     line-height: 20px;
@@ -165,57 +163,23 @@ a {
     }
   }
 
-@media (max-width: 767px) {
+  @media (max-width: 767px) {
     .vision-misson {
      height: fit-content;
+    }
+    .anthem-container{
+        margin-top: -1rem;
     }
     .anthem .c-text{
         font-size: 1rem;
     }
-    .anthem-container{
-        margin-top: 16rem;
-     }
-  }
- 
-@media (max-width: 688px) {
-    .vma{
-        top: 36rem;  
+    .widget-title{
+        margin-bottom: 1rem;
     }
-    .anthem-container{
-        margin-top: 20rem;
-     }
-  }
-  
-@media (max-width: 480px) {
-    .anthem-container{
-        margin-top: 24rem;
-     }
-  }
+}
 
+   
  
-  /* .vma{
-    top: 37rem;  
-} */
-@media (max-width: 360px) {
-    .anthem-container{
-        margin-top: 36rem;
-     }
-     .vma{
-        top: 37rem;  
-    }
-  }
-  
-  @media (min-width: 361px) and (max-width: 394px){
-    .anthem-container{
-        margin-top: 30rem;
-     }
-  }
-
-  @media (min-width: 481px) and (max-width: 541px){
-    .anthem-container{
-        margin-top: 36rem;
-     }
-  }
  
 
 
