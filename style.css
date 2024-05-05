@@ -51,12 +51,16 @@ a {
 	font-size: 16px;
     margin-left: 15px;
 }
+.nav-link.current{
+    border-bottom: 2px solid #398A12;
+    padding-bottom: 0%;
+}
 .nav-link:hover{
 	color: rgb(3, 122, 13);
     font-weight: bold;
 }
 .navbar-brand, .nav-link.active{
-    color:#181B20;
+    color: #4f7260;
 }
 .navbar-nav{
     margin-left: 30px;
@@ -86,7 +90,7 @@ a {
     border-color: #5ec52e;
     color:white;
 }
-#hero-button:hover, .subscribe-btn:hover{
+#hero-button:hover, .subscribe-btn:hover, .about-btn:hover{
     background-color: #5ec52e;
 }
 .vision-misson{
@@ -119,6 +123,9 @@ a {
 .anthem .c-text{
     font-size: 1.5rem;
     margin-bottom: 0;
+}
+.anthem .c-text.second{
+    margin-bottom: 1rem;
 }
 .anthem .c-title{
     margin-bottom: 24px;
@@ -171,6 +178,11 @@ a {
      margin-bottom: 20px;
     }
   }
+  @media (min-width: 768px) {
+    .arabic-smallscreen{
+        display: none;
+    }
+  }
 
   @media (max-width: 767px) {
     .vision-misson {
@@ -187,6 +199,40 @@ a {
     .widget-title{
         margin-bottom: 1rem;
     }
+    .arabic-bigscreen{
+        display: none;
+    }
+}
+
+
+/* ==================================================
+                    ABOUT US PAGE 
+================================================== */
+
+.about-header{
+    height: 15rem;
+}
+.about-header h1{
+    text-shadow: 2px 1px 1px rgb(16, 59, 2);
+    margin-top: 4rem;
+}
+.about-btn{
+   background-color: #5ec52e;
+}
+.about-btn:hover{
+    color: white;
+}
+.about-us .card{
+    border-color: #5ec52e;
+    background-color: #cbeebb;    
+}
+.about-us .card .card-title{
+   font-weight: bold;
+}
+.about-viewprg{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
 }
 
    
