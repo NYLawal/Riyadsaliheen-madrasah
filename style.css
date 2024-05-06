@@ -234,6 +234,20 @@ a {
     margin-right: auto;
     max-width: 60%;
 }
+.qanda-section{
+    background-color: #e5f0e0;
+}
+.qanda-section .accordion-button:focus{
+    background-color: #c8f1b5;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.qanda-section .accordion-button:active{
+    border: none;
+    outline: none;
+}
+
 
    
  
