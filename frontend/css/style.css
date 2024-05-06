@@ -117,6 +117,10 @@ a {
 #hero-button:hover, .subscribe-btn:hover, .about-btn:hover{
     background-color: #5ec52e;
 }
+.motto-arabic{
+margin-top: 30px;
+margin-bottom: 0px;
+}
 .vision-misson{
     height: 300px;
     color:#181B20;
@@ -197,17 +201,18 @@ a {
     opacity: 0.5;
 }
 
-/* ==================================================
-                    ABOUT US PAGE 
-================================================== */
-
 .page-header{
     height: 15rem;
 }
 .page-header h1{
     text-shadow: 2px 1px 1px rgb(16, 59, 2);
-    margin-top: 4rem;
+    margin-top: 6rem;
 }
+
+/* ==================================================
+                    ABOUT US PAGE 
+================================================== */
+
 .about-btn{
    background-color: #5ec52e;
 }
@@ -216,7 +221,8 @@ a {
 }
 .about-us .card{
     border-color: #5ec52e;
-    background-color: #cbeebb;    
+    background-color: #e1fad4;
+    border-radius: 2px;    
 }
 .about-us .card .card-title{
    font-weight: bold;
@@ -244,6 +250,14 @@ a {
 }
 .accordion-body p{
     margin-bottom: 0.5rem;
+}
+
+
+/* ==================================================
+                    LOGIN PAGE 
+================================================== */
+.login-bkgd{
+margin-top: 10rem;
 }
 
 
@@ -289,14 +303,4 @@ a {
     }
    
 }
-
-
-
-
-
-   
- 
- 
-
-
 
