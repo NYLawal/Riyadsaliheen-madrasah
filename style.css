@@ -44,16 +44,20 @@ a {
 .d-flex{
     display:flex;
 }
-
+.navbar-toggler{
+    border: none;
+}
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    box-shadow: none;
+    border: 1px solid #4f7260;
+}
 .nav-link{
 	color: #181B20;
 	font-weight: 500;
 	font-size: 16px;
     margin-left: 15px;
-}
-.nav-link.current{
-    border-bottom: 2px solid #398A12;
-    padding-bottom: 0%;
 }
 .nav-link:hover{
 	color: rgb(3, 122, 13);
@@ -62,11 +66,31 @@ a {
 .navbar-brand, .nav-link.active{
     color: #4f7260;
 }
+.nav-item.active .nav-link {
+    position: relative;
+  }
+ .nav-item.active .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    left: 50%;
+    height: 2px;
+    background-color: #398A12;
+    bottom: 8px;
+    margin: 0 auto;
+    display: block;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
+  
 .navbar-nav{
     margin-left: 30px;
 }
 .dropdown-item:hover{
        background-color:#b1e698;
+}
+.dropdown-item.current{
+    background-color: #ebfaea;
 }
 #header-wrapper {
 	background-color: rgb(44, 77, 44);
@@ -172,11 +196,69 @@ a {
     color: #b1e698;
     opacity: 0.5;
 }
+
+/* ==================================================
+                    ABOUT US PAGE 
+================================================== */
+
+.page-header{
+    height: 15rem;
+}
+.page-header h1{
+    text-shadow: 2px 1px 1px rgb(16, 59, 2);
+    margin-top: 4rem;
+}
+.about-btn{
+   background-color: #5ec52e;
+}
+.about-btn:hover{
+    color: white;
+}
+.about-us .card{
+    border-color: #5ec52e;
+    background-color: #cbeebb;    
+}
+.about-us .card .card-title{
+   font-weight: bold;
+}
+.about-viewprg{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
+}
+.qanda-section{
+    background-color: #e1fad4;
+}
+.qanda-section .accordion-button:focus{
+    background-color: #c8f1b5;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.qanda-section .accordion-button:active{
+    border: none;
+    outline: none;
+}
+.qanda-section .accordion{
+    margin-bottom: 3rem;
+}
+.accordion-body p{
+    margin-bottom: 0.5rem;
+}
+
+
+/* ==================================================
+                    MEDIA QUERIES 
+================================================== */
+
 @media (max-width: 991px) {
     .vision {
      border: none;
      margin-bottom: 20px;
     }
+    .qanda-section img{
+        display: none;
+      }
   }
   @media (min-width: 768px) {
     .arabic-smallscreen{
@@ -202,51 +284,14 @@ a {
     .arabic-bigscreen{
         display: none;
     }
+    .about-us img{
+        width:50%
+    }
+   
 }
 
 
-/* ==================================================
-                    ABOUT US PAGE 
-================================================== */
 
-.about-header{
-    height: 15rem;
-}
-.about-header h1{
-    text-shadow: 2px 1px 1px rgb(16, 59, 2);
-    margin-top: 4rem;
-}
-.about-btn{
-   background-color: #5ec52e;
-}
-.about-btn:hover{
-    color: white;
-}
-.about-us .card{
-    border-color: #5ec52e;
-    background-color: #cbeebb;    
-}
-.about-us .card .card-title{
-   font-weight: bold;
-}
-.about-viewprg{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 60%;
-}
-.qanda-section{
-    background-color: #e5f0e0;
-}
-.qanda-section .accordion-button:focus{
-    background-color: #c8f1b5;
-    border: none;
-    outline: none;
-    box-shadow: none;
-}
-.qanda-section .accordion-button:active{
-    border: none;
-    outline: none;
-}
 
 
    
