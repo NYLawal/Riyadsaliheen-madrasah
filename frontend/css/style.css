@@ -151,6 +151,11 @@ margin-bottom: 0px;
    width: fit-content;
    border: 2px solid #317a10;
 }
+.anthem-btn:hover{
+    background-color: #5ec52e;
+    color:white;
+    border: none;
+}
 .anthem-container{
    margin-bottom: 30px;
    display:none;
@@ -196,6 +201,18 @@ margin-bottom: 0px;
     display:block;
      margin-left: auto;
     margin-right: auto;
+}
+#programmes .card{
+    border: 1px solid #317a10;
+}
+#programmes .card-body a{
+    color:#317a10;
+}
+#news-events .img-fluid{
+    height: 200px;
+}
+#news-events .read-more{
+    margin-top: 20px;
 }
 .footer{
     background-color: rgb(44, 77, 44);
