@@ -142,8 +142,18 @@ margin-bottom: 0px;
 #header-wrapper button{
     margin-top: 1.5em;
 }
+.anthem-btn{
+    font-size: 16px;
+   color: #317a10;
+   height: 3rem;
+   border-radius: 20px;
+   background-color: white;
+   width: fit-content;
+   border: 2px solid #317a10;
+}
 .anthem-container{
    margin-bottom: 30px;
+   display:none;
 }
 .anthem{
     text-align: center;
@@ -163,14 +173,29 @@ margin-bottom: 0px;
 .anthem-english{
     margin-top: 0;
 }
+#anthem-btn-play{
+    background-color: #398A12 ;
+    color: #ebfaea;
+}
 .audio-container{
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 60%;
+    display: none;
 }
 .audio-container audio{
     background-color: #398A12;
     height: 50px;
+}
+.audio-container, .anthem-btn-row{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 60%;
+}
+.displayed{
+    display:block;
+}
+.anthem-play{
+    display:block;
+     margin-left: auto;
+    margin-right: auto;
 }
 .footer{
     background-color: rgb(44, 77, 44);
