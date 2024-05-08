@@ -338,6 +338,17 @@ color: #317a10;
 #subjects-card-container .row .card{
 height: fit-content;
 }
+.modal .modal-body p{
+    color: #181B20;
+    line-height: 1.75;
+}
+.modal .modal-body span{
+    color: #398A12;
+}
+.modal .modal-footer button{
+   background-color: #317a10;
+   color: white;
+}
 
 /* ==================================================
                     LOGIN PAGE 
