@@ -99,7 +99,6 @@ a {
 	 background-attachment: local ;
 	background-position: left bottom;	
 }
-
 #welcome h1{
 	color: rgb(163, 243, 169);
 	text-shadow: 2px 1px 1px rgb(16, 59, 2);
@@ -110,7 +109,7 @@ a {
 	text-shadow: 1px 1px 1px rgb(21, 24, 21);
 }
 
-#hero-button, .subscribe-btn{
+#hero-button, .subscribe-btn, #morenews-btn{
     border-color: #5ec52e;
     color:white;
 }
@@ -142,7 +141,7 @@ margin-bottom: 0px;
 #header-wrapper button{
     margin-top: 1.5em;
 }
-.anthem-btn{
+.anthem-btn, #morenews-btn{
     font-size: 16px;
    color: #317a10;
    height: 3rem;
@@ -151,7 +150,10 @@ margin-bottom: 0px;
    width: fit-content;
    border: 2px solid #317a10;
 }
-.anthem-btn:hover{
+/* #morenews-btn{
+    border: 2px solid #5ec52e;
+} */
+.anthem-btn:hover, #morenews-btn:hover{
     background-color: #5ec52e;
     color:white;
     border: none;
@@ -213,6 +215,9 @@ margin-bottom: 0px;
 }
 #news-events .read-more{
     margin-top: 20px;
+}
+.morenews-container{
+    margin-top: -20px;
 }
 .footer{
     background-color: rgb(44, 77, 44);
@@ -294,6 +299,45 @@ margin-bottom: 0px;
     margin-bottom: 0.5rem;
 }
 
+/* ==================================================
+                    LOGIN PAGE 
+================================================== */
+.programmes-container {
+   color: #181B20;
+}
+.programmes-container h4{
+   color: rgb(44, 77, 44);
+}
+.programmes-container svg.svg-top{
+    fill: #5ec52e;
+    margin-bottom: 2rem;
+}
+.programmes-container.prg-con-1{
+    margin-bottom: 2rem;
+}
+.programmes-container .programme-dates{
+    text-align: left;
+    list-style: none;
+    color: #398A12;
+    font-weight: 600;
+    margin-left: -30px;
+}
+.programmes-container p{
+    text-align: justify;
+    margin-bottom: 1rem;
+}
+.courses{
+    background-color: #eef5ed;
+}
+.border-green{
+   border-bottom: 1.5px solid #317a10;
+}
+#subjects-card-container h2{
+color: #317a10;
+}
+#subjects-card-container .row .card{
+height: fit-content;
+}
 
 /* ==================================================
                     LOGIN PAGE 
@@ -320,8 +364,32 @@ margin-top: 10rem;
     .arabic-smallscreen{
         display: none;
     }
+    #programmes .card-body h3{
+        height: 3rem;
+        width: 120px;
+    }
+    #programmes-descr .programmes-container .card-body .p-div{
+        max-height: 20rem;
+    }
   }
-
+  @media (min-width: 768px) and (max-width: 991px)  {
+    #programmes .card-body p{
+        height: 220px;
+    }
+    .border-green{
+        height: 230px;
+     }
+  }
+  @media (min-width: 992px) and (max-width: 1199px)  {
+    #programmes .card-body p{
+        height: 150px;
+    }
+  }
+  @media (min-width: 576px) and (max-width: 767px)  {
+    .border-green{
+        height: 280px;
+     }
+  }
   @media (max-width: 767px) {
     .vision-misson {
      height: fit-content;
@@ -343,6 +411,9 @@ margin-top: 10rem;
     .about-us img{
         width:50%
     }
-   
 }
-
+@media (min-width:1200px){
+    .border-green{
+        height: 280px;
+     }
+}
