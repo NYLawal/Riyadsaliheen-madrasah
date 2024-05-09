@@ -109,7 +109,7 @@ a {
 	text-shadow: 1px 1px 1px rgb(21, 24, 21);
 }
 
-#hero-button, .subscribe-btn, #morenews-btn{
+#hero-button, .subscribe-btn, #morenews-btn, .visit-button, .donate-button{
     border-color: #5ec52e;
     color:white;
 }
@@ -263,6 +263,11 @@ margin-bottom: 0px;
 .about-btn{
    background-color: #5ec52e;
 }
+#support-button{
+    font-size: 32px;
+    padding: 2px 2rem;
+    border-radius: 12px;
+}
 .about-btn:hover{
     color: white;
 }
@@ -300,7 +305,7 @@ margin-bottom: 0px;
 }
 
 /* ==================================================
-                    LOGIN PAGE 
+                   PROGRAMMES PAGE 
 ================================================== */
 .programmes-container {
    color: #181B20;
@@ -351,6 +356,58 @@ height: fit-content;
 }
 
 /* ==================================================
+                    DONATE PAGE 
+================================================== */
+.donate-section{
+    text-align: justify;
+    font-size: 16px;
+}
+
+.donate-section .visit-button, .donate-section .donate-button{
+    background-color: #5ec52e;
+    border-radius: 30px;
+}
+.donate-section span{
+    color: #398A12;
+    font-weight: bold;
+}
+.modal .modal-body .acct-details{
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.modal .modal-body .acct-details .first-p{
+    margin-top: 0;
+}
+
+/* ==================================================
+                    CALENDAR PAGE 
+================================================== */
+.green-underline{
+    border-bottom: 2px solid green;
+}
+.term-name{
+    padding-bottom: 0.2rem;
+}
+.ver-line{
+    border-right: 1px solid green;
+}
+.term-name-arabic{
+    padding-bottom: 1rem;
+}
+.ver-line{
+    border-right: 1px solid green;
+    margin-bottom: 0;
+}
+.hor-line{
+    border-bottom: 1px solid #809188;
+}
+.bolden{
+    font-weight: bold;
+}
+
+
+
+/* ==================================================
                     LOGIN PAGE 
 ================================================== */
 .login-bkgd{
@@ -370,6 +427,9 @@ margin-top: 10rem;
     .qanda-section img{
         display: none;
       }
+    .subject-collapse{
+        display:none;
+    }
   }
   @media (min-width: 768px) {
     .arabic-smallscreen{
@@ -394,6 +454,9 @@ margin-top: 10rem;
   @media (min-width: 992px) and (max-width: 1199px)  {
     #programmes .card-body p{
         height: 150px;
+    }
+    .team-offer-arabic{
+        height:151px;
     }
   }
   @media (min-width: 576px) and (max-width: 767px)  {
