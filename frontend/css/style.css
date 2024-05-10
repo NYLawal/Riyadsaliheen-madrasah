@@ -313,7 +313,7 @@ margin-bottom: 0px;
 .programmes-container h4{
    color: rgb(44, 77, 44);
 }
-.programmes-container svg.svg-top{
+svg.svg-top{
     fill: #5ec52e;
     margin-bottom: 2rem;
 }
@@ -404,8 +404,31 @@ height: fit-content;
 .bolden{
     font-weight: bold;
 }
+.sp-heading{
+    margin-top: -1rem;
+    /* color: #317a10; */
+}
 
 
+/* ==================================================
+                    NEWS AND EVENTS PAGE 
+================================================== */
+.green-text{
+    color:#317a10;
+}
+.news p{
+    text-align: justify;
+    margin-bottom: 0.5rem;
+}
+.news a:hover{
+text-decoration: underline;
+}
+.event{
+}
+.news figure img{
+    width:600px;
+    height: 350px;
+}
 
 /* ==================================================
                     LOGIN PAGE 
@@ -442,6 +465,10 @@ margin-top: 10rem;
     #programmes-descr .programmes-container .card-body .p-div{
         max-height: 20rem;
     }
+    .pr-0{
+        /* margin-left: 1.5em; */
+        padding-right: 0;
+    }
   }
   @media (min-width: 768px) and (max-width: 991px)  {
     #programmes .card-body p{
@@ -449,6 +476,9 @@ margin-top: 10rem;
     }
     .border-green{
         height: 230px;
+     }
+     .sp-date{
+        height:100px;
      }
   }
   @media (min-width: 992px) and (max-width: 1199px)  {
@@ -485,9 +515,16 @@ margin-top: 10rem;
     .about-us img{
         width:50%
     }
+    .sp-heading{
+        margin-top: 2rem;
+        margin-bottom: -1rem;
+    }
 }
 @media (min-width:1200px){
     .border-green{
         height: 280px;
      }
 }
+
+
+
