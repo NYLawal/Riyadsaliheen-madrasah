@@ -40,7 +40,7 @@ const signUp = (userData) => {
         });
 };
 
-const signup = document.getElementById("create");
+const signup = document.getElementById("signup-btn");
 signup.addEventListener("click", (e) => {
     e.preventDefault()
     const email = emailInput.value;
