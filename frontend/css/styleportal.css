@@ -1,0 +1,55 @@
+
+#bsbSidebar1 li a{
+    text-decoration: none;
+    color: white;
+}
+
+#bsbSidebar1{
+    background-color: rgb(44, 77, 44);
+    color: #d0f1c1;
+    padding-top: 1rem;
+}
+#bsbSidebar1 .offcanvas-header {
+    padding: 20px;
+    background: #d0f1c1;
+}
+#bsbSidebar1 .offcanvas-title {
+   color: rgb(44, 77, 44)
+}
+
+#bsbSidebar1 ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #d0f1c1;
+}
+
+#bsbSidebar1 ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#bsbSidebar1 ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#homeSubmenu li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#bsbSidebar1 ul li a:hover {
+    color: #7ff549;
+}
+
+#bsbSidebar1 ul li.active > a, a[aria-expanded="true"] {
+    color: rgb(44, 77, 44);
+    background: #d0f1c1;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #d0f1c1;
+}
+#bsbSidebar1 button.btn-close{
+    background-color: rgb(4, 201, 4);
+}

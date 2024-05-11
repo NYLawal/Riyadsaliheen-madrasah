@@ -423,8 +423,6 @@ height: fit-content;
 .news a:hover{
 text-decoration: underline;
 }
-.event{
-}
 .news figure img{
     width:600px;
     height: 350px;
