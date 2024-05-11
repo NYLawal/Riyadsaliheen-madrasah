@@ -64,7 +64,7 @@ signup.addEventListener("click", (e) => {
 });
 
 function Redirect() {
-    window.location.href = "https://result-proc-system.onrender.com/adminPortal.html"
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
     // window.location.href = "http://127.0.0.1:5500/Tech4Dev/Easymart-store/home-page.html"
      }
 
@@ -110,8 +110,8 @@ const login = document.getElementById("login-btn");
 login.addEventListener("click", (e) => {
     e.preventDefault()
 
-    const email = emailInput.value;
-    const password = passwordInput.value;
+    const email = emailLogin.value;
+    const password = passwdLogin.value;
         const formData = {
             email,
             password,
