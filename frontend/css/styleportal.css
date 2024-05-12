@@ -19,12 +19,19 @@
 
 #bsbSidebar1 ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #d0f1c1;
+    /* border-bottom: 1px solid #d0f1c1; */
+    border-bottom: 1px solid #7ff549;
 }
+#bsbSidebar1 ul.components2{
+    border-bottom: none;
+    margin-top: -1rem;
+ }
 
 #bsbSidebar1 ul p {
-    color: #fff;
+    color: #7ff549;
     padding: 10px;
+    border-bottom: 2px solid #7ff549;
+    /* border-bottom-width: 50%; */
 }
 
 #bsbSidebar1 ul li a {
@@ -32,10 +39,17 @@
     font-size: 1.1em;
     display: block;
 }
-#homeSubmenu li a {
+#addSubmenu li a, #viewSubmenu li a, #editSubmenu li a, #deleteSubmenu li a {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color:black
+}
+#addSubmenu li, #viewSubmenu li,  #editSubmenu li, #deleteSubmenu li {
+    line-height: 1;
+}
+#addSubmenu li a:hover, #viewSubmenu li a:hover, #editSubmenu li a:hover, #deleteSubmenu li a:hover {
+    background-color: rgb(44, 77, 44);
 }
 #bsbSidebar1 ul li a:hover {
     color: #7ff549;
@@ -43,7 +57,7 @@
 
 #bsbSidebar1 ul li.active > a, a[aria-expanded="true"] {
     color: rgb(44, 77, 44);
-    background: #d0f1c1;
+    background: #485841;
 }
 ul ul a {
     font-size: 0.9em !important;
@@ -53,3 +67,15 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
+
+.staffadd-form button{
+    background-color:rgb(4, 201, 4) ;
+}
+.staffadd-form button:hover{
+    background-color: rgb(44, 77, 44) ;
+    color: #fff;
+}
+.staffadd-form h2{
+    line-height: 1.5;
+}
+
