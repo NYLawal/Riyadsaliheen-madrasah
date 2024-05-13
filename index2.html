@@ -989,3 +989,18 @@
       </li>
   </ul>   
 </div>
+
+const token = findBetween(res.body, ‘“acess_token”:"’, ‘"’)
+
+localStorage.setItem('access_token',JSON.stringify(tokenParameter))
+var access_token = localStorage.getItem('access_token');
+'Bearer '+access_token or 'Bearer '+localStorage.getItem('access_token');
+const headers = { 'Authorization': 'Bearer my-token' }; 
+fetch('https://testapi.jasonwatmore.com/products/1', { headers })
+
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+
+axios.get('https://example.com/api', { 
+    headers: {
+      'Authorization': 'Bearer ' + token
+    } 

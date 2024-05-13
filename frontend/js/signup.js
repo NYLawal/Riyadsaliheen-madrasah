@@ -1,5 +1,6 @@
+const baseUrl = "http://localhost:5000/api/v1"
 // const baseUrl = "http://localhost:3000/Tech4Dev/Easymart-store/login.html"
-const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
@@ -65,7 +66,7 @@ signup.addEventListener("click", (e) => {
 
 function Redirect() {
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-    // window.location.href = "http://127.0.0.1:5500/Tech4Dev/Easymart-store/home-page.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
      }
 
 const logIn = (userData) => {
@@ -74,6 +75,8 @@ const logIn = (userData) => {
         .post(`${baseUrl}/user/login`, userData)
         .then(function (response) {
             console.log(response)
+            let token = response.data.access_token;
+            localStorage.setItem("access_token", token);
             setTimeout(function() {
                 Redirect();
                  }, 1000);   

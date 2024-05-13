@@ -1,14 +1,20 @@
 const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 
 const submitButton = document.getElementById("submit-btn")
 const emailInput = document.getElementById("email")
 const nameInput = document.getElementById("staffName")
 const staffRole = document.getElementById("role-drpdwn")
+const logoutLink= document.getElementById("logout")
 
-
+const token = localStorage.getItem('access_token')
 const addStaff = (staffInfo) => {
     axios
-        .post(`${baseUrl}/user/addStaff`, staffInfo)
+        .post(`${baseUrl}/user/addStaff`, staffInfo, { 
+            headers: {
+              'Authorization': 'Bearer ' + token
+            } 
+}) 
         .then(function (response) {
             console.log(response)
             Swal.fire({
@@ -57,4 +63,10 @@ submitButton.addEventListener("click", (e) => {
         }
         addStaff(formData);
     
+});
+
+logoutLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    localStorage.clear()
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
 });
