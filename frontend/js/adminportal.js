@@ -6,9 +6,11 @@ const emailInput = document.getElementById("email")
 const nameInput = document.getElementById("staffName")
 const staffRole = document.getElementById("role-drpdwn")
 const logoutLink= document.getElementById("logout")
+const cancelLink= document.getElementById("cancel-btn")
 
 const token = localStorage.getItem('access_token')
 const addStaff = (staffInfo) => {
+    let errorMsg;
     axios
         .post(`${baseUrl}/user/addStaff`, staffInfo, { 
             headers: {
@@ -69,4 +71,11 @@ logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+});
+
+cancelLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    emailInput.value = "";
+    nameInput.value = "";
+    staffRole.value = ""
 });

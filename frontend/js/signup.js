@@ -64,9 +64,51 @@ signup.addEventListener("click", (e) => {
 });
 
 function Redirect() {
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
-     }
+    axios
+        .get(`${baseUrl}/user/authorise`)
+        .then(function (response) {
+            console.log(response);
+            let userRole = response.data.role;
+            if (userRole == 'superadmin' || userRole == 'admin'){
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            }
+            else if (userRole == 'student'){
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
+            }
+            else if (userRole == 'parent'){
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
+            }
+
+           
+            Swal.fire({
+                toast: true,
+                icon: "success",
+                title: "Signup successful, login to view your portal",
+                animation: false,
+                position: "center",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+            });
+
+        })
+        .catch((err) => {
+            console.log(err);
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: err.response.data.message,
+            });
+        });
+};
+   
 
 const logIn = (userData) => {
     let errorMsg;

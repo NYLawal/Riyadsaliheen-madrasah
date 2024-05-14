@@ -144,52 +144,24 @@
     <ul class="list-unstyled components">
       <p class="text-tasks"> Your Tasks</p>
       <li class="">
-          <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#addSubmenu" aria-controls="addSubmenu">Add</a>
+          <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#addSubmenu" aria-controls="addSubmenu">Take Assessment</a>
           <ul class="collapse list-unstyled" id="addSubmenu">
               <li>
-                  <a href="#">staffer</a>
+                  <a href="#">assignment</a>
               </li>
               <li>
-                  <a href="#">student</a>
+                  <a href="#">quiz</a>
               </li>
           </ul>
       </li>
-      <li class="">
-        <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#viewSubmenu" aria-controls="viewSubmenu">View</a>
-        <ul class="collapse list-unstyled" id="viewSubmenu">
-            <li>
-                <a href="#">staff</a>
-            </li>
-            <li>
-                <a href="#">students</a>
-            </li>
-        </ul>
-    </li>
-    <li class="">
-      <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#editSubmenu" aria-controls="editSubmenu">Edit</a>
-      <ul class="collapse list-unstyled" id="editSubmenu">
-          <li>
-              <a href="#">staffer</a>
-          </li>
-          <li>
-              <a href="#">student</a>
-          </li>
-      </ul>
-  </li>
-      <li>
-          <a href="#">Remove Staff</a>  
-      </li>
-      <li>
-          <a href="#">Promote Students</a>  
-      </li>
       <li>
         <!-- scores and attendance for all students in a particular term -->
-          <a href="#">View Term Report</a>  
+          <a href="#">Check Ward's Result</a>  
       </li>
 
       <li>
          <!-- scores and attendance for a student in a particular term -->
-        <a href="#">View Student Report</a>
+        <a href="#">View Ward's Report</a>
     </li>
   </ul>
   <ul class="list-unstyled components components2">
@@ -202,64 +174,7 @@
 
 
 <!-- Main -->
-<!-- Add Admin -->
-<section class="bg-light py-3 py-md-5 staffadd-form">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-        <div class="card border border-light-subtle rounded-3 shadow-sm">
-          <div class="card-body p-3 p-md-4 p-xl-5">
-            <div class="text-center mb-3">
-              <a href="#!">
-                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
-              </a>
-            </div>
-            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffadd-h2">Provide the name and email of the staffer you want to add and choose their role. Please verify the correctness of the email.</h2>
-            <form action="#!">
-              <div class="row gy-2 overflow-hidden">
-                <div class="col-12">
-                  <div class="">
-                    <label for="email" class="form-label"> Staffer Name</label>
-                    <input type="text" class="form-control" name="staffName" id="staffName" placeholder="Enter name" required>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
-                  </div>
-                </div>
-                <div class="col-12 role-div">
-                  <div class="">
-                    <label for="roles" class="form-label">Role</label>
-                    <select name="roles" class="form-select" id="role-drpdwn">
-                      <option selected>Choose role</option>
-                      <option value="superadmin">Superadmin</option>
-                      <option value="admin">Admin</option>
-                      <option value="bursar">Bursar</option>
-                      <option value="teacher">Teacher</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-12 submitbtn-div">
-                  <div class="d-grid my-3 mt-4">
-                    <button class="btn btn-lg" type="submit" id="submit-btn">Submit</button>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-flex gap-2 justify-content-between">
-                    <!-- <a href="#!" class="link-primary text-decoration-none">Log In</a> -->
-                    <a href="#!" class="green-text fw-bold text-decoration-none" id="cancel-btn">Cancel</a>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
       
       <!-- Footer  -->
