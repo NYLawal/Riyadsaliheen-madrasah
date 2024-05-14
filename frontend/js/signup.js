@@ -3,6 +3,7 @@ const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
+const togglePasswordLogin = document.getElementById("pl-icon");
 const togglePassword = document.getElementById("p-icon");
 const toggleRepeatPassword = document.getElementById("pr-icon");
 const emailLogin = document.getElementById("user");
@@ -64,14 +65,23 @@ signup.addEventListener("click", (e) => {
 });
 
 function Redirect() {
+    const token = localStorage.getItem('access_token') 
     axios
-        .get(`${baseUrl}/user/authorise`)
+        .get(`${baseUrl}/user/authorise`, { 
+            headers: {
+              'Authorization': 'Bearer ' + token
+            } 
+}) 
         .then(function (response) {
             console.log(response);
             let userRole = response.data.role;
             if (userRole == 'superadmin' || userRole == 'admin'){
             window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            }
+            else if (userRole == 'teacher'){
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
             else if (userRole == 'student'){
             window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
@@ -81,12 +91,15 @@ function Redirect() {
             window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
             }
+            else {
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+            }
 
-           
             Swal.fire({
                 toast: true,
                 icon: "success",
-                title: "Signup successful, login to view your portal",
+                title: "Login successful, continue with your task",
                 animation: false,
                 position: "center",
                 showConfirmButton: false,
@@ -165,6 +178,7 @@ login.addEventListener("click", (e) => {
 
 
 togglePassword.addEventListener("click", function () {
+    console.log("clicked")
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
         togglePassword.classList.remove("fa-eye");
@@ -173,6 +187,18 @@ togglePassword.addEventListener("click", function () {
         passwordInput.type = "password";
         togglePassword.classList.remove("fa-eye-slash");
         togglePassword.classList.add("fa-eye");
+    }
+});
+togglePasswordLogin.addEventListener("click", function () {
+    console.log("clicked")
+    if (passwdLogin.type === "password") {
+        passwdLogin.type = "text";
+        togglePasswordLogin.classList.remove("fa-eye");
+        togglePasswordLogin.classList.add("fa-eye-slash");
+    } else {
+        passwdLogin.type = "password";
+        togglePasswordLogin.classList.remove("fa-eye-slash");
+        togglePasswordLogin.classList.add("fa-eye");
     }
 });
 toggleRepeatPassword.addEventListener("click", function () {
