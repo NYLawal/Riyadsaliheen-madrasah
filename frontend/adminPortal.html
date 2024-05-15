@@ -17,9 +17,6 @@
     />
     <link href="./css/styleportal.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/navbars/navbar-3/assets/css/navbar-3.css">
   </head>
   <body>
     <main>
@@ -120,12 +117,13 @@
 
       <!-- Header -->
 <header id="header-demo">
-  <nav class="navbar navbar-expand-md bsb-navbar-3 mb-5" style="background-color: #d0f1c1;">
+  <nav class="navbar navbar-expand-md bsb-navbar-3" style="background-color: #d0f1c1;">
     <div class="container">
       <ul class="navbar-nav">
         <li class="nav-item me-3">
           <a class="nav-link" href="#!" data-bs-toggle="offcanvas" data-bs-target="#bsbSidebar1" aria-controls="bsbSidebar1">
-            <i class="bi-filter-left fs-3 lh-1"></i>
+            <i class="navbar-toggler-icon"></i>
+            <span style="color: rgb(16, 59, 2);">click here</span>
           </a>
         </li>
       </ul>
@@ -133,6 +131,9 @@
     </div>
   </nav>
 </header>
+
+<section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 50px;">
+</section>
 
 <!-- Aside -->
 <aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1" aria-labelledby="bsbSidebarLabel1">
@@ -147,10 +148,10 @@
           <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#addSubmenu" aria-controls="addSubmenu">Add</a>
           <ul class="collapse list-unstyled" id="addSubmenu">
               <li>
-                  <a href="#">staffer</a>
+                  <a href="#" id="add-staffer">staffer</a>
               </li>
               <li>
-                  <a href="#">student</a>
+                  <a href="#" id="add-student">student</a>
               </li>
           </ul>
       </li>
@@ -202,8 +203,8 @@
 
 
 <!-- Main -->
-<!-- Add Admin -->
-<section class="bg-light py-3 py-md-5 staffadd-form">
+<!-- Add Staffer -->
+<section class="bg-light py-3 py-md-5 staffadd-form" id="staffadd-form">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -248,8 +249,8 @@
                 </div>
                 <div class="col-12">
                   <div class="d-flex gap-2 justify-content-between">
-                    <!-- <a href="#!" class="link-primary text-decoration-none">Log In</a> -->
                     <a href="#!" class="green-text fw-bold text-decoration-none" id="cancel-btn">Cancel</a>
+                    <a href="#!" class="green-text fw-bold text-decoration-none" id="close-btn">Close</a>
                   </div>
                 </div>
               </div>
@@ -259,6 +260,86 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- Add Student -->
+<section class="bg-light py-3 py-md-5 studentadd-form" id="studentadd-form">
+ <div class="container">
+  <div class="row justify-content-center">
+    <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+    <form action="/" id="student-form">
+      <div class="banner">
+        <h1>Student Registration Form</h1>
+      </div>
+      <h2 class="mt-2 mb-3">Student Details</h2>
+      <div class="item">
+        <p>Name</p>
+        <div class="name-item">
+          <input type="text" name="name" placeholder="First"/>
+          <input type="text" name="name" placeholder="Last"/>
+        </div>
+      </div>
+      <div class="item">
+        <p>Admission No</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>Gender</p>
+        <select>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+      </div>
+      <div class="item">
+        <p>Entry Class</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>Address</p>
+        <input type="text" name="name" placeholder="Number and Street address" />
+        <input type="text" name="name" placeholder="City" />
+          <input type="text" name="name" placeholder="State" />
+        </div>
+      <div class="item">
+        <p>Phone No</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>Email</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>Parent Email</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>State of Origin</p>
+        <input type="text" name="name"/>
+      </div>
+      <div class="item">
+        <p>Marital Status</p>
+        <input type="text" name="name"/>
+      </div> 
+      <!-- <div class="question">
+        <p>Privacy Policy<span class="required">*</span></p>
+        <div class="question-answer checkbox-item">
+          <div>
+            <input type="checkbox" value="none" id="check_1" name="check" required/>
+            <label for="check_1" class="check"><span>I agree to the <a href="">code of conduct</a></span></label>
+          </div>
+        </div>
+      </div> -->
+      <div class="btn-block">
+        <button type="submit" href="/" id="send-btn">Send</button>
+      </div>
+      <div class="d-flex gap-2 justify-content-around mt-5">
+        <a href="#!" class="green-text fw-bold text-decoration-none" id="clearfrm-btn">Clear Form</a>
+        <a href="#!" class="green-text fw-bold text-decoration-none" id="closefrm-btn">Close</a>
+      </div>
+    </form>
+    </div>
+  </div>
+ </div>
 </section>
 
       

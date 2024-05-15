@@ -1,13 +1,34 @@
 const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 // const baseUrl = "http://localhost:5000/api/v1"
 
+const addStafferLink= document.getElementById("add-staffer")
+const addStafferForm = document.getElementById("staffadd-form")
+const addStudentLink= document.getElementById("add-student")
+const addStudentForm = document.getElementById("studentadd-form")
+
 const submitButton = document.getElementById("submit-btn")
 const emailInput = document.getElementById("email")
 const nameInput = document.getElementById("staffName")
 const staffRole = document.getElementById("role-drpdwn")
 const logoutLink= document.getElementById("logout")
 const cancelLink= document.getElementById("cancel-btn")
+const closeLink= document.getElementById("close-btn")
+const clearStdFrmLink= document.getElementById("clearfrm-btn")
+const closeStdFrmLink= document.getElementById("closefrm-btn")
 
+// display add staffer form
+addStafferLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    addStafferForm.style.display = "block"
+});
+
+// display add student form
+addStudentLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    addStudentForm.style.display = "block"
+});
+
+// add a staff member - admin, bursar or teacher
 const token = localStorage.getItem('access_token')
 const addStaff = (staffInfo) => {
     let errorMsg;
@@ -63,8 +84,7 @@ submitButton.addEventListener("click", (e) => {
             stafferName,
             stafferRole
         }
-        addStaff(formData);
-    
+        addStaff(formData);    
 });
 
 logoutLink.addEventListener("click", (e) => {
@@ -78,4 +98,21 @@ cancelLink.addEventListener("click", (e) => {
     emailInput.value = "";
     nameInput.value = "";
     staffRole.value = ""
+});
+
+closeLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    addStafferForm.style.display = "none"
+});
+
+clearStdFrmLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    // emailInput.value = "";
+    // nameInput.value = "";
+    // staffRole.value = ""
+});
+
+closeStdFrmLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    addStudentForm.style.display = "none"
 });

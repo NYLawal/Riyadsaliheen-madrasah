@@ -8,6 +8,7 @@
     background-color: rgb(44, 77, 44);
     color: #d0f1c1;
     padding-top: 1rem;
+    max-width: 300px;
 }
 #bsbSidebar1 .offcanvas-header {
     padding: 20px;
@@ -67,15 +68,202 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-
+.staffadd-form, .studentadd-form {
+    display: none;
+}
 .staffadd-form button{
-    background-color:rgb(4, 201, 4) ;
+    border-radius: 5px; 
+    background: #5ec52e;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
 }
 .staffadd-form button:hover{
-    background-color: rgb(44, 77, 44) ;
-    color: #fff;
+   background-color:  #5ec52e;
 }
 .staffadd-form h2{
     line-height: 1.5;
 }
+#cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
+color: #74e042;
+}
 
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* add student form styles */
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+html, body {
+    min-height: 100%;
+    }
+/* body, div, form, input, select, p { 
+    padding: 0;
+    margin: 0;
+    outline: none;
+    } */
+    #studentadd-form h1 {
+    position: absolute;
+    margin: 0;
+    font-size: 28px;
+    color: #fff;
+    z-index: 2;
+    }
+    #studentadd-form  h2 {
+    font-weight: 400;
+    }
+    .testbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    padding: 20px;
+    }
+    form#student-form {
+    /* width: 80%; */
+    padding: 20px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 0 10px 0 #c9cac9; 
+    }
+    .banner {
+    position: relative;
+    height: 180px;
+    background-color: rgb(57, 99, 57); 
+    color: #fff;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    }
+    .banner::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.4); 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    }
+    #studentadd-form input, #studentadd-form select {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    }
+    #studentadd-form input {
+    width: calc(100% - 10px);
+    padding: 5px;
+    }
+    #studentadd-form select {
+    width: 100%;
+    padding: 7px 0;
+    background: transparent;
+    }
+    .item:hover p, .item:hover i, .question:hover p, .question label:hover, input:hover::placeholder, a {
+    color: rgb(48, 122, 48);
+    }
+    .item input:hover, .item select:hover {
+    border: 1px solid transparent;
+    box-shadow: 0 0 6px 0 #768b6d;
+    color: #5ec52e;
+    }
+    .item {
+    position: relative;
+    margin: 14px 0;
+    }
+    .item p{
+    margin-bottom: 5px;
+    }
+    input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    }
+    .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    font-size: 20px;
+    color: #a9a9a9;
+    }
+    .item i {
+    right: 2%;
+    top: 30px;
+    z-index: 1;
+    }
+    [type="date"]::-webkit-calendar-picker-indicator {
+    right: 1%;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+    }
+    input[type=checkbox]  {
+    display: none;
+    }
+    label.check {
+    position: relative;
+    display: inline-block;
+    margin: 5px 20px 10px 0;
+    cursor: pointer;
+    }
+    .question span {
+    margin-left: 30px;
+    }
+    span.required {
+    margin-left: 0;
+    color: red;
+    }
+    label.check:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    border: 1px solid #5ec52e;
+    }
+    input[type=checkbox]:checked + .check:before {
+    background: #5ec52e;
+    }
+    label.check:after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 4px;
+    width: 8px;
+    height: 4px;
+    border: 3px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    opacity: 0;
+    }
+    input[type=checkbox]:checked + label:after {
+    opacity: 1;
+    }
+    .btn-block {
+    margin-top: 10px;
+    text-align: center;
+    }
+    button#send-btn {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; 
+    background: #5ec52e;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    }
+    button#send-btn::-webkit-file-upload-button {
+    background: #7ff549;
+    }
+    button#send-btn:hover {
+    background: #7ff549;
+    }
+    @media (min-width: 568px) {
+    .name-item, .city-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    }
+    .name-item input, .city-item input {
+    width: calc(50% - 20px);
+    }
+    .city-item select {
+    width: calc(50% - 8px);
+    }
+    }
