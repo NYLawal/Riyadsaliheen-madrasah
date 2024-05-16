@@ -68,22 +68,22 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form {
+.staffadd-form, .studentadd-form, #teacher-class, #class-label {
     display: none;
 }
-.staffadd-form button{
+/* .staffadd-form button{
     border-radius: 5px; 
     background: #5ec52e;
     font-size: 16px;
     color: #fff;
     cursor: pointer;
 }
-.staffadd-form button:hover{
+ button:hover{
    background-color:  #5ec52e;
 }
 .staffadd-form h2{
     line-height: 1.5;
-}
+} */
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
 color: #74e042;
 }
@@ -99,15 +99,16 @@ html, body {
     margin: 0;
     outline: none;
     } */
-    #studentadd-form h1 {
+    #studentadd-form h1, #staffadd-form  h1 {
     position: absolute;
     margin: 0;
     font-size: 28px;
     color: #fff;
     z-index: 2;
     }
-    #studentadd-form  h2 {
+    #studentadd-form  h2, #staffadd-form  h2 {
     font-weight: 400;
+    font-size: 24px;
     }
     .testbox {
     display: flex;
@@ -116,7 +117,7 @@ html, body {
     height: inherit;
     padding: 20px;
     }
-    form#student-form {
+    form#student-form, form#staff-form {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -126,7 +127,7 @@ html, body {
     .banner {
     position: relative;
     height: 180px;
-    background-color: rgb(57, 99, 57); 
+    background-color: rgb(44, 77, 44); 
     color: #fff;
     background-size: cover;
     display: flex;
@@ -141,16 +142,16 @@ html, body {
     width: 100%;
     height: 100%;
     }
-    #studentadd-form input, #studentadd-form select {
+    #studentadd-form input, #studentadd-form select, #staffadd-form select, #staffadd-form input {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input {
+    #studentadd-form input, #staffadd-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select {
+    #studentadd-form select, #staffadd-form select {
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -238,7 +239,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn {
+    button {
     width: 150px;
     padding: 10px;
     border: none;
@@ -248,10 +249,10 @@ html, body {
     color: #fff;
     cursor: pointer;
     }
-    button#send-btn::-webkit-file-upload-button {
+    button::-webkit-file-upload-button {
     background: #7ff549;
     }
-    button#send-btn:hover {
+    button:hover {
     background: #7ff549;
     }
     @media (min-width: 568px) {

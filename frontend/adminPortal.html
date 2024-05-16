@@ -122,7 +122,7 @@
       <ul class="navbar-nav">
         <li class="nav-item me-3">
           <a class="nav-link" href="#!" data-bs-toggle="offcanvas" data-bs-target="#bsbSidebar1" aria-controls="bsbSidebar1">
-            <i class="navbar-toggler-icon"></i>
+            <i class="navbar-toggler-icon" id="toggler-icon"></i>
             <span style="color: rgb(16, 59, 2);">click here</span>
           </a>
         </li>
@@ -132,7 +132,7 @@
   </nav>
 </header>
 
-<section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 50px;">
+<section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 20px;">
 </section>
 
 <!-- Aside -->
@@ -204,7 +204,7 @@
 
 <!-- Main -->
 <!-- Add Staffer -->
-<section class="bg-light py-3 py-md-5 staffadd-form" id="staffadd-form">
+<!-- <section class="bg-light py-3 py-md-5 staffadd-form" id="staffadd-form">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -260,7 +260,70 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<section class="bg-light py-3 py-md-5 staffadd-form" id="staffadd-form">
+  <div class="container">
+   <div class="row justify-content-center">
+     <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+     <form action="/" id="staff-form">
+       <div class="banner">
+         <h1>Staff Addition Form</h1>
+       </div>
+       <h2 class="mt-2 mb-3">Staff Details</h2>
+       <div class="item">
+         <p>Name</p>
+         <div class="name-item">
+           <input type="text" name="name" placeholder="Title"/ id="staff-title">
+           <input type="text" name="name" placeholder="Name(s)"/ id="staff-name">
+         </div>
+       </div>
+       <div class="item">
+         <p>Email</p>
+         <input type="email" name="name"/ id="staff-email">
+       </div>
+       <div class="item">
+         <p>Gender</p>
+         <select id="staff-gender">
+           <option value="1">Male</option>
+           <option value="2">Female</option>
+         </select>
+       </div>
+       <div class="item">
+         <p>Address</p>
+         <input type="text" name="name" placeholder="Number and Street address" / id="staff-street">
+         <input type="text" name="name" placeholder="City" / id="staff-city">
+           <input type="text" name="name" placeholder="State" / id="staff-state">
+         </div>
+       <div class="item">
+         <p>Phone No</p>
+         <input type="text" name="name"/ id="staff-phone">
+       </div>
+       <div class="item">
+        <p>Role</p>
+        <select name="roles" id="role-drpdwn">
+          <option value="superadmin">Superadmin</option>
+          <option value="admin">Admin</option>
+          <option value="bursar">Bursar</option>
+          <option value="teacher">Teacher</option>
+        </select>
+       </div>
+       <div class="item">
+        <p id="class-label">Class</p>
+        <input type="text" name="name"/ id="teacher-class">
+      </div>
+       <div class="btn-block">
+         <button class="mt-2" type="submit" href="/" id="submit-btn">Send</button>
+       </div>
+       <div class="d-flex gap-2 justify-content-around mt-5">
+         <a href="#!" class="green-text fw-bold text-decoration-none" id="cancel-btn">Clear Form</a>
+         <a href="#!" class="green-text fw-bold text-decoration-none" id="close-btn">Close</a>
+       </div>
+     </form>
+     </div>
+   </div>
+  </div>
+ </section>
 
 <!-- Add Student -->
 <section class="bg-light py-3 py-md-5 studentadd-form" id="studentadd-form">
@@ -318,7 +381,10 @@
       </div>
       <div class="item">
         <p>Marital Status</p>
-        <input type="text" name="name"/>
+        <select>
+          <option value="1">Married</option>
+          <option value="2">Single</option>
+        </select>
       </div> 
       <!-- <div class="question">
         <p>Privacy Policy<span class="required">*</span></p>
