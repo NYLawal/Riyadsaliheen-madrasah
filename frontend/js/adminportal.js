@@ -1,5 +1,5 @@
-const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-// const baseUrl = "http://localhost:5000/api/v1"
+// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler= document.getElementById("toggler-icon")
@@ -21,6 +21,20 @@ const classLabel = document.getElementById("class-label")
 const teacherClassInput = document.getElementById("teacher-class")
 const staffRole = document.getElementById("role-drpdwn")
 
+const studentFNameInput = document.getElementById("stud-name-first")
+const studentLNameInput = document.getElementById("stud-name-last")
+const admissionNumber = document.getElementById("stud-admno")
+const studentEmailInput = document.getElementById("stud-email")
+const studentGenderInput = document.getElementById("stud-gender")
+const studentStreetlInput = document.getElementById("stud-street")
+const studentCityInput = document.getElementById("stud-city")
+const studentStateInput = document.getElementById("stud-state")
+const studentPhoneInput = document.getElementById("stud-phone")
+const parentEmailInput = document.getElementById("stud-parent-email")
+const studentEntryClass = document.getElementById("stud-entry-class")
+const studentOrigin = document.getElementById("stud-origin")
+const studentMaritalStatus = document.getElementById("stud-mstatus")
+
 const cancelLink= document.getElementById("cancel-btn")
 const closeLink= document.getElementById("close-btn")
 const clearStdFrmLink= document.getElementById("clearfrm-btn")
@@ -30,7 +44,7 @@ const submitButton = document.getElementById("submit-btn")
 const sendButton = document.getElementById("send-btn")
 
 const logoutLink= document.getElementById("logout")
-
+const token = localStorage.getItem('access_token')
 
 
 toggler.addEventListener("click", (e) => {
@@ -65,7 +79,6 @@ staffRole.addEventListener("change", (e) => {
 });
 
 // add a staff member - admin, bursar or teacher
-const token = localStorage.getItem('access_token')
 const addStaff = (staffInfo) => {
     let errorMsg;
     axios
@@ -81,6 +94,17 @@ const addStaff = (staffInfo) => {
                 title: "Successful",
                 text:  response.data.message
             });
+            //clear the form fields
+            staffTitleInput.value="";
+            staffNameInput.value="";
+            staffEmailInput.value="";
+            staffGenderInput.value="";
+            staffStreetlInput.value="";
+            staffCityInput.value="";
+            staffStateInput.value="";
+            staffPhoneInput.value="";
+            staffRole.value="";
+            teacherClassInput.value=""
         })
         .catch(function (error) {
             if (error.response) {
@@ -112,13 +136,14 @@ const addStaff = (staffInfo) => {
 // submit stafff form
 submitButton.addEventListener("click", (e) => {
     e.preventDefault(); 
-    const stafferName = staffTitleInput.value + "" + staffNameInput.value;
+    const stafferName = staffTitleInput.value + " " + staffNameInput.value;
     const email = staffEmailInput.value;
     const gender = staffGenderInput.value;
     const address = staffStreetlInput.value + " " + staffCityInput.value + " " + staffStateInput.value;
-    const phoneNumber = staffPhoneInput.value;
-    const teacherClass = teacherClassInput.value;
+    const phoneNumber = "+234" + staffPhoneInput.value;
+    let teacherClass = teacherClassInput.value;
     const role = staffRole.value;
+    if (role != "teacher") teacherClass = "nil"
     
         const formData = {
             stafferName,
@@ -132,39 +157,125 @@ submitButton.addEventListener("click", (e) => {
         addStaff(formData);    
 });
 
+
+// register a new student
+const registerStudent = (studentInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/student/registerStudent`, studentInfo, { 
+            headers: {
+              'Authorization': 'Bearer ' + token
+            } 
+}) 
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text:  response.data.message
+            });
+            //clear the form fields
+     admissionNumber.value = "";
+     studentFNameInput.value = ""
+     studentLNameInput.value = "";
+     studentEmailInput.value = "";
+     studentGenderInput.value = "";
+     studentStreetlInput.value = "" ;
+     studentCityInput.value = "";
+     studentStateInput.value = "";
+     studentPhoneInput.value = "";
+     parentEmailInput.value = "";
+     studentEntryClass.value = "";
+     studentOrigin.value = "";
+     studentMaritalStatus.value= "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+              errorMsg = error.response.data.message
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request);
+              errorMsg = "Network Error"
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+              errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text:  errorMsg
+            });
+        });
+};
+
 // submit student form
 sendButton.addEventListener("click", (e) => {
     e.preventDefault(); 
-    const email = emailInput.value;
-    const stafferName = nameInput.value;
-    const stafferRole = staffRole.value;
-    
+    const admNo = admissionNumber.value;
+    const firstName = studentFNameInput.value
+    const lastName = studentLNameInput.value;
+    let email = studentEmailInput.value;
+    const gender = studentGenderInput.value;
+    const address = studentStreetlInput.value + " " + studentCityInput.value + " " + studentStateInput.value;
+    const phoneNumber = "+" + studentPhoneInput.value;
+    const parentEmail = parentEmailInput.value
+    const entryClass = studentEntryClass.value
+    const stateOfOrigin = studentOrigin.value
+    const maritalStatus = studentMaritalStatus.value
+    if (email == "") email = "nothing@nil.com"
         const formData = {
-            email, 
-            stafferName,
-            stafferRole
+            admNo,
+            firstName,
+            lastName,
+            email,
+            gender,
+            address,
+            phoneNumber,
+            parentEmail,
+            entryClass,
+            stateOfOrigin,
+            maritalStatus
         }
-        addStaff(formData);    
+        registerStudent(formData);    
 });
 
+// logout
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
 });
 
+//clear staff form
 cancelLink.addEventListener("click", (e) => {
     e.preventDefault(); 
-    emailInput.value = "";
-    nameInput.value = "";
-    staffRole.value = ""
+    staffTitleInput.value="";
+            staffNameInput.value="";
+            staffEmailInput.value="";
+            staffGenderInput.value="";
+            staffStreetlInput.value="";
+            staffCityInput.value="";
+            staffStateInput.value="";
+            staffPhoneInput.value="";
+            staffRole.value="";
+            teacherClassInput.value=""
 });
 
+//close staff form
 closeLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     addStafferForm.style.display = "none"
 });
 
+//clear student form
 clearStdFrmLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     // emailInput.value = "";
@@ -172,6 +283,7 @@ clearStdFrmLink.addEventListener("click", (e) => {
     // staffRole.value = ""
 });
 
+//clos e student form
 closeStdFrmLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     addStudentForm.style.display = "none"
