@@ -239,7 +239,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button {
+    button#send-btn,  button#submit-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -267,4 +267,16 @@ html, body {
     .city-item select {
     width: calc(50% - 8px);
     }
+    }
+
+
+    /* view staff styles */
+    #viewstaff-form .card{
+        box-shadow: 0 0 3px 0 #bbbdbb;
+    }
+    #viewstaff-form table thead th{
+       color: #74e042;
+    }
+    #viewstaff-form table thead{
+        border-bottom: 1px solid white;
     }

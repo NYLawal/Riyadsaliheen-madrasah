@@ -1,5 +1,5 @@
-// const baseUrl = "http://localhost:5000/api/v1"
-const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+const baseUrl = "http://localhost:5000/api/v1"
+// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
@@ -29,16 +29,37 @@ const signUp = (userData) => {
                     toast.addEventListener("mouseleave", Swal.resumeTimer);
                 },
             });
+            emailInput.value ="";
+            passwordInput.value ="";
+           passwordRepeatInput.value ="";
 
         })
-        .catch((err) => {
-            console.log(err);
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: err.response.data.message,
-            });
+        .catch(function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+              errorMsg = error.response.data.message
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request);
+              errorMsg = "Network Error"
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+              errorMsg = error.message
+            }
+           
+        Swal.fire({
+            icon: "error",
+            title: "Error Processing Input",
+            text:  errorMsg
         });
+    });
 };
 
 const signup = document.getElementById("signup-btn");
@@ -73,33 +94,35 @@ function Redirect() {
             } 
 }) 
         .then(function (response) {
+            emailLogin.value ="";
+            passwdLogin.value ="";
             console.log(response);
             let userRole = response.data.role;
             if (userRole == 'superadmin' || userRole == 'admin'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
             }
             else if (userRole == 'teacher'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
             else if (userRole == 'student'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
+            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
+            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
             }
             else if (userRole == 'parent'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
+            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
             }
             else {
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
+            window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
             }
 
             Swal.fire({
                 toast: true,
                 icon: "success",
-                title: "Login successful, continue with your task",
+                title: "Logged in successfully",
                 animation: false,
                 position: "center",
                 showConfirmButton: false,
@@ -133,7 +156,7 @@ const logIn = (userData) => {
             localStorage.setItem("access_token", token);
             setTimeout(function() {
                 Redirect();
-                 }, 1000);   
+                 }, 1000); 
         })
         .catch(function (error) {
                 if (error.response) {
@@ -190,7 +213,6 @@ togglePassword.addEventListener("click", function () {
     }
 });
 togglePasswordLogin.addEventListener("click", function () {
-    console.log("clicked")
     if (passwdLogin.type === "password") {
         passwdLogin.type = "text";
         togglePasswordLogin.classList.remove("fa-eye");

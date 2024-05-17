@@ -82,7 +82,7 @@ staffRole.addEventListener("change", (e) => {
 const addStaff = (staffInfo) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/user/addStaff`, staffInfo, { 
+        .post(`${baseUrl}/staff/addStaff`, staffInfo, { 
             headers: {
               'Authorization': 'Bearer ' + token
             } 
@@ -133,7 +133,7 @@ const addStaff = (staffInfo) => {
         });
 };
 
-// submit stafff form
+// submit staff form
 submitButton.addEventListener("click", (e) => {
     e.preventDefault(); 
     const stafferName = staffTitleInput.value + " " + staffNameInput.value;
@@ -174,7 +174,7 @@ const registerStudent = (studentInfo) => {
                 title: "Successful",
                 text:  response.data.message
             });
-            //clear the form fields
+            //clear the form fields after successful submission
      admissionNumber.value = "";
      studentFNameInput.value = ""
      studentLNameInput.value = "";
@@ -225,7 +225,7 @@ sendButton.addEventListener("click", (e) => {
     let email = studentEmailInput.value;
     const gender = studentGenderInput.value;
     const address = studentStreetlInput.value + " " + studentCityInput.value + " " + studentStateInput.value;
-    const phoneNumber = "+" + studentPhoneInput.value;
+    const phoneNumber = studentPhoneInput.value;
     const parentEmail = parentEmailInput.value
     const entryClass = studentEntryClass.value
     const stateOfOrigin = studentOrigin.value
@@ -251,7 +251,8 @@ sendButton.addEventListener("click", (e) => {
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
 });
 
 //clear staff form
@@ -278,9 +279,19 @@ closeLink.addEventListener("click", (e) => {
 //clear student form
 clearStdFrmLink.addEventListener("click", (e) => {
     e.preventDefault(); 
-    // emailInput.value = "";
-    // nameInput.value = "";
-    // staffRole.value = ""
+    admissionNumber.value = "";
+     studentFNameInput.value = ""
+     studentLNameInput.value = "";
+     studentEmailInput.value = "";
+     studentGenderInput.value = "";
+     studentStreetlInput.value = "" ;
+     studentCityInput.value = "";
+     studentStateInput.value = "";
+     studentPhoneInput.value = "";
+     parentEmailInput.value = "";
+     studentEntryClass.value = "";
+     studentOrigin.value = "";
+     studentMaritalStatus.value= "";
 });
 
 //clos e student form
