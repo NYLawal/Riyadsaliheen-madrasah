@@ -159,10 +159,10 @@
         <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#viewSubmenu" aria-controls="viewSubmenu">View</a>
         <ul class="collapse list-unstyled" id="viewSubmenu">
             <li>
-                <a href="#">staff</a>
+                <a href="#" id="view-staff">staff</a>
             </li>
             <li>
-                <a href="#">students</a>
+                <a href="#" id="view-students">students</a>
             </li>
         </ul>
     </li>
@@ -427,11 +427,22 @@
       <div class="col-12 col-lg-9 col-xl-9">
         <div class="card widget-card border-light">
           <div class="card-body p-4">
-            <h5 class="card-title widget-card-title mb-4">View Staff Members</h5>
+            <h4 class="mb-2">View Staff Members</h4>
+            <!-- <div class="d-grid gap-2 d-sm-flex mb-5"> -->
+              <div class="item mb-4">
+                <select id="viewstaff-select">
+                  <option value="all">All</option>
+                  <option value="teachers">Teachers</option>
+                </select>
+              </div> 
+              <div>
+                <p id="staff-number"></p>
+              </div>
+            <!-- </div> -->
             <div class="table-responsive">
-              <table class="table table-dark bsb-table-xl text-nowrap align-middle m-0">
+              <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstaff-table">
                 <thead>
-                  <tr>
+                  <tr id="tclass">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Gender</th>
@@ -439,51 +450,11 @@
                     <th>Phone</th>
                     <th>Role</th>
                     <th>Admin?</th>
+                    <th id="noclass">Class</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      #HO3210
-                    </td>
-                    <td>
-                      Oliver
-                    </td>
-                    <td>
-                     Bootstrap
-                    </td>
-                    <td>$495</td>
-                    <td>
-                     Pending
-                    </td>
-                    <td>
-                     Pending
-                    </td>
-                    <td>
-                     Pending
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      #HO3210
-                    </td>
-                    <td>
-                      Oliver
-                    </td>
-                    <td>
-                     Bootstrap
-                    </td>
-                    <td>$495</td>
-                    <td>
-                     Pending
-                    </td>
-                    <td>
-                     Pending
-                    </td>
-                    <td>
-                     Pending
-                    </td>
-                  </tr>
+                <tbody id="stafftbl-body">
+                  
                 </tbody>
               </table>
             </div>

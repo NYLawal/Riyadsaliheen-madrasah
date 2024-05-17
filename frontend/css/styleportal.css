@@ -68,28 +68,16 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #teacher-class, #class-label {
+.staffadd-form, .studentadd-form, #viewstaff-form, #teacher-class, #class-label {
+/* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
     display: none;
 }
-/* .staffadd-form button{
-    border-radius: 5px; 
-    background: #5ec52e;
-    font-size: 16px;
-    color: #fff;
-    cursor: pointer;
-}
- button:hover{
-   background-color:  #5ec52e;
-}
-.staffadd-form h2{
-    line-height: 1.5;
-} */
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
 color: #74e042;
 }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* add student form styles */
+/* add student/staff form styles */
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 html, body {
     min-height: 100%;
@@ -269,14 +257,21 @@ html, body {
     }
     }
 
-
-    /* view staff styles */
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* view staff styles */
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
     #viewstaff-form .card{
-        box-shadow: 0 0 3px 0 #bbbdbb;
+        box-shadow: 0 0 5px 0 #bbbdbb;
+    }
+    #viewstaff-form .card .card-body h4,  #viewstaff-form .card .card-body .item{
+        text-align: center;
     }
     #viewstaff-form table thead th{
        color: #74e042;
     }
     #viewstaff-form table thead{
         border-bottom: 1px solid white;
+    }
+    #viewstaff-form .table-responsive table tr {
+       padding-left: 5px;
     }

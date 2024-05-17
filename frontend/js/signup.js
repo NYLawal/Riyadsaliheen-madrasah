@@ -1,5 +1,5 @@
-const baseUrl = "http://localhost:5000/api/v1"
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
@@ -99,24 +99,24 @@ function Redirect() {
             console.log(response);
             let userRole = response.data.role;
             if (userRole == 'superadmin' || userRole == 'admin'){
-            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
             }
             else if (userRole == 'teacher'){
-            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
             else if (userRole == 'student'){
-            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
-            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
             }
             else if (userRole == 'parent'){
-            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
-            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
             }
             else {
-            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
-            window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
+            // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
             }
 
             Swal.fire({
