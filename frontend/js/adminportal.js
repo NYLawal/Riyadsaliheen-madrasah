@@ -1,5 +1,6 @@
-const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-// const baseUrl = "http://localhost:5000/api/v1"
+
+// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler= document.getElementById("toggler-icon")
@@ -11,6 +12,9 @@ const addStudentForm = document.getElementById("studentadd-form")
 const viewStaffLink = document.getElementById("view-staff")
 const viewStaffForm= document.getElementById("viewstaff-form")
 const viewStaffSelect= document.getElementById("viewstaff-select")
+const viewStudentSelect= document.getElementById("viewstudent-select")
+const viewStudentsLink= document.getElementById("view-students")
+const viewStudentsForm= document.getElementById("viewstudent-form")
 
 const staffTitleInput = document.getElementById("staff-title")
 const staffNameInput = document.getElementById("staff-name")
@@ -47,9 +51,20 @@ const submitButton = document.getElementById("submit-btn")
 const sendButton = document.getElementById("send-btn")
 
 const pNumber = document.getElementById("staff-number")
+const pstdNumber = document.getElementById("student-number")
 let staffTableBody = document.getElementById("stafftbl-body")
+let studentTableBody = document.getElementById("studenttbl-body")
 const staffTable = document.getElementById("viewstaff-table")
 const tClassHeading = document.getElementById("noclass")
+
+const studSearchDiv = document.getElementById("search-students")
+const studSearchKey = document.getElementById("stud-searchkey")
+const studSearchValue = document.getElementById("stud-searchvalue")
+const searchStudentGender = document.getElementById("searchstud-gender")
+const searchMe = document.getElementById("searchme")
+const searchButton = document.getElementById("search-btn")
+const studentStatus = document.getElementById("search-studstatus")
+
 const logoutLink= document.getElementById("logout")
 const token = localStorage.getItem('access_token')
 
@@ -414,6 +429,302 @@ sendButton.addEventListener("click", (e) => {
             maritalStatus
         }
         registerStudent(formData);    
+});
+
+// display all students
+const displayAllStudents = () => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/student/all`, { 
+            headers: {
+              'Authorization': 'Bearer ' + token
+            } 
+}) 
+        .then(function (response) {
+            console.log(response)
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found`
+            for (let i=0; i< response.data.students.length; i++){
+                let tblrow = document.createElement("tr")
+                let tblcol1 = document.createElement("td")
+                let tblcol2 = document.createElement("td")
+                let tblcol3 = document.createElement("td")
+                let tblcol4 = document.createElement("td")
+                let tblcol5 = document.createElement("td")
+                let tblcol6 = document.createElement("td")
+                let tblcol7 = document.createElement("td")
+                let tblcol8 = document.createElement("td")
+                let tblcol9 = document.createElement("td")
+                let tblcol10 = document.createElement("td")
+                let tblcol11 = document.createElement("td")
+                let tblcol12 = document.createElement("td")
+                let tblcol13 = document.createElement("td")
+                let tblcol14 = document.createElement("td")
+                tblcol1.innerText = response.data.students[i].admNo
+                tblcol2.innerText = response.data.students[i].firstName
+                tblcol3.innerText = response.data.students[i].lastName
+                tblcol4.innerText = response.data.students[i].gender
+                tblcol5.innerText = response.data.students[i].entryClass
+                tblcol6.innerText = response.data.students[i].address
+                tblcol7.innerText = response.data.students[i].phoneNumber
+                tblcol8.innerText = response.data.students[i].email
+                tblcol9.innerText = response.data.students[i].parentEmail
+                tblcol10.innerText = response.data.students[i].stateOfOrigin
+                tblcol11.innerText = response.data.students[i].maritalStatus
+                tblcol12.innerText = response.data.students[i].programme
+                tblcol13.innerText = response.data.students[i].presentClass
+                tblcol14.innerText = response.data.students[i].registeredOn
+                tblrow.appendChild(tblcol1)
+                tblrow.appendChild(tblcol2)
+                tblrow.appendChild(tblcol3)
+                tblrow.appendChild(tblcol4)
+                tblrow.appendChild(tblcol5)
+                tblrow.appendChild(tblcol6)
+                tblrow.appendChild(tblcol7)
+                tblrow.appendChild(tblcol8)
+                tblrow.appendChild(tblcol9)
+                tblrow.appendChild(tblcol10)
+                tblrow.appendChild(tblcol11)
+                tblrow.appendChild(tblcol12)
+                tblrow.appendChild(tblcol13)
+                tblrow.appendChild(tblcol14)
+                studentTableBody.appendChild(tblrow)  
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+              errorMsg = error.response.data.message
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request);
+              errorMsg = "Network Error"
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+              errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text:  errorMsg
+            });
+        });
+};
+
+// display view students form
+viewStudentsLink.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    viewStudentsForm.style.display = "block"
+    sidebar.style.display = "none"
+    displayAllStudents()
+});
+
+// display student list all/by search/one
+viewStudentSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML =""
+    pstdNumber.innerHTML =""
+    if (viewStudentSelect.value == "all"){
+        studSearchDiv.style.display = "none"
+        displayAllStudents()
+    }
+    else if (viewStudentSelect.value == "bycriteria"){
+        studSearchDiv.style.display = "block";
+        studSearchValue.focus()
+    }
+});
+
+// display students by search key
+  studSearchKey.addEventListener("change", (e) => {
+    e.preventDefault(); 
+    studentTableBody.innerHTML =""
+    pstdNumber.innerHTML =""
+   if (studSearchKey.value == "firstName" || studSearchKey.value == "lastName" || studSearchKey.value == "address" || studSearchKey.value == "stateOfOrigin" ){
+    searchMe.innerHTML =`<input type="text" name="stdsearchvalue" placeholder="Input your search term" id="searchstud-value"/>`
+    const searchValueBox = document.getElementById("searchstud-value")
+    searchValueBox.focus()
+   }
+   else if (studSearchKey.value == "gender") {
+    searchMe.innerHTML = 
+                 `<select id="searchstud-gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>`
+   }
+   else if (studSearchKey.value == "entryClass") {
+    searchMe.innerHTML = 
+    `<select id="searchstud-entryclass">
+    <option value="tamyidi">tamyidi</option>
+    <option value="adonah">adonah</option>
+    <option value="rawdoh">rawdoh</option>
+    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+    <option value="awwal idaadi">awwal idaadi</option>
+    <option value="thaani idaadi">thaani idaadi</option>
+    <option value="thaalith idaadi">thaalith idaadi</option>
+  </select>`
+   }
+   else if (studSearchKey.value == "maritalStatus") {
+    searchMe.innerHTML = 
+                 `<select id="searchstud-mstatus">
+                 <option value="married">Married</option>
+                 <option value="single">Single</option>
+               </select>`
+   }
+   else if (studSearchKey.value == "programme") {
+    searchMe.innerHTML = 
+                 `<select id="searchstud-prg">
+                 <option value="children madrasah">Children Madrasah</option>
+                 <option value="adult madrasah">Adult Madrasah</option>
+                 <option value="female madrasah">Female Madrasah</option>
+                 <option value="barnomij">Barnomij</option>
+               </select>`
+   }
+   else if (studSearchKey.value == "studentStatus") {
+    searchMe.innerHTML = ""
+   }
+   else if (studSearchKey.value == "presentClass") {
+    searchMe.innerHTML = 
+    `<select id="searchstud-presentclass">
+    <option value="tamyidi">tamyidi</option>
+    <option value="adonah">adonah</option>
+    <option value="rawdoh">rawdoh</option>
+    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+    <option value="awwal idaadi">awwal idaadi</option>
+    <option value="thaani idaadi">thaani idaadi</option>
+    <option value="thaalith idaadi">thaalith idaadi</option>
+  </select>`
+   }
+   else if (studSearchKey.value == "classStatus") {
+    searchMe.innerHTML = 
+                 `<select id="searchstud-status">
+                 <option value="promoted">Promoted</option>
+                 <option value="repeated">Repeated</option>
+               </select>`
+   }
+});
+// clear table if search value changes
+studSearchValue.addEventListener("change", (e) => {
+    e.preventDefault(); 
+    studentTableBody.innerHTML =""
+    pstdNumber.innerHTML =""
+})
+let searchMeFirst = searchMe.firstChild 
+searchMeFirst.addEventListener("change", (e) => {
+    e.preventDefault(); 
+    studentTableBody.innerHTML =""
+    pstdNumber.innerHTML =""
+})
+// display students by search key and value
+const displayStudents = (key,value) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/student/?${key}=${value}`, { 
+            headers: {
+              'Authorization': 'Bearer ' + token
+            } 
+}) 
+        .then(function (response) {
+            console.log(response)
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found`
+            for (let i=0; i< response.data.students.length; i++){
+                let tblrow = document.createElement("tr")
+                let tblcol1 = document.createElement("td")
+                let tblcol2 = document.createElement("td")
+                let tblcol3 = document.createElement("td")
+                let tblcol4 = document.createElement("td")
+                let tblcol5 = document.createElement("td")
+                let tblcol6 = document.createElement("td")
+                let tblcol7 = document.createElement("td")
+                let tblcol8 = document.createElement("td")
+                let tblcol9 = document.createElement("td")
+                let tblcol10 = document.createElement("td")
+                let tblcol11 = document.createElement("td")
+                let tblcol12 = document.createElement("td")
+                let tblcol13 = document.createElement("td")
+                let tblcol14 = document.createElement("td")
+                tblcol1.innerText = response.data.students[i].admNo
+                tblcol2.innerText = response.data.students[i].firstName
+                tblcol3.innerText = response.data.students[i].lastName
+                tblcol4.innerText = response.data.students[i].gender
+                tblcol5.innerText = response.data.students[i].entryClass
+                tblcol6.innerText = response.data.students[i].address
+                tblcol7.innerText = response.data.students[i].phoneNumber
+                tblcol8.innerText = response.data.students[i].email
+                tblcol9.innerText = response.data.students[i].parentEmail
+                tblcol10.innerText = response.data.students[i].stateOfOrigin
+                tblcol11.innerText = response.data.students[i].maritalStatus
+                tblcol12.innerText = response.data.students[i].programme
+                tblcol13.innerText = response.data.students[i].presentClass
+                tblcol14.innerText = response.data.students[i].registeredOn
+                tblrow.appendChild(tblcol1)
+                tblrow.appendChild(tblcol2)
+                tblrow.appendChild(tblcol3)
+                tblrow.appendChild(tblcol4)
+                tblrow.appendChild(tblcol5)
+                tblrow.appendChild(tblcol6)
+                tblrow.appendChild(tblcol7)
+                tblrow.appendChild(tblcol8)
+                tblrow.appendChild(tblcol9)
+                tblrow.appendChild(tblcol10)
+                tblrow.appendChild(tblcol11)
+                tblrow.appendChild(tblcol12)
+                tblrow.appendChild(tblcol13)
+                tblrow.appendChild(tblcol14)
+                studentTableBody.appendChild(tblrow)  
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+              errorMsg = error.response.data.message
+            } else if (error.request) {
+              // The request was made but no response was received
+              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+              // http.ClientRequest in node.js
+              console.log(error.request);
+              errorMsg = "Network Error"
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+              errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text:  errorMsg
+            });
+        });
+};
+
+// submit student form
+searchButton.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    studentTableBody.innerHTML =""
+    pstdNumber.innerHTML =""
+    let key =studSearchKey.value;
+    let value;
+    if (key === "studentStatus") value="past"
+    else { value = searchMe.firstChild.value || studSearchValue.value}
+    console.log(key,value)
+        displayStudents(key,value);    
 });
 
 // logout

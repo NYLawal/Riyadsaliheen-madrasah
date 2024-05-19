@@ -68,7 +68,8 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #teacher-class, #class-label {
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #teacher-class, #class-label {
+/* .staffadd-form, .studentadd-form, #viewstaff-form, #teacher-class, #class-label { */
 /* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
     display: none;
 }
@@ -227,7 +228,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn{
+    button#send-btn,  button#submit-btn , button#search-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -236,6 +237,10 @@ html, body {
     font-size: 16px;
     color: #fff;
     cursor: pointer;
+    }
+    button#search-btn{
+        width: 80px;
+        padding: 3px;
     }
     button::-webkit-file-upload-button {
     background: #7ff549;
@@ -258,20 +263,38 @@ html, body {
     }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* view staff styles */
+/* view staff  and student styles */
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    #viewstaff-form .card{
+    #viewstaff-form .card, #viewstudent-form .card{
         box-shadow: 0 0 5px 0 #bbbdbb;
     }
     #viewstaff-form .card .card-body h4,  #viewstaff-form .card .card-body .item{
         text-align: center;
     }
-    #viewstaff-form table thead th{
+     #viewstudent-form .card .card-body h4,  #viewstudent-form .card .card-body .item, #viewstudent-form .card .card-body #search-students {
+        text-align: center;
+    } 
+    #viewstaff-form table thead th, #viewstudent-form table thead th{
        color: #74e042;
     }
-    #viewstaff-form table thead{
+    #viewstaff-form table thead, #viewstudent-form table thead{
         border-bottom: 1px solid white;
     }
-    #viewstaff-form .table-responsive table tr {
+    #viewstaff-form .table-responsive table tr, #viewstudent-form .table-responsive table tr {
        padding-left: 5px;
+    }
+    .page-item.active{
+        background-color: #5ec52e;
+    }
+    #stud-searchkey{
+        background-color: #7ff549;
+        color: black;
+        border-width: 1px;
+    }
+    #search-students{
+        display:none;
+        background-color: #d0f1c1;
+    }
+    #viewstudent-select:active{
+        background-color: #7ff549;
     }
