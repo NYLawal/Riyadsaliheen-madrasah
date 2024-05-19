@@ -1,6 +1,6 @@
 
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler= document.getElementById("toggler-icon")
