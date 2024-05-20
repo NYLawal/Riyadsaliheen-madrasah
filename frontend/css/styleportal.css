@@ -283,10 +283,16 @@ html, body {
     #viewstaff-form .table-responsive table tr, #viewstudent-form .table-responsive table tr {
        padding-left: 5px;
     }
-    .page-item.active{
-        background-color: #5ec52e;
+    .pagination-color{
+        color: #5ec52e;
     }
-    #stud-searchkey{
+    .component-active-bg{
+        background-color: #2b7a07;
+    }
+    .component-active-color{
+        color: #2b7a07;
+    }
+   #stud-searchkey{
         background-color: #7ff549;
         color: black;
         border-width: 1px;
@@ -298,3 +304,16 @@ html, body {
     #viewstudent-select:active{
         background-color: #7ff549;
     }
+
+   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon{
+   position: absolute;
+   right: 20px;
+}
+a.disable {
+    background-color: #0a5f0a;
+    pointer-events: none;
+    cursor: default;
+    cursor: pointer;
+    }
+
+    

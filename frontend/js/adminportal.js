@@ -56,6 +56,8 @@ let staffTableBody = document.getElementById("stafftbl-body")
 let studentTableBody = document.getElementById("studenttbl-body")
 const staffTable = document.getElementById("viewstaff-table")
 const tClassHeading = document.getElementById("noclass")
+const closeViewStudentBtn = document.getElementById("vstdclose-icon")
+const closeViewStaffBtn = document.getElementById("vstfclose-icon")
 
 const studSearchDiv = document.getElementById("search-students")
 const studSearchKey = document.getElementById("stud-searchkey")
@@ -65,11 +67,18 @@ const searchMe = document.getElementById("searchme")
 const searchButton = document.getElementById("search-btn")
 const studentStatus = document.getElementById("search-studstatus")
 
+const studentViewPagination = document.getElementById("stdview-pagination")
+const viewStudentPage1 = document.getElementById("viewstd-page1")
+const viewStudentPage2 = document.getElementById("viewstd-page2")
+const viewStudentPage3 = document.getElementById("viewstd-page3")
+const viewStudentPageNext = document.getElementById("viewstd-pagenext")
+const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
+const tabDisabledPrevious = document.getElementById("tab-disabled")
+
 const logoutLink= document.getElementById("logout")
 const token = localStorage.getItem('access_token')
-
-// let tblrow;
-// tblrow = document.createElement("tr")
+let studentpage = [];
+let lastpage = [];
                 
 
 toggler.addEventListener("click", (e) => {
@@ -105,6 +114,7 @@ staffRole.addEventListener("change", (e) => {
 
 // display all staff members
 const displayAllStaff = () => {
+    let serial_no = 0;
     let errorMsg;
     axios
         .get(`${baseUrl}/staff/viewStaff`, { 
@@ -118,7 +128,9 @@ const displayAllStaff = () => {
             tClassHeading.style.display= "none"
              tClassHeading.innerHTML=""
             for (let i=0; i< response.data.staff_list.length; i++){
+                serial_no++
                 let tblrow = document.createElement("tr")
+                let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
@@ -126,6 +138,7 @@ const displayAllStaff = () => {
                 let tblcol5 = document.createElement("td")
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
+                tblcol0.innerText = serial_no
                 tblcol1.innerText = response.data.staff_list[i].stafferName
                 tblcol2.innerText = response.data.staff_list[i].email
                 tblcol3.innerText = response.data.staff_list[i].gender
@@ -133,6 +146,7 @@ const displayAllStaff = () => {
                 tblcol5.innerText = response.data.staff_list[i].phoneNumber
                 tblcol6.innerText = response.data.staff_list[i].role
                 tblcol7.innerText = response.data.staff_list[i].isAdmin
+                tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -173,6 +187,7 @@ const displayAllStaff = () => {
 // display all teachers
 const displayTeachers = () => {
     let errorMsg;
+    let serial_no = 0;
     axios
         .get(`${baseUrl}/staff/viewTeachers`, { 
             headers: {
@@ -186,8 +201,9 @@ const displayTeachers = () => {
             tClassHeading.innerHTML="Class";
             tClassHeading.style.borderBottom = "none";
             for (let i=0; i< response.data.teachers_list.length; i++){
-                
+                serial_no++
                 let tblrow = document.createElement("tr")
+                let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
@@ -196,6 +212,7 @@ const displayTeachers = () => {
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
+                tblcol0.innerText = serial_no;
                 tblcol1.innerText = response.data.teachers_list[i].stafferName
                 tblcol2.innerText = response.data.teachers_list[i].email
                 tblcol3.innerText = response.data.teachers_list[i].gender
@@ -204,6 +221,7 @@ const displayTeachers = () => {
                 tblcol6.innerText = response.data.teachers_list[i].role
                 tblcol7.innerText = response.data.teachers_list[i].isAdmin
                 tblcol8.innerText = response.data.teachers_list[i].teacherClass
+                tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -260,6 +278,12 @@ viewStaffLink.addEventListener("click", (e) => {
     viewStaffForm.style.display = "block"
     sidebar.style.display = "none"
     displayAllStaff()
+});
+// close view staff form
+closeViewStaffBtn.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    staffTableBody.innerHTML =""
+    viewStaffForm.style.display = "none"
 });
 
 // add a staff member - admin, bursar or teacher
@@ -432,19 +456,21 @@ sendButton.addEventListener("click", (e) => {
 });
 
 // display all students
-const displayAllStudents = () => {
+const displayAllStudents = (page) => {
     let errorMsg;
     axios
-        .get(`${baseUrl}/student/all`, { 
+        .get(`${baseUrl}/student/all/${page}`, { 
             headers: {
               'Authorization': 'Bearer ' + token
             } 
 }) 
         .then(function (response) {
             console.log(response)
-            pstdNumber.innerText = `${response.data.noOfStudents} registered students found`
-            for (let i=0; i< response.data.students.length; i++){
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
+            for (let i=0; i< response.data.studentsperpage.length; i++){
+                // serial_no++;
                 let tblrow = document.createElement("tr")
+                let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
@@ -459,20 +485,22 @@ const displayAllStudents = () => {
                 let tblcol12 = document.createElement("td")
                 let tblcol13 = document.createElement("td")
                 let tblcol14 = document.createElement("td")
-                tblcol1.innerText = response.data.students[i].admNo
-                tblcol2.innerText = response.data.students[i].firstName
-                tblcol3.innerText = response.data.students[i].lastName
-                tblcol4.innerText = response.data.students[i].gender
-                tblcol5.innerText = response.data.students[i].entryClass
-                tblcol6.innerText = response.data.students[i].address
-                tblcol7.innerText = response.data.students[i].phoneNumber
-                tblcol8.innerText = response.data.students[i].email
-                tblcol9.innerText = response.data.students[i].parentEmail
-                tblcol10.innerText = response.data.students[i].stateOfOrigin
-                tblcol11.innerText = response.data.students[i].maritalStatus
-                tblcol12.innerText = response.data.students[i].programme
-                tblcol13.innerText = response.data.students[i].presentClass
-                tblcol14.innerText = response.data.students[i].registeredOn
+                tblcol0.innerText = response.data.studentsperpage[i].serialNo
+                tblcol1.innerText = response.data.studentsperpage[i].admNo
+                tblcol2.innerText = response.data.studentsperpage[i].firstName
+                tblcol3.innerText = response.data.studentsperpage[i].lastName
+                tblcol4.innerText = response.data.studentsperpage[i].gender
+                tblcol5.innerText = response.data.studentsperpage[i].entryClass
+                tblcol6.innerText = response.data.studentsperpage[i].address
+                tblcol7.innerText = response.data.studentsperpage[i].phoneNumber
+                tblcol8.innerText = response.data.studentsperpage[i].email
+                tblcol9.innerText = response.data.studentsperpage[i].parentEmail
+                tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
+                tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
+                tblcol12.innerText = response.data.studentsperpage[i].programme
+                tblcol13.innerText = response.data.studentsperpage[i].presentClass
+                tblcol14.innerText = response.data.studentsperpage[i].dateOfRegistration
+                tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -489,6 +517,14 @@ const displayAllStudents = () => {
                 tblrow.appendChild(tblcol14)
                 studentTableBody.appendChild(tblrow)  
             }
+                console.log("response says page is ", response.data.page)
+               studentpage.push(response.data.page)
+               lastpage.push(response.data.pgnum)
+              
+   // disable next button if end of page is reached
+   if (response.data.pgnum === response.data.page){  
+    viewStudentPageNext.classList.add("disable")    
+}
         })
         .catch(function (error) {
             if (error.response) {
@@ -522,7 +558,15 @@ viewStudentsLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     viewStudentsForm.style.display = "block"
     sidebar.style.display = "none"
-    displayAllStudents()
+    // viewStudentPage1.style.backgroundColor = "green"
+    page = displayAllStudents(1)
+});
+
+// close view student form
+closeViewStudentBtn.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    studentTableBody.innerHTML ="";
+    viewStudentsForm.style.display = "none"
 });
 
 // display student list all/by search/one
@@ -545,7 +589,7 @@ viewStudentSelect.addEventListener("change", (e) => {
     e.preventDefault(); 
     studentTableBody.innerHTML =""
     pstdNumber.innerHTML =""
-   if (studSearchKey.value == "firstName" || studSearchKey.value == "lastName" || studSearchKey.value == "address" || studSearchKey.value == "stateOfOrigin" ){
+   if (studSearchKey.value == "admNo" || studSearchKey.value == "firstName" || studSearchKey.value == "lastName" || studSearchKey.value == "address" || studSearchKey.value == "stateOfOrigin" ){
     searchMe.innerHTML =`<input type="text" name="stdsearchvalue" placeholder="Input your search term" id="searchstud-value"/>`
     const searchValueBox = document.getElementById("searchstud-value")
     searchValueBox.focus()
@@ -629,19 +673,23 @@ searchMeFirst.addEventListener("change", (e) => {
     pstdNumber.innerHTML =""
 })
 // display students by search key and value
-const displayStudents = (key,value) => {
+const displayStudents = (key,value,page) => {
     let errorMsg;
+    let serial_no = 0;
     axios
-        .get(`${baseUrl}/student/?${key}=${value}`, { 
+        .get(`${baseUrl}/student/${page}/?${key}=${value}`, { 
+            // params: { page} ,
             headers: {
               'Authorization': 'Bearer ' + token
             } 
 }) 
         .then(function (response) {
             console.log(response)
-            pstdNumber.innerText = `${response.data.noOfStudents} registered students found`
-            for (let i=0; i< response.data.students.length; i++){
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
+            for (let i=0; i< response.data.studentsperpage.length; i++){
+                // serial_no++
                 let tblrow = document.createElement("tr")
+                let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
@@ -656,20 +704,22 @@ const displayStudents = (key,value) => {
                 let tblcol12 = document.createElement("td")
                 let tblcol13 = document.createElement("td")
                 let tblcol14 = document.createElement("td")
-                tblcol1.innerText = response.data.students[i].admNo
-                tblcol2.innerText = response.data.students[i].firstName
-                tblcol3.innerText = response.data.students[i].lastName
-                tblcol4.innerText = response.data.students[i].gender
-                tblcol5.innerText = response.data.students[i].entryClass
-                tblcol6.innerText = response.data.students[i].address
-                tblcol7.innerText = response.data.students[i].phoneNumber
-                tblcol8.innerText = response.data.students[i].email
-                tblcol9.innerText = response.data.students[i].parentEmail
-                tblcol10.innerText = response.data.students[i].stateOfOrigin
-                tblcol11.innerText = response.data.students[i].maritalStatus
-                tblcol12.innerText = response.data.students[i].programme
-                tblcol13.innerText = response.data.students[i].presentClass
-                tblcol14.innerText = response.data.students[i].registeredOn
+                tblcol0.innerText = response.data.studentsperpage[i].serialNo
+                tblcol1.innerText = response.data.studentsperpage[i].admNo
+                tblcol2.innerText = response.data.studentsperpage[i].firstName
+                tblcol3.innerText = response.data.studentsperpage[i].lastName
+                tblcol4.innerText = response.data.studentsperpage[i].gender
+                tblcol5.innerText = response.data.studentsperpage[i].entryClass
+                tblcol6.innerText = response.data.studentsperpage[i].address
+                tblcol7.innerText = response.data.studentsperpage[i].phoneNumber
+                tblcol8.innerText = response.data.studentsperpage[i].email
+                tblcol9.innerText = response.data.studentsperpage[i].parentEmail
+                tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
+                tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
+                tblcol12.innerText = response.data.studentsperpage[i].programme
+                tblcol13.innerText = response.data.studentsperpage[i].presentClass
+                tblcol14.innerText = response.data.studentsperpage[i].dateOfRegistration
+                tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -685,7 +735,15 @@ const displayStudents = (key,value) => {
                 tblrow.appendChild(tblcol13)
                 tblrow.appendChild(tblcol14)
                 studentTableBody.appendChild(tblrow)  
-            }
+        }
+            console.log("response says page is ", response.data.page)
+            studentpage.push(response.data.page)
+            lastpage.push(response.data.pgnum)
+           
+// disable next button if end of page is reached
+if (response.data.pgnum === response.data.page){  
+ viewStudentPageNext.classList.add("disable")    
+}   
         })
         .catch(function (error) {
             if (error.response) {
@@ -723,8 +781,123 @@ searchButton.addEventListener("click", (e) => {
     let value;
     if (key === "studentStatus") value="past"
     else { value = searchMe.firstChild.value || studSearchValue.value}
-    console.log(key,value)
-        displayStudents(key,value);    
+    
+    displayStudents(key,value,1);    
+});
+
+// view student pagination
+studentViewPagination.addEventListener("click", (e) => {
+    e.preventDefault();   
+    
+    let targetElement = e.target.id;
+    let target = e.target;
+    target.style.boxShadow = "none" 
+    target.style.color = "green" 
+    
+    let page;
+    switch (targetElement) {
+        case "viewstd-page1":
+          page = 1;
+          break;
+        case "viewstd-page2":
+          page = 2;
+          break;
+        case "viewstd-page3":
+          page = 3
+          break;
+      }
+    if (targetElement == "viewstd-page1" || targetElement == "viewstd-page2" || targetElement == "viewstd-page3" ){
+    let maxpage = lastpage[lastpage.length-1]
+    // console.log("last page is ", maxpage)
+    // console.log("page is ", page)
+    if (page <= maxpage){
+        studentTableBody.innerHTML =""
+        viewStudentPagePrevious.classList.remove("disable")
+        viewStudentPageNext.classList.remove("disable")
+
+    if (viewStudentSelect.value == "all"){
+        displayAllStudents(page)
+    }
+    else if (viewStudentSelect.value == "bycriteria"){
+        const key = studSearchKey.value
+        let value;
+        if (key === "studentStatus") value="past"
+        else { value = searchMe.firstChild.value || studSearchValue.value}
+        displayStudents(key,value,page);  
+        console.log(key,value,page)
+    }
+}
+// else  viewStudentPageNext.classList.add("disable")
+else { 
+    lastpage.push(maxpage)
+Swal.fire({
+    icon: "error",
+    title: "End of File Reached",
+    text: "The page requested does not exist"
+});
+} 
+    } 
+});
+
+// display next students list page
+viewStudentPageNext.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    let maxpage = lastpage[lastpage.length-1]
+    let pageNumber = studentpage.pop()
+    if (pageNumber <= maxpage){
+    viewStudentPagePrevious.classList.remove("disable")
+    studentTableBody.innerHTML =""
+    // let pageNumber = studentpage.pop()
+    if (viewStudentSelect.value == "all"){
+        displayAllStudents(pageNumber+1)
+    }
+    else if (viewStudentSelect.value == "bycriteria"){
+        const key = studSearchKey.value
+        let value;
+        if (key === "studentStatus") value="past"
+        else { value = searchMe.firstChild.value || studSearchValue.value}
+        displayStudents(key,value,pageNumber+1);  
+        console.log(key,value,pageNumber)
+    } 
+} 
+else { 
+    lastpage.push(maxpage)
+Swal.fire({
+    icon: "error",
+    title: "End of File Reached",
+    text: "The page requested does not exist"
+});
+}    
+    // displayAllStudents(pageNumber+1)
+});
+
+// display previous students list page
+ viewStudentPagePrevious.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    viewStudentPageNext.classList.remove("disable")
+    console.log(studentpage)
+    let pageNumber = studentpage.pop()
+    console.log("page is ", pageNumber)
+    if (pageNumber == 1) {
+        studentpage.push(1)
+      viewStudentPagePrevious.classList.add("disable")
+    }
+    else {
+        studentTableBody.innerHTML ="";
+
+        if (viewStudentSelect.value == "all"){
+            displayAllStudents(pageNumber-1)
+        }
+        else if (viewStudentSelect.value == "bycriteria"){
+            const key = studSearchKey.value
+            let value;
+            if (key === "studentStatus") value="past"
+            else { value = searchMe.firstChild.value || studSearchValue.value}
+            displayStudents(key,value,pageNumber-1);  
+            console.log(key,value,pageNumber)
+        }
+        // displayAllStudents(pageNumber-1)
+    }
 });
 
 // logout
@@ -732,7 +905,7 @@ logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
 
 //clear staff form

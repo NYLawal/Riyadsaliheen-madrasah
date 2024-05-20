@@ -448,6 +448,7 @@
       <div class="col-12 col-lg-9 col-xl-9">
         <div class="card widget-card border-light">
           <div class="card-body p-4">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="vstfclose-icon" aria-label="Close"></button>
             <h4 class="mb-2">View Staff Members</h4>
             <!-- <div class="d-grid gap-2 d-sm-flex mb-5"> -->
               <div class="item mb-4">
@@ -464,6 +465,7 @@
               <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstaff-table">
                 <thead>
                   <tr id="tclass">
+                    <th>Serial No</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Gender</th>
@@ -493,6 +495,7 @@
       <div class="col-12 col-lg-9 col-xl-9">
         <div class="card widget-card border-light">
           <div class="card-body p-4">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="vstdclose-icon" aria-label="Close"></button>
             <h4 class="mb-2">View Students</h4>
             <!-- <div class="d-grid gap-2 d-sm-flex mb-5"> -->
               <div class="item mb-4">
@@ -505,6 +508,7 @@
               <div id="search-students" class="pt-3 pb-4">
                 <p id="view-search-term" class="mt-4 mb-2">Input the search key and value in the box below</p>
                 <select id="stud-searchkey">
+                  <option value="admNo" id="search-admNo">Admission Number</option>
                   <option value="firstName" id="search-firstname">First Name</option>
                   <option value="lastName" id="search-lastname">Last name</option>
                   <option value="gender" id="search-gender">Gender</option>
@@ -531,6 +535,7 @@
               <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstudent-table">
                 <thead>
                   <tr id="">
+                    <th>Serial No</th>
                     <th>Admission No</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -554,21 +559,25 @@
           </div>
 
           <!-- pagination -->
-          <!-- <nav aria-label="...">
-            <ul class="pagination pagination-sm justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          <nav aria-label="..." class="mt-2">
+            <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
+              <li class="page-item" id="tab-disabled">
+                <a class="page-link component-active-color" href="" id="viewstd-pageprevious">Previous</a>
               </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item" aria-current="page">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
+              </li>
+              <li class="page-item" >
+                <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link  pagination-color" href="#" id="viewstd-page3">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next</a>
               </li>
             </ul>
-          </nav> -->
+          </nav>
         </div>
       </div>
     </div>
