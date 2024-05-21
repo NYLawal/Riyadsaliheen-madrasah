@@ -170,10 +170,10 @@
       <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#editSubmenu" aria-controls="editSubmenu">Edit</a>
       <ul class="collapse list-unstyled" id="editSubmenu">
           <li>
-              <a href="#">staffer</a>
+              <a href="#" id="edit-staff">staffer</a>
           </li>
           <li>
-              <a href="#">student</a>
+              <a href="#" id="edit-students">student</a>
           </li>
       </ul>
   </li>
@@ -261,6 +261,7 @@
     </div>
   </div>
 </section> -->
+
 <!-- Add Staff -->
 <section class="bg-light pb-3 staffadd-form" id="staffadd-form">
   <div class="container">
@@ -583,6 +584,122 @@
     </div>
   </div>
 </section>
+
+<!-- Edit Staff -->
+<section class="bg-light mb-5 staffedit-queryform" id="staffedit-queryform">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div class="card border border-light-subtle rounded-3 shadow-sm">
+          <div class="card-body p-5">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="editstfclose-icon" aria-label="Close"></button>
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+              </a>
+            </div>
+            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the email of the staffer you want to edit. Make sure to verify its correctness before submitting.</h2>
+            <form action="#!">
+              <div class="row gy-2 overflow-hidden">
+                <!-- <div class="col-12">
+                  <div class="">
+                    <label for="toedit-staffname" class="form-label">Staffer Name</label>
+                    <input type="text" class="form-control" name="staffName" id="toedit-staffname" placeholder="Enter name" required>
+                  </div> -->
+                </div>
+                <div class="col-12">
+                  <div class="">
+                    <label for="toedit-staffemail" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="toedit-staffemail" placeholder="name@example.com" required>
+                  </div>
+                </div>
+                <div class="col-12 submitbtn-div">
+                  <div class="d-grid my-3 mt-4">
+                    <button class="btn btn-lg" type="submit" id="submiteditquery-btn">Submit</button>
+                  </div>
+                </div>
+                <!-- <div class="col-12 mt-3 mb-0">
+                  <div class="d-flex gap-2 justify-content-between">
+                    <a href="#!" class="green-text fw-bold text-decoration-none" id="canceledit-btn">Cancel</a>
+                    <a href="#!" class="green-text fw-bold text-decoration-none" id="closeedit-btn">Close</a>
+                  </div> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Update Staff -->
+<section class="bg-light pb-3 staffupdate-form" id="staffupdate-form">
+  <div class="container">
+   <div class="row justify-content-center">
+     <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+     <form action="/" id="staff-formupdate">
+       <div class="banner">
+         <h1>Staff Update Form</h1>
+       </div>
+       <h2 class="mt-2 mb-3">Staff Details</h2>
+       <p>Edit the staff details, then submit for update</p>
+       <div class="item">
+           <input type="email" name="email" placeholder="" id="upd-staffemail" />
+       </div>
+       <div class="item">
+         <p>Name</p>
+           <input type="text" name="name" placeholder="Name(s)" id="upd-staffname" />
+       </div>
+       <div class="item">
+         <p>Gender</p>
+         <input type="text" name="gender" placeholder="Male/Female" id="upd-staffgender" />
+       </div>
+       <div class="item">
+         <p>Address</p>
+         <input type="text" name="address" placeholder="Full Address"  id="upd-staffaddress" />
+         </div>
+       <div class="item">
+         <p>Phone No</p>
+         <input type="text" name="phone" placeholder="e.g 080..." id="upd-staffphone" />
+       </div>
+       <div class="item">
+        <p>Role</p>
+        <input type="text" name="role" placeholder="e.g Teacher" id="upd-staffrole" />
+       </div>
+       <div class="item">
+        <p id="upd-classlabel">Class</p>
+        <input type="text" name="role" placeholder="" id="upd-teacherclass" />
+       </div>
+       <div class="item">
+        <!-- <p id="updateclass-label">Class</p> -->
+        <select id="updateit-teacherclass">
+          <option selected>select a new class</option>
+          <option value="tamyidi">tamyidi</option>
+          <option value="adonah">adonah</option>
+          <option value="rawdoh">rawdoh</option>
+          <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+          <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+          <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+          <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+          <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+          <option value="awwal idaadi">awwal idaadi</option>
+          <option value="thaani idaadi">thaani idaadi</option>
+          <option value="thaalith idaadi">thaalith idaadi</option>
+        </select>
+      </div>
+       <div class="btn-block">
+         <button class="mt-2" type="submit" href="/" id="update-btn">Update</button>
+       </div>
+       <div class="d-flex gap-2 justify-content-around mt-5">
+         <a href="#!" class="green-text fw-bold text-decoration-none" id="cancelupdate-btn">Clear Form</a>
+         <a href="#!" class="green-text fw-bold text-decoration-none" id="closeupdate-btn">Close</a>
+       </div>
+     </form>
+     </div>
+   </div>
+  </div>
+ </section>
 
       
       <!-- Footer  -->
