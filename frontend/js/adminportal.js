@@ -955,17 +955,21 @@ closeStdFrmLink.addEventListener("click", (e) => {
 
 
 // ***************************************************************************************
-// SECTION 2 - EDIT, PROMOTE ....
+// SECTION 2 - EDIT, PROMOTE, REMOVE ....
 // ***************************************************************************************
 const editStaffQueryForm = document.getElementById('staffedit-queryform')
-// const cancelEditLink = document.getElementById('canceledit-btn')
 const closeEditButtonIcon = document.getElementById('editstfclose-icon')
+const closeRemoveButtonIcon = document.getElementById('removestfclose-icon')
 const editStaffLink = document.getElementById('edit-staff')
+const removeStaffLink = document.getElementById('remove-staff')
 const staffNameToEdit = document.getElementById('toedit-staffname')
 const staffEmailToEdit = document.getElementById('toedit-staffemail')
+const staffEmailToRemove = document.getElementById('toremove-staffemail')
 const submitEditQuery = document.getElementById('submiteditquery-btn')
+const submitRemoveQuery = document.getElementById('submitremovequery-btn')
 
 const updateStaffForm = document.getElementById('staffupdate-form')
+const removeStaffForm = document.getElementById('staffremove-form')
 const cancelUpdateButton = document.getElementById('cancelupdate-btn')
 const closeUpdateButton = document.getElementById('closeupdate-btn')
 const UpdateButton = document.getElementById('update-btn')
@@ -1114,7 +1118,7 @@ staffRoleUpdate.addEventListener("keypress", function(e) {
 const updateStaffDetails = (staffInfo) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/staff/updateStaff`, staffInfo, {
+        .patch(`${baseUrl}/staff/updateStaff`, staffInfo, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -1193,4 +1197,344 @@ UpdateButton.addEventListener("click", (e) => {
         teacherClass
     }
     updateStaffDetails(formData);
+});
+
+// display removestaff query form
+removeStaffLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    removeStaffForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close staffedit query form
+closeRemoveButtonIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    removeStaffForm.style.display = "none";
+    staffEmailToRemove.value = "";
+});
+
+// submit query for staff edit
+const removeStaff = (payload) => {
+    let errorMsg;
+    
+    axios
+        .delete(`${baseUrl}/staff/deleteStaff`, {
+            data: payload,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            staffEmailToRemove.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//submit staffremove query form
+submitRemoveQuery.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = staffEmailToRemove.value;
+    console.log("email is ", staffEmailToRemove.value)
+    if (staffEmailToRemove.value == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Staffer email is required for the query"
+        });
+    }
+   else{
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            removeStaff(formData);
+        }
+    });
+   }   
+   const formData = {
+    email
+}
+  
+});
+
+
+
+// ************************** STUDENTS *****************************************
+const editStudentLink = document.getElementById('edit-students')
+const updateStudentForm = document.getElementById('studentupdate-form')
+const cancelStudentUpdateButton = document.getElementById('clearstdupdfrm-btn')
+const closeStudentUpdateButton= document.getElementById('closestdupdfrm-btn')
+const UpdateStudentButton = document.getElementById('studupd-btn')
+
+const studentAdmNoToEdit = document.getElementById('studupd-admno')
+const studentFirstNameUpdate = document.getElementById("studupd-firstname")
+const studentLastNameUpdate = document.getElementById("studupd-lastname")
+const studentGenderUpdate = document.getElementById("studupd-gender")
+const studentAddressUpdate = document.getElementById("studupd-address")
+const studentPhoneUpdate = document.getElementById("studupd-phone")
+const studentEntryClassUpdate = document.getElementById("studupd-entryclass")
+const studentEntryClassUpdateSelect = document.getElementById("studupd-entryclassselect")
+const studentEmailUpdate = document.getElementById("studupd-email")
+const studentParentEmailUpdate = document.getElementById("studupd-parentemail")
+const studentOriginUpdate = document.getElementById("studupd-origin")
+const studentMStatusUpdate = document.getElementById("studupd-mstatus")
+const studentProgrammeUpdate = document.getElementById("studupd-programme")
+const studentProgrammeUpdateSelect = document.getElementById("studupd-prgselect")
+
+
+// display update student form
+editStudentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    updateStudentForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+
+// submit query for student edit
+const QueryStudentUpdate = (studentInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/student/editStudent`, studentInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message + ". Edit their details in the form below"
+            });
+            studentFirstNameUpdate.value = response.data.student.firstName
+            studentLastNameUpdate.value = response.data.student.lastName
+            studentGenderUpdate.value = response.data.student.gender
+            studentAddressUpdate.value = response.data.student.address
+            studentPhoneUpdate.value =  response.data.student.phoneNumber
+            studentEntryClassUpdate.value = response.data.student.entryClass
+            studentEmailUpdate.value = response.data.student.email
+            studentParentEmailUpdate.value = response.data.student.parentEmail
+            studentOriginUpdate.value = response.data.student.stateOfOrigin
+            studentMStatusUpdate.value = response.data.student.maritalStatus
+            studentProgrammeUpdate.value = response.data.student.programme     
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//submit studentupdate query form
+studentAdmNoToEdit.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && studentAdmNoToEdit.value != "") {
+        e.preventDefault();
+        const admNo = studentAdmNoToEdit.value;
+        const formData = {
+            admNo
+        }
+        QueryStudentUpdate(formData);
+    }
+    else if (e.key === "Enter" && studentAdmNoToEdit.value == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Error Processing Input",
+            text: "A valid admission number is required for the query"
+        });
+    }
+});
+
+//change entry class when another is picked
+studentEntryClassUpdateSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentEntryClassUpdate.value = studentEntryClassUpdateSelect.value;
+});
+
+//change programme when another is picked
+studentProgrammeUpdateSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentProgrammeUpdate.value = studentProgrammeUpdateSelect.value;
+});
+
+// update student
+const updateStudentDetails = (studentInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/updateStudent`, studentInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            studentAdmNoToEdit.value = ""
+            studentFirstNameUpdate.value = ""
+            studentLastNameUpdate.value = ""
+            studentGenderUpdate.value = ""
+            studentAddressUpdate.value = ""
+            studentPhoneUpdate.value =  ""
+            studentEntryClassUpdate.value = ""
+            studentEmailUpdate.value = ""
+            studentParentEmailUpdate.value = ""
+            studentOriginUpdate.value = ""
+            studentMStatusUpdate.value = ""
+            studentProgrammeUpdate.value = ""  
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit request to update student
+UpdateStudentButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const admNo = studentAdmNoToEdit.value; 
+    const firstName = studentFirstNameUpdate.value; 
+    const lastName = studentLastNameUpdate.value;
+    const gender = studentGenderUpdate.value;
+    const address = studentAddressUpdate.value;
+    const phoneNumber = studentPhoneUpdate.value;
+    const entryClass = studentEntryClassUpdate.value;
+    let email = studentEmailUpdate.value;
+    const parentEmail = studentParentEmailUpdate.value;
+    const stateOfOrigin = studentOriginUpdate.value;
+    const maritalStatus = studentMStatusUpdate.value;
+    const programme = studentProgrammeUpdate.value;     
+    if (email == ""){
+       email = "nothing@nil.com"
+    }
+
+    const formData = {
+        admNo,
+        firstName,
+        lastName,
+        gender,
+        address,
+        entryClass,
+        email,
+        parentEmail,
+        phoneNumber,
+        stateOfOrigin,
+        maritalStatus,
+        programme
+    }
+    updateStudentDetails(formData);
+});
+
+// close student update form
+closeStudentUpdateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+   updateStudentForm.style.display = "none";
+   studentAdmNoToEdit.value = ""
+    studentFirstNameUpdate.value = ""
+    studentLastNameUpdate.value = ""
+    studentGenderUpdate.value = ""
+    studentAddressUpdate.value = ""
+    studentPhoneUpdate.value =  ""
+    studentEntryClassUpdate.value = ""
+    studentEmailUpdate.value = ""
+    studentParentEmailUpdate.value = ""
+    studentOriginUpdate.value = ""
+    studentMStatusUpdate.value = ""
+    studentProgrammeUpdate.value = ""  
+});
+
+// clear student update form
+cancelStudentUpdateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    studentAdmNoToEdit.value = ""
+    studentFirstNameUpdate.value = ""
+    studentLastNameUpdate.value = ""
+    studentGenderUpdate.value = ""
+    studentAddressUpdate.value = ""
+    studentPhoneUpdate.value =  ""
+    studentEntryClassUpdate.value = ""
+    studentEmailUpdate.value = ""
+    studentParentEmailUpdate.value = ""
+    studentOriginUpdate.value = ""
+    studentMStatusUpdate.value = ""
+    studentProgrammeUpdate.value = ""  
 });

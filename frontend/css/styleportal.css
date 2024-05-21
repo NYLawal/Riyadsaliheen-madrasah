@@ -68,7 +68,8 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #teacher-class, #class-label {
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
+#studentupdate-form, #staffremove-form, #teacher-class, #class-label {
 /* .staffadd-form, .studentadd-form, #viewstaff-form,#viewstudent-form, #teacher-class, #class-label { */
 /* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
     display: none;
@@ -88,14 +89,14 @@ html, body {
     margin: 0;
     outline: none;
     } */
-    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1 {
+    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1, #studentupdate-form  h1 {
     position: absolute;
     margin: 0;
     font-size: 28px;
     color: #fff;
     z-index: 2;
     }
-    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2 {
+    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2, #studentupdate-form  h2 {
     font-weight: 400;
     font-size: 24px;
     }
@@ -106,7 +107,7 @@ html, body {
     height: inherit;
     padding: 20px;
     }
-    form#student-form, form#staff-form, form#staff-formupdate {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -131,16 +132,17 @@ html, body {
     width: 100%;
     height: 100%;
     }
-    #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select  {
+    #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, 
+    #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select  {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input {
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #studentupdate-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select, #staffadd-form select, #staffupdate-form select {
+    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select {
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -228,7 +230,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn{
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -326,7 +328,7 @@ a.disable {
 #staffedit-queryform input{
     margin-bottom: 10px;
 }
-#submiteditquery-btn{
+#submiteditquery-btn, #submitremovequery-btn{
     padding: 10px;
     border: none;
     border-radius: 5px; 
@@ -336,13 +338,22 @@ a.disable {
     cursor: pointer;
 }
 #staff-formupdate{
-    width: 92%;
+    width: 80%;
 }
-#staffedit-queryform .closebtn-icon{
+#staffedit-queryform .closebtn-icon, #staffremove-form .closebtn-icon{
     position: absolute;
     right: 2.5rem;
     top: 2.5rem
  }
  #updateit-teacherclass, #upd-teacherclass, #upd-classlabel, #upd-staffemail{
     display: none;
+ }
+ .admno-inputinstr{
+    width: 90%;
+    font-weight: bold;
+    color: #5ec52e;
+    line-height: 1.35;
+ }
+ #updstdclose-icon{
+    color: white;
  }
