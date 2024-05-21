@@ -99,6 +99,9 @@ a {
 	 background-attachment: local ;
 	background-position: left bottom;	
 }
+#header-wrapper.homepage-header{
+    background: url("../../images/coverimage.jpg") no-repeat fixed center;
+}
 #welcome h1{
 	color: rgb(163, 243, 169);
 	text-shadow: 2px 1px 1px rgb(16, 59, 2);
