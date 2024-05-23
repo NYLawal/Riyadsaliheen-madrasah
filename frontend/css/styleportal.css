@@ -89,14 +89,14 @@ html, body {
     margin: 0;
     outline: none;
     } */
-    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1, #studentupdate-form  h1 {
+    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1, #studentupdate-form  h1, #addscores-form h1 {
     position: absolute;
     margin: 0;
     font-size: 28px;
     color: #fff;
     z-index: 2;
     }
-    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2, #studentupdate-form  h2 {
+    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2, #studentupdate-form  h2, #addscores-form h2 {
     font-weight: 400;
     font-size: 24px;
     }
@@ -107,7 +107,7 @@ html, body {
     height: inherit;
     padding: 20px;
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -133,16 +133,17 @@ html, body {
     height: 100%;
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, 
-    #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select  {
+    #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select,
+    #addscores-form input, #addscores-form select  {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #studentupdate-form input {
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #studentupdate-form input, #addscores-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select {
+    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #addscores-form select {
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -230,7 +231,8 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn{
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
+    button#addcomment-btn, button#addscores-btn {
     width: 150px;
     padding: 10px;
     border: none;
@@ -250,6 +252,56 @@ html, body {
     button:hover {
     background: #7ff549;
     }
+    textarea {
+        width: calc(100% - 12px);
+        padding: 5px;
+        }
+
+        input[type="time"]::-webkit-inner-spin-button {
+            margin: 2px 22px 0 0;
+            }
+            input[type=radio], input.other {
+            display: none;
+            }
+            label.radio {
+            position: relative;
+            display: inline-block;
+            margin: 5px 20px 10px 0;
+            cursor: pointer;
+            }
+            label.radio:before {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            }
+            #radio_5:checked ~ input.other {
+            display: block;
+            }
+            input[type=radio]:checked + label.radio:before {
+            border: 2px solid #444;
+            background: #444;
+            }
+            label.radio:after {
+            content: "";
+            position: absolute;
+            top: 7px;
+            left: 5px;
+            width: 7px;
+            height: 4px;
+            border: 3px solid #fff;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+            opacity: 0;
+            }
+            input[type=radio]:checked + label:after {
+            opacity: 1;
+            }
     @media (min-width: 568px) {
     .name-item, .city-item {
     display: flex;
@@ -358,8 +410,24 @@ a.disable {
     color: white;
  }
 
-
-
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+/* TEACHER'S PORTAL styles */
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+#scoresadd .row{
+    padding-left: 0.75rem;
+}
+#student-namebar{
+    background-color: #073d07;
+    color: #7ff549;
+}
+.scores-inputinstr{
+    /* font-weight: bold; */
+    color: #214710;
+    line-height: 1.5;
+ }
+ #student-namebar{
+    display: none;
+ }
 
 
  
