@@ -232,7 +232,7 @@ html, body {
     text-align: center;
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
-    button#addcomment-btn, button#addscores-btn {
+    button#addcomment-btn, button#addscores-btn, button#createstudent-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -427,6 +427,9 @@ a.disable {
  }
  #student-namebar{
     display: none;
+ }
+ #addscores-form .row select{
+    width: calc(100% - 10px);
  }
 
 

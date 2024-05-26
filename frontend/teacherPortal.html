@@ -181,7 +181,7 @@
   </div>
 </aside>
 
-<!-- scores inpu form -->
+<!-- scores input form -->
 <section class="bg-light pb-5" id="addscores-form">
   <div class="container">
     <div class="row justify-content-md-center">
@@ -197,75 +197,96 @@
       <form action="/" class="py-4" id="scoresadd" style="background-color: #d0f1c1; box-shadow: none;">
         <div class="row">
           <p class="scores-inputinstr">Type in the admission number, term and session; then select your class subjects one after the other while you add the scores.
-             Click on the 'Add Score' button after completing input for each subject.
+             Click on the 'Add Score' button after completing input for each subject. Use the 'Add Comment' button to add a comment for the term.
           </p>
         </div>
         <div class="row mt-0 mb-3" id="student-namebar">
-          <h3>Inputting scores for Semiah Mustapha</h3>
+          <h3 id="namebar"></h3>
         </div>
-        <div class="row mb-3" style="padding-right:0.5rem ;">
+        <div class="row mb-3 mt-2" style="padding-right:0.5rem ;">
           <div class="col-12 col-md-4">
-            <label for="fullname" class="form-label">Admission No <span class="text-danger">*</span></label>
+            <label for="admNumber" class="form-label">Admission No <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="text" class="form-control" id="fullname" value="" required>
+              <input type="text" class="form-control" id="admNumber" value="" required>
             </div>
           </div>
           <div class="col-12 col-md-4">
-            <label for="email" class="form-label">Term <span class="text-danger">*</span></label>
+            <label for="term" class="form-label">Term <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="email" class="form-control" id="email" value="" required>
+              <input type="text" class="form-control" id="term" value="" required>
             </div>
           </div>
           <div class="col-12 col-md-4">
-            <label for="website" class="form-label">Session <span class="text-danger">*</span></label>
+            <label for="session" class="form-label">Session <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="url" class="form-control" id="website" value="">
+              <input type="text" class="form-control" id="session" value="">
             </div>
           </div> 
         </div>
         <div class="row">
           <div class="col-6 item">
             <p>Select Subject</p>
-            <select style="background-color: white;">
-              <option value="">Country</option>
-              <option value="1">Russia</option>
-              <option value="2">Germany</option>
-              <option value="3">France</option>
-              <option value="4">Armenia</option>
-              <option value="5">USA</option>
+            <select style="background-color: white;" id="subject">
+              <option value="hifzul Qur'an">Hifzul Qur'an </option>
+              <option value="tawheed">Tawheed</option>
+              <option value="fiqh">Fiqh</option>
+              <option value="lugha">Lugha</option>
+              <option value="hadith">Hadith</option>
             </select>
+          </div>
+          <div class="col-6 item">
+            <p>Select Class</p>
+              <select style="background-color: white;" id="classname">
+                <option value="tamyidi">tamyidi</option>
+                <option value="adonah">adonah</option>
+                <option value="rawdoh">rawdoh</option>
+                <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                <option value="awwal idaadi">awwal idaadi</option>
+                <option value="thaani idaadi">thaani idaadi</option>
+                <option value="thaalith idaadi">thaalith idaadi</option>
+              </select>
           </div>
         </div>
         <div class="row">
           <div class="col-3 item">
             <p>Test</p>
-              <input type="text" name="name" placeholder="" />
+              <input type="number" min="0" max="40" name="test" placeholder="" id="testscore" />
           </div>
           <div class="col-3 item">
               <p>Exam</p>
-              <input type="text" name="name" placeholder="" />
+              <input type="number" min="0" max="60" name="exam" placeholder="" id="examscore" />
           </div>
           <div class="col-3 item">
               <p>Total</p>
-              <input type="text" name="name" placeholder="" />
+              <input type="text" name="total" placeholder="" id="totalscore"/>
           </div>
           <div class="col-3 item">
               <p>Remark</p>
-              <input type="text" name="name" placeholder="" />
+              <select style="background-color: white;" id="remark">
+                <option value="excellent">Excellent  ممتاز</option>
+                <option value="v.good">Very Good  جيد جيدا</option>
+                <option value="good">Good  جيد</option>
+                <option value="success">Success  ناجح</option>
+                <option value="failed">Failed  راسب</option>
+              </select>
           </div>
         </div> 
         <div class="row">
           <div class="col-12">
             <div class="item">
               <p>Comment</p>
-              <textarea rows="3"></textarea>
+              <textarea rows="3" id="comment"></textarea>
             </div>
           </div>
         </div> 
         <div class="row" style="padding-left: 0;">
           <!-- <div class="col"></div> -->
-          <div class="col-6 btn-block" ><button type="submit" id="addscores-btn" href="/">Add Score</button></div>
-          <div class="col-6 btn-block" ><button type="submit" id="addcomment-btn" href="/">Add Comment</button></div>
+          <div class="col-12 col-md-6 btn-block" ><button type="submit" id="addscores-btn" href="/">Add Score</button></div>
+          <div class="col-12 col-md-6 btn-block" ><button type="submit" id="addcomment-btn" href="/">Add Comment</button></div>
           <!-- <div class="col"></div> -->
         </div>
       </form>
