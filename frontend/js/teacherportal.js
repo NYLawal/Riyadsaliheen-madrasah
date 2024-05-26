@@ -21,18 +21,20 @@ const createStudentButton= document.getElementById("createstudent-btn")
 const studentNameBar= document.getElementById("student-namebar")
 const nameBar= document.getElementById("namebar")
 
+const token = localStorage.getItem('access_token')
 
-// create student scores
-const createStudent = (scoreinfo, admNo) => {
+
+// add student comment
+const addComment = (commentInfo, admNo) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/scores/createScores/?admNo=${admNo}`, scoreinfo)
-        // {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + token
-        //     }
-        // }
-    // )
+        .patch(`${baseUrl}/scores/addComment/?admNo=${admNo}`, commentInfo,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        }
+    )
         .then(function (response) {
             console.log(response)
             Swal.fire({
@@ -69,57 +71,35 @@ const createStudent = (scoreinfo, admNo) => {
 };
 
 
-// createStudentButton.addEventListener("click", (e) => {
-//     e.preventDefault(); 
-//     let admNo = admissionNumber.value;
-//     let sessionName = "";
-//     let className = "";
-//     let termName = "";
+addCommentButton.addEventListener("click", (e) => {
+    e.preventDefault(); 
+    let comment = teacherComment.value;
+    let admNo = admissionNumber.value;
+    let sessionName = schoolSession.value;
+    let className = nameOfClass.value;
+    let termName = schoolTerm.value;
 
-//     let subjectName = "";
-//     let testScore = "";
-//     let examScore = "";
-//     let totalScore = "";
-//     let remark = "";
-//     let comment = "";
-
-//     // if (schoolTerm.value == "first") term = "firstTerm"
-//     // else if (schoolTerm.value == "second") term = "secondTerm"
-//     // else if (schoolTerm.value == "third") term = "thirdTerm"
-
-//     const formData = {
-//         sessionName,
-//         className,
-//         term: {
-//         termName, 
-//         subjects: {
-//         subjectName,
-//         testScore,
-//         examScore,
-//         totalScore,
-//         remark,
-//         },
-//         comment,
-//         },
-        
-//     }
-//     // console.log(formData)
-//     console.log(admNo)
-//     createStudent(formData, admNo);
-// });
+    const formData ={
+       comment,
+       sessionName,
+       className,
+       termName
+    }
+    addComment(formData, admNo);
+});
 
 
 // create student scores
 const addScores = (scoreinfo, admNo) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/scores/addScores/?admNo=${admNo}`, scoreinfo)
-        // {
-        //     headers: {
-        //         'Authorization': 'Bearer ' + token
-        //     }
-        // }
-    // )
+        .post(`${baseUrl}/scores/addScores/?admNo=${admNo}`, scoreinfo,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        }
+    )
         .then(function (response) {
             console.log(response)
             Swal.fire({
