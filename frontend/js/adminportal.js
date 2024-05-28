@@ -26,6 +26,8 @@ const staffStateInput = document.getElementById("staff-state")
 const staffPhoneInput = document.getElementById("staff-phone")
 const classLabel = document.getElementById("class-label")
 const teacherClassInput = document.getElementById("teacher-class")
+const programmeLabel = document.getElementById("programme-label")
+const teacherProgrammeInput = document.getElementById("teacher-prg")
 const staffRole = document.getElementById("role-drpdwn")
 
 const studentFNameInput = document.getElementById("stud-name-first")
@@ -55,7 +57,9 @@ const pstdNumber = document.getElementById("student-number")
 let staffTableBody = document.getElementById("stafftbl-body")
 let studentTableBody = document.getElementById("studenttbl-body")
 const staffTable = document.getElementById("viewstaff-table")
+const tClass = document.getElementById("tclass")
 const tClassHeading = document.getElementById("noclass")
+const tProgrammeHeading = document.getElementById("noprg")
 const closeViewStudentBtn = document.getElementById("vstdclose-icon")
 const closeViewStaffBtn = document.getElementById("vstfclose-icon")
 
@@ -77,6 +81,7 @@ const tabDisabledPrevious = document.getElementById("tab-disabled")
 
 const logoutLink = document.getElementById("logout")
 const token = localStorage.getItem('access_token')
+// let tProgrammeHeading = document.createElement("th")
 let studentpage = [];
 let lastpage = [];
 
@@ -105,10 +110,14 @@ staffRole.addEventListener("change", (e) => {
     if (staffRole.value == "teacher") {
         teacherClassInput.style.display = "block"
         classLabel.style.display = "block"
+        teacherProgrammeInput.style.display = "block"
+        programmeLabel.style.display = "block"
     }
     else {
         teacherClassInput.style.display = "none"
         classLabel.style.display = "none"
+        teacherProgrammeInput.style.display = "none"
+        programmeLabel.style.display = "none"
     }
 });
 
@@ -127,6 +136,8 @@ const displayAllStaff = () => {
             pNumber.innerText = `${response.data.noOfStaff} registered staffers found`
             tClassHeading.style.display = "none"
             tClassHeading.innerHTML = ""
+            tProgrammeHeading.style.display = "none";
+            tProgrammeHeading.innerHTML = "";
             for (let i = 0; i < response.data.staff_list.length; i++) {
                 serial_no++
                 let tblrow = document.createElement("tr")
@@ -197,9 +208,13 @@ const displayTeachers = () => {
         .then(function (response) {
             console.log(response)
             pNumber.innerText = `${response.data.noOfStaff} registered teachers found`
-            tClassHeading.style.display = "block";
+            tClassHeading.style.display = "inline-block";
             tClassHeading.innerHTML = "Class";
             tClassHeading.style.borderBottom = "none";
+            // tClass.appendChild(tProgrammeHeading)
+            tProgrammeHeading.style.display = "inline-block";
+            tProgrammeHeading.innerHTML = "Programme";
+            tProgrammeHeading.style.borderBottom = "none";
             for (let i = 0; i < response.data.teachers_list.length; i++) {
                 serial_no++
                 let tblrow = document.createElement("tr")
@@ -212,6 +227,7 @@ const displayTeachers = () => {
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
+                let tblcol9 = document.createElement("td")
                 tblcol0.innerText = serial_no;
                 tblcol1.innerText = response.data.teachers_list[i].stafferName
                 tblcol2.innerText = response.data.teachers_list[i].email
@@ -221,6 +237,7 @@ const displayTeachers = () => {
                 tblcol6.innerText = response.data.teachers_list[i].role
                 tblcol7.innerText = response.data.teachers_list[i].isAdmin
                 tblcol8.innerText = response.data.teachers_list[i].teacherClass
+                tblcol9.innerText = response.data.teachers_list[i].teacherProgramme
                 tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
@@ -230,6 +247,7 @@ const displayTeachers = () => {
                 tblrow.appendChild(tblcol6)
                 tblrow.appendChild(tblcol7)
                 tblrow.appendChild(tblcol8)
+                tblrow.appendChild(tblcol9)
                 staffTableBody.appendChild(tblrow)
             }
         })
@@ -313,6 +331,7 @@ const addStaff = (staffInfo) => {
             staffPhoneInput.value = "";
             staffRole.value = "";
             teacherClassInput.value = ""
+            teacherProgrammeInput.value = ""
         })
         .catch(function (error) {
             if (error.response) {
@@ -350,8 +369,12 @@ submitButton.addEventListener("click", (e) => {
     const address = staffStreetlInput.value + " " + staffCityInput.value + " " + staffStateInput.value;
     const phoneNumber = "+234" + staffPhoneInput.value;
     let teacherClass = teacherClassInput.value;
+    let teacherProgramme = teacherProgrammeInput.value;
     const role = staffRole.value;
-    if (role != "teacher") teacherClass = "nil"
+    if (role != "teacher") {
+        teacherClass = "nil"
+        teacherProgramme = "nil"
+    }
 
     const formData = {
         stafferName,
@@ -360,6 +383,7 @@ submitButton.addEventListener("click", (e) => {
         address,
         phoneNumber,
         teacherClass,
+        teacherProgramme,
         role
     }
     addStaff(formData);
@@ -786,58 +810,58 @@ searchButton.addEventListener("click", (e) => {
 });
 
 // view student pagination
-studentViewPagination.addEventListener("click", (e) => {
-    e.preventDefault();
+// studentViewPagination.addEventListener("click", (e) => {
+//     e.preventDefault();
 
-    let targetElement = e.target.id;
-    let target = e.target;
-    target.style.boxShadow = "none"
-    target.style.color = "green"
+//     let targetElement = e.target.id;
+//     let target = e.target;
+//     target.style.boxShadow = "none"
+//     target.style.color = "green"
 
-    let page;
-    switch (targetElement) {
-        case "viewstd-page1":
-            page = 1;
-            break;
-        case "viewstd-page2":
-            page = 2;
-            break;
-        case "viewstd-page3":
-            page = 3
-            break;
-    }
-    if (targetElement == "viewstd-page1" || targetElement == "viewstd-page2" || targetElement == "viewstd-page3") {
-        let maxpage = lastpage[lastpage.length - 1]
-        // console.log("last page is ", maxpage)
-        // console.log("page is ", page)
-        if (page <= maxpage) {
-            studentTableBody.innerHTML = ""
-            viewStudentPagePrevious.classList.remove("disable")
-            viewStudentPageNext.classList.remove("disable")
+//     let page;
+//     switch (targetElement) {
+//         case "viewstd-page1":
+//             page = 1;
+//             break;
+//         case "viewstd-page2":
+//             page = 2;
+//             break;
+//         case "viewstd-page3":
+//             page = 3
+//             break;
+//     }
+//     if (targetElement == "viewstd-page1" || targetElement == "viewstd-page2" || targetElement == "viewstd-page3") {
+//         let maxpage = lastpage[lastpage.length - 1]
+//         // console.log("last page is ", maxpage)
+//         // console.log("page is ", page)
+//         if (page <= maxpage) {
+//             studentTableBody.innerHTML = ""
+//             viewStudentPagePrevious.classList.remove("disable")
+//             viewStudentPageNext.classList.remove("disable")
 
-            if (viewStudentSelect.value == "all") {
-                displayAllStudents(page)
-            }
-            else if (viewStudentSelect.value == "bycriteria") {
-                const key = studSearchKey.value
-                let value;
-                if (key === "studentStatus") value = "past"
-                else { value = searchMe.firstChild.value || studSearchValue.value }
-                displayStudents(key, value, page);
-                console.log(key, value, page)
-            }
-        }
-        // else  viewStudentPageNext.classList.add("disable")
-        else {
-            lastpage.push(maxpage)
-            Swal.fire({
-                icon: "error",
-                title: "End of File Reached",
-                text: "The page requested does not exist"
-            });
-        }
-    }
-});
+//             if (viewStudentSelect.value == "all") {
+//                 displayAllStudents(page)
+//             }
+//             else if (viewStudentSelect.value == "bycriteria") {
+//                 const key = studSearchKey.value
+//                 let value;
+//                 if (key === "studentStatus") value = "past"
+//                 else { value = searchMe.firstChild.value || studSearchValue.value }
+//                 displayStudents(key, value, page);
+//                 console.log(key, value, page)
+//             }
+//         }
+//         // else  viewStudentPageNext.classList.add("disable")
+//         else {
+//             lastpage.push(maxpage)
+//             Swal.fire({
+//                 icon: "error",
+//                 title: "End of File Reached",
+//                 text: "The page requested does not exist"
+//             });
+//         }
+//     }
+// });
 
 // display next students list page
 viewStudentPageNext.addEventListener("click", (e) => {
@@ -879,7 +903,12 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     let pageNumber = studentpage.pop()
     console.log("page is ", pageNumber)
     if (pageNumber == 1) {
-        studentpage.push(1)
+        // studentpage.push(1)
+        Swal.fire({
+            icon: "error",
+            title: "Beginning of File Reached",
+            text: "The page requested does not exist"
+        });
         viewStudentPagePrevious.classList.add("disable")
     }
     else {
@@ -921,6 +950,7 @@ cancelLink.addEventListener("click", (e) => {
     staffPhoneInput.value = "";
     staffRole.value = "";
     teacherClassInput.value = ""
+    teacherProgrammeInput.value = ""
 });
 
 //close staff form
@@ -960,15 +990,22 @@ closeStdFrmLink.addEventListener("click", (e) => {
 const editStaffQueryForm = document.getElementById('staffedit-queryform')
 const closeEditButtonIcon = document.getElementById('editstfclose-icon')
 const closeRemoveButtonIcon = document.getElementById('removestfclose-icon')
+const closeAssignButtonIcon = document.getElementById('assignteacherclose-icon')
 const editStaffLink = document.getElementById('edit-staff')
 const removeStaffLink = document.getElementById('remove-staff')
+const assignTeacherLink = document.getElementById('assign-teacher')
 const staffNameToEdit = document.getElementById('toedit-staffname')
 const staffEmailToEdit = document.getElementById('toedit-staffemail')
 const staffEmailToRemove = document.getElementById('toremove-staffemail')
+const teacherEmailToAssign = document.getElementById('toassignteacher-staffemail')
+const assignTeacherClassSelect = document.getElementById('assignteacher-classelect')
+const assignTeacherProgrammeSelect = document.getElementById('assignteacher-programmeselect')
 const submitEditQuery = document.getElementById('submiteditquery-btn')
 const submitRemoveQuery = document.getElementById('submitremovequery-btn')
+const submitAssignTeacher = document.getElementById('submitassignteacher-btn')
 
 const updateStaffForm = document.getElementById('staffupdate-form')
+const assignTeacherForm = document.getElementById('teacherassign-form')
 const removeStaffForm = document.getElementById('staffremove-form')
 const cancelUpdateButton = document.getElementById('cancelupdate-btn')
 const closeUpdateButton = document.getElementById('closeupdate-btn')
@@ -1066,6 +1103,65 @@ submitEditQuery.addEventListener("click", (e) => {
         email
     }
     QuerystaffEdit(formData);
+});
+
+// assign staff as teacher
+const assignTeacher = (staffInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/staff/assignTeacher`, staffInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message 
+            });
+           
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//submit assign teacher form
+submitAssignTeacher.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = teacherEmailToAssign.value;
+    const teacherClass = assignTeacherClassSelect.value;
+    const teacherProgramme = assignTeacherProgrammeSelect.value;
+    const formData = {
+        email,
+        teacherClass,
+        teacherProgramme
+    }
+    assignTeacher(formData);
 });
 
 // close staff update form
@@ -1197,6 +1293,20 @@ UpdateButton.addEventListener("click", (e) => {
         teacherClass
     }
     updateStaffDetails(formData);
+});
+
+// display assignteacher query form
+assignTeacherLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignTeacherForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close assignteacher query form
+closeAssignButtonIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignTeacherForm.style.display = "none";
+    teacherEmailToAssign.value = "";
 });
 
 // display removestaff query form

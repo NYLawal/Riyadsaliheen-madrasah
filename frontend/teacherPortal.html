@@ -147,19 +147,11 @@
     <ul class="list-unstyled components">
       <p class="text-tasks"> Your Tasks</p>
       <li class="">
-        <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#viewSubmenu" aria-controls="viewSubmenu">View</a>
-        <ul class="collapse list-unstyled" id="viewSubmenu">
-            <li>
-                <a href="#">students</a>
-            </li>
-            <li>
-                <a href="#">scores</a>
-            </li>
-        </ul>
-    </li>
-      <li>
-          <a href="#">Add Scores</a>  
+        <a href="#" id="view-students">View Students</a> 
       </li>
+      <!-- <li>
+          <a href="#">Add Scores</a>  
+      </li> -->
       <li>
           <a href="#">Edit Scores</a>  
       </li>
@@ -181,13 +173,78 @@
   </div>
 </aside>
 
+<!-- View Students -->
+<section class="py-3 py-md-5" id="viewstudent-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-9">
+        <div class="card widget-card border-light">
+          <div class="card-body p-4">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="vstdclose-icon" aria-label="Close"></button>
+            <h4 class="mb-2">View Students</h4>
+              <div>
+                <p id="student-number" class="mt-2 mb-2"></p>
+              </div>
+            <div class="table-responsive">
+              <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstudent-table">
+                <thead>
+                  <tr id="">
+                    <th>Serial No</th>
+                    <th>Admission No</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Entry Class</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Parent's Email</th>
+                    <th>State of Origin</th>
+                    <th>Marital Status</th>
+                    <!-- <th>Programme</th>
+                    <th>Present Class</th>
+                    <th>Date of Registration</th> -->
+                  </tr>
+                </thead>
+                <tbody id="studenttbl-body">                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- pagination -->
+          <nav aria-label="..." class="mt-2">
+            <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
+              <li class="page-item" id="tab-disabled">
+                <a class="page-link component-active-color" href="" id="viewstd-pageprevious"> << Previous</a>
+              </li>
+              <!-- <li class="page-item">
+                <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
+              </li>
+              <li class="page-item" >
+                <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link  pagination-color" href="#" id="viewstd-page3">3</a>
+              </li> -->
+              <li class="page-item">
+                <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next >> </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- scores input form -->
 <section class="bg-light pb-5" id="addscores-form">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
         <h3 class="mb-3 display-5 text-center">Student Scores Input Form</h3>
-        <p class="text-secondary mb-1 text-center">Ya mudaris/mudarisah, input the scores of your students in the form below. You're advised to be extra-careful, as human errors cannot be detected by computers.</p>
+        <p class="text-secondary mb-1 text-center">Input the scores of your students in the form below. You're advised to be extra-careful, as human errors cannot be detected by computers.</p>
         <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle">
       </div>
     </div>
@@ -200,14 +257,14 @@
              Click on the 'Add Score' button after completing input for each subject. Use the 'Add Comment' button to add a comment for the term.
           </p>
         </div>
-        <div class="row mt-0 mb-3" id="student-namebar">
+        <!-- <div class="row mt-0 mb-3" id="student-namebar">
           <h3 id="namebar"></h3>
-        </div>
+        </div> -->
         <div class="row mb-3 mt-2" style="padding-right:0.5rem ;">
           <div class="col-12 col-md-4">
             <label for="admNumber" class="form-label">Admission No <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="text" class="form-control" id="admNumber" value="" required>
+              <input type="text" class="form-control" id="admNumber" value="" required >
             </div>
           </div>
           <div class="col-12 col-md-4">
@@ -223,24 +280,50 @@
           <div class="col-12 col-md-4">
             <label for="session" class="form-label">Session <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="text" class="form-control" id="session" value="" required>
+              <input type="text" class="form-control" id="session" value="" placeholder="xxxx/yyyy">
             </div>
           </div> 
         </div>
         <div class="row">
-          <div class="col-6 item">
+          <div class="col-4 item">
             <p>Select Subject</p>
             <select style="background-color: white;" id="subject">
-              <option value="hifzul Qur'an">Hifzul Qur'an </option>
-              <option value="tawheed">Tawheed</option>
-              <option value="fiqh">Fiqh</option>
-              <option value="lugha">Lugha</option>
-              <option value="hadith">Hadith</option>
+              <option value="Adhkaar">Adhkaar</option>
+              <option value="Fiqh">Fiqh</option>
+              <option value="Hadith">Hadith</option>
+              <option value="Hifzul Qur'an">Hifzul Qur'an</option>
+              <option value="Huruf">Huruf</option>
+              <option value="Imlah">Imlah</option>
+              <option value="Khatu">Khatu</option>
+              <option value="Lugha">Lugha</option>
+              <option value="Nahw">Nahw</option>
+              <option value="Sarf">Sarf</option>
+              <option value="Ta'abeer">Ta'abeer</option>
+              <option value="Taajiyah">Taajiyah</option>
+              <option value="Tadribaatu lughawiyyah">Tadribaatu Lughawiyyah</option>
+              <option value="Tafseer">Tafseer</option>
+              <option value="Tajweed">Tajweed</option>
+              <option value="Tawheed">Tawheed</option>
+              <option value="Qiraaha">Qiraaha</option>
             </select>
           </div>
-          <div class="col-6 item">
-            <p>Select Class</p>
-              <select style="background-color: white;" id="classname">
+          <!-- <div class="col-4 item">
+            <p>Programme</p>
+            <select style="background-color: white;" id="progname" disabled>
+              <option value="children madrasah">Children Madrasah</option>
+              <option value="adult madrasah">Adult Madrasah</option>
+              <option value="female madrasah">Female Madrasah</option>
+              <option value="barnomij">Barnomij</option>
+            </select>
+          </div> -->
+          <div class="col-4 item">
+            <p>Other Subject</p>
+            <input type="text" name="othersubject" placeholder="" id="othersubject" />
+          </div>
+          <div class="col-4 item">
+            <p>Class</p>
+            <input type="text" name="class" placeholder="" id="classname" />
+              <!-- <select style="background-color: white;" id="classname">
                 <option value="tamyidi">tamyidi</option>
                 <option value="adonah">adonah</option>
                 <option value="rawdoh">rawdoh</option>
@@ -252,21 +335,21 @@
                 <option value="awwal idaadi">awwal idaadi</option>
                 <option value="thaani idaadi">thaani idaadi</option>
                 <option value="thaalith idaadi">thaalith idaadi</option>
-              </select>
+              </select> -->
           </div>
         </div>
         <div class="row">
           <div class="col-3 item">
             <p>Test</p>
-              <input type="number" min="0" max="40" name="test" placeholder="" id="testscore" required/>
+              <input type="number" min="0" max="40" name="test" placeholder="" id="testscore" />
           </div>
           <div class="col-3 item">
               <p>Exam</p>
-              <input type="number" min="0" max="60" name="exam" placeholder="" id="examscore" required/>
+              <input type="number" min="0" max="60" name="exam" placeholder="" id="examscore" />
           </div>
           <div class="col-3 item">
               <p>Total</p>
-              <input type="text" name="total" placeholder="" id="totalscore" required/>
+              <input type="text" name="total" placeholder="" id="totalscore" />
           </div>
           <div class="col-3 item">
               <p>Remark</p>
@@ -289,8 +372,8 @@
         </div> 
         <div class="row" style="padding-left: 0;">
           <!-- <div class="col"></div> -->
-          <div class="col-12 col-md-6 btn-block" ><button type="submit" id="addscores-btn" href="/">Add Score</button></div>
-          <div class="col-12 col-md-6 btn-block" ><button type="submit" id="addcomment-btn" href="/">Add Comment</button></div>
+          <div class="col-12 col-md-6 btn-block" ><button type="button" id="addscores-btn" href="/">Add Score</button></div>
+          <div class="col-12 col-md-6 btn-block" ><button type="button" id="addcomment-btn" href="/">Add Comment</button></div>
           <!-- <div class="col"></div> -->
         </div>
       </form>
@@ -302,7 +385,7 @@
 
 
 <!-- scores report form -->
-<section class="bg-light pb-5 addscores-form"> 
+<section class="bg-light pb-5 reportscores-form" id="reportscores-form"> 
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
@@ -315,21 +398,25 @@
       <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 py-5 px-4" style="background-color: #d0f1c1;">
         <div class="row gy-4 gy-xl-5 mb-3">
           <div class="col-12 col-md-4">
-            <label for="fullname" class="form-label">Admission No <span class="text-danger">*</span></label>
+            <label for="admNo-forreport" class="form-label">Admission No <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="text" class="form-control" id="fullname" value="" required>
+              <input type="text" class="form-control" id="admNo-forreport" value="" required>
             </div>
           </div>
           <div class="col-12 col-md-4">
-            <label for="email" class="form-label">Term <span class="text-danger">*</span></label>
+            <label for="term-forreport" class="form-label">Term <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="email" class="form-control" id="email" value="" required>
+              <select style="background-color: white;" id="term-forreport">
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+              </select>
             </div>
           </div>
           <div class="col-12 col-md-4">
-            <label for="website" class="form-label">Session <span class="text-danger">*</span></label>
+            <label for="session-forreport" class="form-label">Session <span class="text-danger">*</span></label>
             <div class="input-group">
-              <input type="url" class="form-control" id="website" value="">
+              <input type="text" class="form-control" id="session-forreport" value="">
             </div>
           </div> 
         </div>
@@ -345,39 +432,22 @@
               <th scope="col">Remark</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Hifzul Qur'an</td>
-              <td>35</td>
-              <td>40</td>
-              <td>75</td>
-              <td>v.good</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Fiqh</td>
-              <td>35</td>
-              <td>40</td>
-              <td>75</td>
-              <td>v.good</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Tawheed</td>
-              <td>35</td>
-              <td>40</td>
-              <td>75</td>
-              <td>v.good</td>
-            </tr>
+          <tbody id="result-body">
+            
           </tbody>
         </table>
         <form action="#!">
           <div class="row gy-4 gy-xl-5">
             <div class="col-12">
               <label for="comment" class="form-label">Comment</label>
-              <textarea class="form-control" id="comment" rows="3" required></textarea>
+              <textarea class="form-control" id="comment-report" rows="3" required></textarea>
             </div>
+          </div>
+          <div class="row mt-4" style="padding-left: 0;">
+            <div class="col"></div>
+            <div class="col-12 col-md-6 btn-block" ><button type="button" id="viewreport-btn" href="/">View Report</button></div>
+            <!-- <div class="col-12 col-md-6 btn-block" ><button type="button" id="addcomment-btn" href="/">Add Comment</button></div> -->
+            <div class="col"></div>
           </div>
         </form>
       </div>

@@ -177,6 +177,9 @@
           </li>
       </ul>
   </li>
+  <li>
+    <a href="#" id="assign-teacher">Assign Teacher</a>  
+  </li>
       <li>
           <a href="#" id="remove-staff">Remove Staff</a>  
       </li>
@@ -325,6 +328,15 @@
           <option value="thaalith idaadi">thaalith idaadi</option>
         </select>
       </div>
+      <div class="item">
+        <p id="programme-label">Programme</p>
+        <select id="teacher-prg">
+          <option value="children madrasah">Children Madrasah</option>
+          <option value="adult madrasah">Adult Madrasah</option>
+          <option value="female madrasah">Female Madrasah</option>
+          <option value="barnomij">Barnomij</option>
+        </select>
+      </div> 
        <div class="btn-block">
          <button class="mt-2" type="submit" href="/" id="submit-btn">Send</button>
        </div>
@@ -475,6 +487,7 @@
                     <th>Role</th>
                     <th>Admin?</th>
                     <th id="noclass">Class</th>
+                    <th id="noprg">Programme</th>
                   </tr>
                 </thead>
                 <tbody id="stafftbl-body">
@@ -563,9 +576,9 @@
           <nav aria-label="..." class="mt-2">
             <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
               <li class="page-item" id="tab-disabled">
-                <a class="page-link component-active-color" href="" id="viewstd-pageprevious">Previous</a>
+                <a class="page-link component-active-color" href="" id="viewstd-pageprevious"> << Previous</a>
               </li>
-              <li class="page-item">
+              <!-- <li class="page-item">
                 <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
               </li>
               <li class="page-item" >
@@ -573,9 +586,9 @@
               </li>
               <li class="page-item">
                 <a class="page-link  pagination-color" href="#" id="viewstd-page3">3</a>
-              </li>
+              </li> -->
               <li class="page-item">
-                <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next</a>
+                <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next >> </a>
               </li>
             </ul>
           </nav>
@@ -674,6 +687,27 @@
        <div class="item">
         <!-- <p id="updateclass-label">Class</p> -->
         <select id="updateit-teacherclass">
+          <option selected>select a new class</option>
+          <option value="tamyidi">tamyidi</option>
+          <option value="adonah">adonah</option>
+          <option value="rawdoh">rawdoh</option>
+          <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+          <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+          <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+          <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+          <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+          <option value="awwal idaadi">awwal idaadi</option>
+          <option value="thaani idaadi">thaani idaadi</option>
+          <option value="thaalith idaadi">thaalith idaadi</option>
+        </select>
+      </div>
+       <div class="item">
+        <p id="upd-programmelabel">Programme</p>
+        <input type="text" name="role" placeholder="" id="upd-teacherprogramme" />
+       </div>
+       <div class="item">
+        <!-- <p id="updateclass-label">Class</p> -->
+        <select id="updateit-teacherprogramme">
           <option selected>select a new class</option>
           <option value="tamyidi">tamyidi</option>
           <option value="adonah">adonah</option>
@@ -792,6 +826,69 @@
    </div>
   </div>
  </section>
+
+ <!-- Assign Teacher -->
+<section class="bg-light mb-5 teacherassign-form" id="teacherassign-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div class="card border border-light-subtle rounded-3 shadow-sm">
+          <div class="card-body p-5">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="assignteacherclose-icon" aria-label="Close"></button>
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+              </a>
+            </div>
+            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="assignteacher-h2">Provide these details for the staffer you want to assign as teacher.</h2>
+            <form action="#!">
+              <div class="row gy-2 overflow-hidden">
+                <!-- </div> -->
+                <div class="col-12">
+                    <label for="toassignteacher-staffemail" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" id="toassignteacher-staffemail" placeholder="name@example.com" required>
+                </div>
+                <div class="col-12 assignteacher-select">
+                    <p class="mt-2 mb-2">Programme</p>
+                    <select id="assignteacher-programmeselect">
+                      <option value="children madrasah">Children Madrasah</option>
+                      <option value="adult madrasah">Adult Madrasah</option>
+                      <option value="female madrasah">Female Madrasah</option>
+                      <option value="barnomij">Barnomij</option>
+                    </select>
+                </div>
+                <div class="col-12 assignteacher-select">
+                    <p class="mt-0 mb-2">Class</p>
+                    <select id="assignteacher-classelect">
+                      <option value="tamyidi">tamyidi</option>
+                      <option value="adonah">adonah</option>
+                      <option value="rawdoh">rawdoh</option>
+                      <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                      <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                      <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                      <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                      <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                      <option value="awwal idaadi">awwal idaadi</option>
+                      <option value="thaani idaadi">thaani idaadi</option>
+                      <option value="thaalith idaadi">thaalith idaadi</option>
+                    </select>
+                </div>
+                <div class="col-12 submitbtn-div">
+                  <div class="d-grid my-3 mt-4">
+                    <button class="btn btn-lg" type="submit" id="submitassignteacher-btn">Submit</button>
+                  </div>
+                </div>
+                
+                <!-- </div> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
  <!-- Remove Staff -->
 <section class="bg-light mb-5 staffremove-form" id="staffremove-form">
