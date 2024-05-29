@@ -110,7 +110,7 @@ a {
 	background-position: left bottom;	
 }
 #header-wrapper.homepage-header{
-    background: url("../../images/coverimage.jpg") no-repeat fixed center;
+    /* background: url("../../images/coverimage.jpg") no-repeat fixed center; */
 }
 #welcome h1{
 	color: rgb(163, 243, 169);

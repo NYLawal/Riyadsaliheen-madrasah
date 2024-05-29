@@ -117,6 +117,10 @@ function Redirect() {
                             window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
                         }
+                        else if (userRole == 'bursar') {
+                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/bursarPortal.html"
+                            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
+                        }
                         else if (userRole == 'teacher') {
                             window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
@@ -128,6 +132,10 @@ function Redirect() {
             else if (userRole  == 'superadmin' || userRole == 'admin') {
                  window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
                 //  window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            }
+            else if (userRole == 'bursar') {
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/bursarPortal.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
             }
             else if (userRole == 'teacher') {
                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"

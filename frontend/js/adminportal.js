@@ -74,11 +74,13 @@ const searchButton = document.getElementById("search-btn")
 const studentStatus = document.getElementById("search-studstatus")
 
 const studentViewPagination = document.getElementById("stdview-pagination")
-const viewStudentPage1 = document.getElementById("viewstd-page1")
-const viewStudentPage2 = document.getElementById("viewstd-page2")
-const viewStudentPage3 = document.getElementById("viewstd-page3")
+// const viewStudentPage1 = document.getElementById("viewstd-page1")
+// const viewStudentPage2 = document.getElementById("viewstd-page2")
+// const viewStudentPage3 = document.getElementById("viewstd-page3")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
+const viewStaffPageNext = document.getElementById("viewstaff-pagenext")
+const viewStaffPagePrevious = document.getElementById("viewstaff-pageprevious")
 const tabDisabledPrevious = document.getElementById("tab-disabled")
 
 const logoutLink = document.getElementById("logout")
@@ -86,6 +88,8 @@ const token = localStorage.getItem('access_token')
 // let tProgrammeHeading = document.createElement("th")
 let studentpage = [];
 let lastpage = [];
+let staffpage = [];
+let stafflastpage = [];
 
 
 toggler.addEventListener("click", (e) => {
@@ -169,6 +173,14 @@ const displayAllStaff = () => {
                 tblrow.appendChild(tblcol7)
                 staffTableBody.appendChild(tblrow)
             }
+            console.log("response says page is ", response.data.page)
+                staffpage.push(response.data.page)
+                stafflastpage.push(response.data.pgnum)
+    
+                // disable next button if end of page is reached
+                if (response.data.pgnum === response.data.page) {
+                    viewStaffPageNext.classList.add("disable")
+                }
         })
         .catch(function (error) {
             if (error.response) {
@@ -252,6 +264,14 @@ const displayTeachers = () => {
                 tblrow.appendChild(tblcol9)
                 staffTableBody.appendChild(tblrow)
             }
+            console.log("response says page is ", response.data.page)
+                staffpage.push(response.data.page)
+                stafflastpage.push(response.data.pgnum)
+    
+                // disable next button if end of page is reached
+                if (response.data.pgnum === response.data.page) {
+                    viewStaffPageNext.classList.add("disable")
+                }
         })
         .catch(function (error) {
             if (error.response) {
@@ -299,6 +319,61 @@ viewStaffLink.addEventListener("click", (e) => {
     sidebar.style.display = "none"
     displayAllStaff()
 });
+
+// display next staff list page
+viewStaffPageNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    let maxpage = stafflastpage[stafflastpage.length - 1]
+    let pageNumber = staffpage.pop()
+    if (pageNumber <= maxpage) {
+        viewStaffPagePrevious.classList.remove("disable")
+        staffTableBody.innerHTML = ""
+        // let pageNumber = studentpage.pop()
+        if (viewStaffSelect.value == "all") {
+            displayAllStaff(pageNumber + 1)
+        }
+        else if (viewStaffSelect.value == "teachers") {
+            displayTeachers(pageNumber + 1)
+        }
+    }
+    else {
+        lastpage.push(maxpage)
+        Swal.fire({
+            icon: "error",
+            title: "End of File Reached",
+            text: "The page requested does not exist"
+        });
+    }
+});
+
+// display previous staff list page
+viewStaffPagePrevious.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewStaffPageNext.classList.remove("disable")
+    console.log(staffpage)
+    let pageNumber = staffpage.pop()
+    console.log("page is ", pageNumber)
+    if (pageNumber == 1) {
+        // studentpage.push(1)
+        Swal.fire({
+            icon: "error",
+            title: "Beginning of File Reached",
+            text: "The page requested does not exist"
+        });
+        viewStaffPagePrevious.classList.add("disable")
+    }
+    else {
+        staffTableBody.innerHTML = "";
+
+        if (viewStaffSelect.value == "all") {
+            displayAllStaff(pageNumber - 1)
+        }
+        else if (viewStaffSelect.value == "teachers") {
+            displayTeachers(pageNumber - 1)
+        }
+    }
+});
+
 // close view staff form
 closeViewStaffBtn.addEventListener("click", (e) => {
     e.preventDefault();

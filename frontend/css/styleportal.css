@@ -40,16 +40,16 @@
     font-size: 1.1em;
     display: block;
 }
-#addSubmenu li a, #viewSubmenu li a, #editSubmenu li a, #deleteSubmenu li a {
+#addSubmenu li a, #viewSubmenu li a, #editSubmenu li a, #deleteSubmenu li a, #updateStudentPayment li a{
     padding: 10px;
     font-size: 1.1em;
     display: block;
     color:black
 }
-#addSubmenu li, #viewSubmenu li,  #editSubmenu li, #deleteSubmenu li {
+#addSubmenu li, #viewSubmenu li,  #editSubmenu li, #deleteSubmenu li, #updateStudentPayment li{
     line-height: 1;
 }
-#addSubmenu li a:hover, #viewSubmenu li a:hover, #editSubmenu li a:hover, #deleteSubmenu li a:hover {
+#addSubmenu li a:hover, #viewSubmenu li a:hover, #editSubmenu li a:hover, #deleteSubmenu li a:hover, #updateStudentPayment li a:hover{
     background-color: rgb(44, 77, 44);
 }
 #bsbSidebar1 ul li a:hover {
