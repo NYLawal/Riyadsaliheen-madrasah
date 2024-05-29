@@ -398,7 +398,7 @@ a.disable {
     right: 2.5rem;
     top: 2.5rem
  }
- #updateit-teacherclass, #upd-teacherclass, #upd-classlabel, #upd-staffemail{
+ #updateit-teacherclass, #upd-teacherclass, #upd-classlabel, #upd-programmelabel, #upd-teacherprogramme, #updateit-teacherprogramme, #upd-staffemail{
     display: none;
  }
  .admno-inputinstr{

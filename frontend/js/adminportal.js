@@ -5,6 +5,7 @@ const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler = document.getElementById("toggler-icon")
 
+const addStudentScores = document.getElementById("add-scores")
 const addStafferLink = document.getElementById("add-staffer")
 const addStafferForm = document.getElementById("staffadd-form")
 const addStudentLink = document.getElementById("add-student")
@@ -43,6 +44,7 @@ const parentEmailInput = document.getElementById("stud-parent-email")
 const studentEntryClass = document.getElementById("stud-entry-class")
 const studentOrigin = document.getElementById("stud-origin")
 const studentMaritalStatus = document.getElementById("stud-mstatus")
+const studentProgramme = document.getElementById("stud-prg")
 
 const cancelLink = document.getElementById("cancel-btn")
 const closeLink = document.getElementById("close-btn")
@@ -462,6 +464,7 @@ sendButton.addEventListener("click", (e) => {
     const entryClass = studentEntryClass.value
     const stateOfOrigin = studentOrigin.value
     const maritalStatus = studentMaritalStatus.value
+    const programme = studentProgramme.value
     if (email == "") email = "nothing@nil.com"
     const formData = {
         admNo,
@@ -474,7 +477,8 @@ sendButton.addEventListener("click", (e) => {
         parentEmail,
         entryClass,
         stateOfOrigin,
-        maritalStatus
+        maritalStatus,
+        programme
     }
     registerStudent(formData);
 });
@@ -929,14 +933,6 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     }
 });
 
-// logout
-logoutLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
-});
-
 //clear staff form
 cancelLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -1019,7 +1015,10 @@ const staffPhoneUpdate = document.getElementById("upd-staffphone")
 const staffRoleUpdate = document.getElementById("upd-staffrole")
 const classLabelUpdate = document.getElementById("upd-classlabel")
 const teacherClassUpdate = document.getElementById("upd-teacherclass")
+const programmeLabelUpdate = document.getElementById("upd-programmelabel")
+const teacherProgrammeUpdate = document.getElementById("upd-teacherprogramme")
 const updateItTeacherClass = document.getElementById("updateit-teacherclass")
+const updateItTeacherProgramme = document.getElementById("updateit-teacherprogramme")
 
 // display editstaff query form
 editStaffLink.addEventListener("click", (e) => {
@@ -1052,6 +1051,7 @@ const QuerystaffEdit = (staffInfo) => {
                 title: "Successful",
                 text: response.data.message + ". Use the form below to edit their details"
             });
+            staffEmailToEdit.value = "";
             updateStaffForm.style.display = "block";
             staffEmailUpdate.value = response.data.staffer.email;
             staffNameUpdate.value = response.data.staffer.stafferName
@@ -1060,11 +1060,15 @@ const QuerystaffEdit = (staffInfo) => {
             staffPhoneUpdate.value =  response.data.staffer.phoneNumber
             staffRoleUpdate.value =  response.data.staffer.role
 
-            if (response.data.staffer.role){
+            if (response.data.staffer.role == "teacher"){
                 classLabelUpdate.style.display = "block";
                 teacherClassUpdate.style.display = "block";
                 updateItTeacherClass.style.display = "block";
+                programmeLabelUpdate.style.display = "block";
+                teacherProgrammeUpdate.style.display = "block";
+                updateItTeacherProgramme.style.display = "block";
                 teacherClassUpdate.value = response.data.staffer.teacherClass;
+                teacherProgrammeUpdate.value = response.data.staffer.teacherProgramme;
             }
             editStaffQueryForm.style.display = "none";
         })
@@ -1105,6 +1109,177 @@ submitEditQuery.addEventListener("click", (e) => {
     QuerystaffEdit(formData);
 });
 
+// close staff update form
+closeUpdateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+   updateStaffForm.style.display = "none";
+   staffEmailUpdate.value = "";
+    staffNameUpdate.value = "";
+    staffGenderUpdate.value =  "";
+    staffAddressUpdate.value =  "";
+    staffPhoneUpdate.value =  "";
+    staffRoleUpdate.value =  "";
+    classLabelUpdate.style.display = "none";
+    teacherClassUpdate.style.display = "none";
+    programmeLabelUpdate.style.display = "none";
+    teacherProgrammeUpdate.style.display = "none";
+    updateItTeacherClass.style.display = "none";
+    updateItTeacherProgramme.style.display = "none";
+    teacherClassUpdate.value = "";
+    teacherProgrammeUpdate.value = "";
+});
+
+// cancel staff update form
+cancelUpdateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    staffEmailUpdate.value = "";
+    staffNameUpdate.value = "";
+    staffGenderUpdate.value =  "";
+    staffAddressUpdate.value =  "";
+    staffPhoneUpdate.value =  "";
+    staffRoleUpdate.value =  "";
+    classLabelUpdate.style.display = "none";
+    teacherClassUpdate.style.display = "none";
+    programmeLabelUpdate.style.display = "none";
+    teacherProgrammeUpdate.style.display = "none";
+    updateItTeacherClass.style.display = "none";
+    updateItTeacherProgramme.style.display = "none";
+    teacherClassUpdate.value = "";
+    teacherProgrammeUpdate.value = "";
+});
+
+//change teacher class when another is picked
+updateItTeacherClass.addEventListener("change", (e) => {
+    e.preventDefault();
+    teacherClassUpdate.value = updateItTeacherClass.value;
+});
+
+//change teacher programme when another is picked
+updateItTeacherProgramme.addEventListener("change", (e) => {
+    e.preventDefault();
+    teacherProgrammeUpdate.value = updateItTeacherProgramme.value;
+});
+
+// display class select when the user presses enter key on the keyboard after inputting role as teacher
+staffRoleUpdate.addEventListener("keyup", function(e) {
+    // if (e.key === "Enter" && staffRoleUpdate.value == "teacher") {
+    if (staffRoleUpdate.value == "teacher") {
+      e.preventDefault();
+      classLabelUpdate.style.display = "block";
+      teacherClassUpdate.style.display = "block";
+      updateItTeacherClass.style.display = "block";
+      programmeLabelUpdate.style.display = "block";
+      teacherProgrammeUpdate.style.display = "block";
+      updateItTeacherProgramme.style.display = "block";
+    }
+    else{
+        classLabelUpdate.style.display = "none";
+      teacherClassUpdate.style.display = "none";
+      updateItTeacherClass.style.display = "none";
+      programmeLabelUpdate.style.display = "none";
+      teacherProgrammeUpdate.style.display = "none";
+      updateItTeacherProgramme.style.display = "none";
+    }
+  });
+
+// update a staffer info
+const updateStaffDetails = (staffInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/staff/updateStaff`, staffInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Update Successful",
+                text: response.data.message
+            });
+            staffEmailUpdate.value = "";
+            staffNameUpdate.value = "";
+            staffGenderUpdate.value =  "";
+            staffAddressUpdate.value =  "";
+            staffPhoneUpdate.value =  "";
+            staffRoleUpdate.value =  "";
+            classLabelUpdate.style.display = "none";
+            teacherClassUpdate.style.display = "none";
+            programmeLabelUpdate.style.display = "none";
+            teacherProgrammeUpdate.style.display = "none";
+            updateItTeacherClass.style.display = "none";
+            updateItTeacherProgramme.style.display = "none";
+            teacherClassUpdate.value = "";
+            teacherProgrammeUpdate.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit request to update staff
+UpdateButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    let email = staffEmailUpdate.value;
+    let stafferName = staffNameUpdate.value;
+    let gender = staffGenderUpdate.value;
+    let address = staffAddressUpdate.value;
+    let phoneNumber = staffPhoneUpdate.value;
+    let role = staffRoleUpdate.value;
+    let teacherClass = teacherClassUpdate.value;
+    let teacherProgramme = teacherProgrammeUpdate.value;
+
+    if (role == "teacher" && (teacherClass == "" || teacherProgramme == "")){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Entry",
+            text: "A teacher must be assigned a class and a programme"
+        });
+    }
+
+    const formData = {
+        email,
+        stafferName,
+        gender,
+        address,
+        phoneNumber,
+        role,
+        teacherClass,
+        teacherProgramme
+    }
+    updateStaffDetails(formData);
+});
+
+// display assignteacher query form
+assignTeacherLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignTeacherForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
 // assign staff as teacher
 const assignTeacher = (staffInfo) => {
     let errorMsg;
@@ -1121,7 +1296,9 @@ const assignTeacher = (staffInfo) => {
                 title: "Successful",
                 text: response.data.message 
             });
-           
+            teacherEmailToAssign.value = "";
+            assignTeacherClassSelect.value ="";
+            assignTeacherProgrammeSelect.value ="";
         })
         .catch(function (error) {
             if (error.response) {
@@ -1162,144 +1339,6 @@ submitAssignTeacher.addEventListener("click", (e) => {
         teacherProgramme
     }
     assignTeacher(formData);
-});
-
-// close staff update form
-closeUpdateButton.addEventListener("click", (e) => {
-    e.preventDefault();
-   updateStaffForm.style.display = "none";
-   staffEmailUpdate.value = "";
-    staffNameUpdate.value = "";
-    staffGenderUpdate.value =  "";
-    staffAddressUpdate.value =  "";
-    staffPhoneUpdate.value =  "";
-    staffRoleUpdate.value =  "";
-    classLabelUpdate.style.display = "none";
-    teacherClassUpdate.style.display = "none";
-    updateItTeacherClass.style.display = "none";
-    teacherClassUpdate.value = "";
-});
-
-// cancel staff update form
-cancelUpdateButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    staffEmailUpdate.value = "";
-    staffNameUpdate.value = "";
-    staffGenderUpdate.value =  "";
-    staffAddressUpdate.value =  "";
-    staffPhoneUpdate.value =  "";
-    staffRoleUpdate.value =  "";
-    classLabelUpdate.style.display = "none";
-    teacherClassUpdate.style.display = "none";
-    updateItTeacherClass.style.display = "none";
-    teacherClassUpdate.value = "";
-});
-
-//change teacher class when another is picked
-updateItTeacherClass.addEventListener("change", (e) => {
-    e.preventDefault();
-    teacherClassUpdate.value = updateItTeacherClass.value;
-});
-
-// display class select when the user presses enter key on the keyboard after inputting role as teacher
-staffRoleUpdate.addEventListener("keypress", function(e) {
-    if (e.key === "Enter" && staffRoleUpdate.value == "teacher") {
-      e.preventDefault();
-      classLabelUpdate.style.display = "block";
-      updateItTeacherClass.style.display = "block";
-    }
-  });
-
-// update a staffer info
-const updateStaffDetails = (staffInfo) => {
-    let errorMsg;
-    axios
-        .patch(`${baseUrl}/staff/updateStaff`, staffInfo, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
-        .then(function (response) {
-            console.log(response)
-            Swal.fire({
-                icon: "success",
-                title: "Update Successful",
-                text: response.data.message
-            });
-            staffEmailUpdate.value = "";
-            staffNameUpdate.value = "";
-            staffGenderUpdate.value =  "";
-            staffAddressUpdate.value =  "";
-            staffPhoneUpdate.value =  "";
-            staffRoleUpdate.value =  "";
-            classLabelUpdate.style.display = "none";
-            teacherClassUpdate.style.display = "none";
-            updateItTeacherClass.style.display = "none";
-            teacherClassUpdate.value = "";
-        })
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                errorMsg = error.response.data.message
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                errorMsg = "Network Error"
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                errorMsg = error.message
-            }
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: errorMsg
-            });
-        });
-};
-
-// submit request to update staff
-UpdateButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    let email = staffEmailUpdate.value;
-    let stafferName = staffNameUpdate.value;
-    let gender = staffGenderUpdate.value;
-    let address = staffAddressUpdate.value;
-    let phoneNumber = staffPhoneUpdate.value;
-    let role = staffRoleUpdate.value;
-    let teacherClass = updateItTeacherClass.value;
-
-    if (role == "teacher" && teacherClass == ""){
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Entry",
-            text: "A teacher must be assigned a class"
-        });
-    }
-
-    const formData = {
-        email,
-        stafferName,
-        gender,
-        address,
-        phoneNumber,
-        role,
-        teacherClass
-    }
-    updateStaffDetails(formData);
-});
-
-// display assignteacher query form
-assignTeacherLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    assignTeacherForm.style.display = "block"
-    sidebar.style.display = "none";
 });
 
 // close assignteacher query form
@@ -1374,7 +1413,6 @@ const removeStaff = (payload) => {
 submitRemoveQuery.addEventListener("click", (e) => {
     e.preventDefault();
     const email = staffEmailToRemove.value;
-    console.log("email is ", staffEmailToRemove.value)
     if (staffEmailToRemove.value == ""){
         Swal.fire({
             icon: "error",
@@ -1647,4 +1685,20 @@ cancelStudentUpdateButton.addEventListener("click", (e) => {
     studentOriginUpdate.value = ""
     studentMStatusUpdate.value = ""
     studentProgrammeUpdate.value = ""  
+});
+
+// add student scores
+addStudentScores.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+});
+
+
+// logout
+logoutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.clear()
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });

@@ -1,8 +1,11 @@
 const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 // const baseUrl = "http://localhost:5000/api/v1"
 
+const sidebartoggler = document.getElementById("sidebar-toggler")
 const toggler = document.getElementById("toggler-icon")
 
+const addScoresForm = document.getElementById("addscores-form")
+const reportScoresForm = document.getElementById("reportscores-form")
 const viewStudentsLink = document.getElementById("view-students")
 const sidebar = document.getElementById("bsbSidebar1")
 const viewStudentsForm = document.getElementById("viewstudent-form")
@@ -84,6 +87,10 @@ const getTeacherClass = () => {
                 title: "Error Processing Input",
                 text: errorMsg
             });
+            sidebartoggler.style.display = "none";
+            addScoresForm.style.display = "none";
+            reportScoresForm.style.display = "none";
+            // nameOfClass.setAttribute("disabled",true)
         });
 };
 
@@ -426,7 +433,7 @@ logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
 
 // REPORT ********************************************************************

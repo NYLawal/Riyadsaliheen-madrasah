@@ -29,37 +29,37 @@ const signUp = (userData) => {
                     toast.addEventListener("mouseleave", Swal.resumeTimer);
                 },
             });
-            emailInput.value ="";
-            passwordInput.value ="";
-           passwordRepeatInput.value ="";
+            emailInput.value = "";
+            passwordInput.value = "";
+            passwordRepeatInput.value = "";
 
         })
         .catch(function (error) {
             if (error.response) {
-              // The request was made and the server responded with a status code
-              // that falls out of the range of 2xx
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-              errorMsg = error.response.data.message
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
             } else if (error.request) {
-              // The request was made but no response was received
-              // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-              // http.ClientRequest in node.js
-              console.log(error.request);
-              errorMsg = "Network Error"
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
             } else {
-              // Something happened in setting up the request that triggered an Error
-              console.log('Error', error.message);
-              errorMsg = error.message
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
             }
-           
-        Swal.fire({
-            icon: "error",
-            title: "Error Processing Input",
-            text:  errorMsg
+
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
         });
-    });
 };
 
 const signup = document.getElementById("signup-btn");
@@ -86,53 +86,80 @@ signup.addEventListener("click", (e) => {
 });
 
 function Redirect() {
-    const token = localStorage.getItem('access_token') 
+    const token = localStorage.getItem('access_token')
     axios
-        .get(`${baseUrl}/user/authorise`, { 
+        .get(`${baseUrl}/user/authorise`, {
             headers: {
-              'Authorization': 'Bearer ' + token
-            } 
-}) 
+                'Authorization': 'Bearer ' + token
+            }
+        })
         .then(function (response) {
-            emailLogin.value ="";
-            passwdLogin.value ="";
+            emailLogin.value = "";
+            passwdLogin.value = "";
             console.log(response);
             let userRole = response.data.role;
-            if (userRole == 'superadmin' || userRole == 'admin'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+            let otherRole = response.data.other_role;
+            
+            if (otherRole == 'parent') {
+                Swal.fire({
+                    title: "You're also a parent.\nContinue as a parent instead?",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, parent",
+                    denyButtonText: `No, ${userRole}`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                          window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+                        // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
+                    
+                    } else if (result.isDenied) {
+                        if (userRole == 'superadmin' || userRole == 'admin') {
+                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+                            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+                        }
+                        else if (userRole == 'teacher') {
+                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+                        }
+                    }
+                });
             }
-            else if (userRole == 'teacher'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+           
+            else if (userRole  == 'superadmin' || userRole == 'admin') {
+                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+                //  window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
             }
-            else if (userRole == 'student'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
+            else if (userRole == 'teacher') {
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
-            else if (userRole == 'parent'){
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
+            else if (userRole == 'student') {
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
+            }
+            else if (userRole == 'parent') {
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
             }
             else {
-            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
-            // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
             }
 
-            Swal.fire({
-                toast: true,
-                icon: "success",
-                title: "Logged in successfully",
-                animation: false,
-                position: "center",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
-            });
+            // Swal.fire({
+            //     toast: true,
+            //     icon: "success",
+            //     title: "Logged in successfully",
+            //     animation: false,
+            //     position: "center",
+            //     showConfirmButton: false,
+            //     timer: 3000,
+            //     timerProgressBar: true,
+            //     didOpen: (toast) => {
+            //         toast.addEventListener("mouseenter", Swal.stopTimer);
+            //         toast.addEventListener("mouseleave", Swal.resumeTimer);
+            //     },
+            // });
 
         })
         .catch((err) => {
@@ -144,7 +171,7 @@ function Redirect() {
             });
         });
 };
-   
+
 
 const logIn = (userData) => {
     let errorMsg;
@@ -154,34 +181,34 @@ const logIn = (userData) => {
             console.log(response)
             let token = response.data.access_token;
             localStorage.setItem("access_token", token);
-            setTimeout(function() {
+            setTimeout(function () {
                 Redirect();
-                 }, 1000); 
+            }, 1000);
         })
         .catch(function (error) {
-                if (error.response) {
-                  // The request was made and the server responded with a status code
-                  // that falls out of the range of 2xx
-                  console.log(error.response.data);
-                  console.log(error.response.status);
-                  console.log(error.response.headers);
-                  errorMsg = error.response.data.message
-                } else if (error.request) {
-                  // The request was made but no response was received
-                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
-                  console.log(error.request);
-                  errorMsg = "Network Error"
-                } else {
-                  // Something happened in setting up the request that triggered an Error
-                  console.log('Error', error.message);
-                  errorMsg = error.message
-                }
-               
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+
             Swal.fire({
                 icon: "error",
                 title: "Error Processing Input",
-                text:  errorMsg
+                text: errorMsg
             });
         });
 };
@@ -192,11 +219,11 @@ login.addEventListener("click", (e) => {
 
     const email = emailLogin.value;
     const password = passwdLogin.value;
-        const formData = {
-            email,
-            password,
-        }
-        logIn(formData);    
+    const formData = {
+        email,
+        password,
+    }
+    logIn(formData);
 });
 
 
