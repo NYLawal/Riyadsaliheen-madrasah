@@ -82,6 +82,7 @@ const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStaffPageNext = document.getElementById("viewstaff-pagenext")
 const viewStaffPagePrevious = document.getElementById("viewstaff-pageprevious")
 const tabDisabledPrevious = document.getElementById("tab-disabled")
+const thHeading = document.getElementById("thheading")
 
 const logoutLink = document.getElementById("logout")
 const token = localStorage.getItem('access_token')
@@ -128,11 +129,11 @@ staffRole.addEventListener("change", (e) => {
 });
 
 // display all staff members
-const displayAllStaff = () => {
-    let serial_no = 0;
+const displayAllStaff = (page) => {
+    // let serial_no = 0;
     let errorMsg;
     axios
-        .get(`${baseUrl}/staff/viewStaff`, {
+        .get(`${baseUrl}/staff/viewStaff/${page}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -145,7 +146,7 @@ const displayAllStaff = () => {
             tProgrammeHeading.style.display = "none";
             tProgrammeHeading.innerHTML = "";
             for (let i = 0; i < response.data.staff_list.length; i++) {
-                serial_no++
+                // serial_no++
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
@@ -155,7 +156,8 @@ const displayAllStaff = () => {
                 let tblcol5 = document.createElement("td")
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
-                tblcol0.innerText = serial_no
+                // tblcol0.innerText = serial_no
+                tblcol0.innerText = response.data.staff_list[i].serialNo
                 tblcol1.innerText = response.data.staff_list[i].stafferName
                 tblcol2.innerText = response.data.staff_list[i].email
                 tblcol3.innerText = response.data.staff_list[i].gender
@@ -174,13 +176,14 @@ const displayAllStaff = () => {
                 staffTableBody.appendChild(tblrow)
             }
             console.log("response says page is ", response.data.page)
+            console.log("response says pagenum is ", response.data.pgnum)
                 staffpage.push(response.data.page)
                 stafflastpage.push(response.data.pgnum)
     
                 // disable next button if end of page is reached
-                if (response.data.pgnum === response.data.page) {
-                    viewStaffPageNext.classList.add("disable")
-                }
+                // if (response.data.pgnum === response.data.page) {
+                //     viewStaffPageNext.classList.add("disable")
+                // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -210,11 +213,11 @@ const displayAllStaff = () => {
 };
 
 // display all teachers
-const displayTeachers = () => {
+const displayTeachers = (page) => {
     let errorMsg;
-    let serial_no = 0;
+    // let serial_no = 0;
     axios
-        .get(`${baseUrl}/staff/viewTeachers`, {
+        .get(`${baseUrl}/staff/viewTeachers/${page}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -230,7 +233,7 @@ const displayTeachers = () => {
             tProgrammeHeading.innerHTML = "Programme";
             tProgrammeHeading.style.borderBottom = "none";
             for (let i = 0; i < response.data.teachers_list.length; i++) {
-                serial_no++
+                // serial_no++
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
@@ -242,7 +245,8 @@ const displayTeachers = () => {
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
                 let tblcol9 = document.createElement("td")
-                tblcol0.innerText = serial_no;
+                // tblcol0.innerText = serial_no;
+                tblcol0.innerText = response.data.teachers_list[i].serialNo
                 tblcol1.innerText = response.data.teachers_list[i].stafferName
                 tblcol2.innerText = response.data.teachers_list[i].email
                 tblcol3.innerText = response.data.teachers_list[i].gender
@@ -265,13 +269,14 @@ const displayTeachers = () => {
                 staffTableBody.appendChild(tblrow)
             }
             console.log("response says page is ", response.data.page)
+            console.log("response says pagenum is ", response.data.pgnum)
                 staffpage.push(response.data.page)
                 stafflastpage.push(response.data.pgnum)
     
                 // disable next button if end of page is reached
-                if (response.data.pgnum === response.data.page) {
-                    viewStaffPageNext.classList.add("disable")
-                }
+                // if (response.data.pgnum === response.data.page) {
+                //     viewStaffPageNext.classList.add("disable")
+                // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -305,10 +310,10 @@ viewStaffSelect.addEventListener("change", (e) => {
     staffTableBody.innerHTML = ""
 
     if (viewStaffSelect.value == "all") {
-        displayAllStaff()
+        displayAllStaff(1)
     }
     else if (viewStaffSelect.value == "teachers") {
-        displayTeachers()
+        displayTeachers(1)
     }
 });
 
@@ -317,15 +322,16 @@ viewStaffLink.addEventListener("click", (e) => {
     e.preventDefault();
     viewStaffForm.style.display = "block"
     sidebar.style.display = "none"
-    displayAllStaff()
+    displayAllStaff(1)
 });
 
 // display next staff list page
 viewStaffPageNext.addEventListener("click", (e) => {
     e.preventDefault();
-    let maxpage = stafflastpage[stafflastpage.length - 1]
+    // let maxpage = stafflastpage[stafflastpage.length - 1]
+    let maxpage = stafflastpage.pop()
     let pageNumber = staffpage.pop()
-    if (pageNumber <= maxpage) {
+    if (pageNumber < maxpage) {
         viewStaffPagePrevious.classList.remove("disable")
         staffTableBody.innerHTML = ""
         // let pageNumber = studentpage.pop()
@@ -337,7 +343,9 @@ viewStaffPageNext.addEventListener("click", (e) => {
         }
     }
     else {
-        lastpage.push(maxpage)
+        viewStaffPageNext.classList.add("disable")
+        stafflastpage.push(maxpage)
+        staffpage.push(pageNumber)
         Swal.fire({
             icon: "error",
             title: "End of File Reached",
@@ -350,17 +358,17 @@ viewStaffPageNext.addEventListener("click", (e) => {
 viewStaffPagePrevious.addEventListener("click", (e) => {
     e.preventDefault();
     viewStaffPageNext.classList.remove("disable")
-    console.log(staffpage)
+    // console.log(staffpage)
     let pageNumber = staffpage.pop()
     console.log("page is ", pageNumber)
-    if (pageNumber == 1) {
-        // studentpage.push(1)
+    if (pageNumber <= 1) {
+        staffpage.push(1)
+        viewStaffPagePrevious.classList.add("disable")
         Swal.fire({
             icon: "error",
             title: "Beginning of File Reached",
             text: "The page requested does not exist"
         });
-        viewStaffPagePrevious.classList.add("disable")
     }
     else {
         staffTableBody.innerHTML = "";
@@ -625,9 +633,9 @@ const displayAllStudents = (page) => {
             lastpage.push(response.data.pgnum)
 
             // disable next button if end of page is reached
-            if (response.data.pgnum === response.data.page) {
-                viewStudentPageNext.classList.add("disable")
-            }
+            // if (response.data.pgnum === response.data.page) {
+            //     viewStudentPageNext.classList.add("disable")
+            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -844,9 +852,9 @@ const displayStudents = (key, value, page) => {
             lastpage.push(response.data.pgnum)
 
             // disable next button if end of page is reached
-            if (response.data.pgnum === response.data.page) {
-                viewStudentPageNext.classList.add("disable")
-            }
+            // if (response.data.pgnum === response.data.page) {
+            //     viewStudentPageNext.classList.add("disable")
+            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -942,15 +950,15 @@ searchButton.addEventListener("click", (e) => {
 //     }
 // });
 
+
 // display next students list page
 viewStudentPageNext.addEventListener("click", (e) => {
     e.preventDefault();
-    let maxpage = lastpage[lastpage.length - 1]
+    let maxpage = lastpage.pop()
     let pageNumber = studentpage.pop()
-    if (pageNumber <= maxpage) {
+    if (pageNumber < maxpage) {
         viewStudentPagePrevious.classList.remove("disable")
         studentTableBody.innerHTML = ""
-        // let pageNumber = studentpage.pop()
         if (viewStudentSelect.value == "all") {
             displayAllStudents(pageNumber + 1)
         }
@@ -964,31 +972,30 @@ viewStudentPageNext.addEventListener("click", (e) => {
         }
     }
     else {
+        viewStudentPageNext.classList.add("disable")
         lastpage.push(maxpage)
+        studentpage.push(pageNumber)
         Swal.fire({
             icon: "error",
             title: "End of File Reached",
             text: "The page requested does not exist"
         });
     }
-    // displayAllStudents(pageNumber+1)
 });
 
 // display previous students list page
 viewStudentPagePrevious.addEventListener("click", (e) => {
     e.preventDefault();
     viewStudentPageNext.classList.remove("disable")
-    console.log(studentpage)
     let pageNumber = studentpage.pop()
-    console.log("page is ", pageNumber)
-    if (pageNumber == 1) {
-        // studentpage.push(1)
+    if (pageNumber <= 1) {
+        studentpage.push(1)
+        viewStudentPagePrevious.classList.add("disable")
         Swal.fire({
             icon: "error",
             title: "Beginning of File Reached",
             text: "The page requested does not exist"
         });
-        viewStudentPagePrevious.classList.add("disable")
     }
     else {
         studentTableBody.innerHTML = "";
@@ -1004,7 +1011,6 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
             displayStudents(key, value, pageNumber - 1);
             console.log(key, value, pageNumber)
         }
-        // displayAllStudents(pageNumber-1)
     }
 });
 

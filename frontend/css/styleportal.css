@@ -105,9 +105,9 @@ html, body {
     justify-content: center;
     align-items: center;
     height: inherit;
-    padding: 20px;
+    /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -134,17 +134,17 @@ html, body {
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, 
     #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select,
-    #addscores-form input, #addscores-form select, #reportscores-form select, #teacherassign-form select  {
+    #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #teacherassign-form select  {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #studentupdate-form input, #addscores-form input {
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
     #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, 
-    #addscores-form select, #teacherassign-form select, #reportscores-form select{
+    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select{
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -155,7 +155,7 @@ html, body {
     .item input:hover, .item select:hover {
     border: 1px solid transparent;
     box-shadow: 0 0 6px 0 #768b6d;
-    color: #5ec52e;
+    color: #2b7a07;
     }
     .item {
     position: relative;
@@ -233,7 +233,8 @@ html, body {
     text-align: center;
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
-    button#addcomment-btn, button#addscores-btn, button#createstudent-btn, button#viewreport-btn{
+    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, 
+    button#viewreport-btn, button#updatecomment-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -314,6 +315,11 @@ html, body {
     }
     .city-item select {
     width: calc(50% - 8px);
+    }
+    }
+    @media (max-width: 767px) {
+       #addsubject {
+        margin-bottom: -10px;
     }
     }
 

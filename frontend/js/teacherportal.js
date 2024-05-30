@@ -4,7 +4,7 @@ const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const sidebartoggler = document.getElementById("sidebar-toggler")
 const toggler = document.getElementById("toggler-icon")
 
-const addScoresForm = document.getElementById("addscores-form")
+const updateScoresForm = document.getElementById("updatescores-form")
 const reportScoresForm = document.getElementById("reportscores-form")
 const viewStudentsLink = document.getElementById("view-students")
 const sidebar = document.getElementById("bsbSidebar1")
@@ -18,7 +18,7 @@ const schoolSession= document.getElementById("session")
 const schoolTerm= document.getElementById("term")
 let studentTableBody = document.getElementById("studenttbl-body")
 
-const nameOfClass= document.getElementById("classname")
+const addnameOfClass= document.getElementById("addclassname")
 const nameOfProgramme= document.getElementById("progname")
 const subjectOffered= document.getElementById("subject")
 const otherSubjectOffered= document.getElementById("othersubject")
@@ -28,8 +28,18 @@ const subjTotalScore= document.getElementById("totalscore")
 const scoreRemark= document.getElementById("remark")
 const teacherComment= document.getElementById("comment")
 
-const addScoresButton= document.getElementById("addscores-btn")
-const addCommentButton= document.getElementById("addcomment-btn")
+const nameOfClass= document.getElementById("classname")
+// const nameOfProgramme= document.getElementById("progname")
+// const subjectOffered= document.getElementById("subject")
+// const otherSubjectOffered= document.getElementById("othersubject")
+// const subjTestScore= document.getElementById("testscore")
+// const subjExamScore= document.getElementById("examscore")
+// const subjTotalScore= document.getElementById("totalscore")
+// const scoreRemark= document.getElementById("remark")
+// const teacherComment= document.getElementById("comment")
+
+const addScoresButton= document.getElementById("updatescores-btn")
+const addCommentButton= document.getElementById("updatecomment-btn")
 const createStudentButton= document.getElementById("createstudent-btn")
 const studentNameBar= document.getElementById("student-namebar")
 const nameBar= document.getElementById("namebar")
@@ -59,7 +69,9 @@ const getTeacherClass = () => {
         .then(function (response) {
             console.log(response)
             nameOfClass.value = response.data.teacher.teacherClass
+            addnameOfClass.value = response.data.teacher.teacherClass
             nameOfClass.setAttribute("disabled",true)
+            addnameOfClass.setAttribute("disabled",true)
             // nameOfProgramme.value = response.data.teacher.teacherProgramme
             return
         })
@@ -89,14 +101,15 @@ const getTeacherClass = () => {
             });
             sidebartoggler.style.display = "none";
             addScoresForm.style.display = "none";
+            updateScoresForm.style.display = "none";
             reportScoresForm.style.display = "none";
             // nameOfClass.setAttribute("disabled",true)
         });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    getTeacherClass()
-  });
+// document.addEventListener("DOMContentLoaded", () => {
+//     getTeacherClass()
+//   });
 
 //   nameOfClass.addEventListener("click", (e) => {
 //     e.preventDefault();
