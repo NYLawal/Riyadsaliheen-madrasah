@@ -68,8 +68,9 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #updatescores-form, #staffedit-queryform,  #staffupdate-form,
-#studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label{
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
+#studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
+#updatescores-form, #reportscores-form{
 /* .staffadd-form, .studentadd-form, #viewstaff-form,#viewstudent-form, #teacher-class, #class-label { */
 /* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
     display: none;
@@ -107,7 +108,7 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#scoresreport {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -234,7 +235,7 @@ html, body {
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, 
-    button#viewreport-btn, button#updatecomment-btn, button#submitscores-btn{
+    button#viewreport-btn, button#updatecomment-btn, button#submitscores-btn,  button#closereportform-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -321,6 +322,21 @@ html, body {
        #addsubject {
         margin-bottom: -10px;
     }
+       .form-label-marks {
+        width: 70px;
+        line-height: 1.2;
+    }
+    #student-namebar{
+        width: 100%;
+        margin-left: 1px;
+    }
+    }
+    @media (max-width: 568px) {
+        form#scoresreport #table-report{
+            padding-left: 0px;
+           max-width:100%;
+           margin-left: -10px;
+        }
     }
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -399,11 +415,16 @@ a.disable {
 #staff-formupdate{
     width: 80%;
 }
-#staffedit-queryform .closebtn-icon, #staffremove-form .closebtn-icon, #teacherassign-form .closebtn-icon{
+#staffedit-queryform .closebtn-icon, #staffremove-form .closebtn-icon, #teacherassign-form .closebtn-icon {
     position: absolute;
     right: 2.5rem;
     top: 2.5rem
  }
+#reportscores-form .closebtn-icon{
+    position: absolute;
+    right: 2rem;
+    top: 0;
+}
  #updateit-teacherclass, #upd-teacherclass, #upd-classlabel, #upd-programmelabel, #upd-teacherprogramme, #updateit-teacherprogramme, #upd-staffemail{
     display: none;
  }
@@ -427,7 +448,7 @@ a.disable {
     padding-left: 0.75rem;
 }
 #student-namebar{
-    background-color: #073d07;
+    background-color: #0c520c;
     color: #7ff549;
     /* display: none; */
 }
@@ -450,6 +471,10 @@ a.disable {
  form#scoresreport{
     width: 100%;
  }
+ .form-label-marks {
+    margin-bottom: 5px;
+}
+
 
 
  

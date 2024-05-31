@@ -5,6 +5,7 @@ const sidebartoggler = document.getElementById("sidebar-toggler")
 const toggler = document.getElementById("toggler-icon")
 
 const updateScoresLink = document.getElementById("updatescores-link")
+const addScoresForm = document.getElementById("addscores-form")
 const updateScoresForm = document.getElementById("updatescores-form")
 const reportScoresForm = document.getElementById("reportscores-form")
 const viewStudentsLink = document.getElementById("view-students")
@@ -33,21 +34,11 @@ const subjTotalScore = document.getElementById("totalscore")
 const scoreRemark = document.getElementById("remark")
 const teacherComment = document.getElementById("comment")
 
-
-// const nameOfProgramme= document.getElementById("progname")
-// const otherSubjectOffered= document.getElementById("othersubject")
-// const subjTestScore= document.getElementById("testscore")
-// const subjExamScore= document.getElementById("examscore")
-// const subjTotalScore= document.getElementById("totalscore")
-// const scoreRemark= document.getElementById("remark")
-// const teacherComment= document.getElementById("comment")
-
 const addScoresButton = document.getElementById("updatescores-btn")
 const addCommentButton = document.getElementById("updatecomment-btn")
 const createStudentButton = document.getElementById("createstudent-btn")
 const studentNameBar = document.getElementById("student-namebar")
 const nameBar = document.getElementById("namebar")
-
 
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
@@ -58,7 +49,7 @@ let studentNamesStore = [];
 
 const token = localStorage.getItem('access_token')
 
-//displat sidebar
+//display sidebar
 toggler.addEventListener("click", (e) => {
     sidebar.style.display = "block"
 });
@@ -105,11 +96,11 @@ const getTeacherClass = () => {
                 title: "Error Processing Input",
                 text: errorMsg
             });
-            sidebartoggler.style.display = "none";
+            // sidebartoggler.style.display = "none";
             // addScoresForm.style.display = "none";
-            updateScoresForm.style.display = "none";
-            reportScoresForm.style.display = "none";
-            // nameOfClass.setAttribute("disabled",true)
+            // updateScoresForm.style.display = "none";
+            // reportScoresForm.style.display = "none";
+            // viewStudentsForm.style.display = "none";
         });
 };
 
@@ -120,7 +111,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 updateScoresLink.addEventListener("click", (e) => {
     e.preventDefault();
-    updateScoresForm.style.display = "block";
+    // if (updateScoresForm.style.display = "block"){
+    //     updateScoresForm.style.display = "none";
+    //     sidebar.style.display = "none"
+    // }
+   
+        updateScoresForm.style.display = "block";
+        sidebar.style.display = "none"
+
+    
 });
 
 // display all students
@@ -143,6 +142,11 @@ const displayStudentsByClass = (page) => {
                     admission_number: response.data.students[j].admNo,
                     student_name: response.data.students[j].firstName + " " + response.data.students[j].lastName
                 }
+            }
+            for (let j = 0; j < response.data.students.length; j++) {
+                let option = document.createElement("option")
+                option.innerText = response.data.students[j].admNo
+                admissionNumberForReport.appendChild(option)
             }
             addName.value = studentNamesStore[0].student_name;
             pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
@@ -422,12 +426,17 @@ logoutLink.addEventListener("click", (e) => {
 // REPORT ********************************************************************
 // ***************************************************************************
 
+const closeStudentReportFormBtn = document.getElementById("closereportform-btn")
+const viewReportLink = document.getElementById("viewreport-link")
 const admissionNumberForReport = document.getElementById("admNo-forreport")
 const termForReport = document.getElementById("term-forreport")
 const sessionForReport = document.getElementById("session-forreport")
 const viewReportButton = document.getElementById("viewreport-btn")
 const resultBody = document.getElementById("result-body")
 const studentCommentReport = document.getElementById("comment-report")
+const termGrandTotal = document.getElementById("grandtotal")
+const termMarkObtained = document.getElementById("marksobtained")
+const termAveragePercent = document.getElementById("avgpercent")
 
 // view student scores
 const viewScores = (admNo, term, session) => {
@@ -471,6 +480,10 @@ const viewScores = (admNo, term, session) => {
                 resultBody.appendChild(tblrow)
             }
             studentCommentReport.value = response.data.comment
+           termGrandTotal.value = response.data.grandTotal
+            termMarkObtained.value = response.data.marksObtained
+            termAveragePercent.value = response.data.avgPercentage.toFixed(2)
+            nameBar.innerText+= response.data.message
         })
         .catch(function (error) {
             if (error.response) {
@@ -518,6 +531,17 @@ viewReportButton.addEventListener("click", (e) => {
     else
         viewScores(admNo, term, session)
 
+});
+// open report form
+viewReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportScoresForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+// close report form
+closeStudentReportFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportScoresForm.style.display = "none";
 });
 
 // ******************** add scores ***********************************
