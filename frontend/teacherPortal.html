@@ -179,7 +179,7 @@
       </header>
 
       <section
-        class="bg-light py-3 py-md-5"
+        class="bg-light py-3"
         id="divider-bkgd"
         style="height: 20px"
       ></section>
@@ -205,14 +205,11 @@
         <div class="offcanvas-body">
           <ul class="list-unstyled components">
             <p class="text-tasks">Your Tasks</p>
-            <li class="">
+            <!-- <li class="">
               <a href="#" id="view-students">View Students</a>
-            </li>
-            <!-- <li>
-          <a href="#">Add Scores</a>  
-      </li> -->
+            </li> -->
             <li>
-              <a href="#">Edit Scores</a>
+              <a href="#" id="updatescores-link">Edit Scores</a>
             </li>
             <li>
               <!-- scores and attendance for all students in a particular term -->
@@ -233,7 +230,7 @@
       </aside>
 
       <!-- View Students -->
-      <section class="py-3 py-md-5" id="viewstudent-form">
+      <section class="py-3 py-md-5" id="viewstudent-form" style="display: block;">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-12 col-lg-9 col-xl-9">
@@ -245,7 +242,7 @@
                     id="vstdclose-icon"
                     aria-label="Close"
                   ></button>
-                  <h4 class="mb-2">View Students</h4>
+                  <h4 class="mb-2">Students' List</h4>
                   <div>
                     <p id="student-number" class="mt-2 mb-2"></p>
                   </div>
@@ -293,10 +290,10 @@
                         << Previous</a
                       >
                     </li>
-                    <!-- <li class="page-item">
+                    <li class="page-item">
                 <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
               </li>
-              <li class="page-item" >
+              <!-- <li class="page-item" >
                 <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
               </li>
               <li class="page-item">
@@ -318,8 +315,9 @@
         </div>
       </section>
 
+
       <!-- scores input form -->
-      <section class="bg-light pb-5 mb-5" id="addscores-form">
+      <section class="bg-light pb-5 pt-5 mb-5" id="addscores-form">
         <div class="container">
           <div class="row justify-content-md-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
@@ -367,11 +365,11 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4">
-                      <label for="term" class="form-label"
+                      <label for="addterm" class="form-label"
                         >Term <span class="text-danger">*</span></label
                       >
                       <div class="input-group">
-                        <select style="background-color: white" id="term">
+                        <select style="background-color: white" id="addterm">
                           <option value="first">First</option>
                           <option value="second">Second</option>
                           <option value="third">Third</option>
@@ -379,20 +377,33 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4">
-                      <label for="session" class="form-label"
+                      <label for="addsession" class="form-label"
                         >Session <span class="text-danger">*</span></label
                       >
                       <div class="input-group">
-                        <select style="background-color: white" id="session">
-                          <option value="first">2023/2024</option>
+                        <select style="background-color: white" id="addsession">
+                          <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="row">
+                    <div class="col-6 item">
+                      <p>Student Name</p>
+                      <input type="text" placeholder="" id="addname" />
+                    </div>
+                    <div class="col-6 item">
+                      <p>Admission No</p>
+                      <!-- <input type="text" placeholder="" id="addadmno" /> -->
+                      <select name="addadmno" id="addadmno" style="background-color: white;"></select>
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class="col-6 col-md-4 item">
-                      <p>Select Subject</p>
-                      <select style="background-color: white" id="subject">
+                      <p>Subject</p>
+                      <select style="background-color: white" id="addsubjectselect">
+                        <option selected>select one</option>
                         <option value="Adhkaar">Adhkaar</option>
                         <option value="Fiqh">Fiqh</option>
                         <option value="Hadith">Hadith</option>
@@ -412,103 +423,113 @@
                         <option value="Tajweed">Tajweed</option>
                         <option value="Tawheed">Tawheed</option>
                         <option value="Qiraaha">Qiraaha</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
                     <div class="col-6 col-md-4 item">
                       <p>Other Subject</p>
                       <input
                         type="text"
-                        name="othersubject"
+                        name="addothersubject"
                         placeholder=""
-                        id="othersubject"
+                        id="addothersubject"
+                        disabled
                       />
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 item">
-                      <p>Student Name</p>
-                      <input type="text" placeholder="" id="addname" />
-                    </div>
-                    <div class="col-6 item">
-                      <p>Admission No</p>
-                      <input type="text" placeholder="" id="addadmno" />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3 item" id="addsubject">
+                  </div>  
+                  <div class="row" id="addsubjectrow">
+                    <!-- <div class="col-md-3 item" id="addsubjectcol">
                       <p>Subject</p>
                       <input
-                        type="number"
-                        min="0"
-                        max="40"
-                        name="test"
+                        type="text"
+                        name="addsubject"
                         placeholder=""
-                        id="testscore"
+                        id="addsubject"
                       />
-                    </div>
-                    <div class="col-3 col-md-2 item">
+                    </div> -->
+                    <div class="col-3 col-md-3 item">
                       <p>Test</p>
                       <input
                         type="number"
                         min="0"
                         max="40"
-                        name="test"
+                        name="addtest"
                         placeholder=""
-                        id="testscore"
+                        id="addtest"
                       />
                     </div>
-                    <div class=" col-3 col-md-2 item">
+                    <div class=" col-3 col-md-3 item">
                       <p>Exam</p>
                       <input
                         type="number"
                         min="0"
                         max="60"
-                        name="exam"
+                        name="addexam"
                         placeholder=""
-                        id="examscore"
+                        id="addexam"
                       />
                     </div>
-                    <div class="col-3 col-md-2 item">
+                    <div class="col-3 col-md-3 item">
                       <p>Total</p>
                       <input
                         type="text"
-                        name="total"
+                        name="addtotal"
                         placeholder=""
-                        id="totalscore"
+                        id="addtotal"
                       />
                     </div>
                     <div class="col-3 col-md-3 item">
                       <p>Remark</p>
-                      <select style="background-color: white" id="remark">
-                        <option value="excellent">Excellent ممتاز</option>
-                        <option value="v.good">Very Good جيد جيدا</option>
-                        <option value="good">Good جيد</option>
-                        <option value="success">Success ناجح</option>
-                        <option value="failed">Failed راسب</option>
-                      </select>
+                      <input
+                        type="text"
+                        name="addremark"
+                        placeholder=""
+                        id="addremark" 
+                      />
+                      <!-- <select style="background-color: white" id="addremark">
+                        <option value="Excellent">Excellent ممتاز</option>
+                        <option value="V.Good">Very Good جيد جيدا</option>
+                        <option value="Good">Good جيد</option>
+                        <option value="Success">Success ناجح</option>
+                        <option value="Failed">Failed راسب</option>
+                      </select> -->
                     </div>
                   </div>
+                  <label for="table" class="form-label mb-0">Scores</label>
+                  <table class="table table-bordered mt-2 text-center" id="scorestable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Test</th>
+                        <th scope="col">Exam</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Remark</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="addresultbody">
+                      <!-- <tr>
+                        <td class="delsubjectscore"><i class="fa fa-trash delsubjecticon" id="delsubjecticon"></i></td>
+                      </tr> -->
+                    </tbody>
+                  </table>
                   <div class="row">
                     <div class="col-12">
                       <div class="item">
                         <p>Comment</p>
-                        <textarea rows="3" id="comment"></textarea>
+                        <textarea rows="3" id="addcomment"></textarea>
                       </div>
                     </div>
                   </div>
                   <div class="row" style="padding-left: 0">
-                    <!-- <div class="col"></div> -->
+                    <div class="col"></div>
                     <div class="col-12 col-md-6 btn-block">
-                      <button type="button" id="addscores-btn" href="/">
-                        Add Score
+                      <button type="button" id="submitscores-btn" href="/">
+                        Submit Scores
                       </button>
                     </div>
-                    <div class="col-12 col-md-6 btn-block">
-                      <button type="button" id="addcomment-btn" href="/">
-                        Add Comment
-                      </button>
-                    </div>
-                    <!-- <div class="col"></div> -->
+                    <div class="col"></div>
                   </div>
                 </form>
               </div>
@@ -745,11 +766,16 @@
               <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
             </div>
           </div>
-          <div class="row justify-content-md-center">
-            <div
-              class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 py-5 px-4"
-              style="background-color: #d0f1c1"
-            >
+          <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+              <div class="testbox">
+                <form
+                  action="/"
+                  class="py-4 px-4 px-md-4"
+                  id="scoresreport"
+                  style="background-color: #d0f1c1; box-shadow: none"
+                >
+                 
               <div class="row gy-4 gy-xl-5 mb-3">
                 <div class="col-12 col-md-4">
                   <label for="admNo-forreport" class="form-label"
@@ -786,7 +812,7 @@
                       style="background-color: white"
                       id="session-forreport"
                     >
-                      <option value="first">2023/2024</option>
+                      <option value="2023/2024">2023/2024</option>
                     </select>
                   </div>
                 </div>
@@ -828,6 +854,10 @@
                   <div class="col"></div>
                 </div>
               </form>
+            <!-- </div>
+                 </div> -->
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -1066,6 +1096,7 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://kit.fontawesome.com/0a5d1384fe.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/teacherportal.js" type="text/javascript"></script>

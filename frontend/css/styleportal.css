@@ -68,7 +68,7 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #updatescores-form, #staffedit-queryform,  #staffupdate-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label{
 /* .staffadd-form, .studentadd-form, #viewstaff-form,#viewstudent-form, #teacher-class, #class-label { */
 /* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
@@ -107,7 +107,7 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#scoresreport {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -134,12 +134,12 @@ html, body {
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, 
     #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select,
-    #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #teacherassign-form select  {
+    #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #teacherassign-form select  {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input {
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
@@ -234,7 +234,7 @@ html, body {
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, 
-    button#viewreport-btn, button#updatecomment-btn{
+    button#viewreport-btn, button#updatecomment-btn, button#submitscores-btn{
     width: 150px;
     padding: 10px;
     border: none;
@@ -442,6 +442,13 @@ a.disable {
  }
  #reportscores-form .row select{
    padding: 9px 7px;
+ }
+ .delsubjecticon:hover{
+    cursor:pointer;
+    color: #57b62b;
+ }
+ form#scoresreport{
+    width: 100%;
  }
 
 
