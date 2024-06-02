@@ -335,7 +335,7 @@ html, body {
         form#scoresreport #table-report{
             padding-left: 0px;
            max-width:100%;
-           margin-left: -10px;
+           /* margin-left: -10px; */
         }
     }
 

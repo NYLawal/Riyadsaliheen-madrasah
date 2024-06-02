@@ -433,10 +433,13 @@ const termForReport = document.getElementById("term-forreport")
 const sessionForReport = document.getElementById("session-forreport")
 const viewReportButton = document.getElementById("viewreport-btn")
 const resultBody = document.getElementById("result-body")
+const thirdTermResultBody = document.getElementById("thirdterm-resultbody")
 const studentCommentReport = document.getElementById("comment-report")
 const termGrandTotal = document.getElementById("grandtotal")
 const termMarkObtained = document.getElementById("marksobtained")
 const termAveragePercent = document.getElementById("avgpercent")
+const tableReport = document.getElementById("table-report")
+const thirdTermReportTable = document.getElementById("table-report-thirdterm")
 
 // view student scores
 const viewScores = (admNo, term, session) => {
@@ -454,10 +457,11 @@ const viewScores = (admNo, term, session) => {
             Swal.fire({
                 icon: "success",
                 title: "Successful",
-                text: response.data.message
+                text: "Scores returned for " + response.data.message
             });
             for (let i = 0; i < response.data.result.length; i++) {
                 // serial_no++
+                // thirdTermReportTable.style.display = "none"
                 let tblrow = document.createElement("tr")
                 let tblserialno = document.createElement("th")
                 let tblsubject = document.createElement("td")
@@ -478,12 +482,66 @@ const viewScores = (admNo, term, session) => {
                 tblrow.appendChild(tbltotalscore)
                 tblrow.appendChild(tblremark)
                 resultBody.appendChild(tblrow)
+                if (response.data.termName == 'third'){
+                    tableReport.style.display = "none"
+                    thirdTermReportTable.style.display = "block"
+                    let ttblrow = document.createElement("tr")
+                    let tblserialno = document.createElement("th")
+                    let tblsubject = document.createElement("td")
+                    let tbltestscore = document.createElement("td")
+                    let tblexamscore = document.createElement("td")
+                    let tbltotalscore = document.createElement("td")
+                    let tblfirstterm = document.createElement("td")
+                    let tblsecondterm = document.createElement("td")
+                    let tblcumscore = document.createElement("td")
+                    let tblcumaverage = document.createElement("td")
+                    let tblremark = document.createElement("td")
+                    tblserialno.innerText = i + 1
+                tblsubject.innerText = response.data.result[i].subjectName
+                tbltestscore.innerText = response.data.result[i].testScore
+                tblexamscore.innerText = response.data.result[i].examScore
+                tbltotalscore.innerText = response.data.result[i].totalScore
+                tblfirstterm.innerText = response.data.firstTermScore[i]
+                tblsecondterm.innerText = response.data.secondTermScore[i]
+                tblcumscore.innerText = response.data.result[i].cumulativeScore
+                tblcumaverage.innerText = response.data.result[i].cumulativeAverage.toFixed(2)
+                // add remark according to avrage score
+                if (tblcumaverage.innerText >= 85) {
+                    tblremark.innerText = "ممتاز"
+                }
+                else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
+                    tblremark.innerText = "جيد جيدا"
+                }
+                else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
+                    tblremark.innerText = "جيد"
+                }
+                else if (tblcumaverage.innerText >= 50 && tblcumaverage.innerText < 65) {
+                    tblremark.innerText = "ناجح"
+                }
+                else if (tblcumaverage.innerText >= 0 && tblcumaverage.innerText < 50) {
+                    tblremark.innerText = "راسب"
+                }
+
+                // tblremark.innerText = response.data.result[i].remark 
+                    ttblrow.appendChild(tblserialno)
+                    ttblrow.appendChild(tblsubject)
+                    ttblrow.appendChild(tbltestscore)
+                    ttblrow.appendChild(tblexamscore)
+                    ttblrow.appendChild(tbltotalscore)
+                    ttblrow.appendChild(tblfirstterm)                   
+                    ttblrow.appendChild(tblsecondterm)                   
+                    ttblrow.appendChild(tblcumscore)                   
+                    ttblrow.appendChild(tblcumaverage)                   
+                    ttblrow.appendChild(tblremark) 
+                    thirdTermResultBody.appendChild(ttblrow)                  
+                }
+                
             }
             studentCommentReport.value = response.data.comment
            termGrandTotal.value = response.data.grandTotal
             termMarkObtained.value = response.data.marksObtained
             termAveragePercent.value = response.data.avgPercentage.toFixed(2)
-            nameBar.innerText+= response.data.message
+            nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}` 
         })
         .catch(function (error) {
             if (error.response) {
@@ -517,6 +575,12 @@ const viewScores = (admNo, term, session) => {
 viewReportButton.addEventListener("click", (e) => {
     e.preventDefault();
     resultBody.innerHTML = "";
+    thirdTermResultBody.innerHTML="";
+    termAveragePercent.value="";
+    termMarkObtained.value="";
+    nameBar.innerText="";
+    studentCommentReport.value="";
+    termGrandTotal.value =""
     const admNo = admissionNumberForReport.value;
     const term = termForReport.value;
     const session = sessionForReport.value;
@@ -528,15 +592,19 @@ viewReportButton.addEventListener("click", (e) => {
             text: "Please fill out all required fields"
         });
     }
-    else
-        viewScores(admNo, term, session)
+    else {
+    // if (term != 'third') thirdTermReportTable.style.display = "none"
+    // else tableReport.style.display = "none"
 
+        viewScores(admNo, term, session)
+    }
 });
 // open report form
 viewReportLink.addEventListener("click", (e) => {
     e.preventDefault();
     reportScoresForm.style.display = "block";
     sidebar.style.display = "none";
+    thirdTermReportTable.style.display = "none"
 });
 // close report form
 closeStudentReportFormBtn.addEventListener("click", (e) => {
