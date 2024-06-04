@@ -147,6 +147,10 @@ const displayStudentsByClass = (page) => {
                 let option = document.createElement("option")
                 option.innerText = response.data.students[j].admNo
                 admissionNumberForReport.appendChild(option)
+                studentNamesStore[j] = {
+                    admission_number: response.data.students[j].admNo,
+                    student_name: response.data.students[j].firstName + " " + response.data.students[j].lastName
+                }
             }
             addName.value = studentNamesStore[0].student_name;
             pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
@@ -246,6 +250,14 @@ viewStudentPageOne.addEventListener("click", (e) => {
         studentTableBody.innerHTML = ""
         displayStudentsByClass(1)
     }
+});
+
+// open view student form
+viewStudentsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.style.display = "none"
+    viewStudentsForm.style.display = "block"
+    displayStudentsByClass(1)
 });
 
 // close view student form
@@ -459,7 +471,8 @@ const viewScores = (admNo, term, session) => {
                 title: "Successful",
                 text: "Scores returned for " + response.data.message
             });
-            for (let i = 0; i < response.data.result.length; i++) {
+            // thirdTermReportTable.style.display = "none"
+            for (let i = 0; i < response.data.report.length; i++) {
                 // serial_no++
                 // thirdTermReportTable.style.display = "none"
                 let tblrow = document.createElement("tr")
@@ -470,11 +483,11 @@ const viewScores = (admNo, term, session) => {
                 let tbltotalscore = document.createElement("td")
                 let tblremark = document.createElement("td")
                 tblserialno.innerText = i + 1
-                tblsubject.innerText = response.data.result[i].subjectName
-                tbltestscore.innerText = response.data.result[i].testScore
-                tblexamscore.innerText = response.data.result[i].examScore
-                tbltotalscore.innerText = response.data.result[i].totalScore
-                tblremark.innerText = response.data.result[i].remark
+                tblsubject.innerText = response.data.report[i].subjectName
+                tbltestscore.innerText = response.data.report[i].testScore
+                tblexamscore.innerText = response.data.report[i].examScore
+                tbltotalscore.innerText = response.data.report[i].totalScore
+                tblremark.innerText = response.data.report[i].remark
                 tblrow.appendChild(tblserialno)
                 tblrow.appendChild(tblsubject)
                 tblrow.appendChild(tbltestscore)
@@ -483,8 +496,8 @@ const viewScores = (admNo, term, session) => {
                 tblrow.appendChild(tblremark)
                 resultBody.appendChild(tblrow)
                 if (response.data.termName == 'third'){
-                    tableReport.style.display = "none"
-                    thirdTermReportTable.style.display = "block"
+                    // tableReport.style.display = "none"
+                    // thirdTermReportTable.style.display = "block"
                     let ttblrow = document.createElement("tr")
                     let tblserialno = document.createElement("th")
                     let tblsubject = document.createElement("td")
@@ -497,14 +510,14 @@ const viewScores = (admNo, term, session) => {
                     let tblcumaverage = document.createElement("td")
                     let tblremark = document.createElement("td")
                     tblserialno.innerText = i + 1
-                tblsubject.innerText = response.data.result[i].subjectName
-                tbltestscore.innerText = response.data.result[i].testScore
-                tblexamscore.innerText = response.data.result[i].examScore
-                tbltotalscore.innerText = response.data.result[i].totalScore
+                tblsubject.innerText = response.data.report[i].subjectName
+                tbltestscore.innerText = response.data.report[i].testScore
+                tblexamscore.innerText = response.data.report[i].examScore
+                tbltotalscore.innerText = response.data.report[i].totalScore || 0
                 tblfirstterm.innerText = response.data.firstTermScore[i]
                 tblsecondterm.innerText = response.data.secondTermScore[i]
-                tblcumscore.innerText = response.data.result[i].cumulativeScore
-                tblcumaverage.innerText = response.data.result[i].cumulativeAverage.toFixed(2)
+                tblcumscore.innerText = response.data.report[i].cumulativeScore
+                tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
                 // add remark according to avrage score
                 if (tblcumaverage.innerText >= 85) {
                     tblremark.innerText = "ممتاز"
@@ -539,7 +552,7 @@ const viewScores = (admNo, term, session) => {
             }
             studentCommentReport.value = response.data.comment
            termGrandTotal.value = response.data.grandTotal
-            termMarkObtained.value = response.data.marksObtained
+            termMarkObtained.value = response.data.marksObtained.toFixed(2)
             termAveragePercent.value = response.data.avgPercentage.toFixed(2)
             nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}` 
         })
@@ -593,11 +606,26 @@ viewReportButton.addEventListener("click", (e) => {
         });
     }
     else {
-    // if (term != 'third') thirdTermReportTable.style.display = "none"
-    // else tableReport.style.display = "none"
+    if (term != 'third') {
+        tableReport.style.width = "100%"
+        tableReport.style.display = "block"
+        thirdTermReportTable.style.display = "none"
+    }
+    else {
+        thirdTermReportTable.style.display = "block"
+     tableReport.style.display = "none"
+    }
 
         viewScores(admNo, term, session)
     }
+});
+// open report form
+admissionNumberForReport.addEventListener("change", (e) => {
+    e.preventDefault();
+    for (let i = 0; i < studentNamesStore.length; i++)
+        if (studentNamesStore[i].admission_number == admissionNumberForReport.value) {
+        nameBar.innerText = studentNamesStore[i].student_name
+        }
 });
 // open report form
 viewReportLink.addEventListener("click", (e) => {

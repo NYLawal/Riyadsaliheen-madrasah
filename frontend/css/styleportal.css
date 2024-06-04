@@ -449,7 +449,8 @@ a.disable {
 }
 #student-namebar{
     background-color: #0c520c;
-    color: #7ff549;
+    color: #a3f17f;
+    padding: 2px 0;
     /* display: none; */
 }
 .scores-inputinstr{
@@ -464,6 +465,17 @@ a.disable {
  #reportscores-form .row select{
    padding: 9px 7px;
  }
+
+ /* #table-report th:nth-child(2), */
+ #table-report th
+  {
+    width:8rem;
+}
+
+#table-report td {
+    width:5rem;
+}
+
  .delsubjecticon:hover{
     cursor:pointer;
     color: #57b62b;

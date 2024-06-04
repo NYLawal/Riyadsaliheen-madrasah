@@ -214,20 +214,19 @@
         <div class="offcanvas-body">
           <ul class="list-unstyled components">
             <p class="text-tasks">Your Tasks</p>
-            <!-- <li class="">
+            <li class="">
               <a href="#" id="view-students">View Students</a>
-            </li> -->
+            </li>
+            <li>
+              <!-- scores and attendance for a student in a particular term -->
+              <a href="#" id="viewreport-link">View Student Report</a>
+            </li>
             <li>
               <a href="#" id="updatescores-link">Edit Scores</a>
             </li>
             <li>
               <!-- scores and attendance for all students in a particular term -->
               <a href="#">View Class Report</a>
-            </li>
-
-            <li>
-              <!-- scores and attendance for a student in a particular term -->
-              <a href="#" id="viewreport-link">View Student Report</a>
             </li>
           </ul>
           <ul class="list-unstyled components components2">
@@ -612,19 +611,21 @@
               <h3 id="namebar"></h3>
              </div>
              <label for="table" class="form-label mb-0">Scores</label>
-             <table class="table table-bordered mt-2 px-0 mb-5" id="table-report">
-               <thead>
-                 <tr>
-                   <th scope="col">#</th>
-                   <th scope="col">Subject</th>
-                   <th scope="col">Test</th>
-                   <th scope="col">Exam</th>
-                   <th scope="col">Total</th>
-                   <th scope="col">Remark</th>
-                 </tr>
-               </thead>
-               <tbody id="result-body"></tbody>
-             </table>
+             <div class="table">
+              <table class="table table-bordered bsb-table-xl mt-2 px-0 mb-3" id="table-report">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Test</th>
+                    <th scope="col">Exam</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Remark</th>
+                  </tr>
+                </thead>
+                <tbody id="result-body"></tbody>
+              </table>
+             </div>
              <div class="table-responsive mb-3">
               <table
                 class="table table-bordered bsb-table-xl text-nowrap align-middle"
