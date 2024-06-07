@@ -619,7 +619,7 @@ viewReportButton.addEventListener("click", (e) => {
         viewScores(admNo, term, session)
     }
 });
-// open report form
+// change student name if admission number is changed
 admissionNumberForReport.addEventListener("change", (e) => {
     e.preventDefault();
     for (let i = 0; i < studentNamesStore.length; i++)

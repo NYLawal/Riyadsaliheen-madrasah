@@ -1,6 +1,6 @@
 
-const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-// const baseUrl = "http://localhost:5000/api/v1"
+// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler = document.getElementById("toggler-icon")
@@ -74,9 +74,9 @@ const searchButton = document.getElementById("search-btn")
 const studentStatus = document.getElementById("search-studstatus")
 
 const studentViewPagination = document.getElementById("stdview-pagination")
-// const viewStudentPage1 = document.getElementById("viewstd-page1")
 // const viewStudentPage2 = document.getElementById("viewstd-page2")
 // const viewStudentPage3 = document.getElementById("viewstd-page3")
+const viewStudentPageRequest = document.getElementById("viewstd-pagerequest")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStaffPageNext = document.getElementById("viewstaff-pagenext")
@@ -177,13 +177,13 @@ const displayAllStaff = (page) => {
             }
             console.log("response says page is ", response.data.page)
             console.log("response says pagenum is ", response.data.pgnum)
-                staffpage.push(response.data.page)
-                stafflastpage.push(response.data.pgnum)
-    
-                // disable next button if end of page is reached
-                // if (response.data.pgnum === response.data.page) {
-                //     viewStaffPageNext.classList.add("disable")
-                // }
+            staffpage.push(response.data.page)
+            stafflastpage.push(response.data.pgnum)
+
+            // disable next button if end of page is reached
+            // if (response.data.pgnum === response.data.page) {
+            //     viewStaffPageNext.classList.add("disable")
+            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -270,13 +270,13 @@ const displayTeachers = (page) => {
             }
             console.log("response says page is ", response.data.page)
             console.log("response says pagenum is ", response.data.pgnum)
-                staffpage.push(response.data.page)
-                stafflastpage.push(response.data.pgnum)
-    
-                // disable next button if end of page is reached
-                // if (response.data.pgnum === response.data.page) {
-                //     viewStaffPageNext.classList.add("disable")
-                // }
+            staffpage.push(response.data.page)
+            stafflastpage.push(response.data.pgnum)
+
+            // disable next button if end of page is reached
+            // if (response.data.pgnum === response.data.page) {
+            //     viewStaffPageNext.classList.add("disable")
+            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -1014,6 +1014,46 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     }
 });
 
+// display students list by page requested
+viewStudentPageRequest.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+        let maxpage = lastpage.pop()
+        let pageNumber = viewStudentPageRequest.value
+        if (pageNumber < 1) {
+            Swal.fire({
+                icon: "error",
+                title: "Beginning of File Reached",
+                text: "The page requested does not exist"
+            });
+        }
+        else if (pageNumber > maxpage) {
+            Swal.fire({
+                icon: "error",
+                title: "End of File Reached",
+                text: "The page requested does not exist"
+            });
+        }
+        else {
+            studentTableBody.innerHTML = "";
+            viewStudentPagePrevious.classList.remove("disable")
+            viewStudentPageNext.classList.remove("disable")
+
+            if (viewStudentSelect.value == "all") {
+                displayAllStudents(pageNumber)
+            }
+            else if (viewStudentSelect.value == "bycriteria") {
+                const key = studSearchKey.value
+                let value;
+                if (key === "studentStatus") value = "past"
+                else { value = searchMe.firstChild.value || studSearchValue.value }
+                displayStudents(key, value, pageNumber);
+                console.log(key, value, pageNumber)
+            }
+        }
+    }
+});
+
 //clear staff form
 cancelLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -1136,12 +1176,12 @@ const QuerystaffEdit = (staffInfo) => {
             updateStaffForm.style.display = "block";
             staffEmailUpdate.value = response.data.staffer.email;
             staffNameUpdate.value = response.data.staffer.stafferName
-            staffGenderUpdate.value =  response.data.staffer.gender
-            staffAddressUpdate.value =  response.data.staffer.address
-            staffPhoneUpdate.value =  response.data.staffer.phoneNumber
-            staffRoleUpdate.value =  response.data.staffer.role
+            staffGenderUpdate.value = response.data.staffer.gender
+            staffAddressUpdate.value = response.data.staffer.address
+            staffPhoneUpdate.value = response.data.staffer.phoneNumber
+            staffRoleUpdate.value = response.data.staffer.role
 
-            if (response.data.staffer.role == "teacher"){
+            if (response.data.staffer.role == "teacher") {
                 classLabelUpdate.style.display = "block";
                 teacherClassUpdate.style.display = "block";
                 updateItTeacherClass.style.display = "block";
@@ -1193,13 +1233,13 @@ submitEditQuery.addEventListener("click", (e) => {
 // close staff update form
 closeUpdateButton.addEventListener("click", (e) => {
     e.preventDefault();
-   updateStaffForm.style.display = "none";
-   staffEmailUpdate.value = "";
+    updateStaffForm.style.display = "none";
+    staffEmailUpdate.value = "";
     staffNameUpdate.value = "";
-    staffGenderUpdate.value =  "";
-    staffAddressUpdate.value =  "";
-    staffPhoneUpdate.value =  "";
-    staffRoleUpdate.value =  "";
+    staffGenderUpdate.value = "";
+    staffAddressUpdate.value = "";
+    staffPhoneUpdate.value = "";
+    staffRoleUpdate.value = "";
     classLabelUpdate.style.display = "none";
     teacherClassUpdate.style.display = "none";
     programmeLabelUpdate.style.display = "none";
@@ -1215,10 +1255,10 @@ cancelUpdateButton.addEventListener("click", (e) => {
     e.preventDefault();
     staffEmailUpdate.value = "";
     staffNameUpdate.value = "";
-    staffGenderUpdate.value =  "";
-    staffAddressUpdate.value =  "";
-    staffPhoneUpdate.value =  "";
-    staffRoleUpdate.value =  "";
+    staffGenderUpdate.value = "";
+    staffAddressUpdate.value = "";
+    staffPhoneUpdate.value = "";
+    staffRoleUpdate.value = "";
     classLabelUpdate.style.display = "none";
     teacherClassUpdate.style.display = "none";
     programmeLabelUpdate.style.display = "none";
@@ -1242,26 +1282,26 @@ updateItTeacherProgramme.addEventListener("change", (e) => {
 });
 
 // display class select when the user presses enter key on the keyboard after inputting role as teacher
-staffRoleUpdate.addEventListener("keyup", function(e) {
+staffRoleUpdate.addEventListener("keyup", function (e) {
     // if (e.key === "Enter" && staffRoleUpdate.value == "teacher") {
     if (staffRoleUpdate.value == "teacher") {
-      e.preventDefault();
-      classLabelUpdate.style.display = "block";
-      teacherClassUpdate.style.display = "block";
-      updateItTeacherClass.style.display = "block";
-      programmeLabelUpdate.style.display = "block";
-      teacherProgrammeUpdate.style.display = "block";
-      updateItTeacherProgramme.style.display = "block";
+        e.preventDefault();
+        classLabelUpdate.style.display = "block";
+        teacherClassUpdate.style.display = "block";
+        updateItTeacherClass.style.display = "block";
+        programmeLabelUpdate.style.display = "block";
+        teacherProgrammeUpdate.style.display = "block";
+        updateItTeacherProgramme.style.display = "block";
     }
-    else{
+    else {
         classLabelUpdate.style.display = "none";
-      teacherClassUpdate.style.display = "none";
-      updateItTeacherClass.style.display = "none";
-      programmeLabelUpdate.style.display = "none";
-      teacherProgrammeUpdate.style.display = "none";
-      updateItTeacherProgramme.style.display = "none";
+        teacherClassUpdate.style.display = "none";
+        updateItTeacherClass.style.display = "none";
+        programmeLabelUpdate.style.display = "none";
+        teacherProgrammeUpdate.style.display = "none";
+        updateItTeacherProgramme.style.display = "none";
     }
-  });
+});
 
 // update a staffer info
 const updateStaffDetails = (staffInfo) => {
@@ -1281,10 +1321,10 @@ const updateStaffDetails = (staffInfo) => {
             });
             staffEmailUpdate.value = "";
             staffNameUpdate.value = "";
-            staffGenderUpdate.value =  "";
-            staffAddressUpdate.value =  "";
-            staffPhoneUpdate.value =  "";
-            staffRoleUpdate.value =  "";
+            staffGenderUpdate.value = "";
+            staffAddressUpdate.value = "";
+            staffPhoneUpdate.value = "";
+            staffRoleUpdate.value = "";
             classLabelUpdate.style.display = "none";
             teacherClassUpdate.style.display = "none";
             programmeLabelUpdate.style.display = "none";
@@ -1333,7 +1373,7 @@ UpdateButton.addEventListener("click", (e) => {
     let teacherClass = teacherClassUpdate.value;
     let teacherProgramme = teacherProgrammeUpdate.value;
 
-    if (role == "teacher" && (teacherClass == "" || teacherProgramme == "")){
+    if (role == "teacher" && (teacherClass == "" || teacherProgramme == "")) {
         Swal.fire({
             icon: "error",
             title: "Invalid Entry",
@@ -1375,11 +1415,11 @@ const assignTeacher = (staffInfo) => {
             Swal.fire({
                 icon: "success",
                 title: "Successful",
-                text: response.data.message 
+                text: response.data.message
             });
             teacherEmailToAssign.value = "";
-            assignTeacherClassSelect.value ="";
-            assignTeacherProgrammeSelect.value ="";
+            assignTeacherClassSelect.value = "";
+            assignTeacherProgrammeSelect.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -1446,7 +1486,7 @@ closeRemoveButtonIcon.addEventListener("click", (e) => {
 // submit query for staff edit
 const removeStaff = (payload) => {
     let errorMsg;
-    
+
     axios
         .delete(`${baseUrl}/staff/deleteStaff`, {
             data: payload,
@@ -1494,32 +1534,32 @@ const removeStaff = (payload) => {
 submitRemoveQuery.addEventListener("click", (e) => {
     e.preventDefault();
     const email = staffEmailToRemove.value;
-    if (staffEmailToRemove.value == ""){
+    if (staffEmailToRemove.value == "") {
         Swal.fire({
             icon: "error",
             title: "Empty Input Detected",
             text: "Staffer email is required for the query"
         });
     }
-   else{
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-            removeStaff(formData);
-        }
-    });
-   }   
-   const formData = {
-    email
-}
-  
+    else {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeStaff(formData);
+            }
+        });
+    }
+    const formData = {
+        email
+    }
+
 });
 
 
@@ -1528,7 +1568,7 @@ submitRemoveQuery.addEventListener("click", (e) => {
 const editStudentLink = document.getElementById('edit-students')
 const updateStudentForm = document.getElementById('studentupdate-form')
 const cancelStudentUpdateButton = document.getElementById('clearstdupdfrm-btn')
-const closeStudentUpdateButton= document.getElementById('closestdupdfrm-btn')
+const closeStudentUpdateButton = document.getElementById('closestdupdfrm-btn')
 const UpdateStudentButton = document.getElementById('studupd-btn')
 
 const studentAdmNoToEdit = document.getElementById('studupd-admno')
@@ -1575,13 +1615,13 @@ const QueryStudentUpdate = (studentInfo) => {
             studentLastNameUpdate.value = response.data.student.lastName
             studentGenderUpdate.value = response.data.student.gender
             studentAddressUpdate.value = response.data.student.address
-            studentPhoneUpdate.value =  response.data.student.phoneNumber
+            studentPhoneUpdate.value = response.data.student.phoneNumber
             studentEntryClassUpdate.value = response.data.student.entryClass
             studentEmailUpdate.value = response.data.student.email
             studentParentEmailUpdate.value = response.data.student.parentEmail
             studentOriginUpdate.value = response.data.student.stateOfOrigin
             studentMStatusUpdate.value = response.data.student.maritalStatus
-            studentProgrammeUpdate.value = response.data.student.programme     
+            studentProgrammeUpdate.value = response.data.student.programme
         })
         .catch(function (error) {
             if (error.response) {
@@ -1620,7 +1660,7 @@ studentAdmNoToEdit.addEventListener("keypress", (e) => {
         }
         QueryStudentUpdate(formData);
     }
-    else if (e.key === "Enter" && studentAdmNoToEdit.value == ""){
+    else if (e.key === "Enter" && studentAdmNoToEdit.value == "") {
         Swal.fire({
             icon: "error",
             title: "Error Processing Input",
@@ -1662,13 +1702,13 @@ const updateStudentDetails = (studentInfo) => {
             studentLastNameUpdate.value = ""
             studentGenderUpdate.value = ""
             studentAddressUpdate.value = ""
-            studentPhoneUpdate.value =  ""
+            studentPhoneUpdate.value = ""
             studentEntryClassUpdate.value = ""
             studentEmailUpdate.value = ""
             studentParentEmailUpdate.value = ""
             studentOriginUpdate.value = ""
             studentMStatusUpdate.value = ""
-            studentProgrammeUpdate.value = ""  
+            studentProgrammeUpdate.value = ""
         })
         .catch(function (error) {
             if (error.response) {
@@ -1700,8 +1740,8 @@ const updateStudentDetails = (studentInfo) => {
 // submit request to update student
 UpdateStudentButton.addEventListener("click", (e) => {
     e.preventDefault();
-    const admNo = studentAdmNoToEdit.value; 
-    const firstName = studentFirstNameUpdate.value; 
+    const admNo = studentAdmNoToEdit.value;
+    const firstName = studentFirstNameUpdate.value;
     const lastName = studentLastNameUpdate.value;
     const gender = studentGenderUpdate.value;
     const address = studentAddressUpdate.value;
@@ -1711,9 +1751,9 @@ UpdateStudentButton.addEventListener("click", (e) => {
     const parentEmail = studentParentEmailUpdate.value;
     const stateOfOrigin = studentOriginUpdate.value;
     const maritalStatus = studentMStatusUpdate.value;
-    const programme = studentProgrammeUpdate.value;     
-    if (email == ""){
-       email = "nothing@nil.com"
+    const programme = studentProgrammeUpdate.value;
+    if (email == "") {
+        email = "nothing@nil.com"
     }
 
     const formData = {
@@ -1736,19 +1776,19 @@ UpdateStudentButton.addEventListener("click", (e) => {
 // close student update form
 closeStudentUpdateButton.addEventListener("click", (e) => {
     e.preventDefault();
-   updateStudentForm.style.display = "none";
-   studentAdmNoToEdit.value = ""
+    updateStudentForm.style.display = "none";
+    studentAdmNoToEdit.value = ""
     studentFirstNameUpdate.value = ""
     studentLastNameUpdate.value = ""
     studentGenderUpdate.value = ""
     studentAddressUpdate.value = ""
-    studentPhoneUpdate.value =  ""
+    studentPhoneUpdate.value = ""
     studentEntryClassUpdate.value = ""
     studentEmailUpdate.value = ""
     studentParentEmailUpdate.value = ""
     studentOriginUpdate.value = ""
     studentMStatusUpdate.value = ""
-    studentProgrammeUpdate.value = ""  
+    studentProgrammeUpdate.value = ""
 });
 
 // clear student update form
@@ -1759,13 +1799,13 @@ cancelStudentUpdateButton.addEventListener("click", (e) => {
     studentLastNameUpdate.value = ""
     studentGenderUpdate.value = ""
     studentAddressUpdate.value = ""
-    studentPhoneUpdate.value =  ""
+    studentPhoneUpdate.value = ""
     studentEntryClassUpdate.value = ""
     studentEmailUpdate.value = ""
     studentParentEmailUpdate.value = ""
     studentOriginUpdate.value = ""
     studentMStatusUpdate.value = ""
-    studentProgrammeUpdate.value = ""  
+    studentProgrammeUpdate.value = ""
 });
 
 // add student scores
@@ -1776,6 +1816,349 @@ addStudentScores.addEventListener("click", (e) => {
 });
 
 
+// REPORT ********************************************************************
+// ***************************************************************************
+
+const reportScoresForm = document.getElementById("reportscores-form")
+const closeStudentReportFormBtn = document.getElementById("closereportform-btn")
+const viewReportButton = document.getElementById("viewreport-btn")
+const viewStudentReportLink = document.getElementById("studentreport-link")
+const admissionNumberForReport = document.getElementById("admNo-forreport")
+const termForReport = document.getElementById("term-forreport")
+const sessionForReport = document.getElementById("session-forreport")
+const resultBody = document.getElementById("result-body")
+const thirdTermResultBody = document.getElementById("thirdterm-resultbody")
+const studentCommentReport = document.getElementById("comment-report")
+const termGrandTotal = document.getElementById("grandtotal")
+const termMarkObtained = document.getElementById("marksobtained")
+const termAveragePercent = document.getElementById("avgpercent")
+const tableReport = document.getElementById("table-report")
+const thirdTermReportTable = document.getElementById("table-report-thirdterm")
+const nameBar = document.getElementById("namebar")
+
+// view student scores
+const viewScores = (admNo, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/scores/viewScores/?admNo=${admNo}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: "Scores returned for " + response.data.message
+            });
+            // thirdTermReportTable.style.display = "none"
+            for (let i = 0; i < response.data.report.length; i++) {
+                // serial_no++
+                // thirdTermReportTable.style.display = "none"
+                let tblrow = document.createElement("tr")
+                let tblserialno = document.createElement("th")
+                let tblsubject = document.createElement("td")
+                let tbltestscore = document.createElement("td")
+                let tblexamscore = document.createElement("td")
+                let tbltotalscore = document.createElement("td")
+                let tblremark = document.createElement("td")
+                tblserialno.innerText = i + 1
+                tblsubject.innerText = response.data.report[i].subjectName
+                tbltestscore.innerText = response.data.report[i].testScore
+                tblexamscore.innerText = response.data.report[i].examScore
+                tbltotalscore.innerText = response.data.report[i].totalScore
+                tblremark.innerText = response.data.report[i].remark
+                tblrow.appendChild(tblserialno)
+                tblrow.appendChild(tblsubject)
+                tblrow.appendChild(tbltestscore)
+                tblrow.appendChild(tblexamscore)
+                tblrow.appendChild(tbltotalscore)
+                tblrow.appendChild(tblremark)
+                resultBody.appendChild(tblrow)
+                if (response.data.termName == 'third') {
+                    // tableReport.style.display = "none"
+                    // thirdTermReportTable.style.display = "block"
+                    let ttblrow = document.createElement("tr")
+                    let tblserialno = document.createElement("th")
+                    let tblsubject = document.createElement("td")
+                    let tbltestscore = document.createElement("td")
+                    let tblexamscore = document.createElement("td")
+                    let tbltotalscore = document.createElement("td")
+                    let tblfirstterm = document.createElement("td")
+                    let tblsecondterm = document.createElement("td")
+                    let tblcumscore = document.createElement("td")
+                    let tblcumaverage = document.createElement("td")
+                    let tblremark = document.createElement("td")
+                    tblserialno.innerText = i + 1
+                    tblsubject.innerText = response.data.report[i].subjectName
+                    tbltestscore.innerText = response.data.report[i].testScore
+                    tblexamscore.innerText = response.data.report[i].examScore
+                    tbltotalscore.innerText = response.data.report[i].totalScore || 0
+                    tblfirstterm.innerText = response.data.firstTermScore[i]
+                    tblsecondterm.innerText = response.data.secondTermScore[i]
+                    tblcumscore.innerText = response.data.report[i].cumulativeScore
+                    tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
+                    // add remark according to avrage score
+                    if (tblcumaverage.innerText >= 85) {
+                        tblremark.innerText = "ممتاز"
+                    }
+                    else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
+                        tblremark.innerText = "جيد جيدا"
+                    }
+                    else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
+                        tblremark.innerText = "جيد"
+                    }
+                    else if (tblcumaverage.innerText >= 50 && tblcumaverage.innerText < 65) {
+                        tblremark.innerText = "ناجح"
+                    }
+                    else if (tblcumaverage.innerText >= 0 && tblcumaverage.innerText < 50) {
+                        tblremark.innerText = "راسب"
+                    }
+
+                    // tblremark.innerText = response.data.result[i].remark 
+                    ttblrow.appendChild(tblserialno)
+                    ttblrow.appendChild(tblsubject)
+                    ttblrow.appendChild(tbltestscore)
+                    ttblrow.appendChild(tblexamscore)
+                    ttblrow.appendChild(tbltotalscore)
+                    ttblrow.appendChild(tblfirstterm)
+                    ttblrow.appendChild(tblsecondterm)
+                    ttblrow.appendChild(tblcumscore)
+                    ttblrow.appendChild(tblcumaverage)
+                    ttblrow.appendChild(tblremark)
+                    thirdTermResultBody.appendChild(ttblrow)
+                }
+
+            }
+            studentCommentReport.value = response.data.comment
+            termGrandTotal.value = response.data.grandTotal
+            termMarkObtained.value = response.data.marksObtained.toFixed(2)
+            termAveragePercent.value = response.data.avgPercentage.toFixed(2)
+            nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}`
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// view report
+viewReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    resultBody.innerHTML = "";
+    thirdTermResultBody.innerHTML = "";
+    termAveragePercent.value = "";
+    termMarkObtained.value = "";
+    nameBar.innerText = "";
+    studentCommentReport.value = "";
+    termGrandTotal.value = ""
+    const admNo = admissionNumberForReport.value;
+    const term = termForReport.value;
+    const session = sessionForReport.value;
+
+    if (admNo == "" || session == "" || term == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please fill out all required fields"
+        });
+    }
+    else {
+        if (term != 'third') {
+            tableReport.style.width = "100%"
+            tableReport.style.display = "block"
+            thirdTermReportTable.style.display = "none"
+        }
+        else {
+            thirdTermReportTable.style.display = "block"
+            tableReport.style.display = "none"
+        }
+
+        viewScores(admNo, term, session)
+    }
+});
+// change name
+// admissionNumberForReport.addEventListener("change", (e) => {
+//     e.preventDefault();
+//     for (let i = 0; i < studentNamesStore.length; i++)
+//         if (studentNamesStore[i].admission_number == admissionNumberForReport.value) {
+//         nameBar.innerText = studentNamesStore[i].student_name
+//         }
+// });
+
+// open report form
+viewStudentReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportScoresForm.style.display = "block";
+    sidebar.style.display = "none";
+    thirdTermReportTable.style.display = "none"
+});
+
+// close report form
+closeStudentReportFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportScoresForm.style.display = "none";
+});
+
+// CLASS REPORT ********************************************************************
+const reportClassScoresForm = document.getElementById("viewclassscores-form")
+const closeClassReportFormBtn = document.getElementById("viewclassreport-icon")
+const viewClassReportLink = document.getElementById("classreport-link")
+const classnameForReportSelect = document.getElementById("classname-forclassreport")
+const termForClassReport = document.getElementById("term-forclassreport")
+const sessionForClassReport = document.getElementById("session-forclassreport")
+const tableHeadClassReport = document.getElementById("classreport-tblhead")
+const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
+const tableBodyForClassReport = document.getElementById("classreport-tblbody")
+
+
+
+// open class report form
+viewClassReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportClassScoresForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close report form
+closeClassReportFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportClassScoresForm.style.display = "none";
+});
+
+// display class report
+const displayClassReport = (classname, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/scores/viewClassScores/?className=${classname}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+
+            // console.log(response.data.classSubjects)
+            let theclassSubjects = response.data.classSubjects
+            for (let j = 0; j < theclassSubjects.length; j++) {
+                let tblsubject = document.createElement("th")
+                tblsubject.innerText = theclassSubjects[j]
+                tableHeadRowClassReport.appendChild(tblsubject)
+            }
+            let tblmarksobtained = document.createElement("th")
+            let tblavgpercentage = document.createElement("th")
+                tblmarksobtained.innerText = "Mark Obtained"
+                tblavgpercentage.innerText = "Average Percentage"
+                tableHeadRowClassReport.appendChild(tblmarksobtained)
+                tableHeadRowClassReport.appendChild(tblavgpercentage)
+
+            for (let i = 0; i < response.data.classExists.length; i++) {
+                let tblrow = document.createElement("tr")
+                let tblserialno = document.createElement("th")
+                let tbladmno = document.createElement("td")
+                let tblname = document.createElement("td")
+                tblserialno.innerText = i + 1
+                tbladmno.innerText = response.data.classExists[i].admissionNumber
+                tblname.innerText = response.data.classExists[i].student_name
+                tblrow.appendChild(tblserialno)
+                tblrow.appendChild(tbladmno)
+                tblrow.appendChild(tblname)
+
+                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
+                    const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
+                    for (let k = 3; k < tableHeadRowClassReport.children.length-2; k++) {
+                        const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
+                        let tbltotalscore = document.createElement("td")
+                        tbltotalscore.innerText = subjectToAdd.totalScore
+                        tblrow.appendChild(tbltotalscore)
+                    }
+                    let tblmark = document.createElement("td")
+                let tblpercentage = document.createElement("td")
+                tblmark.innerText = requestedterm.marksObtained
+                tblpercentage.innerText = requestedterm.avgPercentage
+                tblrow.appendChild(tblmark)
+                tblrow.appendChild(tblpercentage)
+                }    
+                tableBodyForClassReport.appendChild(tblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+
+// display class scores on chane of class name
+classnameForReportSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    const className = classnameForReportSelect.value
+    const sessionName = sessionForClassReport.value
+    const termName = termForClassReport.value
+    //    const formData = {
+    //     className,
+    //     termName,
+    //     sessionName
+    //    }
+    displayClassReport(className, termName, sessionName)
+});
+
+
+
+
+// ************************************************************************
 // logout
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault();

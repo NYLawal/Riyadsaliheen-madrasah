@@ -144,9 +144,11 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="login.html">Staff</a></li>
                   <li><a class="dropdown-item" href="login.html">Parent</a></li>
-                  <li><a class="dropdown-item" href="login.html">Student</a></li>
+                  <li>
+                    <a class="dropdown-item" href="login.html">Student</a>
+                  </li>
                 </ul>
-              </li>        
+              </li>
             </ul>
           </div>
         </div>
@@ -212,7 +214,7 @@
         <div class="offcanvas-body">
           <ul class="list-unstyled components">
             <p class="text-tasks">Your Tasks</p>
-            
+
             <li class="">
               <a
                 href=""
@@ -222,7 +224,8 @@
                 class="dropdown-toggle"
                 data-bs-target="#viewSubmenu"
                 aria-controls="viewSubmenu"
-                >View</a>
+                >View</a
+              >
               <ul class="collapse list-unstyled" id="viewSubmenu">
                 <li>
                   <a href="#" id="view-staff">staff</a>
@@ -232,27 +235,28 @@
                 </li>
               </ul>
             </li>
-            
+
             <li class="">
-                <a
-                  href=""
-                  data-bs-toggle="collapse"
-                  aria-expanded="false"
-                  role="button"
-                  class="dropdown-toggle"
-                  data-bs-target="#updateStudentPayment"
-                  aria-controls="updateStudentPayment"
-                  >Payment Status</a>
-                <ul class="collapse list-unstyled" id="updateStudentPayment">
-                  <li>
-                    <a href="#" id="viewbyclass-paymentstatus">by class</a>
-                  </li>
-                  <li>
-                    <a href="#" id="viewbystudent-paymentstatus">by student</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
+              <a
+                href=""
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                role="button"
+                class="dropdown-toggle"
+                data-bs-target="#updateStudentPayment"
+                aria-controls="updateStudentPayment"
+                >Payment Status</a
+              >
+              <ul class="collapse list-unstyled" id="updateStudentPayment">
+                <li>
+                  <a href="#" id="viewbyclass-paymentstatus">by class</a>
+                </li>
+                <li>
+                  <a href="#" id="viewbystudent-paymentstatus">by student</a>
+                </li>
+              </ul>
+            </li>
+            <li>
               <!-- scores and attendance for all students in a particular term -->
               <a href="#">Term Report</a>
             </li>
@@ -264,7 +268,6 @@
           </ul>
         </div>
       </aside>
-
 
       <!-- View Staff -->
       <section class="py-3 py-md-5" id="viewstaff-form">
@@ -315,16 +318,30 @@
                   </div>
                 </div>
                 <!-- pagination -->
-          <nav aria-label="..." class="mt-2">
-            <ul class="pagination pagination-sm justify-content-center" id="staffview-pagination">
-              <li class="page-item" id="stftab-disabled">
-                <a class="page-link component-active-color" href="" id="viewstaff-pageprevious"> << Previous</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link component-active-color" href="#" id="viewstaff-pagenext">Next >> </a>
-              </li>
-            </ul>
-          </nav>
+                <nav aria-label="..." class="mt-2">
+                  <ul
+                    class="pagination pagination-sm justify-content-center"
+                    id="staffview-pagination"
+                  >
+                    <li class="page-item" id="stftab-disabled">
+                      <a
+                        class="page-link component-active-color"
+                        href=""
+                        id="viewstaff-pageprevious"
+                      >
+                        << Previous</a
+                      >
+                    </li>
+                    <li class="page-item">
+                      <a
+                        class="page-link component-active-color"
+                        href="#"
+                        id="viewstaff-pagenext"
+                        >Next >>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
@@ -449,6 +466,15 @@
                       >
                         << Previous</a
                       >
+                    </li>
+                    <li class="page-item">
+                      <input
+                        class="page-link pagination-color"
+                        href="#"
+                        id="viewstd-pagerequest"
+                        placeholder="page"
+                        style="width: 50px"
+                      />
                     </li>
                     <li class="page-item">
                       <a

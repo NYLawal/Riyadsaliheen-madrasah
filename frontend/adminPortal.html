@@ -192,14 +192,19 @@
       <li>
           <a href="#">Promote Students</a>  
       </li>
-      <li>
-        <!-- scores and attendance for all students in a particular term -->
-          <a href="#">View Term Report</a>  
-      </li>
-
-      <li>
-         <!-- scores and attendance for a student in a particular term -->
-        <a href="#">View Student Report</a>
+      <li class="">
+        <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#reportSubmenu" aria-controls="reportSubmenu">View Report</a>
+        <ul class="collapse list-unstyled" id="reportSubmenu">
+            <li>
+                <a href="#" id="studentreport-link">student</a>
+            </li>
+            <li>
+                <a href="#" id="classreport-link">class</a>
+            </li>
+            <li>
+                <a href="#" id="termreport-link">term</a>
+            </li>
+        </ul>
     </li>
   </ul>
   <ul class="list-unstyled components components2">
@@ -460,6 +465,89 @@
  </div>
 </section>
 
+<!-- Add Class -->
+<section class="bg-light mb-5 addclass-form" id="addclass-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div class="card border border-light-subtle rounded-3 shadow-sm">
+          <div class="card-body p-5">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="editstfclose-icon" aria-label="Close"></button>
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+              </a>
+            </div>
+            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the below information.</h2>
+            <form action="#!">
+              <div class="row gy-2 overflow-hidden">
+                </div>
+                <div class="col-12">
+                  <div class="item">
+                    <p>Class Name</p>
+                    <select id="stud-entry-class">
+                      <option value="tamyidi">tamyidi</option>
+                      <option value="adonah">adonah</option>
+                      <option value="rawdoh">rawdoh</option>
+                      <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                      <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                      <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                      <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                      <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                      <option value="awwal idaadi">awwal idaadi</option>
+                      <option value="thaani idaadi">thaani idaadi</option>
+                      <option value="thaalith idaadi">thaalith idaadi</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="item">
+                  <p>Subject</p>
+                  <select style="background-color: white" id="addsubjectselect">
+                    <option selected>select one</option>
+                    <option value="Adhkaar">Adhkaar</option>
+                    <option value="Fiqh">Fiqh</option>
+                    <option value="Hadith">Hadith</option>
+                    <option value="Hifzul Qur'an">Hifzul Qur'an</option>
+                    <option value="Huruf">Huruf</option>
+                    <option value="Imlah">Imlah</option>
+                    <option value="Khatu">Khatu</option>
+                    <option value="Lugha">Lugha</option>
+                    <option value="Nahw">Nahw</option>
+                    <option value="Sarf">Sarf</option>
+                    <option value="Ta'abeer">Ta'abeer</option>
+                    <option value="Taajiyah">Taajiyah</option>
+                    <option value="Tadribaatu lughawiyyah">
+                      Tadribaatu Lughawiyyah
+                    </option>
+                    <option value="Tafseer">Tafseer</option>
+                    <option value="Tajweed">Tajweed</option>
+                    <option value="Tawheed">Tawheed</option>
+                    <option value="Qiraaha">Qiraaha</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                </div>
+                <div class="col-12 submitbtn-div">
+                  <div class="d-grid my-3 mt-4">
+                    <button class="btn btn-lg" type="submit" id="submiteditquery-btn">Submit</button>
+                  </div>
+                </div>
+                <!-- <div class="col-12 mt-3 mb-0">
+                  <div class="d-flex gap-2 justify-content-between">
+                    <a href="#!" class="green-text fw-bold text-decoration-none" id="canceledit-btn">Cancel</a>
+                    <a href="#!" class="green-text fw-bold text-decoration-none" id="closeedit-btn">Close</a>
+                  </div> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- View Staff -->
 <section class="py-3 py-md-5" id="viewstaff-form">
   <div class="container">
@@ -588,17 +676,16 @@
               </table>
             </div>
           </div>
-
           <!-- pagination -->
           <nav aria-label="..." class="mt-2">
             <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
               <li class="page-item" id="tab-disabled">
                 <a class="page-link component-active-color" href="" id="viewstd-pageprevious"> << Previous</a>
               </li>
-              <!-- <li class="page-item">
-                <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
+              <li class="page-item">
+                <input class="page-link pagination-color" href="#" id="viewstd-pagerequest" placeholder="page" style="width: 50px;">
               </li>
-              <li class="page-item" >
+              <!-- <li class="page-item" >
                 <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
               </li>
               <li class="page-item">
@@ -746,10 +833,10 @@
  </section>
 
  <!-- Update Student -->
-<section class="bg-light pb-3 studentupdate-form" id="studentupdate-form">
+<section class="bg-light py-5 studentupdate-form" id="studentupdate-form">
   <div class="container">
    <div class="row justify-content-center">
-     <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+     <div class="testbox col-12 col-md-7 col-lg-7">
      <form action="/" id="student-formupdate">
        <div class="banner">
          <h1>Student Update Form</h1>
@@ -899,7 +986,6 @@
   </div>
 </section>
 
-
  <!-- Remove Staff -->
 <section class="bg-light mb-5 staffremove-form" id="staffremove-form">
   <div class="container">
@@ -937,6 +1023,304 @@
               </div>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- scores report form -->
+ <section
+ class="bg-light pt-5 pb-5 reportscores-form"
+ id="reportscores-form"
+>
+ <div class="container" style="position:relative">
+   <div class="row justify-content-md-center">
+     <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+       <h3 class="mb-3 display-5 text-center">Student Scores Report</h3>
+       <p class="text-secondary mb-1 text-center">
+         To view a student's report, input their admission number as well
+         as the term and session in the form below.
+       </p>
+       <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+     </div>
+   </div>
+   <div class="row justify-content-lg-center">
+     <div class="col-12 col-lg-9">
+       <div class="testbox">
+         <form
+           action="/"
+           class="py-4 px-md-4 px-2"
+           id="scoresreport"
+           style="background-color: #d0f1c1; box-shadow: none"
+         >                
+       <div class="row gy-4 gy-xl-5 mb-3">
+         <div class="col-12 col-md-4">
+           <label for="admNo-forreport" class="form-label"
+             >Admission No <span class="text-danger">*</span></label
+           >
+           <div class="">
+             <input name="admNo-forreport" id="admNo-forreport" style="background-color: white; height: 38px;">
+           </div>
+         </div>
+         <div class="col-12 col-md-4">
+           <label for="term-forreport" class="form-label"
+             >Term <span class="text-danger">*</span></label
+           >
+           <div class="input-group">
+             <select style="background-color: white" id="term-forreport">
+               <option value="first">First</option>
+               <option value="second">Second</option>
+               <option value="third">Third</option>
+             </select>
+           </div>
+         </div>
+         <div class="col-12 col-md-4">
+           <label for="session-forreport" class="form-label"
+             >Session <span class="text-danger">*</span></label
+           >
+           <div class="input-group">
+             <select
+               style="background-color: white"
+               id="session-forreport"
+             >
+               <option value="2023/2024">2023/2024</option>
+             </select>
+           </div>
+         </div>
+       </div>
+       <div class="row mt-0 mb-3" id="student-namebar">
+        <h3 id="namebar"></h3>
+       </div>
+       <label for="table" class="form-label mb-0">Scores</label>
+       <div class="table">
+        <table class="table table-bordered bsb-table-xl mt-2 px-0 mb-3" id="table-report">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Test</th>
+              <th scope="col">Exam</th>
+              <th scope="col">Total</th>
+              <th scope="col">Remark</th>
+            </tr>
+          </thead>
+          <tbody id="result-body"></tbody>
+        </table>
+       </div>
+       <div class="table-responsive mb-3">
+        <table
+          class="table table-bordered bsb-table-xl text-nowrap align-middle"
+          id="table-report-thirdterm"
+        >
+          <thead>
+            <tr id="">
+              <th scope="col">#</th>
+             <th scope="col">Subject</th>
+             <th scope="col">Test</th>
+             <th scope="col">Exam</th>
+             <th scope="col">Total</th>
+             <th scope="col">First Term</th>
+             <th scope="col">Second Term</th>
+             <th scope="col">Cumulative Score</th>
+             <th scope="col">Cumulative Average</th>
+             <th scope="col">Remark</th>
+            </tr>
+          </thead>
+          <tbody id="thirdterm-resultbody"></tbody>
+        </table>
+      </div>
+       <form action="#!">
+        <div class="row gy-4 gy-xl-5 mb-3 ">
+          <div class="col-4">
+            <label for="grandtotal" class="form-label-marks"
+              >Grand Total </label
+            >
+                <input type="text" placeholder="" id="grandtotal" />  
+          </div>
+          <div class="col-4">
+            <label for="marksobtained" class="form-label-marks"
+              >Marks Obtained </label
+            >
+                <input type="text" placeholder="" id="marksobtained" />  
+          </div>
+          <div class="col-4">
+            <label for="avgpercent" class="form-label-marks"
+              >Average Percentage </label
+            >
+                <input type="text" placeholder="" id="avgpercent" />  
+          </div>
+        </div>
+         <div class="row gy-4 gy-xl-5">
+           <div class="col-12">
+             <label for="comment" class="form-label">Comment</label>
+             <textarea
+               class="form-control"
+               id="comment-report"
+               rows="3"
+               required
+             ></textarea>
+           </div>
+         </div>
+         <div class="row mt-4" style="padding-left: 0">
+           <!-- <div class="col"></div> -->
+           <div class="col-12 col-md-6 btn-block">
+             <button type="button" id="viewreport-btn" href="/">
+               View Report
+             </button>
+           </div>
+           <div class="col-12 col-md-6 btn-block">
+             <button type="button" id="closereportform-btn" href="/">
+               Close Form
+             </button>
+           </div>
+           <!-- <div class="col"></div> -->
+         </div>
+       </form>
+     <!-- </div>
+          </div> -->
+         </form>
+       </div>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+<!-- View Report by Class -->
+<section class="py-5 py-md-3 mb-5" id="viewclassscores-form" style="display: block;">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+        <h3 class="mb-3 display-5 text-center">Class Scores Report</h3>
+        <p class="text-secondary mb-1 text-center">
+          To view a class report, input the class as well
+          as the term and session in the form below.
+        </p>
+        <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-9">
+        <div class="card widget-card border-light">
+          <div class="card-body p-4">
+            <button
+              type="button"
+              class="btn-close btn-close closebtn-icon"
+              id="viewclassreport-icon"
+              aria-label="Close"
+            ></button>
+            <form
+            action="/"
+            class="py-3 px-md-4 px-2"
+            id="classcoresreport"
+            style=" box-shadow: none"
+          >                
+        <div class="row gy-4 gy-xl-5 mb-3">
+          <div class="col-12 col-md-4" >
+            <label for="classname-forclassreport" class="form-label"
+              >Class <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <select id="classname-forclassreport">
+                <option value="tamyidi">tamyidi</option>
+                <option value="adonah">adonah</option>
+                <option value="rawdoh">rawdoh</option>
+                <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                <option value="awwal idaadi">awwal idaadi</option>
+                <option value="thaani idaadi">thaani idaadi</option>
+                <option value="thaalith idaadi">thaalith idaadi</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="term-forclassreport" class="form-label"
+              >Term <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <select style="background-color: white" id="term-forclassreport">
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <label for="session-forclassreport" class="form-label"
+              >Session <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <select
+                style="background-color: white"
+                id="session-forclassreport"
+              >
+                <option value="2023/2024">2023/2024</option>
+              </select>
+            </div>
+          </div>
+        </div>
+          </form>
+            <!-- <h4 class="mb-2" style="color: white;">Class Report</h4> -->
+            <div>
+              <p id="student-number" class="mt-2 mb-2"></p>
+            </div>
+            <div class="table-responsive">
+              <table
+                class="table table-light table-striped bsb-table-xl text-nowrap align-middle"
+                id="viewstudent-table"
+              >
+                <thead id="classreport-tblhead">
+                  <tr id="classreport-tblheadrow">
+                    <th>Serial No</th>
+                    <th>Admission No</th>
+                    <th>Name</th>
+                    <!-- <th>Last Name</th> -->
+                   
+                  </tr>
+                </thead>
+                <tbody id="classreport-tblbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- pagination -->
+          <nav aria-label="..." class="mt-2">
+            <ul
+              class="pagination pagination-sm justify-content-center"
+              id="stdview-pagination"
+            >
+              <li class="page-item" id="tab-disabled">
+                <a
+                  class="page-link component-active-color"
+                  href=""
+                  id="viewstd-pageprevious"
+                >
+                  << Previous</a
+                >
+              </li>
+              <li class="page-item">
+          <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
+        </li>
+        <!-- <li class="page-item" >
+          <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link  pagination-color" href="#" id="viewstd-page3">3</a>
+        </li> -->
+              <li class="page-item">
+                <a
+                  class="page-link component-active-color"
+                  href="#"
+                  id="viewstd-pagenext"
+                  >Next >>
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

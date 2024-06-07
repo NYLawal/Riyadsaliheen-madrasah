@@ -40,16 +40,16 @@
     font-size: 1.1em;
     display: block;
 }
-#addSubmenu li a, #viewSubmenu li a, #editSubmenu li a, #deleteSubmenu li a, #updateStudentPayment li a{
+#addSubmenu li a, #viewSubmenu li a, #editSubmenu li a, #deleteSubmenu li a, #updateStudentPayment li a, #reportSubmenu li a{
     padding: 10px;
     font-size: 1.1em;
     display: block;
     color:black
 }
-#addSubmenu li, #viewSubmenu li,  #editSubmenu li, #deleteSubmenu li, #updateStudentPayment li{
+#addSubmenu li, #viewSubmenu li,  #editSubmenu li, #deleteSubmenu li, #updateStudentPayment li, #reportSubmenu li{
     line-height: 1;
 }
-#addSubmenu li a:hover, #viewSubmenu li a:hover, #editSubmenu li a:hover, #deleteSubmenu li a:hover, #updateStudentPayment li a:hover{
+#addSubmenu li a:hover, #viewSubmenu li a:hover, #editSubmenu li a:hover, #deleteSubmenu li a:hover, #updateStudentPayment li a:hover, #reportSubmenu li a:hover{
     background-color: rgb(44, 77, 44);
 }
 #bsbSidebar1 ul li a:hover {
@@ -71,8 +71,6 @@ ul ul a {
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
 #updatescores-form, #reportscores-form{
-/* .staffadd-form, .studentadd-form, #viewstaff-form,#viewstudent-form, #teacher-class, #class-label { */
-/* .staffadd-form, .studentadd-form, #teacher-class, #class-label { */
     display: none;
 }
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
@@ -108,7 +106,7 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -133,19 +131,20 @@ html, body {
     width: 100%;
     height: 100%;
     }
-    #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, 
-    #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, #studentupdate-form select,
-    #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #teacherassign-form select  {
+    #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input, 
+    #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, 
+    #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input  {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input {
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input,
+    #viewclassscores-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
     #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, 
-    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select{
+    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select{
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -342,7 +341,7 @@ html, body {
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* view staff  and student styles */
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    #viewstaff-form .card, #viewstudent-form .card{
+    #viewstaff-form .card, #viewstudent-form .card, #viewclassscores-form .card{
         box-shadow: 0 0 5px 0 #bbbdbb;
     }
     #viewstaff-form .card .card-body h4,  #viewstaff-form .card .card-body .item{
@@ -382,7 +381,7 @@ html, body {
         background-color: #7ff549;
     }
 
-   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon{
+   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon{
    position: absolute;
    right: 20px;
 }

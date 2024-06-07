@@ -43,6 +43,7 @@ const studentStatus = document.getElementById("search-studstatus")
 const studentPaymentStatus = document.getElementById("search-paymentstatus")
 
 const studentViewPagination = document.getElementById("stdview-pagination")
+const viewStudentPageRequest = document.getElementById("viewstd-pagerequest")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStaffPageNext = document.getElementById("viewstaff-pagenext")
@@ -664,6 +665,46 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
             console.log(key, value, pageNumber)
         }
     }
+});
+
+// display students list by page requested
+viewStudentPageRequest.addEventListener("keyup", (e) => {
+    e.preventDefault();
+ if (e.key === "Enter"){
+    let maxpage = lastpage.pop()
+    let pageNumber = viewStudentPageRequest.value
+    if (pageNumber < 1) {
+        Swal.fire({
+            icon: "error",
+            title: "Beginning of File Reached",
+            text: "The page requested does not exist"
+        });
+    }
+    else if (pageNumber > maxpage) {
+        Swal.fire({
+            icon: "error",
+            title: "End of File Reached",
+            text: "The page requested does not exist"
+        });
+    }
+    else {
+        studentTableBody.innerHTML = "";
+        viewStudentPagePrevious.classList.remove("disable")
+        viewStudentPageNext.classList.remove("disable")
+
+        if (viewStudentSelect.value == "all") {
+            displayAllStudents(pageNumber)
+        }
+        else if (viewStudentSelect.value == "bycriteria") {
+            const key = studSearchKey.value
+            let value;
+            if (key === "studentStatus") value = "past"
+            else { value = searchMe.firstChild.value || studSearchValue.value }
+            displayStudents(key, value, pageNumber);
+            console.log(key, value, pageNumber)
+        }
+    }   
+ }
 });
 
 
