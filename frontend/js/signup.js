@@ -1,5 +1,5 @@
-const baseUrl = "http://localhost:5000/api/v1"
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
@@ -130,8 +130,8 @@ function Redirect() {
             }
            
             else if (userRole  == 'superadmin' || userRole == 'admin') {
-                //  window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
-                 window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
+                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+                //  window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
             }
             else if (userRole == 'bursar') {
                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/bursarPortal.html"

@@ -70,7 +70,7 @@ ul ul a {
 }
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
-#updatescores-form, #reportscores-form{
+#updatescores-form, #reportscores-form, #viewclassscores-form{
     display: none;
 }
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
@@ -233,7 +233,7 @@ html, body {
     text-align: center;
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
-    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, 
+    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn,
     button#viewreport-btn, button#updatecomment-btn, button#submitscores-btn,  button#closereportform-btn{
     width: 150px;
     padding: 10px;

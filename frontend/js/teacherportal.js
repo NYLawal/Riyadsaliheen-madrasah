@@ -802,6 +802,7 @@ const addScores = ({...scoreinfo}, admNo) => {
             addSubjectexam.value = "";
             addSubjecttotal.value = "";
             addSubjectremark.value = "";
+            addTermComment.value ="";
             addResultBody.innerHTML = "";
             // }
             // studentNameBar.style.display = "block";

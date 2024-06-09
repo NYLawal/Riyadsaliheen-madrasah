@@ -466,7 +466,7 @@
 </section>
 
 <!-- Add Class -->
-<section class="bg-light mb-5 addclass-form" id="addclass-form">
+<!-- <section class="bg-light mb-5 addclass-form" id="addclass-form">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -533,11 +533,6 @@
                     <button class="btn btn-lg" type="submit" id="submiteditquery-btn">Submit</button>
                   </div>
                 </div>
-                <!-- <div class="col-12 mt-3 mb-0">
-                  <div class="d-flex gap-2 justify-content-between">
-                    <a href="#!" class="green-text fw-bold text-decoration-none" id="canceledit-btn">Cancel</a>
-                    <a href="#!" class="green-text fw-bold text-decoration-none" id="closeedit-btn">Close</a>
-                  </div> -->
                 </div>
               </div>
             </form>
@@ -546,7 +541,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- View Staff -->
 <section class="py-3 py-md-5" id="viewstaff-form">
@@ -1031,7 +1026,7 @@
 
  <!-- scores report form -->
  <section
- class="bg-light pt-5 pb-5 reportscores-form"
+ class="bg-light pt-3 pb-5 reportscores-form"
  id="reportscores-form"
 >
  <div class="container" style="position:relative">
@@ -1188,7 +1183,7 @@
 
 
 <!-- View Report by Class -->
-<section class="py-5 py-md-3 mb-5" id="viewclassscores-form" style="display: block;">
+<section class="py-5 py-md-3 mb-5" id="viewclassscores-form">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
@@ -1217,12 +1212,13 @@
             style=" box-shadow: none"
           >                
         <div class="row gy-4 gy-xl-5 mb-3">
-          <div class="col-12 col-md-4" >
+          <div class="col-12 col-md-3" >
             <label for="classname-forclassreport" class="form-label"
               >Class <span class="text-danger">*</span></label
             >
             <div class="input-group">
               <select id="classname-forclassreport">
+                <option selected>select a class</option>
                 <option value="tamyidi">tamyidi</option>
                 <option value="adonah">adonah</option>
                 <option value="rawdoh">rawdoh</option>
@@ -1237,7 +1233,21 @@
               </select>
             </div>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-3" >
+            <label for="programme-forclassreport" class="form-label"
+              >Programme <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+                <select id="programme-forclassreport">
+                  <option selected>select a programme</option>
+                  <option value="children madrasah">children madrasah</option>
+                  <option value="adult madrasah">adult madrasah</option>
+                  <option value="female madrasah">female madrasah</option>
+                  <option value="barnomij">barnomij</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
             <label for="term-forclassreport" class="form-label"
               >Term <span class="text-danger">*</span></label
             >
@@ -1249,7 +1259,7 @@
               </select>
             </div>
           </div>
-          <div class="col-12 col-md-4">
+          <div class="col-12 col-md-3">
             <label for="session-forclassreport" class="form-label"
               >Session <span class="text-danger">*</span></label
             >
@@ -1262,6 +1272,15 @@
               </select>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-12 col-md-6 btn-block">
+            <button type="button" id="viewclassreport-btn" href="/">
+              View Report
+            </button>
+          </div>
+          <div class="col"></div>
         </div>
           </form>
             <!-- <h4 class="mb-2" style="color: white;">Class Report</h4> -->
@@ -1326,8 +1345,6 @@
     </div>
   </div>
 </section>
-
- 
 
       
       <!-- Footer  -->

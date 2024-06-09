@@ -1,6 +1,6 @@
 
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler = document.getElementById("toggler-icon")
@@ -2029,11 +2029,13 @@ const reportClassScoresForm = document.getElementById("viewclassscores-form")
 const closeClassReportFormBtn = document.getElementById("viewclassreport-icon")
 const viewClassReportLink = document.getElementById("classreport-link")
 const classnameForReportSelect = document.getElementById("classname-forclassreport")
+const programmeForReportSelect = document.getElementById("programme-forclassreport")
 const termForClassReport = document.getElementById("term-forclassreport")
 const sessionForClassReport = document.getElementById("session-forclassreport")
 const tableHeadClassReport = document.getElementById("classreport-tblhead")
 const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
 const tableBodyForClassReport = document.getElementById("classreport-tblbody")
+const viewClassReportButton= document.getElementById("viewclassreport-btn")
 
 
 
@@ -2051,10 +2053,10 @@ closeClassReportFormBtn.addEventListener("click", (e) => {
 });
 
 // display class report
-const displayClassReport = (classname, term, session) => {
+const displayClassReport = (classname, programme, term, session) => {
     let errorMsg;
     axios
-        .get(`${baseUrl}/scores/viewClassScores/?className=${classname}&termName=${term}&sessionName=${session}`,
+        .get(`${baseUrl}/scores/viewClassScores/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -2106,7 +2108,7 @@ const displayClassReport = (classname, term, session) => {
                     let tblmark = document.createElement("td")
                 let tblpercentage = document.createElement("td")
                 tblmark.innerText = requestedterm.marksObtained
-                tblpercentage.innerText = requestedterm.avgPercentage
+                tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
                 tblrow.appendChild(tblmark)
                 tblrow.appendChild(tblpercentage)
                 }    
@@ -2141,18 +2143,29 @@ const displayClassReport = (classname, term, session) => {
 };
 
 
-// display class scores on chane of class name
-classnameForReportSelect.addEventListener("change", (e) => {
+// display class scores on click of button
+viewClassReportButton.addEventListener("click", (e) => {
     e.preventDefault();
     const className = classnameForReportSelect.value
+    const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
     const termName = termForClassReport.value
-    //    const formData = {
-    //     className,
-    //     termName,
-    //     sessionName
-    //    }
-    displayClassReport(className, termName, sessionName)
+
+    if (programme == "select a programme" || className == "select a class"){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check the programme or class you entered"
+        });
+    }
+    else
+    displayClassReport(className, programme, termName, sessionName)
+});
+
+// clear table body when class is changed
+classnameForReportSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    tableBodyForClassReport.innerHTML="";
 });
 
 
