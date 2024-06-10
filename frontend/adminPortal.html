@@ -190,7 +190,7 @@
           <a href="#" id="remove-staff">Remove Staff</a>  
       </li>
       <li>
-          <a href="#">Promote Students</a>  
+          <a href="#" id="promotestudents-link">Promote Students</a>  
       </li>
       <li class="">
         <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#reportSubmenu" aria-controls="reportSubmenu">View Report</a>
@@ -200,9 +200,6 @@
             </li>
             <li>
                 <a href="#" id="classreport-link">class</a>
-            </li>
-            <li>
-                <a href="#" id="termreport-link">term</a>
             </li>
         </ul>
     </li>
@@ -1014,6 +1011,55 @@
                     <a href="#!" class="green-text fw-bold text-decoration-none" id="canceledit-btn">Cancel</a>
                     <a href="#!" class="green-text fw-bold text-decoration-none" id="closeedit-btn">Close</a>
                   </div> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Promote students -->
+<section class="bg-light mb-5 py-3 promotestudents-form" id="promotestudents-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div class="card border border-light-subtle rounded-3 shadow-sm">
+          <div class="card-body p-5">
+            <button type="button" class="btn-close btn-close closebtn-icon"  id="promotestudents-closeicon" aria-label="Close"></button>
+            <div class="text-center mb-3">
+              <a href="#!">
+                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+              </a>
+            </div>
+            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">You are about to promote students who scored 50% and above. Choose the session and term below.</h2>
+            <form action="#!">
+              <div class="row gy-2 overflow-hidden">
+                <div class="col-12">
+                  <div class="">
+                    <label for="termtopromote" class="form-label">Term</label>
+                    <select name="" id="promotestudents-termselect">
+                      <option value="first">First</option>
+                      <option value="second">Second</option>
+                      <option value="third">Third</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="">
+                    <label for="sessiontopromote" class="form-label">Session</label>
+                    <select name="" id="promotestudents-sessionselect">
+                      <option value="2023/2024">2023/2024</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 submitbtn-div">
+                  <div class="d-grid my-3 mt-4">
+                    <button class="btn btn-lg" type="submit" id="promotestudents-btn">Submit</button>
+                  </div>
+                </div>
                 </div>
               </div>
             </form>

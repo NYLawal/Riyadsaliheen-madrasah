@@ -16,6 +16,7 @@ const viewStaffSelect = document.getElementById("viewstaff-select")
 const viewStudentSelect = document.getElementById("viewstudent-select")
 const viewStudentsLink = document.getElementById("view-students")
 const viewStudentsForm = document.getElementById("viewstudent-form")
+const promoteStudentsLink = document.getElementById("promotestudents-link")
 
 const staffTitleInput = document.getElementById("staff-title")
 const staffNameInput = document.getElementById("staff-name")
@@ -545,6 +546,7 @@ sendButton.addEventListener("click", (e) => {
     const phoneNumber = studentPhoneInput.value;
     const parentEmail = parentEmailInput.value
     const entryClass = studentEntryClass.value
+    const presentClass = studentEntryClass.value
     const stateOfOrigin = studentOrigin.value
     const maritalStatus = studentMaritalStatus.value
     const programme = studentProgramme.value
@@ -561,7 +563,9 @@ sendButton.addEventListener("click", (e) => {
         entryClass,
         stateOfOrigin,
         maritalStatus,
-        programme
+        programme,
+        presentClass
+        
     }
     registerStudent(formData);
 });
@@ -883,7 +887,7 @@ const displayStudents = (key, value, page) => {
         });
 };
 
-// submit student form
+// submit view student form
 searchButton.addEventListener("click", (e) => {
     e.preventDefault();
     studentTableBody.innerHTML = ""
@@ -1108,6 +1112,7 @@ const editStaffQueryForm = document.getElementById('staffedit-queryform')
 const closeEditButtonIcon = document.getElementById('editstfclose-icon')
 const closeRemoveButtonIcon = document.getElementById('removestfclose-icon')
 const closeAssignButtonIcon = document.getElementById('assignteacherclose-icon')
+const promoteStudentsButtonIcon = document.getElementById('promotestudents-closeicon')
 const editStaffLink = document.getElementById('edit-staff')
 const removeStaffLink = document.getElementById('remove-staff')
 const assignTeacherLink = document.getElementById('assign-teacher')
@@ -1124,6 +1129,7 @@ const submitAssignTeacher = document.getElementById('submitassignteacher-btn')
 const updateStaffForm = document.getElementById('staffupdate-form')
 const assignTeacherForm = document.getElementById('teacherassign-form')
 const removeStaffForm = document.getElementById('staffremove-form')
+const promoteStudentsForm = document.getElementById('promotestudents-form')
 const cancelUpdateButton = document.getElementById('cancelupdate-btn')
 const closeUpdateButton = document.getElementById('closeupdate-btn')
 const UpdateButton = document.getElementById('update-btn')
@@ -1140,6 +1146,10 @@ const programmeLabelUpdate = document.getElementById("upd-programmelabel")
 const teacherProgrammeUpdate = document.getElementById("upd-teacherprogramme")
 const updateItTeacherClass = document.getElementById("updateit-teacherclass")
 const updateItTeacherProgramme = document.getElementById("updateit-teacherprogramme")
+
+const promoteStudentsSessionSelect = document.getElementById("promotestudents-sessionselect")
+const promoteStudentsTermSelect = document.getElementById("promotestudents-termselect")
+const promoteStudentsSubmitButton = document.getElementById("promotestudents-btn")
 
 // display editstaff query form
 editStaffLink.addEventListener("click", (e) => {
@@ -1483,7 +1493,7 @@ closeRemoveButtonIcon.addEventListener("click", (e) => {
     staffEmailToRemove.value = "";
 });
 
-// submit query for staff edit
+// remove staff
 const removeStaff = (payload) => {
     let errorMsg;
 
@@ -1562,6 +1572,87 @@ submitRemoveQuery.addEventListener("click", (e) => {
 
 });
 
+//promote students
+const promoteStudents = (termInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/promoteStudents`, termInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+           
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click promote students link to display form
+promoteStudentsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    promoteStudentsForm.style.display = "block"
+});
+
+// click promote students button to promote students
+promoteStudentsSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const termName = promoteStudentsTermSelect.value;
+    const sessionName = promoteStudentsSessionSelect.value;
+    const formData = {
+        termName,
+        sessionName
+    }
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, promote students"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            promoteStudents(formData)
+        }
+    });
+     
+});
+
+// close promote students form
+promoteStudentsButtonIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    promoteStudentsForm.style.display = "none";
+});
 
 
 // ************************** STUDENTS *****************************************
