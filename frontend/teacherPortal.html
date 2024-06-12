@@ -217,6 +217,9 @@
             <li class="">
               <a href="#" id="view-students">View Students</a>
             </li>
+            <li class="">
+              <a href="#" id="addscores-link">Add Scores</a>
+            </li>
             <li>
               <!-- scores and attendance for a student in a particular term -->
               <a href="#" id="viewreport-link">View Student Report</a>
@@ -226,7 +229,7 @@
             </li>
             <li>
               <!-- scores and attendance for all students in a particular term -->
-              <a href="#">View Class Report</a>
+              <a href="#" id="classreport-link">View Class Report</a>
             </li>
           </ul>
           <ul class="list-unstyled components components2">
@@ -391,7 +394,7 @@
                       <div class="input-group">
                         <select style="background-color: white" id="addsession">
                           <option value="2023/2024">2023/2024</option>
-                          <option value="2024/2025">2024/2025</option>
+                          <!-- <option value="2024/2025">2024/2025</option> -->
                         </select>
                       </div>
                     </div>
@@ -531,13 +534,17 @@
                     </div>
                   </div>
                   <div class="row" style="padding-left: 0">
-                    <div class="col"></div>
+                    <!-- <div class="col"></div> -->
                     <div class="col-12 col-md-6 btn-block">
                       <button type="button" id="submitscores-btn" href="/">
                         Submit Scores
                       </button>
                     </div>
-                    <div class="col"></div>
+                    <div class="col-12 col-md-6 btn-block">
+                      <button type="button" id="closeinputform-btn" href="/">
+                        Close Form
+                      </button>
+                    <!-- <div class="col"></div> -->
                   </div>
                 </form>
               </div>
@@ -704,6 +711,7 @@
        </div>
      </section>
 
+
       <!-- scores update form -->
       <section class="bg-light pt-5 pb-5 mb-3" id="updatescores-form">
         <div class="container">
@@ -713,7 +721,7 @@
                 Student Scores Update Form
               </h3>
               <p class="text-secondary mb-1 text-center">
-                Input the scores of the student in the form below. You're
+                Use this form to edit your student's scores. You're
                 advised to be extra-careful, as human errors cannot be detected
                 by computers.
               </p>
@@ -732,9 +740,9 @@
                   <div class="row">
                     <p class="scores-inputinstr">
                       Type in the admission number, term and session; then
-                      select the subject and add the scores. Click on the 'Add
+                      select the subject and add the scores. Click on the 'Update
                       Score' button after completing your input. If you want to
-                      edit the comment also, use the 'Add Comment' button.
+                      edit the comment also, add your comment in the comment box.
                     </p>
                   </div>
                   <div class="row mb-3 mt-2" style="padding-right: 0.5rem">
@@ -770,7 +778,7 @@
                       >
                       <div class="input-group">
                         <select style="background-color: white" id="session">
-                          <option value="first">2023/2024</option>
+                          <option value="2023/2024">2023/2024</option>
                         </select>
                       </div>
                     </div>
@@ -779,6 +787,7 @@
                     <div class="col-6 col-md-4 item">
                       <p>Select Subject</p>
                       <select style="background-color: white" id="subject">
+                        <option selected>select one</option>
                         <option value="Adhkaar">Adhkaar</option>
                         <option value="Fiqh">Fiqh</option>
                         <option value="Hadith">Hadith</option>
@@ -798,23 +807,16 @@
                         <option value="Tajweed">Tajweed</option>
                         <option value="Tawheed">Tawheed</option>
                         <option value="Qiraaha">Qiraaha</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
-                    <!-- <div class="col-4 item">
-            <p>Programme</p>
-            <select style="background-color: white;" id="progname" disabled>
-              <option value="children madrasah">Children Madrasah</option>
-              <option value="adult madrasah">Adult Madrasah</option>
-              <option value="female madrasah">Female Madrasah</option>
-              <option value="barnomij">Barnomij</option>
-            </select>
-          </div> -->
                     <div class="col-6 col-md-4 item">
                       <p>Other Subject</p>
                       <input
                         type="text"
                         name="othersubject"
                         placeholder=""
+                        disabled
                         id="othersubject"
                       />
                     </div>
@@ -826,19 +828,6 @@
                         placeholder=""
                         id="classname"
                       />
-                      <!-- <select style="background-color: white;" id="classname">
-                <option value="tamyidi">tamyidi</option>
-                <option value="adonah">adonah</option>
-                <option value="rawdoh">rawdoh</option>
-                <option value="awwal ibtidaahi">awwal ibtidaahi</option>
-                <option value="thaani ibtidaahi">thaani ibtidaahi</option>
-                <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
-                <option value="raabi ibtidaahi">raabi ibtidaahi</option>
-                <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
-                <option value="awwal idaadi">awwal idaadi</option>
-                <option value="thaani idaadi">thaani idaadi</option>
-                <option value="thaalith idaadi">thaalith idaadi</option>
-              </select> -->
                     </div>
                   </div>
                   <div class="row">
@@ -875,13 +864,16 @@
                     </div>
                     <div class="col-6 col-md-3 item">
                       <p>Remark</p>
-                      <select style="background-color: white" id="remark">
+                      <input type="text"
+                      id="remark"
+                      >
+                      <!-- <select style="background-color: white" id="remark">
                         <option value="excellent">Excellent ممتاز</option>
                         <option value="v.good">Very Good جيد جيدا</option>
                         <option value="good">Good جيد</option>
                         <option value="success">Success ناجح</option>
                         <option value="failed">Failed راسب</option>
-                      </select>
+                      </select> -->
                     </div>
                   </div>
                   <div class="row">
@@ -896,12 +888,12 @@
                     <!-- <div class="col"></div> -->
                     <div class="col-12 col-md-6 btn-block">
                       <button type="button" id="updatescores-btn" href="/">
-                        Add Score
+                        Update Score
                       </button>
                     </div>
                     <div class="col-12 col-md-6 btn-block">
-                      <button type="button" id="updatecomment-btn" href="/">
-                        Add Comment
+                      <button type="button" id="closeupdateform-btn" href="/">
+                        Close Form
                       </button>
                     </div>
                     <!-- <div class="col"></div> -->
@@ -912,6 +904,145 @@
           </div>
         </div>
       </section>
+
+
+      <!-- View Report by Class -->
+<section class="py-5 py-md-3 mt-5 mb-5" id="viewclassscores-form">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+        <h3 class="mb-3 display-5 text-center">Class Scores Report</h3>
+        <p class="text-secondary mb-1 text-center">
+          Input the term and session in the form below, then click on the button to view your class report. 
+        </p>
+        <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-9">
+        <div class="card widget-card border-light">
+          <div class="card-body p-4">
+            <button
+              type="button"
+              class="btn-close btn-close closebtn-icon"
+              id="viewclassreport-icon"
+              aria-label="Close"
+            ></button>
+            <form
+            action="/"
+            class="py-3 px-md-4 px-2"
+            id="classcoresreport"
+            style=" box-shadow: none"
+          >                
+        <div class="row gy-4 gy-xl-5 mb-3">
+          <div class="col-12 col-md-3" >
+            <label for="classname-forclassreport" class="form-label"
+              >Class <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <input id="classname-forclassreport">
+                
+            </div>
+          </div>
+          <div class="col-12 col-md-3" >
+            <label for="programme-forclassreport" class="form-label"
+              >Programme <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+                <input id="programme-forclassreport">
+                  
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="term-forclassreport" class="form-label"
+              >Term <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <select style="background-color: white" id="term-forclassreport">
+                <option value="first">First</option>
+                <option value="second">Second</option>
+                <option value="third">Third</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <label for="session-forclassreport" class="form-label"
+              >Session <span class="text-danger">*</span></label
+            >
+            <div class="input-group">
+              <select
+                style="background-color: white"
+                id="session-forclassreport"
+              >
+                <option value="2023/2024">2023/2024</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col-12 col-md-6 btn-block">
+            <button type="button" id="viewclassreport-btn" href="/">
+              View Report
+            </button>
+          </div>
+          <div class="col"></div>
+        </div>
+          </form>
+            <!-- <h4 class="mb-2" style="color: white;">Class Report</h4> -->
+            <div>
+              <p id="student-number" class="mt-2 mb-2"></p>
+            </div>
+            <div class="table-responsive">
+              <table
+                class="table table-light table-striped bsb-table-xl text-nowrap align-middle"
+                id="viewstudent-table"
+              >
+                <thead id="classreport-tblhead">
+                  <tr id="classreport-tblheadrow">
+                    <!-- <th>Serial No</th>
+                    <th>Admission No</th>
+                    <th>Name</th> -->  
+                  </tr>
+                </thead>
+                <tbody id="classreport-tblbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- pagination -->
+          <!-- <nav aria-label="..." class="mt-2">
+            <ul
+              class="pagination pagination-sm justify-content-center"
+              id="stdview-pagination"
+            >
+              <li class="page-item" id="tab-disabled">
+                <a
+                  class="page-link component-active-color"
+                  href=""
+                  id="viewstd-pageprevious"
+                >
+                  << Previous</a
+                >
+              </li>
+              <li class="page-item">
+          <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
+        </li>
+              <li class="page-item">
+                <a
+                  class="page-link component-active-color"
+                  href="#"
+                  id="viewstd-pagenext"
+                  >Next >>
+                </a>
+              </li>
+            </ul>
+          </nav> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
      
 

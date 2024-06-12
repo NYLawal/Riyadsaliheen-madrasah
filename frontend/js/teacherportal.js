@@ -33,9 +33,9 @@ const subjExamScore = document.getElementById("examscore")
 const subjTotalScore = document.getElementById("totalscore")
 const scoreRemark = document.getElementById("remark")
 const teacherComment = document.getElementById("comment")
+const updateScoresButton = document.getElementById("updatescores-btn")
+const closeStudentUpdateFormButton = document.getElementById("closeupdateform-btn")
 
-const addScoresButton = document.getElementById("updatescores-btn")
-const addCommentButton = document.getElementById("updatecomment-btn")
 const createStudentButton = document.getElementById("createstudent-btn")
 const studentNameBar = document.getElementById("student-namebar")
 const nameBar = document.getElementById("namebar")
@@ -43,9 +43,12 @@ const nameBar = document.getElementById("namebar")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStudentPageOne = document.getElementById("viewstd-page1")
+const addNewSession = document.getElementById("addnewsession-link")
+
 let studentpage = [];
 let lastpage = [];
 let studentNamesStore = [];
+let classSubjectsReturned = [] ;
 
 const token = localStorage.getItem('access_token')
 
@@ -53,6 +56,13 @@ const token = localStorage.getItem('access_token')
 toggler.addEventListener("click", (e) => {
     sidebar.style.display = "block"
 });
+//add session
+// addNewSession.addEventListener("click", (e) => {
+//    let optionnewsession = document.createElement("option")
+//     optionnewsession.value = "2024/2025"
+//     optionnewsession.innerText = "2024/2025"
+//     addSession.appendChild(optionnewsession)
+// });
 
 // get teacher's class
 const getTeacherClass = () => {
@@ -67,10 +77,19 @@ const getTeacherClass = () => {
             console.log(response)
             nameOfClass.value = response.data.teacher.teacherClass
             addClass.value = response.data.teacher.teacherClass
+            classnameForReportSelect.value = response.data.teacher.teacherClass
+            programmeForReportSelect.value = response.data.teacher.teacherProgramme
             nameOfClass.setAttribute("disabled", true)
             addClass.setAttribute("disabled", true)
-            // nameOfProgramme.value = response.data.teacher.teacherProgramme
-            return
+            classnameForReportSelect.setAttribute("disabled", true)
+            programmeForReportSelect.setAttribute("disabled", true)
+
+            const teacherClass = response.data.teacher.teacherClass
+            const teacherProgramme = response.data.teacher.teacherProgramme
+            console.log(teacherClass, teacherProgramme)
+            getClassSubjects(teacherClass, teacherProgramme)
+
+            return 
         })
         .catch(function (error) {
             if (error.response) {
@@ -103,23 +122,52 @@ const getTeacherClass = () => {
             // viewStudentsForm.style.display = "none";
         });
 };
+// get class subjects
+const getClassSubjects = (teacherClass, teacherProgramme) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/class/getSubjects/?className=${teacherClass}&programme=${teacherProgramme}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            // for (let i=0; i < response.data.classExists.subjects.length;i++){
+            //     classSubjectsReturned.push(response.data.classExists.subjects[i])
+            // }
+            classSubjectsReturned = [...response.data.classExists.subjects];
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     getTeacherClass()
-    displayStudentsByClass(1)
-});
-
-updateScoresLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    // if (updateScoresForm.style.display = "block"){
-    //     updateScoresForm.style.display = "none";
-    //     sidebar.style.display = "none"
-    // }
-   
-        updateScoresForm.style.display = "block";
-        sidebar.style.display = "none"
-
-    
+    displayStudentsByClass(1)   
 });
 
 // display all students
@@ -267,122 +315,6 @@ closeViewStudentBtn.addEventListener("click", (e) => {
     viewStudentsForm.style.display = "none"
 });
 
-
-// add student comment
-const addComment = (commentInfo, admNo) => {
-    let errorMsg;
-    axios
-        .patch(`${baseUrl}/scores/addComment/?admNo=${admNo}`, commentInfo,
-            {
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
-            }
-        )
-        .then(function (response) {
-            console.log(response)
-            Swal.fire({
-                icon: "success",
-                title: "Successful",
-                text: response.data.message
-            });
-            teacherComment.value = "";
-        })
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                errorMsg = error.response.data.message
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                errorMsg = "Network Error"
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                errorMsg = error.message
-            }
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: errorMsg
-            });
-        });
-};
-
-// click add comment button 
-addCommentButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    let admNo = admissionNumber.value;
-    let comment = teacherComment.value;
-    let sessionName = schoolSession.value;
-    let className = nameOfClass.value;
-    let termName = schoolTerm.value;
-
-    const formData = {
-        comment,
-        sessionName,
-        className,
-        termName
-    }
-    addComment(formData, admNo);
-});
-
-
-//click button to update scores
-addScoresButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    let admNo = admissionNumber.value;
-    let sessionName = schoolSession.value;
-    let className = nameOfClass.value;
-    let termName = schoolTerm.value;
-
-    let subjectName = subjectOffered.value;
-    if (otherSubjectOffered.value != "") subjectName = otherSubjectOffered.value;
-    let testScore = subjTestScore.value;
-    let examScore = subjExamScore.value;
-    let totalScore = subjTotalScore.value;
-    let remark = scoreRemark.value;
-    let comment = teacherComment.value;
-    if (admNo == "" || sessionName == "" || className == "" || termName == "" || subjectName == "" || testScore == "" || examScore == "") {
-        Swal.fire({
-            icon: "error",
-            title: "Empty input detected",
-            text: "Please fill out all fields"
-        });
-    }
-    else {
-        const formData = {
-            sessionName,
-            className,
-            term: {
-                termName,
-                subjects: {
-                    subjectName,
-                    testScore,
-                    examScore,
-                    totalScore,
-                    remark,
-                },
-                comment,
-            },
-        }
-        addScores(formData, admNo);
-    }
-});
-
-// add exam and test scores
-subjTotalScore.addEventListener("focus", (e) => {
-    e.preventDefault();
-    if (subjExamScore.value.length >= 1)
-        subjTotalScore.value = +subjTestScore.value + (+subjExamScore.value);
-})
-
 // display next students list page
 viewStudentPageNext.addEventListener("click", (e) => {
     e.preventDefault();
@@ -427,13 +359,190 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     }
 });
 
-// logout
-logoutLink.addEventListener("click", (e) => {
+
+// EDIT SCORES ********************************************************************
+// ***************************************************************************
+
+updateScoresLink.addEventListener("click", (e) => {
     e.preventDefault();
-    localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
+    // if (updateScoresForm.style.display = "block"){
+    //     updateScoresForm.style.display = "none";
+    //     sidebar.style.display = "none"
+    // }
+    updateScoresForm.style.display = "block";
+    sidebar.style.display = "none"
 });
+
+// on change of subject selection to other, enable the other subject input field
+subjectOffered.addEventListener("change", (e) => {
+    e.preventDefault();
+    //allow subject to be selected from list or inputted if 'other' is chosen from list of subjects
+    if (subjectOffered.value == "Other") {
+       otherSubjectOffered.removeAttribute("disabled")
+        otherSubjectOffered.focus()
+    }
+    else {
+        otherSubjectOffered.value="";
+        otherSubjectOffered.setAttribute("disabled", true)
+    }
+})
+
+// on click of total field, check for errors in subject and scores input
+subjTotalScore.addEventListener("click", (e) => {
+    e.preventDefault();
+     let subjectSelected = subjectOffered.value
+     if (subjectSelected == "Other") subjectSelected = otherSubjectOffered.value
+    
+    if (subjectOffered.value == "select one" || (subjectOffered.value == "Other" && otherSubjectOffered.value == "" )) {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input!",
+            text: "Input a valid subject"
+        });
+    }
+    // if subject is not registered for the class, display error
+    else if (!classSubjectsReturned.includes(subjectSelected)) {
+        Swal.fire({
+            icon: "error",
+            title: "Sorry",
+            text: `${subjectSelected} is not a valid subject for your class`
+        });
+    }
+    else if (+subjTestScore.value > 40 || +subjExamScore.value > 60) {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Score!",
+            text: "Please check the test or exam score inputted"
+        });
+    } else {
+        subjTotalScore.value = +subjTestScore.value + (+subjExamScore.value);
+        //display appropriate remark according to the score
+        if (subjTotalScore.value >= 85) {
+            scoreRemark.value = "ممتاز"
+        }
+        else if (subjTotalScore.value >= 75 && subjTotalScore.value < 85) {
+            scoreRemark.value = "جيد جيدا"
+        }
+        else if (subjTotalScore.value >= 65 && subjTotalScore.value < 75) {
+            scoreRemark.value = "جيد"
+        }
+        else if (subjTotalScore.value >= 50 && subjTotalScore.value < 65) {
+            scoreRemark.value = "ناجح"
+        }
+        else if (subjTotalScore.value >= 0 && subjTotalScore.value < 50) {
+            scoreRemark.value = "راسب"
+        }       
+    }
+})
+
+
+// update student comment
+const updateScores = (scoreInfo, admNo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/scores/updateScores/?admNo=${admNo}`, scoreInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            admissionNumber.value = "";
+    teacherComment.value ="";
+    otherSubjectOffered.value ="";
+    subjTestScore.value = "";
+    subjExamScore.value = "";
+    subjTotalScore.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//click button to update scores
+updateScoresButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    let admNo = admissionNumber.value;
+    let sessionName = schoolSession.value;
+    let className = nameOfClass.value;
+    let termName = schoolTerm.value;
+
+    let subjectName = subjectOffered.value;
+    if (otherSubjectOffered.value != "") subjectName = otherSubjectOffered.value;
+    let testScore = subjTestScore.value;
+    let examScore = subjExamScore.value;
+    let totalScore = subjTotalScore.value;
+    let remark = scoreRemark.value;
+    let comment = teacherComment.value;
+    if (admNo == "" || sessionName == "" || className == "" || termName == "" || subjectName == "" || testScore == "" || examScore == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please fill out all necessary fields"
+        });
+    }
+    else {
+        const formData = {
+            sessionName,
+            className,
+            term: {
+                termName,
+                subjects: {
+                    subjectName,
+                    testScore,
+                    examScore,
+                    totalScore,
+                    remark,
+                },
+                comment,
+            },
+        }
+        updateScores(formData, admNo);
+    }
+});
+
+// click updatestudent form button 
+closeStudentUpdateFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    admissionNumber.value = "";
+    teacherComment.value ="";
+    otherSubjectOffered.value ="";
+    subjTestScore.value = "";
+    subjExamScore.value = "";
+    subjTotalScore.value = "";
+    updateScoresForm.style.display="none";
+});
+
+
 
 // REPORT ********************************************************************
 // ***************************************************************************
@@ -495,7 +604,7 @@ const viewScores = (admNo, term, session) => {
                 tblrow.appendChild(tbltotalscore)
                 tblrow.appendChild(tblremark)
                 resultBody.appendChild(tblrow)
-                if (response.data.termName == 'third'){
+                if (response.data.termName == 'third') {
                     // tableReport.style.display = "none"
                     // thirdTermReportTable.style.display = "block"
                     let ttblrow = document.createElement("tr")
@@ -510,51 +619,51 @@ const viewScores = (admNo, term, session) => {
                     let tblcumaverage = document.createElement("td")
                     let tblremark = document.createElement("td")
                     tblserialno.innerText = i + 1
-                tblsubject.innerText = response.data.report[i].subjectName
-                tbltestscore.innerText = response.data.report[i].testScore
-                tblexamscore.innerText = response.data.report[i].examScore
-                tbltotalscore.innerText = response.data.report[i].totalScore || 0
-                tblfirstterm.innerText = response.data.firstTermScore[i]
-                tblsecondterm.innerText = response.data.secondTermScore[i]
-                tblcumscore.innerText = response.data.report[i].cumulativeScore
-                tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
-                // add remark according to avrage score
-                if (tblcumaverage.innerText >= 85) {
-                    tblremark.innerText = "ممتاز"
-                }
-                else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
-                    tblremark.innerText = "جيد جيدا"
-                }
-                else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
-                    tblremark.innerText = "جيد"
-                }
-                else if (tblcumaverage.innerText >= 50 && tblcumaverage.innerText < 65) {
-                    tblremark.innerText = "ناجح"
-                }
-                else if (tblcumaverage.innerText >= 0 && tblcumaverage.innerText < 50) {
-                    tblremark.innerText = "راسب"
-                }
+                    tblsubject.innerText = response.data.report[i].subjectName
+                    tbltestscore.innerText = response.data.report[i].testScore
+                    tblexamscore.innerText = response.data.report[i].examScore
+                    tbltotalscore.innerText = response.data.report[i].totalScore || 0
+                    tblfirstterm.innerText = response.data.firstTermScore[i]
+                    tblsecondterm.innerText = response.data.secondTermScore[i]
+                    tblcumscore.innerText = response.data.report[i].cumulativeScore
+                    tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
+                    // add remark according to avrage score
+                    if (tblcumaverage.innerText >= 85) {
+                        tblremark.innerText = "ممتاز"
+                    }
+                    else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
+                        tblremark.innerText = "جيد جيدا"
+                    }
+                    else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
+                        tblremark.innerText = "جيد"
+                    }
+                    else if (tblcumaverage.innerText >= 50 && tblcumaverage.innerText < 65) {
+                        tblremark.innerText = "ناجح"
+                    }
+                    else if (tblcumaverage.innerText >= 0 && tblcumaverage.innerText < 50) {
+                        tblremark.innerText = "راسب"
+                    }
 
-                // tblremark.innerText = response.data.result[i].remark 
+                    // tblremark.innerText = response.data.result[i].remark 
                     ttblrow.appendChild(tblserialno)
                     ttblrow.appendChild(tblsubject)
                     ttblrow.appendChild(tbltestscore)
                     ttblrow.appendChild(tblexamscore)
                     ttblrow.appendChild(tbltotalscore)
-                    ttblrow.appendChild(tblfirstterm)                   
-                    ttblrow.appendChild(tblsecondterm)                   
-                    ttblrow.appendChild(tblcumscore)                   
-                    ttblrow.appendChild(tblcumaverage)                   
-                    ttblrow.appendChild(tblremark) 
-                    thirdTermResultBody.appendChild(ttblrow)                  
+                    ttblrow.appendChild(tblfirstterm)
+                    ttblrow.appendChild(tblsecondterm)
+                    ttblrow.appendChild(tblcumscore)
+                    ttblrow.appendChild(tblcumaverage)
+                    ttblrow.appendChild(tblremark)
+                    thirdTermResultBody.appendChild(ttblrow)
                 }
-                
+
             }
             studentCommentReport.value = response.data.comment
-           termGrandTotal.value = response.data.grandTotal
+            termGrandTotal.value = response.data.grandTotal
             termMarkObtained.value = response.data.marksObtained.toFixed(2)
             termAveragePercent.value = response.data.avgPercentage.toFixed(2)
-            nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}` 
+            nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}`
         })
         .catch(function (error) {
             if (error.response) {
@@ -588,12 +697,12 @@ const viewScores = (admNo, term, session) => {
 viewReportButton.addEventListener("click", (e) => {
     e.preventDefault();
     resultBody.innerHTML = "";
-    thirdTermResultBody.innerHTML="";
-    termAveragePercent.value="";
-    termMarkObtained.value="";
-    nameBar.innerText="";
-    studentCommentReport.value="";
-    termGrandTotal.value =""
+    thirdTermResultBody.innerHTML = "";
+    termAveragePercent.value = "";
+    termMarkObtained.value = "";
+    nameBar.innerText = "";
+    studentCommentReport.value = "";
+    termGrandTotal.value = ""
     const admNo = admissionNumberForReport.value;
     const term = termForReport.value;
     const session = sessionForReport.value;
@@ -606,15 +715,15 @@ viewReportButton.addEventListener("click", (e) => {
         });
     }
     else {
-    if (term != 'third') {
-        tableReport.style.width = "100%"
-        tableReport.style.display = "block"
-        thirdTermReportTable.style.display = "none"
-    }
-    else {
-        thirdTermReportTable.style.display = "block"
-     tableReport.style.display = "none"
-    }
+        if (term != 'third') {
+            tableReport.style.width = "100%"
+            tableReport.style.display = "block"
+            thirdTermReportTable.style.display = "none"
+        }
+        else {
+            thirdTermReportTable.style.display = "block"
+            tableReport.style.display = "none"
+        }
 
         viewScores(admNo, term, session)
     }
@@ -622,10 +731,17 @@ viewReportButton.addEventListener("click", (e) => {
 // change student name if admission number is changed
 admissionNumberForReport.addEventListener("change", (e) => {
     e.preventDefault();
+    resultBody.innerHTML = "";
+    thirdTermResultBody.innerHTML = "";
+    termAveragePercent.value = "";
+    termMarkObtained.value = "";
+    termGrandTotal.value = ""
+    nameBar.innerText = "";
+    studentCommentReport.value = "";
     for (let i = 0; i < studentNamesStore.length; i++)
         if (studentNamesStore[i].admission_number == admissionNumberForReport.value) {
-        nameBar.innerText = studentNamesStore[i].student_name
-        }
+            nameBar.innerText = studentNamesStore[i].student_name
+        }    
 });
 // open report form
 viewReportLink.addEventListener("click", (e) => {
@@ -640,8 +756,11 @@ closeStudentReportFormBtn.addEventListener("click", (e) => {
     reportScoresForm.style.display = "none";
 });
 
-// ******************** add scores ***********************************
+// ******************** ADD SCORES **************************************
+// **********************************************************************
 
+const addScoresLink = document.getElementById("addscores-link")
+const closeAddScoresButton = document.getElementById("closeinputform-btn")
 
 const addTerm = document.getElementById("addterm")
 const addSession = document.getElementById("addsession")
@@ -659,6 +778,26 @@ const deleteScoresIcon = document.getElementsByClassName("delsubjecticon")
 const scoresTable = document.getElementById("scorestable")
 
 
+// open add scores form
+addScoresLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.style.display = "none"
+    addScoresForm.style.display = "block"
+});
+
+// close addscores form
+closeAddScoresButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    addSubjecttest.value = "";
+    addSubjectexam.value = "";
+    addSubjecttotal.value = "";
+    addSubjectremark.value = "";
+    addTermComment.value = "";
+    addResultBody.innerHTML = "";
+    addScoresForm.style.display = "none";
+});
+
+
 // on change of admission number field, show student's name
 addAdmNo.addEventListener("change", (e) => {
     e.preventDefault();
@@ -671,34 +810,46 @@ addAdmNo.addEventListener("change", (e) => {
 // on change of subject selection to other, enable the other subject input field
 addSubjectSelect.addEventListener("change", (e) => {
     e.preventDefault();
+    //allow subject to be selected from list or inputted if 'other' is chosen from list of subjects
     if (addSubjectSelect.value == "Other") {
         addOtherSubject.removeAttribute("disabled")
         addOtherSubject.focus()
     }
-    else addOtherSubject.setAttribute("disabled", true)
-
-    if (addResultBody.childElementCount >= 1) {
-        for (let count = 0; count < addResultBody.childElementCount; count++) {
-            if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Hello!",
-                    text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
-                });
+    else {
+        addOtherSubject.value="";
+        addOtherSubject.setAttribute("disabled", true)
+    }
+        // if subject is already on the table, reject same subject addition
+        if (addResultBody.childElementCount >= 1) {
+            for (let count = 0; count < addResultBody.childElementCount; count++) {
+                if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Hello!",
+                        text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
+                    });
+                }
             }
         }
-    }
 })
 
 // add scores to result body on click of total input field
-// let serialno = 0;
 addSubjecttotal.addEventListener("click", (e) => {
     e.preventDefault();
-    if (addSubjectSelect.value == "select one") {
+    let subjectSelected = addSubjectSelect.value 
+    if (subjectSelected == "Other") subjectSelected = addOtherSubject.value
+    if (addSubjectSelect.value == "select one" || (addSubjectSelect.value == "Other" && addOtherSubject.value == "" )) {
         Swal.fire({
             icon: "error",
             title: "Invalid Input!",
             text: "Input a valid subject"
+        });
+    }  
+    else if (!classSubjectsReturned.includes(subjectSelected)) {
+        Swal.fire({
+            icon: "error",
+            title: "Sorry",
+            text: `${subjectSelected} is not a valid subject for your class`
         });
     }
     else if (+addSubjecttest.value > 40 || +addSubjectexam.value > 60) {
@@ -781,7 +932,7 @@ scoresTable.addEventListener("click", (e) => {
 })
 
 // add student scores
-const addScores = ({...scoreinfo}, admNo) => {
+const addScores = ({ ...scoreinfo }, admNo) => {
     let errorMsg;
     axios
         .post(`${baseUrl}/scores/addScores/?admNo=${admNo}`, scoreinfo,
@@ -802,11 +953,8 @@ const addScores = ({...scoreinfo}, admNo) => {
             addSubjectexam.value = "";
             addSubjecttotal.value = "";
             addSubjectremark.value = "";
-            addTermComment.value ="";
+            addTermComment.value = "";
             addResultBody.innerHTML = "";
-            // }
-            // studentNameBar.style.display = "block";
-            // nameBar.innerText = `Inputting scores for ${response.data.alreadyHasScores.student_name}`
         })
         .catch(function (error) {
             if (error.response) {
@@ -837,14 +985,14 @@ const addScores = ({...scoreinfo}, admNo) => {
 
 // listen for click on the submit scores button
 submitScoresButton.addEventListener("click", (e) => {
-    let scores=[]
+    let scores = []
     e.preventDefault();
     let admNo = addAdmNo.value;
     let sessionName = addSession.value;
     let className = addClass.value;
     let termName = addTerm.value;
     let comment = addTermComment.value;
-    let subjects=[];
+    let subjects = [];
     let formdata = {
         sessionName,
         className,
@@ -854,43 +1002,222 @@ submitScoresButton.addEventListener("click", (e) => {
             comment
         }
     }
-    if (admNo == "" || sessionName == "" || className == "" || termName == ""  || comment == "") {
+    if (admNo == "" || sessionName == "" || className == "" || termName == "" || comment == "") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
             text: "Please fill out all fields"
         });
-    } else {
-    for (let count = 0; count < addResultBody.childElementCount; count++) {
-        let subjectNameTD = addResultBody.children[count].firstElementChild.nextElementSibling;
-        let subjectName = subjectNameTD.innerText;
-        let testScoreTD = subjectNameTD.nextElementSibling
-        let testScore = testScoreTD.innerText
-        let examScoreTD = testScoreTD.nextElementSibling
-        let examScore = examScoreTD.innerText
-        let totalScoreTD = examScoreTD.nextElementSibling
-        let totalScore = totalScoreTD.innerText
-        let remarkTD = totalScoreTD.nextElementSibling
-        let remark = remarkTD.innerText
+    } 
+    else if (addResultBody.childElementCount != classSubjectsReturned.length){
+        Swal.fire({
+            icon: "error",
+            title: "Something missing",
+            text: "Looks like you haven't inputted all subjects' scores for this student"
+        });
+    }
+    else {
+        for (let count = 0; count < addResultBody.childElementCount; count++) {
+            let subjectNameTD = addResultBody.children[count].firstElementChild.nextElementSibling;
+            let subjectName = subjectNameTD.innerText;
+            let testScoreTD = subjectNameTD.nextElementSibling
+            let testScore = testScoreTD.innerText
+            let examScoreTD = testScoreTD.nextElementSibling
+            let examScore = examScoreTD.innerText
+            let totalScoreTD = examScoreTD.nextElementSibling
+            let totalScore = totalScoreTD.innerText
+            let remarkTD = totalScoreTD.nextElementSibling
+            let remark = remarkTD.innerText
 
-        if ( testScore == "" || examScore == "") {
+            if (testScore == "" || examScore == "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "Empty input detected",
+                    text: "Please fill out all fields"
+                });
+            }
+            else {
+                let subject = {
+                    subjectName,
+                    testScore,
+                    examScore,
+                    totalScore,
+                    remark
+                }
+                subjects.push(subject)
+            }
+        }
+        addScores(formdata, admNo);
+    }
+})
+
+
+// ******************** CLASS REPORT **************************************
+// **********************************************************************
+// const classReportLink = document.getElementById("viewclassreport-link")
+const reportClassScoresForm = document.getElementById("viewclassscores-form")
+const closeClassReportFormBtn = document.getElementById("viewclassreport-icon")
+const viewClassReportLink = document.getElementById("classreport-link")
+const classnameForReportSelect = document.getElementById("classname-forclassreport")
+const programmeForReportSelect = document.getElementById("programme-forclassreport")
+const termForClassReport = document.getElementById("term-forclassreport")
+const sessionForClassReport = document.getElementById("session-forclassreport")
+const tableHeadClassReport = document.getElementById("classreport-tblhead")
+const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
+const tableBodyForClassReport = document.getElementById("classreport-tblbody")
+const viewClassReportButton= document.getElementById("viewclassreport-btn")
+
+
+
+// open class report form
+viewClassReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportClassScoresForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close report form
+closeClassReportFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    reportClassScoresForm.style.display = "none";
+});
+
+// display class report
+const displayClassReport = (classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/scores/viewClassScores/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+
+            // console.log(response.data.classSubjects)
+            let tblserialnohead = document.createElement("th")
+            let tbladmnohead = document.createElement("th")
+            let tblnamehead = document.createElement("th")
+            tblserialnohead.innerText = "Serial No"
+            tbladmnohead.innerText = "Admission No"
+            tblnamehead.innerText = "Name"
+                tableHeadRowClassReport.appendChild(tblserialnohead)
+                tableHeadRowClassReport.appendChild(tbladmnohead)
+                tableHeadRowClassReport.appendChild(tblnamehead)
+
+            let theclassSubjects = response.data.classSubjects
+            for (let j = 0; j < theclassSubjects.length; j++) {
+                let tblsubject = document.createElement("th")
+                tblsubject.innerText = theclassSubjects[j]
+                tableHeadRowClassReport.appendChild(tblsubject)
+            }
+            let tblmarksobtained = document.createElement("th")
+            let tblavgpercentage = document.createElement("th")
+                tblmarksobtained.innerText = "Mark Obtained"
+                tblavgpercentage.innerText = "Average Percentage"
+                tableHeadRowClassReport.appendChild(tblmarksobtained)
+                tableHeadRowClassReport.appendChild(tblavgpercentage)
+
+            for (let i = 0; i < response.data.classExists.length; i++) {
+                let tblrow = document.createElement("tr")
+                let tblserialno = document.createElement("th")
+                let tbladmno = document.createElement("td")
+                let tblname = document.createElement("td")
+                tblserialno.innerText = i + 1
+                tbladmno.innerText = response.data.classExists[i].admissionNumber
+                tblname.innerText = response.data.classExists[i].student_name
+                tblrow.appendChild(tblserialno)
+                tblrow.appendChild(tbladmno)
+                tblrow.appendChild(tblname)
+
+                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
+                    const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
+                    for (let k = 3; k < tableHeadRowClassReport.children.length-2; k++) {
+                        const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
+                        let tbltotalscore = document.createElement("td")
+                        tbltotalscore.innerText = subjectToAdd.totalScore
+                        tblrow.appendChild(tbltotalscore)
+                    }
+                    let tblmark = document.createElement("td")
+                let tblpercentage = document.createElement("td")
+                tblmark.innerText = requestedterm.marksObtained
+                tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
+                tblrow.appendChild(tblmark)
+                tblrow.appendChild(tblpercentage)
+                }    
+                tableBodyForClassReport.appendChild(tblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
             Swal.fire({
                 icon: "error",
-                title: "Empty input detected",
-                text: "Please fill out all fields"
+                title: "Error Processing Input",
+                text: errorMsg
             });
-        }
-        else {
-            let subject = {
-                subjectName,
-                testScore,
-                examScore,
-                totalScore,
-                remark
-            }
-            subjects.push(subject)
-        }
+        });
+};
+
+
+// display class scores on click of button
+viewClassReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForClassReport.innerHTML="";
+    tableHeadRowClassReport.innerHTML="";
+    const className = classnameForReportSelect.value
+    const programme = programmeForReportSelect.value
+    const sessionName = sessionForClassReport.value
+    const termName = termForClassReport.value
+
+    if (programme == "select a programme" || className == "select a class"){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check the programme or class you entered"
+        });
     }
-    addScores(formdata, admNo);
-}
-})
+    else
+    displayClassReport(className, programme, termName, sessionName)
+});
+
+// clear table body when class is changed
+classnameForReportSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    tableBodyForClassReport.innerHTML="";
+    tableHeadRowClassReport.innerHTML="";
+});
+
+
+
+
+// logout
+logoutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    localStorage.clear()
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
+});

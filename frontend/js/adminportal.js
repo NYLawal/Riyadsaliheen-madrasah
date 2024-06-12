@@ -4,6 +4,7 @@ const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler = document.getElementById("toggler-icon")
+// const addNewSession = document.getElementById("addnewsession-link")
 
 const addStudentScores = document.getElementById("add-scores")
 const addStafferLink = document.getElementById("add-staffer")
@@ -84,6 +85,8 @@ const viewStaffPageNext = document.getElementById("viewstaff-pagenext")
 const viewStaffPagePrevious = document.getElementById("viewstaff-pageprevious")
 const tabDisabledPrevious = document.getElementById("tab-disabled")
 const thHeading = document.getElementById("thheading")
+const viewStudentsTableHead = document.getElementById("viewstd-tblhead")
+const viewStudentsPresentClass = document.getElementById("stud-presentclass")
 
 const logoutLink = document.getElementById("logout")
 const token = localStorage.getItem('access_token')
@@ -849,6 +852,19 @@ const displayStudents = (key, value, page) => {
                 tblrow.appendChild(tblcol12)
                 tblrow.appendChild(tblcol13)
                 tblrow.appendChild(tblcol14)
+                if (value == "past"){
+                    // remove present class from student's view
+                    viewStudentsTableHead.removeChild(viewStudentsPresentClass)
+                    tblrow.removeChild(tblcol13)
+                    // add status to table heading
+                    let tblheadstatus= document.createElement("th");
+                    tblheadstatus.innerText = "Status"
+                    viewStudentsTableHead.appendChild(tblheadstatus)
+                    // add non-student status to table view
+                    let tblcol15= document.createElement("td");
+                    tblcol15.innerText = response.data.studentsperpage[i].nonStudentStatus
+                    tblrow.appendChild(tblcol15)
+                }
                 studentTableBody.appendChild(tblrow)
             }
             console.log("response says page is ", response.data.page)
@@ -1620,7 +1636,8 @@ const promoteStudents = (termInfo) => {
 // click promote students link to display form
 promoteStudentsLink.addEventListener("click", (e) => {
     e.preventDefault();
-    promoteStudentsForm.style.display = "block"
+    promoteStudentsForm.style.display = "block";
+    sidebar.style.display = "none";
 });
 
 // click promote students button to promote students
@@ -2140,6 +2157,8 @@ viewClassReportLink.addEventListener("click", (e) => {
 // close report form
 closeClassReportFormBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    tableBodyForClassReport.innerHTML="";
+    tableHeadRowClassReport.innerHTML="";
     reportClassScoresForm.style.display = "none";
 });
 
@@ -2163,6 +2182,16 @@ const displayClassReport = (classname, programme, term, session) => {
             });
 
             // console.log(response.data.classSubjects)
+            let tblserialnohead = document.createElement("th")
+            let tbladmnohead = document.createElement("th")
+            let tblnamehead = document.createElement("th")
+            tblserialnohead.innerText = "Serial No"
+            tbladmnohead.innerText = "Admission No"
+            tblnamehead.innerText = "Name"
+                tableHeadRowClassReport.appendChild(tblserialnohead)
+                tableHeadRowClassReport.appendChild(tbladmnohead)
+                tableHeadRowClassReport.appendChild(tblnamehead)
+
             let theclassSubjects = response.data.classSubjects
             for (let j = 0; j < theclassSubjects.length; j++) {
                 let tblsubject = document.createElement("th")
@@ -2237,6 +2266,8 @@ const displayClassReport = (classname, programme, term, session) => {
 // display class scores on click of button
 viewClassReportButton.addEventListener("click", (e) => {
     e.preventDefault();
+    tableBodyForClassReport.innerHTML="";
+    tableHeadRowClassReport.innerHTML="";
     const className = classnameForReportSelect.value
     const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
@@ -2257,8 +2288,189 @@ viewClassReportButton.addEventListener("click", (e) => {
 classnameForReportSelect.addEventListener("change", (e) => {
     e.preventDefault();
     tableBodyForClassReport.innerHTML="";
+    tableHeadRowClassReport.innerHTML="";
 });
 
+// EDIT SUBJECTS***************************************************************
+// ****************************************************************************
+const editSubjectsFormCloseIcon = document.getElementById("subjecteditclose-icon");
+const editSubjectsForm = document.getElementById("subjectedit-form");
+const editClassSubjectsLink = document.getElementById("editclassubjects-link");
+
+// const editClassSubjectsForm = document.getElementById("edit-classubjects");
+const editSubjectsClass = document.getElementById("editsubject-classelect");
+const editSubjectsProgramme = document.getElementById("editsubject-programmeselect");
+const editSubjectsSubject = document.getElementById("editsubject-subjectselect");
+const editSubjectsSubjectOther = document.getElementById("editsubject-subjectotherselect");
+const editSubjectsAddSubjectButton = document.getElementById("addnewsubject-btn");
+const editSubjectsRemoveSubjectButton = document.getElementById("removenewsubject-btn");
+
+
+//add new subject
+const addSubject = (subjectInfo,className,programme) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/addSubject/?className=${className}&programme=${programme}`, subjectInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            editSubjectsClass.value ="";
+            editSubjectsProgramme.value ="";
+            editSubjectsSubject.value="";
+            editSubjectsSubjectOther.value="";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click add subjects button
+editSubjectsAddSubjectButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = editSubjectsClass.value;
+    const programme = editSubjectsProgramme.value;
+    const subject = editSubjectsSubject.value;
+    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value !="") subject = editSubjectsSubjectOther.value
+    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one" ){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please check that all inputs are valid"
+        });
+    }
+    else{
+     const formData = {
+        subject
+        }
+    addSubject(formData,className,programme)    
+    }
+});
+
+//remove subject
+const removeSubject = (subjectInfo,className,programme) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/removeSubject/?className=${className}&programme=${programme}`, subjectInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            editSubjectsClass.value ="";
+           editSubjectsProgramme.value ="";
+           editSubjectsSubject.value="";
+           editSubjectsSubjectOther.value="";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click remove subjects button
+editSubjectsRemoveSubjectButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = editSubjectsClass.value;
+    const programme = editSubjectsProgramme.value;
+    const subject = editSubjectsSubject.value;
+    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value !="") subject = editSubjectsSubjectOther.value
+    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one" ){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please check that all inputs are valid"
+        });
+    }
+    else{
+     const formData = {
+        subject
+        }
+    removeSubject(formData,className,programme)    
+    }
+});
+
+// click edit subjects link to display form
+editSubjectsSubject.addEventListener("change", (e) => {
+    e.preventDefault();
+   if (editSubjectsSubject.value == "Other"){
+    editSubjectsSubjectOther.removeAttribute("disabled")
+    editSubjectsSubjectOther.focus()
+}
+else {
+    editSubjectsSubjectOther.value="";
+    editSubjectsSubjectOther.setAttribute("disabled", true)
+}
+});
+
+// click edit subjects link to display form
+editClassSubjectsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    editSubjectsForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close edit subjects form
+editSubjectsFormCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    editSubjectsForm.style.display = "none";
+});
 
 
 
