@@ -330,6 +330,9 @@ svg.svg-top{
     fill: #5ec52e;
     margin-bottom: 2rem;
 }
+svg.bi{
+    fill: #5ec52e;
+}
 .programmes-container.prg-con-1{
     margin-bottom: 2rem;
 }
@@ -367,6 +370,9 @@ height: fit-content;
    background-color: #317a10;
    color: white;
 }
+/* img {
+    height:100%;
+} */
 
 /* ==================================================
                     DONATE PAGE 
