@@ -568,7 +568,7 @@ sendButton.addEventListener("click", (e) => {
         maritalStatus,
         programme,
         presentClass
-        
+
     }
     registerStudent(formData);
 });
@@ -852,16 +852,16 @@ const displayStudents = (key, value, page) => {
                 tblrow.appendChild(tblcol12)
                 tblrow.appendChild(tblcol13)
                 tblrow.appendChild(tblcol14)
-                if (value == "past"){
+                if (value == "past") {
                     // remove present class from student's view
                     viewStudentsTableHead.removeChild(viewStudentsPresentClass)
                     tblrow.removeChild(tblcol13)
                     // add status to table heading
-                    let tblheadstatus= document.createElement("th");
+                    let tblheadstatus = document.createElement("th");
                     tblheadstatus.innerText = "Status"
                     viewStudentsTableHead.appendChild(tblheadstatus)
                     // add non-student status to table view
-                    let tblcol15= document.createElement("td");
+                    let tblcol15 = document.createElement("td");
                     tblcol15.innerText = response.data.studentsperpage[i].nonStudentStatus
                     tblrow.appendChild(tblcol15)
                 }
@@ -1604,7 +1604,7 @@ const promoteStudents = (termInfo) => {
                 title: "Successful",
                 text: response.data.message
             });
-           
+
         })
         .catch(function (error) {
             if (error.response) {
@@ -1662,7 +1662,7 @@ promoteStudentsSubmitButton.addEventListener("click", (e) => {
             promoteStudents(formData)
         }
     });
-     
+
 });
 
 // close promote students form
@@ -2143,7 +2143,12 @@ const sessionForClassReport = document.getElementById("session-forclassreport")
 const tableHeadClassReport = document.getElementById("classreport-tblhead")
 const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
 const tableBodyForClassReport = document.getElementById("classreport-tblbody")
-const viewClassReportButton= document.getElementById("viewclassreport-btn")
+const viewClassReportButton = document.getElementById("viewclassreport-btn")
+const attendanceLabel = document.getElementById("attendance-label")
+const attendanceTableHeadRow = document.getElementById("classattendance-tblheadrow")
+const attendanceTableBodyRow = document.getElementById("classattendance-tblbodyrow")
+const attendanceTableBody = document.getElementById("classattendance-tblbody")
+
 
 
 
@@ -2157,8 +2162,11 @@ viewClassReportLink.addEventListener("click", (e) => {
 // close report form
 closeClassReportFormBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    tableBodyForClassReport.innerHTML="";
-    tableHeadRowClassReport.innerHTML="";
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
+    attendanceTableHeadRow.innerHTML = "";
+    attendanceTableBody.innerHTML = "";
+    attendanceLabel.style.display = "none";
     reportClassScoresForm.style.display = "none";
 });
 
@@ -2180,7 +2188,7 @@ const displayClassReport = (classname, programme, term, session) => {
                 title: "Successful",
                 // text:  response.data.message
             });
-
+            attendanceLabel.style.display = "block";
             // console.log(response.data.classSubjects)
             let tblserialnohead = document.createElement("th")
             let tbladmnohead = document.createElement("th")
@@ -2188,9 +2196,19 @@ const displayClassReport = (classname, programme, term, session) => {
             tblserialnohead.innerText = "Serial No"
             tbladmnohead.innerText = "Admission No"
             tblnamehead.innerText = "Name"
-                tableHeadRowClassReport.appendChild(tblserialnohead)
-                tableHeadRowClassReport.appendChild(tbladmnohead)
-                tableHeadRowClassReport.appendChild(tblnamehead)
+            tableHeadRowClassReport.appendChild(tblserialnohead)
+            tableHeadRowClassReport.appendChild(tbladmnohead)
+            tableHeadRowClassReport.appendChild(tblnamehead)
+            //for attendance
+            let atdtblserialnohead = document.createElement("th")
+            let atdtbladmnohead = document.createElement("th")
+            let atdtblnamehead = document.createElement("th")
+            atdtblserialnohead.innerText = "Serial No"
+            atdtbladmnohead.innerText = "Admission No"
+            atdtblnamehead.innerText = "Name"
+            attendanceTableHeadRow.appendChild(atdtblserialnohead)
+            attendanceTableHeadRow.appendChild(atdtbladmnohead)
+            attendanceTableHeadRow.appendChild(atdtblnamehead)
 
             let theclassSubjects = response.data.classSubjects
             for (let j = 0; j < theclassSubjects.length; j++) {
@@ -2200,10 +2218,10 @@ const displayClassReport = (classname, programme, term, session) => {
             }
             let tblmarksobtained = document.createElement("th")
             let tblavgpercentage = document.createElement("th")
-                tblmarksobtained.innerText = "Mark Obtained"
-                tblavgpercentage.innerText = "Average Percentage"
-                tableHeadRowClassReport.appendChild(tblmarksobtained)
-                tableHeadRowClassReport.appendChild(tblavgpercentage)
+            tblmarksobtained.innerText = "Mark Obtained"
+            tblavgpercentage.innerText = "Average Percentage"
+            tableHeadRowClassReport.appendChild(tblmarksobtained)
+            tableHeadRowClassReport.appendChild(tblavgpercentage)
 
             for (let i = 0; i < response.data.classExists.length; i++) {
                 let tblrow = document.createElement("tr")
@@ -2216,23 +2234,61 @@ const displayClassReport = (classname, programme, term, session) => {
                 tblrow.appendChild(tblserialno)
                 tblrow.appendChild(tbladmno)
                 tblrow.appendChild(tblname)
+                //for attendance
+                let atdtblrow = document.createElement("tr")
+                let atdtblserialno = document.createElement("th")
+                let atdtbladmno = document.createElement("td")
+                let atdtblname = document.createElement("td")
+                atdtblserialno.innerText = i + 1
+                atdtbladmno.innerText = response.data.classExists[i].admissionNumber
+                atdtblname.innerText = response.data.classExists[i].student_name
+                atdtblrow.appendChild(atdtblserialno)
+                atdtblrow.appendChild(atdtbladmno)
+                atdtblrow.appendChild(atdtblname)
 
                 for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
                     const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-                    for (let k = 3; k < tableHeadRowClassReport.children.length-2; k++) {
+                    for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                         const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
                         let tbltotalscore = document.createElement("td")
                         tbltotalscore.innerText = subjectToAdd.totalScore
                         tblrow.appendChild(tbltotalscore)
                     }
                     let tblmark = document.createElement("td")
-                let tblpercentage = document.createElement("td")
-                tblmark.innerText = requestedterm.marksObtained
-                tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
-                tblrow.appendChild(tblmark)
-                tblrow.appendChild(tblpercentage)
-                }    
+                    let tblpercentage = document.createElement("td")
+                    tblmark.innerText = requestedterm.marksObtained
+                    tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
+                    tblrow.appendChild(tblmark)
+                    tblrow.appendChild(tblpercentage)
+                }
+                //attendance
+                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
+                    let requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
+                    if (i==0 && j == 0){  //adding term dates as heading for attendance table
+                        for (let k = 0; k < requestedterm.attendance.length; k++) {
+                            const dateToAdd = requestedterm.attendance[k].termdate
+                            let tbldate = document.createElement("th")
+                            tbldate.innerText = dateToAdd
+                            attendanceTableHeadRow.appendChild(tbldate)
+                        }
+                    }
+                    for (let k = 0; k < requestedterm.attendance.length; k++) {
+                        const presentStatus = requestedterm.attendance[k].presence
+                        let tblpresence = document.createElement("td")
+                        if (presentStatus == 'yes'){
+                             tblpresence.innerText = "ح"
+                            // atdtblrow.appendChild(tblpresence)
+                            }
+                        else {
+                             tblpresence.innerText = "-"
+                            //  atdtblrow.appendChild(tblpresence)
+                        }
+                        // tblpresence.innerText = presentStatus
+                        atdtblrow.appendChild(tblpresence)
+                    }
+                }
                 tableBodyForClassReport.appendChild(tblrow)
+                attendanceTableBody.appendChild(atdtblrow)
             }
         })
         .catch(function (error) {
@@ -2266,14 +2322,17 @@ const displayClassReport = (classname, programme, term, session) => {
 // display class scores on click of button
 viewClassReportButton.addEventListener("click", (e) => {
     e.preventDefault();
-    tableBodyForClassReport.innerHTML="";
-    tableHeadRowClassReport.innerHTML="";
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
+    attendanceTableHeadRow.innerHTML = "";
+    attendanceTableBody.innerHTML = "";
+    attendanceLabel.style.display = "none";
     const className = classnameForReportSelect.value
     const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
     const termName = termForClassReport.value
 
-    if (programme == "select a programme" || className == "select a class"){
+    if (programme == "select a programme" || className == "select a class") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input",
@@ -2281,14 +2340,17 @@ viewClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
-    displayClassReport(className, programme, termName, sessionName)
+        displayClassReport(className, programme, termName, sessionName)
 });
 
 // clear table body when class is changed
 classnameForReportSelect.addEventListener("change", (e) => {
     e.preventDefault();
-    tableBodyForClassReport.innerHTML="";
-    tableHeadRowClassReport.innerHTML="";
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
+    attendanceTableHeadRow.innerHTML = "";
+    attendanceTableBody.innerHTML = "";
+    attendanceLabel.style.display = "none";
 });
 
 // EDIT SUBJECTS***************************************************************
@@ -2307,7 +2369,7 @@ const editSubjectsRemoveSubjectButton = document.getElementById("removenewsubjec
 
 
 //add new subject
-const addSubject = (subjectInfo,className,programme) => {
+const addSubject = (subjectInfo, className, programme) => {
     let errorMsg;
     axios
         .post(`${baseUrl}/class/addSubject/?className=${className}&programme=${programme}`, subjectInfo, {
@@ -2322,10 +2384,10 @@ const addSubject = (subjectInfo,className,programme) => {
                 title: "Successful",
                 text: response.data.message
             });
-            editSubjectsClass.value ="";
-            editSubjectsProgramme.value ="";
-            editSubjectsSubject.value="";
-            editSubjectsSubjectOther.value="";
+            editSubjectsClass.value = "";
+            editSubjectsProgramme.value = "";
+            editSubjectsSubject.value = "";
+            editSubjectsSubjectOther.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -2360,24 +2422,24 @@ editSubjectsAddSubjectButton.addEventListener("click", (e) => {
     const className = editSubjectsClass.value;
     const programme = editSubjectsProgramme.value;
     const subject = editSubjectsSubject.value;
-    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value !="") subject = editSubjectsSubjectOther.value
-    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one" ){
+    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value != "") subject = editSubjectsSubjectOther.value
+    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
             text: "Please check that all inputs are valid"
         });
     }
-    else{
-     const formData = {
-        subject
+    else {
+        const formData = {
+            subject
         }
-    addSubject(formData,className,programme)    
+        addSubject(formData, className, programme)
     }
 });
 
 //remove subject
-const removeSubject = (subjectInfo,className,programme) => {
+const removeSubject = (subjectInfo, className, programme) => {
     let errorMsg;
     axios
         .post(`${baseUrl}/class/removeSubject/?className=${className}&programme=${programme}`, subjectInfo, {
@@ -2392,10 +2454,10 @@ const removeSubject = (subjectInfo,className,programme) => {
                 title: "Successful",
                 text: response.data.message
             });
-            editSubjectsClass.value ="";
-           editSubjectsProgramme.value ="";
-           editSubjectsSubject.value="";
-           editSubjectsSubjectOther.value="";
+            editSubjectsClass.value = "";
+            editSubjectsProgramme.value = "";
+            editSubjectsSubject.value = "";
+            editSubjectsSubjectOther.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -2430,33 +2492,33 @@ editSubjectsRemoveSubjectButton.addEventListener("click", (e) => {
     const className = editSubjectsClass.value;
     const programme = editSubjectsProgramme.value;
     const subject = editSubjectsSubject.value;
-    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value !="") subject = editSubjectsSubjectOther.value
-    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one" ){
+    if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value != "") subject = editSubjectsSubjectOther.value
+    if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
             text: "Please check that all inputs are valid"
         });
     }
-    else{
-     const formData = {
-        subject
+    else {
+        const formData = {
+            subject
         }
-    removeSubject(formData,className,programme)    
+        removeSubject(formData, className, programme)
     }
 });
 
 // click edit subjects link to display form
 editSubjectsSubject.addEventListener("change", (e) => {
     e.preventDefault();
-   if (editSubjectsSubject.value == "Other"){
-    editSubjectsSubjectOther.removeAttribute("disabled")
-    editSubjectsSubjectOther.focus()
-}
-else {
-    editSubjectsSubjectOther.value="";
-    editSubjectsSubjectOther.setAttribute("disabled", true)
-}
+    if (editSubjectsSubject.value == "Other") {
+        editSubjectsSubjectOther.removeAttribute("disabled")
+        editSubjectsSubjectOther.focus()
+    }
+    else {
+        editSubjectsSubjectOther.value = "";
+        editSubjectsSubjectOther.setAttribute("disabled", true)
+    }
 });
 
 // click edit subjects link to display form

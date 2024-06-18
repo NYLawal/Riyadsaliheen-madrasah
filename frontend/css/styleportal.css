@@ -68,7 +68,7 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form,
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
 #updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form{
     display: none;
@@ -106,7 +106,7 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#markattendance {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -133,18 +133,18 @@ html, body {
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input,  #promotestudents-form select,
     #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, 
-    #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input  {
+    #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input,
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,
     #viewclassscores-form input,  #subjectedit-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
     #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select,
-    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select{
+    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select, #markattendance-form select{
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -165,24 +165,29 @@ html, body {
     margin-bottom: 5px;
     }
     input[type="date"]::-webkit-inner-spin-button {
-    display: none;
-    }
-    .item i, input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    font-size: 20px;
-    color: #a9a9a9;
-    }
-    .item i {
-    right: 2%;
-    top: 30px;
-    z-index: 1;
-    }
-    [type="date"]::-webkit-calendar-picker-indicator {
-    right: 1%;
-    z-index: 2;
-    opacity: 0;
-    cursor: pointer;
-    }
+        display: none;
+        }
+        .item i, input[type="date"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        font-size: 20px;
+        color: #a9a9a9;
+        }
+        .item i {
+        right: 2%;
+        top: 28px;
+        z-index: 1;
+        }
+        .item i.fa-calendar-alt {
+        right: 7%;
+        top: 36px;
+        z-index: 1;
+        }
+        [type="date"]::-webkit-calendar-picker-indicator {
+        right: 7%;
+        z-index: 2;
+        opacity: 0;
+        cursor: pointer;
+        }
     input[type=checkbox]  {
     display: none;
     }
@@ -232,7 +237,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, 
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#markattendance-btn,
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn,
     button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn{
     width: 150px;
@@ -381,7 +386,7 @@ html, body {
         background-color: #7ff549;
     }
 
-   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon{
+   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon, #markattendance-form .closebtn-icon{
    position: absolute;
    right: 20px;
 }
@@ -484,6 +489,11 @@ a.disable {
  }
  .form-label-marks {
     margin-bottom: 5px;
+}
+#attendance-label{
+    display: none;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 

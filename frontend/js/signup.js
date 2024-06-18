@@ -1,5 +1,5 @@
-// const baseUrl = "http://localhost:5000/api/v1"
 const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");

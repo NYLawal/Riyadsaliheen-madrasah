@@ -135,9 +135,6 @@
   </nav>
 </header>
 
-<section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 20px;">
-</section>
-
 <!-- Aside -->
 <aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1" aria-labelledby="bsbSidebarLabel1">
   <div class="offcanvas-header">
@@ -159,14 +156,14 @@
           </ul>
       </li>
       <li>
-        <!-- scores and attendance for all students in a particular term -->
-          <a href="#">Check Ward's Result</a>  
+          <a href="#" id="resultcheck">Check Result</a>  
       </li>
-
       <li>
-         <!-- scores and attendance for a student in a particular term -->
-        <a href="#">View Ward's Report</a>
-    </li>
+        <a href="#" id="attendanceview">View Term Attendance</a>
+      </li>
+      <li>
+        <a href="#" id="progressreport">Progress Report</a>
+      </li>
   </ul>
   <ul class="list-unstyled components components2">
     <li>
@@ -175,6 +172,190 @@
   </ul>
   </div>
 </aside>
+
+<!-- scores report form -->
+<section
+class="bg-light pt-5 pb-5 reportscores-form"
+id="reportscores-form"
+>
+<div class="container" style="position:relative">
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+      <h3 class="mb-3 display-5 text-center">Term Report</h3>
+      <p class="text-secondary mb-1 text-center">
+        To view your ward's report or yours, input the admission number as well
+        as the term and session in the form below.
+      </p>
+      <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+    </div>
+  </div>
+  <div class="row justify-content-lg-center">
+    <div class="col-12 col-lg-9">
+      <div class="testbox">
+        <form
+          action="/"
+          class="py-4 px-md-4 px-2"
+          id="scoresreport"
+          style="background-color: #d0f1c1; box-shadow: none"
+        >                
+      <div class="row gy-4 gy-xl-5 mb-3">
+        <div class="col-12 col-md-4">
+          <label for="admNo-forreport" class="form-label"
+            >Admission No <span class="text-danger">*</span></label
+          >
+          <div class="">
+            <input name="admNo-forreport" id="admNo-forreport" style="background-color: white;">
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <label for="term-forreport" class="form-label"
+            >Term <span class="text-danger">*</span></label
+          >
+          <div class="input-group">
+            <select style="background-color: white" id="term-forreport">
+              <option value="first">First</option>
+              <option value="second">Second</option>
+              <option value="third">Third</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <label for="session-forreport" class="form-label"
+            >Session <span class="text-danger">*</span></label
+          >
+          <div class="input-group">
+            <select
+              style="background-color: white"
+              id="session-forreport"
+            >
+              <option value="2023/2024">2023/2024</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-0 mb-3" id="student-namebar">
+       <h3 id="namebar"></h3>
+      </div>
+      <label for="table" class="form-label mb-0">Scores</label>
+      <div class="table">
+       <table class="table table-bordered bsb-table-xl mt-2 px-0 mb-3" id="table-report">
+         <thead>
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Subject</th>
+             <th scope="col">Test</th>
+             <th scope="col">Exam</th>
+             <th scope="col">Total</th>
+             <th scope="col">Remark</th>
+           </tr>
+         </thead>
+         <tbody id="result-body"></tbody>
+       </table>
+      </div>
+      <div class="table-responsive mb-3">
+       <table
+         class="table table-bordered bsb-table-xl text-nowrap align-middle"
+         id="table-report-thirdterm"
+       >
+         <thead>
+           <tr id="">
+             <th scope="col">#</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Test</th>
+            <th scope="col">Exam</th>
+            <th scope="col">Total</th>
+            <th scope="col">First Term</th>
+            <th scope="col">Second Term</th>
+            <th scope="col">Cumulative Score</th>
+            <th scope="col">Cumulative Average</th>
+            <th scope="col">Remark</th>
+           </tr>
+         </thead>
+         <tbody id="thirdterm-resultbody"></tbody>
+       </table>
+     </div>
+      <form action="#!">
+       <div class="row gy-4 gy-xl-5 mb-3 ">
+         <div class="col-4">
+           <label for="grandtotal" class="form-label-marks"
+             >Grand Total </label
+           >
+               <input type="text" placeholder="" id="grandtotal" />  
+         </div>
+         <div class="col-4">
+           <label for="marksobtained" class="form-label-marks"
+             >Marks Obtained </label
+           >
+               <input type="text" placeholder="" id="marksobtained" />  
+         </div>
+         <div class="col-4">
+           <label for="avgpercent" class="form-label-marks"
+             >Average Percentage </label
+           >
+               <input type="text" placeholder="" id="avgpercent" />  
+         </div>
+       </div>
+        <div class="row gy-4 gy-xl-5">
+          <div class="col-12">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea
+              class="form-control"
+              id="comment-report"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+        </div>
+        <div class="row mt-4" style="padding-left: 0">
+          <!-- <div class="col"></div> -->
+          <div class="col-12 col-md-6 btn-block">
+            <button type="button" id="viewreport-btn" href="/">
+              View Report
+            </button>
+          </div>
+          <div class="col-12 col-md-6 btn-block">
+            <button type="button" id="closereportform-btn" href="/">
+              Close Form
+            </button>
+          </div>
+          <!-- <div class="col"></div> -->
+        </div>
+      </form>
+    <!-- </div>
+         </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Chart student report -->
+<!-- <section class="py-3 py-md-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+              <div class="mb-3 mb-sm-0">
+                <h5 class="card-title widget-card-title">Revenue</h5>
+              </div>
+              <div>
+                <select class="form-select text-secondary border-light-subtle">
+                  <option value="1">Month</option>
+                  <option value="2">Week</option>
+                  <option value="3">Day</option>
+                </select>
+              </div>
+            </div>
+            <div id="bsb-chart-5"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
 
 
 

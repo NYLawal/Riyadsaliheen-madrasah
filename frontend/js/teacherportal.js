@@ -48,7 +48,7 @@ const addNewSession = document.getElementById("addnewsession-link")
 let studentpage = [];
 let lastpage = [];
 let studentNamesStore = [];
-let classSubjectsReturned = [] ;
+let classSubjectsReturned = [];
 
 const token = localStorage.getItem('access_token')
 
@@ -79,17 +79,21 @@ const getTeacherClass = () => {
             addClass.value = response.data.teacher.teacherClass
             classnameForReportSelect.value = response.data.teacher.teacherClass
             programmeForReportSelect.value = response.data.teacher.teacherProgramme
+            classnameForAttendanceSelect.value = response.data.teacher.teacherClass
+            programmeForAttendanceSelect.value = response.data.teacher.teacherProgramme
             nameOfClass.setAttribute("disabled", true)
             addClass.setAttribute("disabled", true)
             classnameForReportSelect.setAttribute("disabled", true)
             programmeForReportSelect.setAttribute("disabled", true)
+            classnameForAttendanceSelect.setAttribute("disabled", true)
+            programmeForAttendanceSelect.setAttribute("disabled", true)
 
             const teacherClass = response.data.teacher.teacherClass
             const teacherProgramme = response.data.teacher.teacherProgramme
             console.log(teacherClass, teacherProgramme)
             getClassSubjects(teacherClass, teacherProgramme)
 
-            return 
+            return
         })
         .catch(function (error) {
             if (error.response) {
@@ -99,6 +103,9 @@ const getTeacherClass = () => {
                 console.log(error.response.status);
                 console.log(error.response.headers);
                 errorMsg = error.response.data.message
+                if (error.response.data.message == "Error: unauthorised access! Log in to resume your tasks")
+                    window.location.href =  "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+                    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -115,11 +122,7 @@ const getTeacherClass = () => {
                 title: "Error Processing Input",
                 text: errorMsg
             });
-            // sidebartoggler.style.display = "none";
-            // addScoresForm.style.display = "none";
-            // updateScoresForm.style.display = "none";
-            // reportScoresForm.style.display = "none";
-            // viewStudentsForm.style.display = "none";
+
         });
 };
 // get class subjects
@@ -167,7 +170,7 @@ const getClassSubjects = (teacherClass, teacherProgramme) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     getTeacherClass()
-    displayStudentsByClass(1)   
+    displayStudentsByClass(1)
 });
 
 // display all students
@@ -378,11 +381,11 @@ subjectOffered.addEventListener("change", (e) => {
     e.preventDefault();
     //allow subject to be selected from list or inputted if 'other' is chosen from list of subjects
     if (subjectOffered.value == "Other") {
-       otherSubjectOffered.removeAttribute("disabled")
+        otherSubjectOffered.removeAttribute("disabled")
         otherSubjectOffered.focus()
     }
     else {
-        otherSubjectOffered.value="";
+        otherSubjectOffered.value = "";
         otherSubjectOffered.setAttribute("disabled", true)
     }
 })
@@ -390,10 +393,10 @@ subjectOffered.addEventListener("change", (e) => {
 // on click of total field, check for errors in subject and scores input
 subjTotalScore.addEventListener("click", (e) => {
     e.preventDefault();
-     let subjectSelected = subjectOffered.value
-     if (subjectSelected == "Other") subjectSelected = otherSubjectOffered.value
-    
-    if (subjectOffered.value == "select one" || (subjectOffered.value == "Other" && otherSubjectOffered.value == "" )) {
+    let subjectSelected = subjectOffered.value
+    if (subjectSelected == "Other") subjectSelected = otherSubjectOffered.value
+
+    if (subjectOffered.value == "select one" || (subjectOffered.value == "Other" && otherSubjectOffered.value == "")) {
         Swal.fire({
             icon: "error",
             title: "Invalid Input!",
@@ -431,7 +434,7 @@ subjTotalScore.addEventListener("click", (e) => {
         }
         else if (subjTotalScore.value >= 0 && subjTotalScore.value < 50) {
             scoreRemark.value = "راسب"
-        }       
+        }
     }
 })
 
@@ -455,11 +458,11 @@ const updateScores = (scoreInfo, admNo) => {
                 text: response.data.message
             });
             admissionNumber.value = "";
-    teacherComment.value ="";
-    otherSubjectOffered.value ="";
-    subjTestScore.value = "";
-    subjExamScore.value = "";
-    subjTotalScore.value = "";
+            teacherComment.value = "";
+            otherSubjectOffered.value = "";
+            subjTestScore.value = "";
+            subjExamScore.value = "";
+            subjTotalScore.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -534,12 +537,12 @@ updateScoresButton.addEventListener("click", (e) => {
 closeStudentUpdateFormButton.addEventListener("click", (e) => {
     e.preventDefault();
     admissionNumber.value = "";
-    teacherComment.value ="";
-    otherSubjectOffered.value ="";
+    teacherComment.value = "";
+    otherSubjectOffered.value = "";
     subjTestScore.value = "";
     subjExamScore.value = "";
     subjTotalScore.value = "";
-    updateScoresForm.style.display="none";
+    updateScoresForm.style.display = "none";
 });
 
 
@@ -561,6 +564,8 @@ const termMarkObtained = document.getElementById("marksobtained")
 const termAveragePercent = document.getElementById("avgpercent")
 const tableReport = document.getElementById("table-report")
 const thirdTermReportTable = document.getElementById("table-report-thirdterm")
+const attendanceTableHeadRow = document.getElementById("stdattendance-tblheadrow")
+const attendanceTableBodyRow = document.getElementById("stdattendance-tblbodyrow")
 
 // view student scores
 const viewScores = (admNo, term, session) => {
@@ -578,7 +583,7 @@ const viewScores = (admNo, term, session) => {
             Swal.fire({
                 icon: "success",
                 title: "Successful",
-                text: "Scores returned for " + response.data.message
+                text: "Successfully returned " + response.data.message + "'s report"
             });
             // thirdTermReportTable.style.display = "none"
             for (let i = 0; i < response.data.report.length; i++) {
@@ -664,6 +669,22 @@ const viewScores = (admNo, term, session) => {
             termMarkObtained.value = response.data.marksObtained.toFixed(2)
             termAveragePercent.value = response.data.avgPercentage.toFixed(2)
             nameBar.innerText = `Displaying ${response.data.termName} term result for ${response.data.message}`
+
+            for (let k = 0; k < response.data.attendance.length; k++) {
+                let tblattdncdate = document.createElement("th")
+                tblattdncdate.innerText = response.data.attendance[k].termdate
+                attendanceTableHeadRow.appendChild(tblattdncdate)
+                let tblattdncstatus = document.createElement("td")
+                // tblattdncstatus.innerText = response.data.attendance[k].presence
+                if (response.data.attendance[k].presence == 'yes'){
+                    tblattdncstatus.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
+                    }
+                else {
+                    tblattdncstatus.innerHTML = `<i class="fa fa-minus isabsenticon" id="isabsenticon"></i>`
+                }
+                attendanceTableBodyRow.appendChild(tblattdncstatus)
+
+            }
         })
         .catch(function (error) {
             if (error.response) {
@@ -692,12 +713,13 @@ const viewScores = (admNo, term, session) => {
         });
 };
 
-
 // view report
 viewReportButton.addEventListener("click", (e) => {
     e.preventDefault();
     resultBody.innerHTML = "";
     thirdTermResultBody.innerHTML = "";
+    attendanceTableHeadRow.innerHTML = "";
+    attendanceTableBodyRow.innerHTML = "";
     termAveragePercent.value = "";
     termMarkObtained.value = "";
     nameBar.innerText = "";
@@ -741,7 +763,9 @@ admissionNumberForReport.addEventListener("change", (e) => {
     for (let i = 0; i < studentNamesStore.length; i++)
         if (studentNamesStore[i].admission_number == admissionNumberForReport.value) {
             nameBar.innerText = studentNamesStore[i].student_name
-        }    
+        }
+        attendanceTableHeadRow.innerHTML = "";
+        attendanceTableBodyRow.innerHTML = "";
 });
 // open report form
 viewReportLink.addEventListener("click", (e) => {
@@ -816,35 +840,35 @@ addSubjectSelect.addEventListener("change", (e) => {
         addOtherSubject.focus()
     }
     else {
-        addOtherSubject.value="";
+        addOtherSubject.value = "";
         addOtherSubject.setAttribute("disabled", true)
     }
-        // if subject is already on the table, reject same subject addition
-        if (addResultBody.childElementCount >= 1) {
-            for (let count = 0; count < addResultBody.childElementCount; count++) {
-                if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Hello!",
-                        text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
-                    });
-                }
+    // if subject is already on the table, reject same subject addition
+    if (addResultBody.childElementCount >= 1) {
+        for (let count = 0; count < addResultBody.childElementCount; count++) {
+            if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Hello!",
+                    text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
+                });
             }
         }
+    }
 })
 
 // add scores to result body on click of total input field
 addSubjecttotal.addEventListener("click", (e) => {
     e.preventDefault();
-    let subjectSelected = addSubjectSelect.value 
+    let subjectSelected = addSubjectSelect.value
     if (subjectSelected == "Other") subjectSelected = addOtherSubject.value
-    if (addSubjectSelect.value == "select one" || (addSubjectSelect.value == "Other" && addOtherSubject.value == "" )) {
+    if (addSubjectSelect.value == "select one" || (addSubjectSelect.value == "Other" && addOtherSubject.value == "")) {
         Swal.fire({
             icon: "error",
             title: "Invalid Input!",
             text: "Input a valid subject"
         });
-    }  
+    }
     else if (!classSubjectsReturned.includes(subjectSelected)) {
         Swal.fire({
             icon: "error",
@@ -1008,8 +1032,8 @@ submitScoresButton.addEventListener("click", (e) => {
             title: "Empty input detected",
             text: "Please fill out all fields"
         });
-    } 
-    else if (addResultBody.childElementCount != classSubjectsReturned.length){
+    }
+    else if (addResultBody.childElementCount != classSubjectsReturned.length) {
         Swal.fire({
             icon: "error",
             title: "Something missing",
@@ -1065,7 +1089,7 @@ const sessionForClassReport = document.getElementById("session-forclassreport")
 const tableHeadClassReport = document.getElementById("classreport-tblhead")
 const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
 const tableBodyForClassReport = document.getElementById("classreport-tblbody")
-const viewClassReportButton= document.getElementById("viewclassreport-btn")
+const viewClassReportButton = document.getElementById("viewclassreport-btn")
 
 
 
@@ -1079,6 +1103,8 @@ viewClassReportLink.addEventListener("click", (e) => {
 // close report form
 closeClassReportFormBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
     reportClassScoresForm.style.display = "none";
 });
 
@@ -1108,9 +1134,9 @@ const displayClassReport = (classname, programme, term, session) => {
             tblserialnohead.innerText = "Serial No"
             tbladmnohead.innerText = "Admission No"
             tblnamehead.innerText = "Name"
-                tableHeadRowClassReport.appendChild(tblserialnohead)
-                tableHeadRowClassReport.appendChild(tbladmnohead)
-                tableHeadRowClassReport.appendChild(tblnamehead)
+            tableHeadRowClassReport.appendChild(tblserialnohead)
+            tableHeadRowClassReport.appendChild(tbladmnohead)
+            tableHeadRowClassReport.appendChild(tblnamehead)
 
             let theclassSubjects = response.data.classSubjects
             for (let j = 0; j < theclassSubjects.length; j++) {
@@ -1120,10 +1146,10 @@ const displayClassReport = (classname, programme, term, session) => {
             }
             let tblmarksobtained = document.createElement("th")
             let tblavgpercentage = document.createElement("th")
-                tblmarksobtained.innerText = "Mark Obtained"
-                tblavgpercentage.innerText = "Average Percentage"
-                tableHeadRowClassReport.appendChild(tblmarksobtained)
-                tableHeadRowClassReport.appendChild(tblavgpercentage)
+            tblmarksobtained.innerText = "Mark Obtained"
+            tblavgpercentage.innerText = "Average Percentage"
+            tableHeadRowClassReport.appendChild(tblmarksobtained)
+            tableHeadRowClassReport.appendChild(tblavgpercentage)
 
             for (let i = 0; i < response.data.classExists.length; i++) {
                 let tblrow = document.createElement("tr")
@@ -1139,19 +1165,19 @@ const displayClassReport = (classname, programme, term, session) => {
 
                 for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
                     const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-                    for (let k = 3; k < tableHeadRowClassReport.children.length-2; k++) {
+                    for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                         const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
                         let tbltotalscore = document.createElement("td")
                         tbltotalscore.innerText = subjectToAdd.totalScore
                         tblrow.appendChild(tbltotalscore)
                     }
                     let tblmark = document.createElement("td")
-                let tblpercentage = document.createElement("td")
-                tblmark.innerText = requestedterm.marksObtained
-                tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
-                tblrow.appendChild(tblmark)
-                tblrow.appendChild(tblpercentage)
-                }    
+                    let tblpercentage = document.createElement("td")
+                    tblmark.innerText = requestedterm.marksObtained
+                    tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
+                    tblrow.appendChild(tblmark)
+                    tblrow.appendChild(tblpercentage)
+                }
                 tableBodyForClassReport.appendChild(tblrow)
             }
         })
@@ -1186,14 +1212,16 @@ const displayClassReport = (classname, programme, term, session) => {
 // display class scores on click of button
 viewClassReportButton.addEventListener("click", (e) => {
     e.preventDefault();
-    tableBodyForClassReport.innerHTML="";
-    tableHeadRowClassReport.innerHTML="";
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
+    tableBodyForAttendance.innerHTML = "";
+    tableHeadRowAttendance.innerHTML = "";
     const className = classnameForReportSelect.value
     const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
     const termName = termForClassReport.value
 
-    if (programme == "select a programme" || className == "select a class"){
+    if (programme == "select a programme" || className == "select a class") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input",
@@ -1201,16 +1229,171 @@ viewClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
-    displayClassReport(className, programme, termName, sessionName)
+        displayClassReport(className, programme, termName, sessionName)
 });
 
 // clear table body when class is changed
 classnameForReportSelect.addEventListener("change", (e) => {
     e.preventDefault();
-    tableBodyForClassReport.innerHTML="";
-    tableHeadRowClassReport.innerHTML="";
+    tableBodyForClassReport.innerHTML = "";
+    tableHeadRowClassReport.innerHTML = "";
 });
 
+
+
+// ******************** ATTENDANCE **************************************
+// **********************************************************************
+// const classReportLink = document.getElementById("viewclassreport-link")
+const attendanceForm = document.getElementById("markattendance-form")
+const closeAttendanceFormIcon = document.getElementById("markattendance-icon")
+const viewAttendanceLink = document.getElementById("markattendance-link")
+const classnameForAttendanceSelect = document.getElementById("classname-forattendance")
+const programmeForAttendanceSelect = document.getElementById("programme-forattendance")
+const termForAttendance = document.getElementById("term-forattendance")
+const sessionForAttendance = document.getElementById("session-forattendance")
+const tableHeadAttendance = document.getElementById("markattendance-tblhead")
+const tableHeadRowAttendance = document.getElementById("markattendance-tblheadrow")
+const tableBodyForAttendance = document.getElementById("markattendance-tblbody")
+const markAttendanceButton = document.getElementById("markattendance-btn")
+const dateInputField = document.getElementById("date-inputfield")
+const datepickIcon = document.getElementById("datepick-icon")
+
+
+
+// open class attendance form
+viewAttendanceLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    attendanceForm.style.display = "block";
+    sidebar.style.display = "none";
+
+    let tblserialnohead = document.createElement("th")
+    let tblnamehead = document.createElement("th")
+    let tblpresent = document.createElement("th")
+    tblserialnohead.innerText = "Serial No"
+    tblnamehead.innerText = "Name"
+    tblpresent.innerText = "Present"
+    tableHeadRowAttendance.appendChild(tblserialnohead)
+    tableHeadRowAttendance.appendChild(tblnamehead)
+    tableHeadRowAttendance.appendChild(tblpresent)
+    for (let j = 0; j < studentNamesStore.length; j++) {
+        let tblrow = document.createElement("tr")
+        let tblserialno = document.createElement("th")
+        // let tbladmno = document.createElement("td")
+        let tblname = document.createElement("td")
+        let tblpresence = document.createElement("td")
+        tblserialno.innerText = j + 1
+        // tbladmno.innerText = response.data.classExists[i].admissionNumber
+        tblname.innerText = studentNamesStore[j].student_name
+        tblpresence.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
+        tblrow.appendChild(tblserialno)
+        // tblrow.appendChild(tbladmno)
+        tblrow.appendChild(tblname)
+        tblrow.appendChild(tblpresence)
+        tableBodyForAttendance.appendChild(tblrow)
+    }
+});
+
+// click to indicate present or absent
+tableBodyForAttendance.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("fa-check")) {
+        e.target.classList.remove("fa-check")
+    }
+    else {
+        e.target.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
+    }
+
+});
+
+// close report form
+closeAttendanceFormIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    attendanceForm.style.display = "none";
+});
+
+// display class report
+const markAttendance = (stdattendance, classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/scores/markAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`, stdattendance,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text:  response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+
+// mark attendance on click of button
+markAttendanceButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    let attendance = []
+    let student_name
+    let termdate = dateInputField.value;
+    if (termdate == "mm/dd/yyyy") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please input a valid date, be sure to pick the correct one"
+        });
+    }
+    else {
+        const classname = classnameForAttendanceSelect.value
+        const programme = programmeForAttendanceSelect.value
+        const term = termForAttendance.value
+        const session = sessionForAttendance.value
+
+        for (let i = 0; i < tableBodyForAttendance.childElementCount; i++) {
+            let presence
+            student_name = tableBodyForAttendance.children[i].children[1].innerText
+            if (tableBodyForAttendance.children[i].children[2].firstElementChild.classList.contains("fa-check")) {
+                presence = "yes"
+            }
+            else { presence = "no" }
+            let stdAttendance = {
+                student_name,
+                termdate,
+                presence
+            }
+            attendance.push(stdAttendance)
+        }
+        markAttendance(attendance, classname, programme, term, session)
+    }
+});
 
 
 
