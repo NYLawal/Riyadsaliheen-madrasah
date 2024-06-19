@@ -1251,6 +1251,7 @@ const classnameForAttendanceSelect = document.getElementById("classname-foratten
 const programmeForAttendanceSelect = document.getElementById("programme-forattendance")
 const termForAttendance = document.getElementById("term-forattendance")
 const sessionForAttendance = document.getElementById("session-forattendance")
+const tableAttendance = document.getElementById("table-attendance")
 const tableHeadAttendance = document.getElementById("markattendance-tblhead")
 const tableHeadRowAttendance = document.getElementById("markattendance-tblheadrow")
 const tableBodyForAttendance = document.getElementById("markattendance-tblbody")
@@ -1266,6 +1267,11 @@ viewAttendanceLink.addEventListener("click", (e) => {
     attendanceForm.style.display = "block";
     sidebar.style.display = "none";
 
+    //clear table if already populated
+    tableBodyForAttendance.innerHTML = "";
+    tableHeadRowAttendance.innerHTML = "";
+    tableHeadAttendance.innerHTML = "";
+    //populate with fresh data
     let tblserialnohead = document.createElement("th")
     let tblnamehead = document.createElement("th")
     let tblpresent = document.createElement("th")
@@ -1299,7 +1305,9 @@ tableBodyForAttendance.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-check")) {
         e.target.classList.remove("fa-check")
     }
-    else {
+    else if (e.target.firstElementChild.classList.contains("fa")){  
+        // console.log(e.target)
+        // e.target.classList.add("fa-check")
         e.target.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
     }
 
@@ -1308,6 +1316,9 @@ tableBodyForAttendance.addEventListener("click", (e) => {
 // close report form
 closeAttendanceFormIcon.addEventListener("click", (e) => {
     e.preventDefault();
+    tableBodyForAttendance.innerHTML = "";
+    tableHeadRowAttendance.innerHTML = "";
+    tableHeadAttendance.innerHTML = "";
     attendanceForm.style.display = "none";
 });
 
