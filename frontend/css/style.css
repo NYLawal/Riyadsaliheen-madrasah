@@ -453,7 +453,15 @@ text-decoration: underline;
 .login-bkgd{
 margin-top: 10rem;
 }
-
+/* ****************** */
+.btn-green{
+    background-color: #71d443;
+    color: white;
+}
+.btn-green:hover{
+    background-color: #71d443;
+    color: black;
+}
 
 /* ==================================================
                     MEDIA QUERIES 

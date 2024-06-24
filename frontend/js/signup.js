@@ -269,3 +269,4 @@ toggleRepeatPassword.addEventListener("click", function () {
         toggleRepeatPassword.classList.add("fa-eye");
     }
 });
+

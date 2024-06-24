@@ -70,7 +70,7 @@ ul ul a {
 }
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
-#updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form{
+#updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form{
     display: none;
 }
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
@@ -132,18 +132,18 @@ html, body {
     height: 100%;
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input,  #promotestudents-form select,
-    #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, 
-    #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select {
+    #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #editstudentstatus-form select,
+    #editstudentstatus-form input, #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
     #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,
-    #viewclassscores-form input,  #subjectedit-form input {
+    #viewclassscores-form input,  #subjectedit-form input, #editstudentstatus-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select,
+    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select,
     #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select, #markattendance-form select{
     width: 100%;
     padding: 7px 0;
@@ -237,7 +237,7 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#markattendance-btn,
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn,
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn,
     button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn{
     width: 150px;
@@ -407,7 +407,7 @@ a.disable {
 #staffedit-queryform input{
     margin-bottom: 10px;
 }
-#submiteditquery-btn, #submitremovequery-btn, #submitassignteacher-btn, #promotestudents-btn, button#removenewsubject-btn, button#addnewsubject-btn{
+#submiteditquery-btn, #submitremovequery-btn, #submitassignteacher-btn, #promotestudents-btn, button#removenewsubject-btn, button#addnewsubject-btn, #editstudentstatus-btn{
     padding: 10px;
     border: none;
     border-radius: 5px; 
@@ -419,7 +419,7 @@ a.disable {
 #staff-formupdate{
     width: 80%;
 }
-#staffedit-queryform .closebtn-icon, #staffremove-form .closebtn-icon, #teacherassign-form .closebtn-icon, #promotestudents-form .closebtn-icon, #subjecteditclose-icon {
+#staffedit-queryform .closebtn-icon, #staffremove-form .closebtn-icon, #teacherassign-form .closebtn-icon, #promotestudents-form .closebtn-icon, #subjecteditclose-icon, #editstudentstatus-form .closebtn-icon {
     position: absolute;
     right: 2.5rem;
     top: 2.5rem

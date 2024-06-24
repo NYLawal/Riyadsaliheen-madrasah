@@ -56,13 +56,6 @@ const token = localStorage.getItem('access_token')
 toggler.addEventListener("click", (e) => {
     sidebar.style.display = "block"
 });
-//add session
-// addNewSession.addEventListener("click", (e) => {
-//    let optionnewsession = document.createElement("option")
-//     optionnewsession.value = "2024/2025"
-//     optionnewsession.innerText = "2024/2025"
-//     addSession.appendChild(optionnewsession)
-// });
 
 // get teacher's class
 const getTeacherClass = () => {

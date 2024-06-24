@@ -826,9 +826,20 @@
                   <option value="barnomij">Barnomij</option>
                 </select>
               </div>
-              <div class="btn-block">
+              <!-- <div class="btn-block">
                 <button type="submit" href="/" id="studupd-btn">Update</button>
-              </div>
+              </div> -->
+              <div class="row" style="padding-left: 0">
+                <div class="col-12 col-md-6 btn-block">
+                  <button type="button" id="studupd-btn" href="/">
+                    Update
+                  </button>
+                </div>
+                <div class="col-12 col-md-6 btn-block">
+                  <button type="button" id="statusupd-btn" href="/">
+                   Edit Status
+                  </button>
+                </div>
               <div class="d-flex gap-2 justify-content-around mt-5">
                 <a href="#!" class="green-text fw-bold text-decoration-none" id="clearstdupdfrm-btn">Clear Form</a>
                 <a href="#!" class="green-text fw-bold text-decoration-none" id="closestdupdfrm-btn">Close</a>
@@ -836,6 +847,58 @@
             </form>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Edit student status -->
+    <section class="bg-light mb-5 py-3 editstudentstatus-form" id="editstudentstatus-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div class="card border border-light-subtle rounded-3 shadow-sm">
+              <div class="card-body p-5">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="editstudentstatus-closeicon"
+                  aria-label="Close"></button>
+                <div class="text-center mb-3">
+                  <a href="#!">
+                    <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+                  </a>
+                </div>
+                <h2 class="fs-6 fw-normal text-secondary mb-3" id="staffedit-h2" style="text-align: justify;">By submitting this form, you're confirming that the student whose admission number appears 
+                  below is no longer a student of your madrasah. This changes the status of the student to 'past'.
+                </h2>
+                <h2 class="fs-6 fw-normal green-text mb-4" id="staffedit-h2" style="text-align: justify">If you wish to continue, choose the appropriate reason in the dropdown below, then click the submit button.
+                </h2>
+                <form action="#!">
+                  <div class="row gy-2 overflow-hidden">
+                    <div class="col-12">
+                      <div class="">
+                        <label for="admnofor-nonstudentstatus" class="form-label">Admission No.</label>
+                        <input name="" id="admnofor-nonstudentstatus">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="">
+                        <label for="nonstudentstatus-select" class="form-label">Reason for non-studentship</label>
+                        <select name="" id="nonstudentstatus-select">
+                          <option value="graduated">Graduated</option>
+                          <option value="left">Left</option>
+                          <option value="expelled">Expelled</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 submitbtn-div">
+                      <div class="d-grid my-3 mt-4">
+                        <button class="btn btn-lg" type="submit" id="editstudentstatus-btn">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </section>
 

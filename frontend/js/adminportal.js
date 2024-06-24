@@ -1114,10 +1114,17 @@ clearStdFrmLink.addEventListener("click", (e) => {
     studentMaritalStatus.value = "";
 });
 
-//clos e student form
+//close student form
 closeStdFrmLink.addEventListener("click", (e) => {
     e.preventDefault();
     addStudentForm.style.display = "none"
+});
+
+// redirect to teacher's portal to be able to add scores for student
+addStudentScores.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
 });
 
 
@@ -1678,6 +1685,12 @@ const updateStudentForm = document.getElementById('studentupdate-form')
 const cancelStudentUpdateButton = document.getElementById('clearstdupdfrm-btn')
 const closeStudentUpdateButton = document.getElementById('closestdupdfrm-btn')
 const UpdateStudentButton = document.getElementById('studupd-btn')
+const studentStatusUpdateButton = document.getElementById('statusupd-btn')
+const editStudentStatusButton = document.getElementById('editstudentstatus-btn')
+const editStudentStatusCloseIcon = document.getElementById('editstudentstatus-closeicon')
+const editStudentStatusForm = document.getElementById('editstudentstatus-form')
+const admNoForNonStudentStatus = document.getElementById('admnofor-nonstudentstatus')
+const selectForNonStudentStatus = document.getElementById('nonstudentstatus-select')
 
 const studentAdmNoToEdit = document.getElementById('studupd-admno')
 const studentFirstNameUpdate = document.getElementById("studupd-firstname")
@@ -1916,12 +1929,89 @@ cancelStudentUpdateButton.addEventListener("click", (e) => {
     studentProgrammeUpdate.value = ""
 });
 
-// add student scores
-addStudentScores.addEventListener("click", (e) => {
+// click edit status button on the main edit page to display the edit form
+studentStatusUpdateButton.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+    editStudentStatusForm.style.display = "block";
+    if (studentAdmNoToEdit.value == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "You need to input the student's admission number"
+        });
+    }
+    else {
+    admNoForNonStudentStatus.value = studentAdmNoToEdit.value;
+    studentAdmNoToEdit.value = "";
+    updateStudentForm.style.display = "none";
+    sidebar.style.display = "none";
+    }
 });
+
+// close edit students status form
+editStudentStatusCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    editStudentStatusForm.style.display = "none";
+});
+
+
+// update student
+const editStudentStatus = (admNo, studentstatus) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/updateStatus/?admNo=${admNo}`, studentstatus, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+           admNoForNonStudentStatus.value = "";
+           selectForNonStudentStatus.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click edit status button to update student status
+editStudentStatusButton.addEventListener("click", (e) => {
+    e.preventDefault();
+   const admNo = admNoForNonStudentStatus.value
+   const status = selectForNonStudentStatus.value
+   const formdata = {
+    status
+   }
+    editStudentStatus(admNo, formdata)
+});
+
 
 
 // REPORT ********************************************************************
@@ -2148,8 +2238,6 @@ const attendanceLabel = document.getElementById("attendance-label")
 const attendanceTableHeadRow = document.getElementById("classattendance-tblheadrow")
 const attendanceTableBodyRow = document.getElementById("classattendance-tblbodyrow")
 const attendanceTableBody = document.getElementById("classattendance-tblbody")
-
-
 
 
 // open class report form
