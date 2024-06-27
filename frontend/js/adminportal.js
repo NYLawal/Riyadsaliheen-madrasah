@@ -1932,8 +1932,7 @@ cancelStudentUpdateButton.addEventListener("click", (e) => {
 // click edit status button on the main edit page to display the edit form
 studentStatusUpdateButton.addEventListener("click", (e) => {
     e.preventDefault();
-    editStudentStatusForm.style.display = "block";
-    if (studentAdmNoToEdit.value == ""){
+    if (studentAdmNoToEdit.value == "") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
@@ -1941,10 +1940,11 @@ studentStatusUpdateButton.addEventListener("click", (e) => {
         });
     }
     else {
-    admNoForNonStudentStatus.value = studentAdmNoToEdit.value;
-    studentAdmNoToEdit.value = "";
-    updateStudentForm.style.display = "none";
-    sidebar.style.display = "none";
+        editStudentStatusForm.style.display = "block";
+        admNoForNonStudentStatus.value = studentAdmNoToEdit.value;
+        studentAdmNoToEdit.value = "";
+        updateStudentForm.style.display = "none";
+        sidebar.style.display = "none";
     }
 });
 
@@ -1971,8 +1971,8 @@ const editStudentStatus = (admNo, studentstatus) => {
                 title: "Successful",
                 text: response.data.message
             });
-           admNoForNonStudentStatus.value = "";
-           selectForNonStudentStatus.value = "";
+            admNoForNonStudentStatus.value = "";
+            selectForNonStudentStatus.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -2004,11 +2004,19 @@ const editStudentStatus = (admNo, studentstatus) => {
 // click edit status button to update student status
 editStudentStatusButton.addEventListener("click", (e) => {
     e.preventDefault();
-   const admNo = admNoForNonStudentStatus.value
-   const status = selectForNonStudentStatus.value
-   const formdata = {
-    status
-   }
+    const admNo = admNoForNonStudentStatus.value
+    const status = selectForNonStudentStatus.value
+    const formdata = {
+        status
+    }
+    if (admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "You need to input the student's admission number"
+        });
+    }
+    else
     editStudentStatus(admNo, formdata)
 });
 
@@ -2352,7 +2360,7 @@ const displayClassReport = (classname, programme, term, session) => {
                 //attendance
                 for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
                     let requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-                    if (i==0 && j == 0){  //adding term dates as heading for attendance table
+                    if (i == 0 && j == 0) {  //adding term dates as heading for attendance table
                         for (let k = 0; k < requestedterm.attendance.length; k++) {
                             const dateToAdd = requestedterm.attendance[k].termdate
                             let tbldate = document.createElement("th")
@@ -2363,12 +2371,12 @@ const displayClassReport = (classname, programme, term, session) => {
                     for (let k = 0; k < requestedterm.attendance.length; k++) {
                         const presentStatus = requestedterm.attendance[k].presence
                         let tblpresence = document.createElement("td")
-                        if (presentStatus == 'yes'){
-                             tblpresence.innerText = "ح"
+                        if (presentStatus == 'yes') {
+                            tblpresence.innerText = "ح"
                             // atdtblrow.appendChild(tblpresence)
-                            }
+                        }
                         else {
-                             tblpresence.innerText = "-"
+                            tblpresence.innerText = "-"
                             //  atdtblrow.appendChild(tblpresence)
                         }
                         // tblpresence.innerText = presentStatus

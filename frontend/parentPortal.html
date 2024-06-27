@@ -15,351 +15,497 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link href="./css/styleportal.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link
+      href="./css/styleportal.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      href="./css/style.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
   </head>
   <body>
     <main>
       <!-- navigation bar begins-->
       <nav
-      class="navbar navbar-expand-lg fixed-top"
-      style="background-color: #d0f1c1"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><img src="../images/logo2.png" alt="logo" width="90" height="90"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../index.html"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Academics
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
-                <li><a class="dropdown-item" href="programmes.html">Programmes</a></li>
-                <li><a class="dropdown-item" href="login.html">Online Studies</a></li>
-                <li><a class="dropdown-item" href="login.html">Check Result</a></li>
-              </ul>
-            </li>             
-            <li class="nav-item">
-              <a class="nav-link" href="careers.html">Careers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Quick Links
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="calendar.html">Term Calendar</a></li>
-                <li><a class="dropdown-item" href="newsandevents.html">News and Events</a></li>
-                <li><a class="dropdown-item" href="assessments.html">Monthly Quiz</a></li>
-                <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                <li><a class="dropdown-item" href="donate.html">Donate</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown active">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Portal
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="login.html">Staff</a></li>
-                <li><a class="dropdown-item" href="login.html">Parent</a></li>
-                <li><a class="dropdown-item" href="login.html">Student</a></li>
-              </ul>
-            </li>        
-          </ul>
+        class="navbar navbar-expand-lg fixed-top"
+        style="background-color: #d0f1c1"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img src="../images/logo2.png" alt="logo" width="90" height="90"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Academics
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="admissions.html"
+                      >Admissions</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="programmes.html"
+                      >Programmes</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="login.html"
+                      >Online Studies</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="login.html">Check Result</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="careers.html">Careers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Quick Links
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="calendar.html"
+                      >Term Calendar</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="newsandevents.html"
+                      >News and Events</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="assessments.html"
+                      >Monthly Quiz</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="gallery.html">Gallery</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="donate.html">Donate</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown active">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Portal
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="login.html">Staff</a></li>
+                  <li><a class="dropdown-item" href="login.html">Parent</a></li>
+                  <li>
+                    <a class="dropdown-item" href="login.html">Student</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-    <!-- navigation bar ends-->
-      
-      <div class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header" id="header-wrapper">
+      </nav>
+      <!-- navigation bar ends-->
+
+      <div
+        class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header"
+        id="header-wrapper"
+      >
         <h1 class="display-5 fw-bold text-white">Welcome to Your Portal</h1>
       </div>
 
-
       <!-- Header -->
-<header id="header-demo">
-  <nav class="navbar navbar-expand-md bsb-navbar-3" style="background-color: #d0f1c1;">
-    <div class="container">
-      <ul class="navbar-nav">
-        <li class="nav-item me-3">
-          <a class="nav-link" href="#!" data-bs-toggle="offcanvas" data-bs-target="#bsbSidebar1" aria-controls="bsbSidebar1">
-            <i class="navbar-toggler-icon" id="toggler-icon"></i>
-            <span style="color: rgb(16, 59, 2);">click here</span>
-          </a>
-        </li>
-      </ul>
-     
-    </div>
-  </nav>
-</header>
+      <header id="header-demo">
+        <nav
+          class="navbar navbar-expand-md bsb-navbar-3"
+          style="background-color: #d0f1c1"
+        >
+          <div class="container">
+            <ul class="navbar-nav">
+              <li class="nav-item me-3">
+                <a
+                  class="nav-link"
+                  href="#!"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#bsbSidebar1"
+                  aria-controls="bsbSidebar1"
+                >
+                  <i class="navbar-toggler-icon" id="toggler-icon"></i>
+                  <span style="color: rgb(16, 59, 2)">click here</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-<!-- Aside -->
-<aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1" aria-labelledby="bsbSidebarLabel1">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="bsbSidebarLabel1">Assalam Alaykum <span></span> </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="list-unstyled components">
-      <p class="text-tasks"> Your Tasks</p>
-      <li class="">
-          <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#addSubmenu" aria-controls="addSubmenu">Take Assessment</a>
-          <ul class="collapse list-unstyled" id="addSubmenu">
-              <li>
+      <!-- Aside -->
+      <aside
+        class="bsb-sidebar-1 offcanvas offcanvas-start"
+        tabindex="-1"
+        id="bsbSidebar1"
+        aria-labelledby="bsbSidebarLabel1"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="bsbSidebarLabel1">
+            Assalam Alaykum <span></span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="list-unstyled components">
+            <p class="text-tasks">Your Tasks</p>
+            <li class="">
+              <a
+                href=""
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                role="button"
+                class="dropdown-toggle"
+                data-bs-target="#addSubmenu"
+                aria-controls="addSubmenu"
+                >Take Assessment</a
+              >
+              <ul class="collapse list-unstyled" id="addSubmenu">
+                <li>
                   <a href="#">assignment</a>
-              </li>
-              <li>
+                </li>
+                <li>
                   <a href="#">quiz</a>
-              </li>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" id="resultcheck">Check Result & Attendance</a>
+            </li>
+            <li>
+              <a href="#" id="progressreport">View Performance Report</a>
+            </li>
+            <li>
+              <a href="#" id="resultsheet">Download Result Sheet</a>
+            </li>
           </ul>
-      </li>
-      <li>
-          <a href="#" id="resultcheck">Check Result</a>  
-      </li>
-      <li>
-        <a href="#" id="attendanceview">View Term Attendance</a>
-      </li>
-      <li>
-        <a href="#" id="progressreport">Progress Report</a>
-      </li>
-  </ul>
-  <ul class="list-unstyled components components2">
-    <li>
-      <a href="#" id="logout">Logout</a>
-  </li>
-  </ul>
-  </div>
-</aside>
+          <ul class="list-unstyled components components2">
+            <li>
+              <a href="#" id="logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
 
-<!-- scores report form -->
-<section
-class="bg-light pt-5 pb-5 reportscores-form"
-id="reportscores-form"
->
-<div class="container" style="position:relative">
-  <div class="row justify-content-md-center">
-    <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
-      <h3 class="mb-3 display-5 text-center">Term Report</h3>
-      <p class="text-secondary mb-1 text-center">
-        To view your ward's report or yours, input the admission number as well
-        as the term and session in the form below.
-      </p>
-      <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
-    </div>
-  </div>
-  <div class="row justify-content-lg-center">
-    <div class="col-12 col-lg-9">
-      <div class="testbox">
-        <form
-          action="/"
-          class="py-4 px-md-4 px-2"
-          id="scoresreport"
-          style="background-color: #d0f1c1; box-shadow: none"
-        >                
-      <div class="row gy-4 gy-xl-5 mb-3">
-        <div class="col-12 col-md-4">
-          <label for="admNo-forreport" class="form-label"
-            >Admission No <span class="text-danger">*</span></label
-          >
-          <div class="">
-            <input name="admNo-forreport" id="admNo-forreport" style="background-color: white;">
+      <!-- scores report form -->
+      <section
+        class="bg-light pt-5 pb-5 reportscores-form"
+        id="reportscores-form"
+      >
+        <div class="container" style="position: relative">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+              <h3 class="mb-3 display-5 text-center">
+                Term Result and Attendance Report
+              </h3>
+              <p class="text-secondary mb-1 text-center">
+                To view your ward's report or yours, input the admission number
+                as well as the term and session in the form below.
+              </p>
+              <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+            </div>
           </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <label for="term-forreport" class="form-label"
-            >Term <span class="text-danger">*</span></label
-          >
-          <div class="input-group">
-            <select style="background-color: white" id="term-forreport">
-              <option value="first">First</option>
-              <option value="second">Second</option>
-              <option value="third">Third</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <label for="session-forreport" class="form-label"
-            >Session <span class="text-danger">*</span></label
-          >
-          <div class="input-group">
-            <select
-              style="background-color: white"
-              id="session-forreport"
-            >
-              <option value="2023/2024">2023/2024</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row mt-0 mb-3" id="student-namebar">
-       <h3 id="namebar"></h3>
-      </div>
-      <label for="table" class="form-label mb-0">Scores</label>
-      <div class="table">
-       <table class="table table-bordered bsb-table-xl mt-2 px-0 mb-3" id="table-report">
-         <thead>
-           <tr>
-             <th scope="col">#</th>
-             <th scope="col">Subject</th>
-             <th scope="col">Test</th>
-             <th scope="col">Exam</th>
-             <th scope="col">Total</th>
-             <th scope="col">Remark</th>
-           </tr>
-         </thead>
-         <tbody id="result-body"></tbody>
-       </table>
-      </div>
-      <div class="table-responsive mb-3">
-       <table
-         class="table table-bordered bsb-table-xl text-nowrap align-middle"
-         id="table-report-thirdterm"
-       >
-         <thead>
-           <tr id="">
-             <th scope="col">#</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Test</th>
-            <th scope="col">Exam</th>
-            <th scope="col">Total</th>
-            <th scope="col">First Term</th>
-            <th scope="col">Second Term</th>
-            <th scope="col">Cumulative Score</th>
-            <th scope="col">Cumulative Average</th>
-            <th scope="col">Remark</th>
-           </tr>
-         </thead>
-         <tbody id="thirdterm-resultbody"></tbody>
-       </table>
-     </div>
-      <form action="#!">
-       <div class="row gy-4 gy-xl-5 mb-3 ">
-         <div class="col-4">
-           <label for="grandtotal" class="form-label-marks"
-             >Grand Total </label
-           >
-               <input type="text" placeholder="" id="grandtotal" />  
-         </div>
-         <div class="col-4">
-           <label for="marksobtained" class="form-label-marks"
-             >Marks Obtained </label
-           >
-               <input type="text" placeholder="" id="marksobtained" />  
-         </div>
-         <div class="col-4">
-           <label for="avgpercent" class="form-label-marks"
-             >Average Percentage </label
-           >
-               <input type="text" placeholder="" id="avgpercent" />  
-         </div>
-       </div>
-        <div class="row gy-4 gy-xl-5">
-          <div class="col-12">
-            <label for="comment" class="form-label">Comment</label>
-            <textarea
-              class="form-control"
-              id="comment-report"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-        </div>
-        <div class="row mt-4" style="padding-left: 0">
-          <!-- <div class="col"></div> -->
-          <div class="col-12 col-md-6 btn-block">
-            <button type="button" id="viewreport-btn" href="/">
-              View Report
-            </button>
-          </div>
-          <div class="col-12 col-md-6 btn-block">
-            <button type="button" id="closereportform-btn" href="/">
-              Close Form
-            </button>
-          </div>
-          <!-- <div class="col"></div> -->
-        </div>
-      </form>
-    <!-- </div>
+          <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+              <div class="testbox">
+                <form
+                  action="/"
+                  class="py-4 px-md-4 px-2"
+                  id="scoresreport"
+                  style="background-color: #d0f1c1; box-shadow: none"
+                >
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col-12 col-md-4">
+                      <label for="admNo-forreport" class="form-label"
+                        >Admission No <span class="text-danger">*</span></label
+                      >
+                      <div class="">
+                        <input
+                          name="admNo-forreport"
+                          id="admNo-forreport"
+                          style="background-color: white"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="term-forreport" class="form-label"
+                        >Term <span class="text-danger">*</span></label
+                      >
+                      <div class="input-group">
+                        <select
+                          style="background-color: white"
+                          id="term-forreport"
+                        >
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="session-forreport" class="form-label"
+                        >Session <span class="text-danger">*</span></label
+                      >
+                      <div class="input-group">
+                        <select
+                          style="background-color: white"
+                          id="session-forreport"
+                        >
+                          <option value="2023/2024">2023/2024</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-0 mb-3" id="student-namebar">
+                    <h3 id="namebar"></h3>
+                  </div>
+                  <label for="table" class="form-label mb-0">Scores</label>
+                  <div class="table">
+                    <table
+                      class="table table-bordered bsb-table-xl mt-2 px-0 mb-3"
+                      id="table-report"
+                    >
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Subject</th>
+                          <th scope="col">Test</th>
+                          <th scope="col">Exam</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody id="result-body"></tbody>
+                    </table>
+                  </div>
+                  <div class="table-responsive mb-3">
+                    <table
+                      class="table table-bordered bsb-table-xl text-nowrap align-middle"
+                      id="table-report-thirdterm"
+                    >
+                      <thead>
+                        <tr id="">
+                          <th scope="col">#</th>
+                          <th scope="col">Subject</th>
+                          <th scope="col">Test</th>
+                          <th scope="col">Exam</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">First Term</th>
+                          <th scope="col">Second Term</th>
+                          <th scope="col">Cumulative Score</th>
+                          <th scope="col">Cumulative Average</th>
+                          <th scope="col">Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody id="thirdterm-resultbody"></tbody>
+                    </table>
+                  </div>
+                  <form action="#!">
+                    <div class="row gy-4 gy-xl-5 mb-3">
+                      <div class="col-4">
+                        <label for="grandtotal" class="form-label-marks"
+                          >Grand Total
+                        </label>
+                        <input type="text" placeholder="" id="grandtotal" />
+                      </div>
+                      <div class="col-4">
+                        <label for="marksobtained" class="form-label-marks"
+                          >Marks Obtained
+                        </label>
+                        <input type="text" placeholder="" id="marksobtained" />
+                      </div>
+                      <div class="col-4">
+                        <label for="avgpercent" class="form-label-marks"
+                          >Average Percentage
+                        </label>
+                        <input type="text" placeholder="" id="avgpercent" />
+                      </div>
+                    </div>
+                    <div class="row gy-4 gy-xl-5">
+                      <div class="col-12">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea
+                          class="form-control"
+                          id="comment-report"
+                          rows="3"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <p>Term Attendance</p>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-light bsb-table-xl text-nowrap align-middle text-center"
+                          id="table-attendance"
+                        >
+                          <thead id="classattendance-tblhead">
+                            <tr id="stdattendance-tblheadrow"></tr>
+                          </thead>
+                          <tbody id="stdattendance-tblbody">
+                            <tr id="stdattendance-tblbodyrow"></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row mt-4" style="padding-left: 0">
+                      <!-- <div class="col"></div> -->
+                      <div class="col-12 col-md-6 btn-block">
+                        <button type="button" id="viewreport-btn" href="/">
+                          View Report
+                        </button>
+                      </div>
+                      <div class="col-12 col-md-6 btn-block">
+                        <button type="button" id="closereportform-btn" href="/">
+                          Close Form
+                        </button>
+                      </div>
+                      <!-- <div class="col"></div> -->
+                    </div>
+                  </form>
+                  <!-- </div>
          </div> -->
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- Chart student report -->
-<!-- <section class="py-3 py-md-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
-        <div class="card widget-card border-light shadow-sm">
-          <div class="card-body p-4">
-            <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
-              <div class="mb-3 mb-sm-0">
-                <h5 class="card-title widget-card-title">Revenue</h5>
-              </div>
-              <div>
-                <select class="form-select text-secondary border-light-subtle">
-                  <option value="1">Month</option>
-                  <option value="2">Week</option>
-                  <option value="3">Day</option>
-                </select>
+                </form>
               </div>
             </div>
-            <div id="bsb-chart-5"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section> -->
+      </section>
 
+      <!-- student report by chart-->
+      <section class="py-3 py-md-5" id="performance-report">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-body p-4">
+                  <button type="button" class="btn-close btn-close closebtn-icon" id="performancereportclose-icon"
+                  aria-label="Close"></button>
+                    <div class="mb-4">
+                      <h5 class="card-title widget-card-title">
+                        Performance Report
+                      </h5>
+                      <p class="green-text"><b>Note: </b> You can view report by subject/term/session. Click on 'select view' below to change views. Please check that all fields are filled/selected correctly before clicking the 'View Report' button.</p>
+                    </div>
+                  <div class="row justify-content-md-center mb-3">
+                    <div class="col-6">
+                      <div>
+                        <label for="admNo-visualreport" class="form-label"
+                          >Admission No: 
+                        </label>
+                        <input
+                          name=""
+                          id="admNo-forvisualreport"
+                          style="background-color: white; border: 1px solid rgb(216, 213, 213);"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-6 mt-4 mt-md-0">
+                      <button type="button" id="viewprogressreport-btn" href="/" class="mt-1 mt-md-0">
+                        View Report
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row justify-content-md-center">
+                    <div class="col-4">
+                      <select class="text-secondary border-light-subtle" id="viewselect-forvisualreport">
+                        <option selected>select view</option>
+                        <option value="subject">By Subject</option>
+                        <option value="term">By Term</option>
+                        <option value="session">By Session</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select class="text-secondary border-light-subtle" id="sessionselect-forvisualreport">
+                        <option selected>select session</option>
+                        <option value="2023/2024">2023/2024</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select class="text-secondary border-light-subtle" id="termselect-forvisualreport">
+                        <option selected>select term</option>
+                        <option value="first">First</option>
+                        <option value="second">Second</option>
+                        <option value="third">Third</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="bsb-chart-4" class="mt-4 mt-md-5" style="display: none;">
+                    <canvas id="progressChart"></canvas>
+                    <!-- <canvas id="progressChartTermly"></canvas> -->
+                  </div>
+                  <div id="bsb-chart-5" class="mt-4 mt-md-5" style="display: none;">
+                    <!-- <canvas id="progressChart"></canvas> -->
+                    <canvas id="progressChartTermly"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
 
-      
       <!-- Footer  -->
       <footer class="footer">
         <!-- Widgets - Bootstrap Brain Component -->
@@ -389,7 +535,10 @@ id="reportscores-form"
                     <a class="text-decoration-none" href="tel:+2348163068097"
                       >+234 816 306 8097</a
                     >
-                    <a class="text-decoration-none"  style="display: block" href="tel:+2348020721422"
+                    <a
+                      class="text-decoration-none"
+                      style="display: block"
+                      href="tel:+2348020721422"
                       >+234 802 072 1422</a
                     >
                     <a
@@ -423,7 +572,9 @@ id="reportscores-form"
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="gallery.html" class="text-decoration-none">Gallery</a>
+                      <a href="gallery.html" class="text-decoration-none"
+                        >Gallery</a
+                      >
                     </li>
                     <li class="mb-2">
                       <a href="assessments.html" class="text-decoration-none"
@@ -431,7 +582,9 @@ id="reportscores-form"
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="donate.html" class="text-decoration-none">Support Us</a>
+                      <a href="donate.html" class="text-decoration-none"
+                        >Support Us</a
+                      >
                     </li>
                   </ul>
                 </div>
@@ -584,6 +737,11 @@ id="reportscores-form"
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script
+      src="https://kit.fontawesome.com/0a5d1384fe.js"
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

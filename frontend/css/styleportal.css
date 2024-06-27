@@ -70,7 +70,9 @@ ul ul a {
 }
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
-#updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form{
+#updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form,
+#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report
+{ 
     display: none;
 }
 #cancel-btn:hover, #close-btn:hover, #clearfrm-btn:hover, #closefrm-btn:hover{
@@ -386,7 +388,7 @@ html, body {
         background-color: #7ff549;
     }
 
-   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon, #markattendance-form .closebtn-icon{
+   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon, #markattendance-form .closebtn-icon, #performance-report .closebtn-icon{
    position: absolute;
    right: 20px;
 }
@@ -494,6 +496,16 @@ a.disable {
     display: none;
     font-weight: bold;
     font-size: 24px;
+}
+#viewprogressreport-btn{
+    border-radius: 5px;
+    background-color: #57b62b;
+    color: white;
+    border: none;
+    padding:3px 5px
+}
+#viewprogressreport-btn:hover{
+color:black;
 }
 
 

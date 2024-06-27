@@ -133,6 +133,7 @@ const getClassSubjects = (teacherClass, teacherProgramme) => {
             //     classSubjectsReturned.push(response.data.classExists.subjects[i])
             // }
             classSubjectsReturned = [...response.data.classExists.subjects];
+            console.log("classSubjectsReturned", classSubjectsReturned)
         })
         .catch(function (error) {
             if (error.response) {
@@ -1222,6 +1223,7 @@ viewClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
+       console.log(className, programme, termName, sessionName)
         displayClassReport(className, programme, termName, sessionName)
 });
 
@@ -1306,7 +1308,7 @@ tableBodyForAttendance.addEventListener("click", (e) => {
 
 });
 
-// close report form
+// close attendance form
 closeAttendanceFormIcon.addEventListener("click", (e) => {
     e.preventDefault();
     tableBodyForAttendance.innerHTML = "";
@@ -1315,7 +1317,7 @@ closeAttendanceFormIcon.addEventListener("click", (e) => {
     attendanceForm.style.display = "none";
 });
 
-// display class report
+// mark attendance 
 const markAttendance = (stdattendance, classname, programme, term, session) => {
     let errorMsg;
     axios
@@ -1328,6 +1330,7 @@ const markAttendance = (stdattendance, classname, programme, term, session) => {
         )
         .then(function (response) {
             console.log(response)
+            dateInputField.value = "";
             Swal.fire({
                 icon: "success",
                 title: "Successful",
@@ -1368,7 +1371,7 @@ markAttendanceButton.addEventListener("click", (e) => {
     let attendance = []
     let student_name
     let termdate = dateInputField.value;
-    if (termdate == "mm/dd/yyyy") {
+    if (termdate == "") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
