@@ -74,12 +74,24 @@ const getTeacherClass = () => {
             programmeForReportSelect.value = response.data.teacher.teacherProgramme
             classnameForAttendanceSelect.value = response.data.teacher.teacherClass
             programmeForAttendanceSelect.value = response.data.teacher.teacherProgramme
+            takeAssessmentStdClass.value = response.data.teacher.teacherClass
+            takeAssessmentStdProgramme.value = response.data.teacher.teacherProgramme
+            setAssessmentStdClass.value = response.data.teacher.teacherClass
+            setAssessmentStdProgramme.value = response.data.teacher.teacherProgramme
+            delAssessmentStdClass.value = response.data.teacher.teacherClass
+            delAssessmentStdProgramme.value = response.data.teacher.teacherProgramme
             nameOfClass.setAttribute("disabled", true)
             addClass.setAttribute("disabled", true)
             classnameForReportSelect.setAttribute("disabled", true)
             programmeForReportSelect.setAttribute("disabled", true)
             classnameForAttendanceSelect.setAttribute("disabled", true)
             programmeForAttendanceSelect.setAttribute("disabled", true)
+            takeAssessmentStdClass.setAttribute("disabled", true)
+            takeAssessmentStdProgramme.setAttribute("disabled", true)
+            setAssessmentStdClass.setAttribute("disabled", true)
+            setAssessmentStdProgramme.setAttribute("disabled", true)
+            delAssessmentStdClass.setAttribute("disabled", true)
+            delAssessmentStdProgramme.setAttribute("disabled", true)
 
             const teacherClass = response.data.teacher.teacherClass
             const teacherProgramme = response.data.teacher.teacherProgramme
@@ -178,6 +190,7 @@ const displayStudentsByClass = (page) => {
         })
         .then(function (response) {
             console.log(response)
+            studentTableBody.innerHTML = "";
             for (let j = 0; j < response.data.students.length; j++) {
                 let option = document.createElement("option")
                 option.innerText = response.data.students[j].admNo
@@ -214,9 +227,7 @@ const displayStudentsByClass = (page) => {
                 let tblcol9 = document.createElement("td")
                 let tblcol10 = document.createElement("td")
                 let tblcol11 = document.createElement("td")
-                // let tblcol12 = document.createElement("td")
-                // let tblcol13 = document.createElement("td")
-                // let tblcol14 = document.createElement("td")
+
                 tblcol0.innerText = response.data.studentsperpage[i].serialNo
                 tblcol1.innerText = response.data.studentsperpage[i].admNo
                 tblcol2.innerText = response.data.studentsperpage[i].firstName
@@ -229,10 +240,7 @@ const displayStudentsByClass = (page) => {
                 tblcol9.innerText = response.data.studentsperpage[i].parentEmail
                 tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
                 tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
-                // tblcol12.innerText = response.data.studentsperpage[i].programme
-                // tblcol13.innerText = response.data.studentsperpage[i].presentClass
-                // tblcol14.innerText = response.data.studentsperpage[i].dateOfRegistration
-                tblrow.appendChild(tblcol0)
+                
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -244,9 +252,6 @@ const displayStudentsByClass = (page) => {
                 tblrow.appendChild(tblcol9)
                 tblrow.appendChild(tblcol10)
                 tblrow.appendChild(tblcol11)
-                // tblrow.appendChild(tblcol12)
-                // tblrow.appendChild(tblcol13)
-                // tblrow.appendChild(tblcol14)
                 studentTableBody.appendChild(tblrow)
             }
             console.log("response says page is ", response.data.page)
@@ -670,9 +675,9 @@ const viewScores = (admNo, term, session) => {
                 attendanceTableHeadRow.appendChild(tblattdncdate)
                 let tblattdncstatus = document.createElement("td")
                 // tblattdncstatus.innerText = response.data.attendance[k].presence
-                if (response.data.attendance[k].presence == 'yes'){
+                if (response.data.attendance[k].presence == 'yes') {
                     tblattdncstatus.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
-                    }
+                }
                 else {
                     tblattdncstatus.innerHTML = `<i class="fa fa-minus isabsenticon" id="isabsenticon"></i>`
                 }
@@ -758,8 +763,8 @@ admissionNumberForReport.addEventListener("change", (e) => {
         if (studentNamesStore[i].admission_number == admissionNumberForReport.value) {
             nameBar.innerText = studentNamesStore[i].student_name
         }
-        attendanceTableHeadRow.innerHTML = "";
-        attendanceTableBodyRow.innerHTML = "";
+    attendanceTableHeadRow.innerHTML = "";
+    attendanceTableBodyRow.innerHTML = "";
 });
 // open report form
 viewReportLink.addEventListener("click", (e) => {
@@ -1223,8 +1228,8 @@ viewClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
-       console.log(className, programme, termName, sessionName)
-        displayClassReport(className, programme, termName, sessionName)
+        console.log(className, programme, termName, sessionName)
+    displayClassReport(className, programme, termName, sessionName)
 });
 
 // clear table body when class is changed
@@ -1300,7 +1305,7 @@ tableBodyForAttendance.addEventListener("click", (e) => {
     if (e.target.classList.contains("fa-check")) {
         e.target.classList.remove("fa-check")
     }
-    else if (e.target.firstElementChild.classList.contains("fa")){  
+    else if (e.target.firstElementChild.classList.contains("fa")) {
         // console.log(e.target)
         // e.target.classList.add("fa-check")
         e.target.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
@@ -1334,7 +1339,7 @@ const markAttendance = (stdattendance, classname, programme, term, session) => {
             Swal.fire({
                 icon: "success",
                 title: "Successful",
-                text:  response.data.message
+                text: response.data.message
             });
         })
         .catch(function (error) {
@@ -1401,6 +1406,429 @@ markAttendanceButton.addEventListener("click", (e) => {
         markAttendance(attendance, classname, programme, term, session)
     }
 });
+
+// VIEW/SET/EDIT/DELETE ASSESSMENT
+const setAssessmentLink = document.getElementById("setassessment-link")
+const viewAssessmentLink = document.getElementById("viewassessment-link")
+const delAssessmentLink = document.getElementById("deleteassessment-link")
+const viewAssessmentForm = document.getElementById("studentassessment-form")
+const setAssessmentForm = document.getElementById("setstudentassessment-form")
+const delAssessmentForm = document.getElementById("delstudentassessment-form")
+const deleteAssessmentText = document.getElementById("deleteassessment-text")
+const viewAssessmentText = document.getElementById("viewassessment-text")
+const setAssessmentText = document.getElementById("setassessment-text")
+
+const tableOfLessons = document.getElementById("tableOfLessons")
+const tableOfLessonsBody = document.getElementById("tableofLessonsBody")
+const tableOfLessonsHeading = document.getElementById("tableOfLessonsHead")
+const cancelAssessmentBtn = document.getElementById("cancelassessment-btn")
+const closeAssessmentBtn = document.getElementById("closeassessment-btn")
+const takeAssessmentStdProgramme = document.getElementById("takeassessment-studentprogramme")
+const takeAssessmentStdClass = document.getElementById("takeassessment-studentclass")
+
+const setAssessmentStdProgramme = document.getElementById("setassessment-studentprogramme")
+const setAssessmentStdClass = document.getElementById("setassessment-studentclass")
+const takeAssessmentLessonText = document.getElementById("takeassessment-lessontext")
+const takeAssessmentLinktoLesson = document.getElementById("takeassessment-lessonlink")
+const takeAssessmentText = document.getElementById("takeassessment-assessmenttext")
+const takeAssessmentLinktoAssessment = document.getElementById("takeassessment-assessmentlink")
+const takeAssessmentSubjectText = document.getElementById("takeassessment-subjecttext")
+const takeAssessmentSubject = document.getElementById("takeassessment-subject")
+const setcancelAssessmentBtn = document.getElementById("setcancelassessment-btn")
+const submitDetailsToSetAssessmentBtn = document.getElementById("assessment-btn")
+const submitDetailstoEditAssessmentBtn = document.getElementById("editassessment-btn")
+
+const delAssessmentStdProgramme = document.getElementById("delassessment-studentprogramme")
+const delAssessmentStdClass = document.getElementById("delassessment-studentclass")
+const delAssessmentSubjectText = document.getElementById("delassessment-subjecttext")
+const delAssessmentSubject = document.getElementById("delassessment-subject")
+const setcloseAssessmentBtn = document.getElementById("setcloseassessment-btn")
+const delcancelAssessmentBtn = document.getElementById("delcancelassessment-btn")
+const delcloseAssessmentBtn = document.getElementById("delcloseassessment-btn")
+const submitDetailstoDeleteAssessmentBtn = document.getElementById("deleteassessment-btn")
+
+
+// display take assessment form
+setAssessmentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setAssessmentForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+viewAssessmentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewAssessmentForm.style.display = "block"
+    sidebar.style.display = "none";
+    const stdClass = takeAssessmentStdClass.value;
+    const programme = takeAssessmentStdProgramme.value;
+    getAssessmentLink(stdClass,programme)
+});
+
+delAssessmentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    delAssessmentForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close view assessmnent form
+closeAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewAssessmentForm.style.display = "none";
+});
+
+// reload view assessmnent form
+cancelAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const stdClass = takeAssessmentStdClass.value;
+    const programme = takeAssessmentStdProgramme.value;
+    getAssessmentLink(stdClass,programme)
+});
+
+// close set assessmnent form
+setcloseAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    setAssessmentForm.style.display = "none";
+    takeAssessmentLinktoAssessment.value = ""
+    takeAssessmentLinktoLesson.value = ""
+    takeAssessmentSubject.value = ""
+});
+
+// clear set assessmnent form
+setcancelAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    takeAssessmentLinktoAssessment.value = ""
+    takeAssessmentLinktoLesson.value = ""
+    takeAssessmentSubject.value = ""
+});
+
+// close delete assessmnent form
+delcloseAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    delAssessmentForm.style.display = "none";
+    takeAssessmentSubject.value = ""
+});
+
+// clear delete assessmnent form
+delcancelAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    takeAssessmentSubject.value = ""
+});
+
+// submit request to set assessment
+submitDetailsToSetAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = setAssessmentStdClass.value;
+    const programme = setAssessmentStdProgramme.value;
+    const assessmentLink = takeAssessmentLinktoAssessment.value;
+    const lessonLink = takeAssessmentLinktoLesson.value;
+    const subjectName = takeAssessmentSubject.value;
+    if (assessmentLink == "" || lessonLink == "" || subjectName == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Check that you have inputs for all fields. Type 'none' if you want to omit a lesson/assessment"
+        });
+    }
+   else if (subjectName == "none") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input Detected",
+            text: "You need to input a valid subject. Subject cannot be omitted"
+        });
+    }
+   else if (assessmentLink == "none" && lessonLink == "none") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input Detected",
+            text: "You cannot omit a lesson and assessment at the same time"
+        });
+    }
+    else {
+        const formData = {
+            className,
+            programme,
+            subjectName,
+            assessmentLink,
+            lessonLink
+        }
+        setAssessment(formData);
+    }
+});
+
+// submit request to edit assessment
+submitDetailstoEditAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = setAssessmentStdClass.value;
+    const programme = setAssessmentStdProgramme.value;
+    const assessmentLink = takeAssessmentLinktoAssessment.value;
+    const lessonLink = takeAssessmentLinktoLesson.value;
+    const subjectName = takeAssessmentSubject.value;
+    if (className =="select your class" || programme == "select your programme") {
+        Swal.fire({
+            icon: "error",
+            title: "Inavlid Input Detected",
+            text: "Check the class or programme you selected"
+        });
+    }
+    else if (assessmentLink == "" || lessonLink == "" || subjectName == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Check that you have inputs for all fields. Type 'none' if you want to omit a lesson/assessment"
+        });
+    }
+   else if (subjectName == "none") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input Detected",
+            text: "You need to input a valid subject. Subject cannot be omitted"
+        });
+    }
+   else if (assessmentLink == "none" && lessonLink == "none") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input Detected",
+            text: "You cannot omit a lesson and assessment at the same time"
+        });
+    }
+    else {
+        const formData = {
+            subjectName,
+            assessmentLink,
+            lessonLink
+        }
+        editAssessment(className, programme, formData);
+    }
+});
+
+// submit request to delete assessment
+submitDetailstoDeleteAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = delAssessmentStdClass.value;
+    const programme = delAssessmentStdProgramme.value;
+    const subjectName = delAssessmentSubject.value;
+    if (subjectName =="none" || subjectName == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Inavlid Input Detected",
+            text: "Check that you have inputted a valid subject "
+        });
+    }
+    else {
+        const formData = {
+            subjectName,
+        }
+        deleteAssessment(className, programme, formData);
+    }
+});
+
+// get assessment link
+const getAssessmentLink = (className, programme) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/assessment/getLink/?className=${className}&programme=${programme}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            tableOfLessonsHeading.innerHTML ="";
+            tableOfLessonsBody.innerHTML ="";
+                const tblhead1 = document.createElement("th")
+                const tblhead2 = document.createElement("th")
+                const tblhead3 = document.createElement("th")
+                tblhead1.innerText = "Subject"
+                tblhead2.innerText = "lesson Link"
+                tblhead3.innerText = "Assessment Link"
+                tableOfLessonsHeading.appendChild(tblhead1)
+                tableOfLessonsHeading.appendChild(tblhead2)
+                tableOfLessonsHeading.appendChild(tblhead3)
+                for (let count=0; count<response.data.lessons.length; count++){
+                    const tblrow = document.createElement("tr")
+                    const tblcol1 = document.createElement("td")
+                    const tblcol2 = document.createElement("td")
+                    const tblcol3 = document.createElement("td")
+                    tblcol1.innerText = response.data.lessons[count].subjectName
+                    tblcol2.innerText = response.data.lessons[count].lessonLink
+                    tblcol3.innerText = response.data.lessons[count].assessmentLink
+                    tblrow.appendChild(tblcol1)
+                    tblrow.appendChild(tblcol2)
+                    tblrow.appendChild(tblcol3)
+                    tableOfLessonsBody.appendChild(tblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// set assessment
+const setAssessment = (taskInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/assessment/setAssessment/`, taskInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// edit assessment
+const editAssessment = (className, programme, taskInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/assessment/editAssessment/?className=${className}&programme=${programme}`, taskInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// delete assessment
+const deleteAssessment = (className, programme, taskInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/assessment/removeAssessment/?className=${className}&programme=${programme}`, taskInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        delAssessmentSubject.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
 
 
 

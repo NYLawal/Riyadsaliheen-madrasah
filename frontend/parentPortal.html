@@ -217,14 +217,14 @@
                 class="dropdown-toggle"
                 data-bs-target="#addSubmenu"
                 aria-controls="addSubmenu"
-                >Take Assessment</a
+                >Lessons & Assessment</a
               >
               <ul class="collapse list-unstyled" id="addSubmenu">
                 <li>
-                  <a href="#">assignment</a>
+                  <a href="#" id="studentassessment-link">take assessment</a>
                 </li>
                 <li>
-                  <a href="#">quiz</a>
+                  <a href="#" id="monthlyquiz-link">take quiz</a>
                 </li>
               </ul>
             </li>
@@ -490,12 +490,12 @@
                     </div>
                   </div>
                   <div id="bsb-chart-4" class="mt-4 mt-md-5" style="display: none;">
-                    <canvas id="progressChart"></canvas>
+                    <canvas id="progressChart" style="width:100%;max-width:700px;height:600px;"></canvas>
                     <!-- <canvas id="progressChartTermly"></canvas> -->
                   </div>
                   <div id="bsb-chart-5" class="mt-4 mt-md-5" style="display: none;">
                     <!-- <canvas id="progressChart"></canvas> -->
-                    <canvas id="progressChartTermly"></canvas>
+                    <canvas id="progressChartTermly" style="width:100%;max-width:700px;height:600px;"></canvas>
                   </div>
                 </div>
               </div>
@@ -504,7 +504,88 @@
         </div>
       </section>
 
-      <!-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
+     <!-- Take assessment -->
+    <section class="bg-light py-3 studentassessment-form" id="studentassessment-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-assessment" style="width: 90%;">
+              <div class="banner">
+                <h1>View Lessons and Assessments</h1>
+              </div>
+              <h2 class="mt-4 mb-2">Student Details</h2>
+              <p class="green-text">Fill in your ward's details to get the link to lessons and/or assessments for their class</p>    
+              <div class="item">
+                <select id="takeassessment-studentclass">
+                  <option selected>select class</option>
+                  <option value="tamyidi">tamyidi</option>
+                  <option value="adonah">adonah</option>
+                  <option value="rawdoh">rawdoh</option>
+                  <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                  <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                  <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                  <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                  <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                  <option value="awwal idaadi">awwal idaadi</option>
+                  <option value="thaani idaadi">thaani idaadi</option>
+                  <option value="thaalith idaadi">thaalith idaadi</option>
+                </select>
+              </div>
+              <div class="item">
+                <select id="takeassessment-studentprogramme">
+                  <option selected>select programme</option>
+                  <option value="children madrasah">Children Madrasah</option>
+                  <option value="adult madrasah">Adult Madrasah</option>
+                  <option value="female madrasah">Female Madrasah</option>
+                  <option value="barnomij">Barnomij</option>
+                </select>
+              </div>
+              <div class="table-responsive">
+                <table id="tableOfLessons" class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3">
+                  <thead>
+                    <tr id="tableOfLessonsHead"></tr>
+                  </thead>
+                  <tbody id="tableofLessonsBody"></tbody>
+                </table>
+              </div>
+              <div class="btn-block">
+                <button class="mt-2" type="submit" href="/" id="assessment-btn">Get Link</button>
+              </div>
+              <div class="d-flex gap-2 justify-content-around mt-5">
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="cancelassessment-btn">Reload</a>
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="closeassessment-btn">Close</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- get quiz -->
+    <section class="bg-light py-3 studentassessment-form" id="getquiz-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-assessment" style="width: 90%;">
+              <div class="banner">
+                <h1>View Monthly Quiz</h1>
+              </div>
+              <div class="item">
+                <p id="quizlink-text mt-3 mb-4">Copy the link and paste it in your browser to get access to the quiz. It is important that you take it on time, as you will no longer have access after the 30-minute deadline.</p>
+                <input type="text" name="" placeholder="" id="quizlink" />
+              </div>
+              <!-- <div class="btn-block">
+                <button class="mt-2" type="submit" href="/" id="setquiz-btn">Get Quiz</button>
+              </div> -->
+              <div class="d-flex gap-2 justify-content-around mt-5">
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="clearquizform-btn">Clear Form</a>
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="closequizform-btn">Close</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
       <!-- Footer  -->
       <footer class="footer">

@@ -234,6 +234,29 @@
               <!-- scores and attendance for all students in a particular term -->
               <a href="#" id="classreport-link">View Class Report</a>
             </li>
+            <li class="">
+              <a
+                href=""
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                role="button"
+                class="dropdown-toggle"
+                data-bs-target="#addSubmenu"
+                aria-controls="addSubmenu"
+                >Lessons & Assessments</a
+              >
+              <ul class="collapse list-unstyled" id="addSubmenu">
+                <li>
+                  <a href="#" id="viewassessment-link">View</a>
+                </li>
+                <li>
+                  <a href="#" id="setassessment-link">Set/Edit</a>
+                </li>
+                <li>
+                  <a href="#" id="deleteassessment-link">Delete</a>
+                </li>
+              </ul>
+            </li>
           </ul>
           <ul class="list-unstyled components components2">
             <li>
@@ -1202,6 +1225,187 @@
             </ul>
           </nav> -->
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- view assessment -->
+ <section class="bg-light py-3 studentassessment-form" id="studentassessment-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+        <form action="/" id="student-assessment" style="width: 90%;">
+          <div class="banner">
+            <h1>View Lessons and Assessments</h1>
+          </div>
+          <!-- <h2 class="mt-4 mb-2">Details</h2>   -->
+          <p class="green-text mt-3" id="viewassessment-text">Below are the links to the lessons and assessments set for your class</p>    
+          <div class="item mt-4">
+            <select id="takeassessment-studentclass">
+              <option selected>select your class</option>
+              <option value="tamyidi">tamyidi</option>
+              <option value="adonah">adonah</option>
+              <option value="rawdoh">rawdoh</option>
+              <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+              <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+              <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+              <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+              <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+              <option value="awwal idaadi">awwal idaadi</option>
+              <option value="thaani idaadi">thaani idaadi</option>
+              <option value="thaalith idaadi">thaalith idaadi</option>
+            </select>
+          </div>
+          <div class="item">
+            <select id="takeassessment-studentprogramme">
+              <option selected>select your programme</option>
+              <option value="children madrasah">Children Madrasah</option>
+              <option value="adult madrasah">Adult Madrasah</option>
+              <option value="female madrasah">Female Madrasah</option>
+              <option value="barnomij">Barnomij</option>
+            </select>
+          </div>
+          <div class="table-responsive">
+            <table id="tableOfLessons" class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3">
+              <thead>
+                <tr id="tableOfLessonsHead"></tr>
+              </thead>
+              <tbody id="tableofLessonsBody"></tbody>
+            </table>
+          </div>
+          <div class="d-flex gap-2 justify-content-around mt-5">
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="cancelassessment-btn">Reload</a>
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="closeassessment-btn">Close</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- set assessment -->
+ <section class="bg-light py-3 studentassessment-form" id="setstudentassessment-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+        <form action="/" id="student-assessment" style="width: 90%;">
+          <div class="banner">
+            <h1>Set/Edit Lessons and Assessments</h1>
+          </div>
+          <h2 class="mt-4 mb-2">Lesson Details</h2>
+          <p class="green-text" id="setassessment-text">Fill in the details to set/edit lessons and assessment for your class. The links expire after 7days it was created, and your students will no longer be able to take the lesson/assessment after this time.</p>       
+          <p class="green-text" id="deleteassessment-text">If you do not want a lesson/assessment to stay up to 7days, use the delete option on the sidebar to clear them off.</p>   
+          <div class="item mt-4">
+            <select id="setassessment-studentclass">
+          <option selected>select your class</option>
+              <option value="tamyidi">tamyidi</option>
+              <option value="adonah">adonah</option>
+              <option value="rawdoh">rawdoh</option>
+              <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+              <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+              <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+              <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+              <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+              <option value="awwal idaadi">awwal idaadi</option>
+              <option value="thaani idaadi">thaani idaadi</option>
+              <option value="thaalith idaadi">thaalith idaadi</option>
+            </select>
+          </div>
+          <div class="item">
+            <select id="setassessment-studentprogramme">
+              <option selected>select your programme</option>
+              <option value="children madrasah">Children Madrasah</option>
+              <option value="adult madrasah">Adult Madrasah</option>
+              <option value="female madrasah">Female Madrasah</option>
+              <option value="barnomij">Barnomij</option>
+            </select>
+          </div>
+          <div class="item">
+            <p id="takeassessment-subjecttext">Subject (Type 'general' if subjects are combined)</p>
+            <input type="text" name="" placeholder="type in the subject" id="takeassessment-subject"/>
+          </div>
+           <div class="item">
+            <p id="takeassessment-lessontext">Paste the lesson link here and check that you have done so correctly. Type "none" if you're omitting this.</p>
+            <input type="text" name="" placeholder="" id="takeassessment-lessonlink"/>
+          </div>
+           <div class="item">
+            <p id="takeassessment-assessmenttext">Paste the assessment link here and check that you have done so correctly. Type "none" if you're omitting this.</p>
+            <input type="text" name="" placeholder="" id="takeassessment-assessmentlink" />
+          </div>
+          <div class="btn-block">
+            <button class="mt-2" type="submit" href="/" id="assessment-btn">Set Assessment</button>
+          </div>
+          <div class="btn-block">
+            <button class="mt-2" type="submit" href="/" id="editassessment-btn">Edit Assessment</button>
+          </div>
+          <div class="d-flex gap-2 justify-content-around mt-5">
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="setcancelassessment-btn">Clear Form</a>
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="setcloseassessment-btn">Close</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- delete assessment -->
+ <section class="bg-light py-3 studentassessment-form" id="delstudentassessment-form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+        <form action="/" id="student-assessment" style="width: 90%;">
+          <div class="banner">
+            <h1>Delete Lessons and Assessments</h1>
+          </div>
+          <h2 class="mt-4 mb-2">Subject Details</h2>    
+          <p class="green-text" id="deleteassessment-text">If you do not want a lesson/assessment to stay up to 7days, type in the subject, then click the delete button to clear them off.</p>       
+          <div class="item mt-4">
+            <select id="delassessment-studentclass">
+              <option selected>select your class</option>
+              <option value="tamyidi">tamyidi</option>
+              <option value="adonah">adonah</option>
+              <option value="rawdoh">rawdoh</option>
+              <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+              <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+              <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+              <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+              <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+              <option value="awwal idaadi">awwal idaadi</option>
+              <option value="thaani idaadi">thaani idaadi</option>
+              <option value="thaalith idaadi">thaalith idaadi</option>
+            </select>
+          </div>
+          <div class="item">
+            <!-- <p id="updateclass-label">Class</p> -->
+            <select id="delassessment-studentprogramme">
+              <option selected>select your programme</option>
+              <option value="children madrasah">Children Madrasah</option>
+              <option value="adult madrasah">Adult Madrasah</option>
+              <option value="female madrasah">Female Madrasah</option>
+              <option value="barnomij">Barnomij</option>
+            </select>
+          </div>
+          <div class="item">
+            <p id="delassessment-subjecttext">Subject (Type 'general' if subjects are combined)</p>
+            <input type="text" name="" placeholder="type in the subject" id="delassessment-subject"/>
+          </div>
+          <div class="btn-block">
+            <button class="mt-2" type="submit" href="/" id="deleteassessment-btn">Delete Assessment</button>
+          </div>
+          <div class="table-responsive">
+            <table id="tableOfLessons" class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3">
+              <thead>
+                <tr id="tableOfLessonsHead"></tr>
+              </thead>
+              <tbody id="tableofLessonsBody"></tbody>
+            </table>
+          </div>
+          <div class="d-flex gap-2 justify-content-around mt-5">
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="delcancelassessment-btn">Clear Form</a>
+            <a href="#!" class="green-text fw-bold text-decoration-none" id="delcloseassessment-btn">Close</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>

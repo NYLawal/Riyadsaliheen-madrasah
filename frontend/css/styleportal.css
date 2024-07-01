@@ -71,7 +71,7 @@ ul ul a {
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
 #updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form,
-#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report
+#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report, .studentassessment-form, #setstudentassessment-form
 { 
     display: none;
 }
@@ -90,14 +90,14 @@ html, body {
     margin: 0;
     outline: none;
     } */
-    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1, #studentupdate-form  h1, #addscores-form h1 {
+    #studentadd-form h1, #staffadd-form  h1, #staffupdate-form  h1, #studentupdate-form  h1, #addscores-form h1, .studentassessment-form h1 {
     position: absolute;
     margin: 0;
     font-size: 28px;
     color: #fff;
     z-index: 2;
     }
-    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2, #studentupdate-form  h2, #addscores-form h2 {
+    #studentadd-form  h2, #staffadd-form  h2, #staffupdate-form  h2, #studentupdate-form  h2, #addscores-form h2, .studentassessment-form h2 {
     font-weight: 400;
     font-size: 24px;
     }
@@ -108,7 +108,7 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#markattendance {
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#markattendance, form#student-assessment {
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -135,17 +135,18 @@ html, body {
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input,  #promotestudents-form select,
     #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #editstudentstatus-form select,
-    #editstudentstatus-form input, #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select {
+    #editstudentstatus-form input, #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select,
+    .studentassessment-form select, .studentassessment-form input{
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
     #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,
-    #viewclassscores-form input,  #subjectedit-form input, #editstudentstatus-form input {
+    #viewclassscores-form input,  #subjectedit-form input, #editstudentstatus-form input, .studentassessment-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select,
+    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select, .studentassessment-form select,
     #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select, #markattendance-form select{
     width: 100%;
     padding: 7px 0;
@@ -239,9 +240,9 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn,
-    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn,
-    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn{
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn,
+    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#assessment-btn, button#deleteassessment-btn,
+    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn {
     width: 150px;
     padding: 10px;
     border: none;
@@ -250,6 +251,9 @@ html, body {
     font-size: 16px;
     color: #fff;
     cursor: pointer;
+    }
+    button#deleteassessment-btn{
+        width: fit-content;
     }
     button#search-btn{
         width: 80px;

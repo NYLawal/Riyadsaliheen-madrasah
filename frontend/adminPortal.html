@@ -165,6 +165,9 @@
           <li>
             <a href="#" id="promotestudents-link">Promote Students</a>
           </li>
+          <li>
+            <a href="#" id="setassessment-link">Set Quiz</a>
+          </li>
           <li class="">
             <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle"
               data-bs-target="#reportSubmenu" aria-controls="reportSubmenu">View Report</a>
@@ -699,6 +702,10 @@
                 <input type="text" name="role" placeholder="e.g Teacher" id="upd-staffrole" />
               </div>
               <div class="item">
+                <p>Other Role</p>
+                <input type="text" name="otherrole" placeholder="Parent" id="upd-staffotherrole" />
+              </div>
+              <div class="item">
                 <p id="upd-classlabel">Class</p>
                 <input type="text" name="role" placeholder="" id="upd-teacherclass" />
               </div>
@@ -724,7 +731,6 @@
                 <input type="text" name="programme" placeholder="" id="upd-teacherprogramme" />
               </div>
               <div class="item">
-                <!-- <p id="updateclass-label">Class</p> -->
                 <select id="updateit-teacherprogramme">
                   <option selected>select a new programme</option>
                   <option value="children madrasah">Children Madrasah</option>
@@ -837,13 +843,13 @@
                 </div>
                 <div class="col-12 col-md-6 btn-block">
                   <button type="button" id="statusupd-btn" href="/">
-                   Edit Status
+                    Edit Status
                   </button>
                 </div>
-              <div class="d-flex gap-2 justify-content-around mt-5">
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="clearstdupdfrm-btn">Clear Form</a>
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="closestdupdfrm-btn">Close</a>
-              </div>
+                <div class="d-flex gap-2 justify-content-around mt-5">
+                  <a href="#!" class="green-text fw-bold text-decoration-none" id="clearstdupdfrm-btn">Clear Form</a>
+                  <a href="#!" class="green-text fw-bold text-decoration-none" id="closestdupdfrm-btn">Close</a>
+                </div>
             </form>
           </div>
         </div>
@@ -864,10 +870,12 @@
                     <img src="../images/logo2.png" alt="Logo" width="50" height="50">
                   </a>
                 </div>
-                <h2 class="fs-6 fw-normal text-secondary mb-3" id="staffedit-h2" style="text-align: justify;">By submitting this form, you're confirming that the student whose admission number appears 
+                <h2 class="fs-6 fw-normal text-secondary mb-3" id="staffedit-h2" style="text-align: justify;">By
+                  submitting this form, you're confirming that the student whose admission number appears
                   below is no longer a student of your madrasah. This changes the status of the student to 'past'.
                 </h2>
-                <h2 class="fs-6 fw-normal green-text mb-4" id="staffedit-h2" style="text-align: justify">If you wish to continue, choose the appropriate reason in the dropdown below, then click the submit button.
+                <h2 class="fs-6 fw-normal green-text mb-4" id="staffedit-h2" style="text-align: justify">If you wish to
+                  continue, choose the appropriate reason in the dropdown below, then click the submit button.
                 </h2>
                 <form action="#!">
                   <div class="row gy-2 overflow-hidden">
@@ -916,7 +924,8 @@
                     <img src="../images/logo2.png" alt="Logo" width="50" height="50">
                   </a>
                 </div>
-                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the information below, and input
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the information
+                  below, and input
                   the subject to add or remove</h2>
                 <form action="#!">
                   <div class="row gy-2 overflow-hidden">
@@ -956,26 +965,26 @@
                         <label for="editsubject-subjectselect" class="form-label">Subject to Add/Remove</label>
                         <select name="" id="editsubject-subjectselect">
                           <option selected>select one</option>
-                        <option value="Adhkaar">Adhkaar</option>
-                        <option value="Fiqh">Fiqh</option>
-                        <option value="Hadith">Hadith</option>
-                        <option value="Hifzul Qur'an">Hifzul Qur'an</option>
-                        <option value="Huruf">Huruf</option>
-                        <option value="Imlah">Imlah</option>
-                        <option value="Khatu">Khatu</option>
-                        <option value="Lugha">Lugha</option>
-                        <option value="Nahw">Nahw</option>
-                        <option value="Sarf">Sarf</option>
-                        <option value="Ta'abeer">Ta'abeer</option>
-                        <option value="Taajiyah">Taajiyah</option>
-                        <option value="Tadribaatu lughawiyyah">
-                          Tadribaatu Lughawiyyah
-                        </option>
-                        <option value="Tafseer">Tafseer</option>
-                        <option value="Tajweed">Tajweed</option>
-                        <option value="Tawheed">Tawheed</option>
-                        <option value="Qiraaha">Qiraaha</option>
-                        <option value="Other">Other</option>
+                          <option value="Adhkaar">Adhkaar</option>
+                          <option value="Fiqh">Fiqh</option>
+                          <option value="Hadith">Hadith</option>
+                          <option value="Hifzul Qur'an">Hifzul Qur'an</option>
+                          <option value="Huruf">Huruf</option>
+                          <option value="Imlah">Imlah</option>
+                          <option value="Khatu">Khatu</option>
+                          <option value="Lugha">Lugha</option>
+                          <option value="Nahw">Nahw</option>
+                          <option value="Sarf">Sarf</option>
+                          <option value="Ta'abeer">Ta'abeer</option>
+                          <option value="Taajiyah">Taajiyah</option>
+                          <option value="Tadribaatu lughawiyyah">
+                            Tadribaatu Lughawiyyah
+                          </option>
+                          <option value="Tafseer">Tafseer</option>
+                          <option value="Tajweed">Tajweed</option>
+                          <option value="Tawheed">Tawheed</option>
+                          <option value="Qiraaha">Qiraaha</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                     </div>
@@ -984,7 +993,8 @@
                     </div> -->
                     <div class="col-12">
                       <label for="editsubject-subjectaddselect" class="form-label">Other Subject</label>
-                      <input type="text" name="" placeholder="input a subject" disabled="true" id="editsubject-subjectotherselect" />
+                      <input type="text" name="" placeholder="input a subject" disabled="true"
+                        id="editsubject-subjectotherselect" />
                     </div>
                     <div class="col-12 col-md-6 submitbtn-div">
                       <div class="d-grid my-3 mt-4">
@@ -1168,6 +1178,36 @@
       </div>
     </section>
 
+    <!-- set quiz -->
+    <section class="bg-light py-3 studentassessment-form" id="setquiz-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-assessment" style="width: 90%;">
+              <div class="banner">
+                <h1>Set Monthly Quiz</h1>
+              </div>
+              <p class="green-text mt-3" id="deleteassessment-text">Input the link in the field below, then click on the button.</p>
+              <div class="item">
+                <p id="quizlink-text" ;>Paste the link to the quiz here</p>
+                <input type="text" name="" placeholder="" id="quizlink" />
+              </div>
+              <div class="btn-block">
+                <button class="mt-2" type="submit" href="/" id="setquiz-btn">Set Quiz</button>
+              </div>
+              <div class="btn-block">
+                <button class="mt-2" type="submit" href="/" id="editquiz-btn">Edit Link</button>
+              </div>
+              <div class="d-flex gap-2 justify-content-around mt-5">
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="clearquizform-btn">Clear Form</a>
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="closequizform-btn">Close</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- scores report form -->
     <section class="bg-light pt-3 pb-5 reportscores-form" id="reportscores-form">
       <div class="container" style="position:relative">
@@ -1295,7 +1335,6 @@
         </div>
       </div>
     </section>
-
 
     <!-- View Report by Class -->
     <section class="py-5 py-md-3 mb-5" id="viewclassscores-form">

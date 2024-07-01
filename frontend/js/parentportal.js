@@ -1,8 +1,6 @@
 const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 // const baseUrl = "http://localhost:5000/api/v1"
 
-// const checkresultLink = document.getElementById("resultcheck")
-// const viewReportLink = document.getElementById("reportview")
 const sidebartoggler = document.getElementById("sidebar-toggler")
 const toggler = document.getElementById("toggler-icon")
 const sidebar = document.getElementById("bsbSidebar1")
@@ -287,81 +285,6 @@ viewSelectForVisualReport.addEventListener("change", (e) => {
     }
 })
 
-
-// view student scores by subject
-const visualReportScores = (admNo, term, session) => {
-    let errorMsg;
-    let subjectView;
-    axios
-        .get(`${baseUrl}/scores/viewScores/?admNo=${admNo}&termName=${term}&sessionName=${session}`,
-            {
-                headers: {
-                    'Authorization': 'Bearer ' + token
-                }
-            }
-        )
-        .then(function (response) {
-            console.log(response)
-            let xValues = [];
-            let yValues = [];
-            subjectView = [...response.data.report]
-            
-            for (let i = 0; i < subjectView.length; i++) {
-                xValues.push(subjectView[i].subjectName)
-                yValues.push(subjectView[i].totalScore)
-            }
-            let barColors = "#5ec52e";
-            new Chart("progressChart", {
-                type: "bar",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        barThickness:36,
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    legend: { display: false },
-                    title: {
-                        display: true,
-                        text: `${term} Term  ${session} Report for ${response.data.message}`
-                    },
-                    scales: {
-                        yValues: {
-                          beginAtZero: true
-                        },
-                    },
-                }
-            });
-        })
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                errorMsg = error.response.data.message
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                errorMsg = "Network Error"
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                errorMsg = error.message
-            }
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: errorMsg
-            });
-        });
-};
-
 viewChartReportButton.addEventListener("click", (e) => {
     e.preventDefault()
     if (viewSelectForVisualReport.value == "select view"){
@@ -419,6 +342,82 @@ viewChartReportButton.addEventListener("click", (e) => {
     
 })
 
+// view student scores by subject
+const visualReportScores = (admNo, term, session) => {
+    let errorMsg;
+    let subjectView;
+    axios
+        .get(`${baseUrl}/scores/viewScores/?admNo=${admNo}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            let xValues = [];
+            let yValues = [];
+            subjectView = [...response.data.report]
+            
+            for (let i = 0; i < subjectView.length; i++) {
+                xValues.push(subjectView[i].subjectName)
+                yValues.push(subjectView[i].totalScore)
+            }
+            let barColors = "#5ec52e";
+            new Chart("progressChart", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        barThickness:36,
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: `${term} Term  ${session} Report for ${response.data.message}`
+                    },
+                    scales: {
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true,
+                          }
+                        }]
+                      },
+                }
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
 // view student scores by term
 const visualReportBySession = (admNo) => {
     let errorMsg;
@@ -454,10 +453,12 @@ const visualReportBySession = (admNo) => {
                 options: {
                     legend: { display: false },
                     scales: {
-                        y: {
-                          beginAtZero: true
-                        },
-                    },
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true,
+                          }
+                        }]
+                      },
                     title: {
                         display: true,
                         text: `Report by Session for ${response.data.message}`
@@ -527,10 +528,12 @@ const visualReportByTerm = (admNo, session) => {
                 options: {
                     legend: { display: false },
                     scales: {
-                        y: {
-                          beginAtZero: true
-                        },
-                    },
+                        yAxes: [{
+                          ticks: {
+                            beginAtZero: true,
+                          }
+                        }]
+                      },
                     title: {
                         display: true,
                         text: `${session} session Report for ${response.data.message}`
@@ -564,6 +567,207 @@ const visualReportByTerm = (admNo, session) => {
             });
         });
 };
+
+// TAKE ASSESSMENT ********************************************************************
+// ***************************************************************************
+const studentAssessmentLink = document.getElementById("studentassessment-link")
+const monthlyQuizLink = document.getElementById("monthlyquiz-link")
+const getQuizForm = document.getElementById("getquiz-form");
+const studentAssessmentForm = document.getElementById("studentassessment-form")
+const submitDetailsForAssessmentBtn = document.getElementById("assessment-btn")
+const cancelAssessmentBtn = document.getElementById("cancelassessment-btn")
+const closeAssessmentBtn = document.getElementById("closeassessment-btn")
+const takeAssessmentStdProgramme= document.getElementById("takeassessment-studentprogramme")
+const takeAssessmentStdClass= document.getElementById("takeassessment-studentclass")
+const tableOfLessons = document.getElementById("tableOfLessons")
+const tableOfLessonsBody = document.getElementById("tableofLessonsBody")
+const tableOfLessonsHeading = document.getElementById("tableOfLessonsHead")
+
+const closeQuizFormButton = document.getElementById("closequizform-btn");
+const clearQuizFormButton = document.getElementById("clearquizform-btn");
+const quizLink = document.getElementById("quizlink");
+
+
+// display check assessment form
+studentAssessmentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    studentAssessmentForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close assessmnent form
+closeAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    takeAssessmentStdClass.value = "select your class"
+    takeAssessmentStdProgramme.value = "select your programme"
+    studentAssessmentForm.style.display = "none";
+    tableOfLessonsHeading.innerHTML ="";
+    tableOfLessonsBody.innerHTML ="";
+});
+
+// reload view assessmnent form
+cancelAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const stdClass = takeAssessmentStdClass.value;
+    const programme = takeAssessmentStdProgramme.value;
+    getAssessmentLink(stdClass,programme)
+});
+
+// submit request to get assessment
+submitDetailsForAssessmentBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const stdClass = takeAssessmentStdClass.value;
+    const programme = takeAssessmentStdProgramme.value;
+    if (stdClass =="select class" || programme == "select programme") {
+        Swal.fire({
+            icon: "error",
+            title: "Inavlid Input Detected",
+            text: "Check the class or programme you selected"
+        });
+    }
+    else
+    getAssessmentLink(stdClass, programme);
+});
+
+// get assessment link
+const getAssessmentLink = (className, programme) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/assessment/getLink/?className=${className}&programme=${programme}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            tableOfLessonsHeading.innerHTML ="";
+            tableOfLessonsBody.innerHTML ="";
+                const tblhead1 = document.createElement("th")
+                const tblhead2 = document.createElement("th")
+                const tblhead3 = document.createElement("th")
+                tblhead1.innerText = "Subject"
+                tblhead2.innerText = "lesson Link"
+                tblhead3.innerText = "Assessment Link"
+                tableOfLessonsHeading.appendChild(tblhead1)
+                tableOfLessonsHeading.appendChild(tblhead2)
+                tableOfLessonsHeading.appendChild(tblhead3)
+                for (let count=0; count<response.data.lessons.length; count++){
+                    const tblrow = document.createElement("tr")
+                    const tblcol1 = document.createElement("td")
+                    const tblcol2 = document.createElement("td")
+                    const tblcol3 = document.createElement("td")
+                    tblcol1.innerText = response.data.lessons[count].subjectName
+                    tblcol2.innerText = response.data.lessons[count].lessonLink
+                    tblcol3.innerText = response.data.lessons[count].assessmentLink
+                    tblrow.appendChild(tblcol1)
+                    tblrow.appendChild(tblcol2)
+                    tblrow.appendChild(tblcol3)
+                    tableOfLessonsBody.appendChild(tblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// close quiz form
+closeQuizFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    getQuizForm.style.display = "none";
+    quizLink.value = ""
+});
+
+// clear quiz form
+clearQuizFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    quizLink.value = ""
+});
+
+// monthly quiz form
+monthlyQuizLink.addEventListener("click", (e) => {
+    e.preventDefault();
+   getQuizForm.style.display = "block"
+    sidebar.style.display = "none";
+    getQuiz()
+});
+
+
+// get quiz
+const getQuiz = () => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/assessment/getQuiz/`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            quizLink.value = response.data.quizPresent.quizlink
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
 
 
 // LOGOUT ********************************************************************

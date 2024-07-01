@@ -90,7 +90,6 @@ const viewStudentsPresentClass = document.getElementById("stud-presentclass")
 
 const logoutLink = document.getElementById("logout")
 const token = localStorage.getItem('access_token')
-// let tProgrammeHeading = document.createElement("th")
 let studentpage = [];
 let lastpage = [];
 let staffpage = [];
@@ -1163,6 +1162,7 @@ const staffGenderUpdate = document.getElementById("upd-staffgender")
 const staffAddressUpdate = document.getElementById("upd-staffaddress")
 const staffPhoneUpdate = document.getElementById("upd-staffphone")
 const staffRoleUpdate = document.getElementById("upd-staffrole")
+const staffOtherRoleUpdate = document.getElementById("upd-staffotherrole")
 const classLabelUpdate = document.getElementById("upd-classlabel")
 const teacherClassUpdate = document.getElementById("upd-teacherclass")
 const programmeLabelUpdate = document.getElementById("upd-programmelabel")
@@ -1213,6 +1213,7 @@ const QuerystaffEdit = (staffInfo) => {
             staffAddressUpdate.value = response.data.staffer.address
             staffPhoneUpdate.value = response.data.staffer.phoneNumber
             staffRoleUpdate.value = response.data.staffer.role
+            staffOtherRoleUpdate.value = response.data.staffer.other_role
 
             if (response.data.staffer.role == "teacher") {
                 classLabelUpdate.style.display = "block";
@@ -1358,6 +1359,7 @@ const updateStaffDetails = (staffInfo) => {
             staffAddressUpdate.value = "";
             staffPhoneUpdate.value = "";
             staffRoleUpdate.value = "";
+            staffOtherRoleUpdate.value = "";
             classLabelUpdate.style.display = "none";
             teacherClassUpdate.style.display = "none";
             programmeLabelUpdate.style.display = "none";
@@ -1403,6 +1405,7 @@ UpdateButton.addEventListener("click", (e) => {
     let address = staffAddressUpdate.value;
     let phoneNumber = staffPhoneUpdate.value;
     let role = staffRoleUpdate.value;
+    let other_role = staffOtherRoleUpdate.value;
     let teacherClass = teacherClassUpdate.value;
     let teacherProgramme = teacherProgrammeUpdate.value;
 
@@ -1421,6 +1424,7 @@ UpdateButton.addEventListener("click", (e) => {
         address,
         phoneNumber,
         role,
+        other_role,
         teacherClass,
         teacherProgramme
     }
@@ -2631,6 +2635,166 @@ editSubjectsFormCloseIcon.addEventListener("click", (e) => {
 });
 
 
+// ************************************************************************
+// SET ASSESSMENT
+
+const setAssessmentLink = document.getElementById("setassessment-link");
+const setQuizForm = document.getElementById("setquiz-form");
+const quizLink = document.getElementById("quizlink");
+const setQuizButton = document.getElementById("setquiz-btn");
+const editQuizButton = document.getElementById("editquiz-btn");
+const clearQuizFormButton = document.getElementById("clearquizform-btn");
+const closeQuizFormButton = document.getElementById("closequizform-btn");
+
+// display set quiz form
+setAssessmentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setQuizForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close quiz form
+closeQuizFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    setQuizForm.style.display = "none";
+    quizLink.value = ""
+});
+
+// clear quiz form
+clearQuizFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    quizLink.value = ""
+});
+
+// submit request to set quiz
+setQuizButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const quizlink = quizLink.value;
+    if (quizlink == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Check that you have inputted a link for the quiz"
+        });
+    }
+    else {
+        const formData = {
+            quizlink
+        }
+        setQuiz(formData);
+    }
+});
+
+// submit request to edit quiz
+editQuizButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const quizlink = quizLink.value;
+    if (quizlink == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "You need to input the new link for the quiz"
+        });
+    }
+    else {
+        const formData = {
+            quizlink
+        }
+        editQuiz(formData);
+    }
+});
+
+// set quiz
+const setQuiz = (quizInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/assessment/setQuiz/`, quizInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// edit quiz
+const editQuiz = (quizInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/assessment/editQuiz/`, quizInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
 
 // ************************************************************************
 // logout
