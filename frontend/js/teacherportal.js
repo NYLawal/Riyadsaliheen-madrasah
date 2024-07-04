@@ -1454,6 +1454,7 @@ setAssessmentLink.addEventListener("click", (e) => {
     setAssessmentForm.style.display = "block"
     sidebar.style.display = "none";
 });
+
 viewAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     viewAssessmentForm.style.display = "block"
@@ -1831,6 +1832,15 @@ const deleteAssessment = (className, programme, taskInfo) => {
 };
 
 
+// SET CLASS DETAILS
+const setClassDetailsLink = document.getElementById("set-classdetails")
+
+// display set class details form
+setClassDetailsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setClassDetailsForm.style.display = "block"
+    sidebar.style.display = "none";
+});
 
 // logout
 logoutLink.addEventListener("click", (e) => {

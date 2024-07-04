@@ -464,6 +464,93 @@ margin-top: 10rem;
 }
 
 /* ==================================================
+                    GALLERY PAGE 
+================================================== */
+.bsb-project-2-item img{
+width: 400px;
+height: 250px;
+}
+
+
+/* ==================================================
+                    REPORT CARD
+================================================== */
+.report-heading, .greenbkgd-heading, .std-details, .pndpsignatures{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.report-heading h4, .report-heading p{
+    margin-bottom: 0;
+}
+.report-heading p{
+    line-height: 1.5;
+}
+#student-reportcard{
+    outline: 4px solid #317a10; 
+    /* border: 2px dashed #378015; */
+    padding: 16px;
+}
+.greenbkgd-heading{
+    background-color: #317a10;
+    height: 20px;
+    padding-top:15px;
+}
+.detail-left{
+    /* position: relative; */
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+.detail-left.psign{
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 0;
+}
+.pndpsignatures{
+justify-content: space-between;
+}
+.detail-left-span{
+/* position: absolute; */
+/* top: 0;
+left: calc(15%); */
+color: rgb(0, 14, 6);
+font-weight: 500;
+}
+
+
+
+@media (max-width:1199px){
+    .detail-right{
+        display: none;
+    }
+    .std-details{
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .std-details p{
+        width: 90%;
+        padding-left: 50px;
+    }
+    .left-details, .right-details{
+        width: 100%;
+    }
+    /* #detail-avgpercent, #detail-maxattendance, #detail-present, #detail-absent{
+        left: 55%;
+    }
+    #detail-session{
+        left: 30%;
+    } */
+    .pndpsignatures{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ==================================================
                     MEDIA QUERIES 
 ================================================== */
 
@@ -478,7 +565,11 @@ margin-top: 10rem;
     .subject-collapse{
         display:none;
     }
+    .std-details p{
+        padding-left: 30px;
+    }
   }
+ 
   @media (min-width: 768px) {
     .arabic-smallscreen{
         display: none;
@@ -544,6 +635,10 @@ margin-top: 10rem;
         margin-top: 2rem;
         margin-bottom: -1rem;
     }
+    /* .std-details p {
+        font-size: 14px;
+        max-width: 80%;
+    } */
 }
 @media (min-width:1200px){
     .border-green{
@@ -551,6 +646,23 @@ margin-top: 10rem;
      }
      .team-offer-arabic{
         height:260px;
+    }
+    .detail-left{
+        position: relative;
+    }
+    .detail-left-span{
+        position: absolute;
+        top: 0;
+        left: 15%;
+    }
+    .signaturesndremarks .detail-left-span{
+        left:27%
+     }
+    #detail-session, #detail-ameedcomment{
+        left: 20%;
+    }
+    #detail-avgpercent, #detail-maxattendance, #detail-present, #detail-absent, #detail-classnumber{
+        left: 45%;
     }
 }
 
