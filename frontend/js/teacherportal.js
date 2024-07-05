@@ -1421,7 +1421,7 @@ const setAssessmentText = document.getElementById("setassessment-text")
 const tableOfLessons = document.getElementById("tableOfLessons")
 const tableOfLessonsBody = document.getElementById("tableofLessonsBody")
 const tableOfLessonsHeading = document.getElementById("tableOfLessonsHead")
-const cancelAssessmentBtn = document.getElementById("cancelassessment-btn")
+const reloadAssessmentBtn = document.getElementById("cancelassessment-btn")
 const closeAssessmentBtn = document.getElementById("closeassessment-btn")
 const takeAssessmentStdProgramme = document.getElementById("takeassessment-studentprogramme")
 const takeAssessmentStdClass = document.getElementById("takeassessment-studentclass")
@@ -1448,13 +1448,14 @@ const delcloseAssessmentBtn = document.getElementById("delcloseassessment-btn")
 const submitDetailstoDeleteAssessmentBtn = document.getElementById("deleteassessment-btn")
 
 
-// display take assessment form
+// display set assessment form
 setAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     setAssessmentForm.style.display = "block"
     sidebar.style.display = "none";
-});
+}); 
 
+// display view assessment form
 viewAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     viewAssessmentForm.style.display = "block"
@@ -1464,6 +1465,7 @@ viewAssessmentLink.addEventListener("click", (e) => {
     getAssessmentLink(stdClass,programme)
 });
 
+// display delete assessment form
 delAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     delAssessmentForm.style.display = "block"
@@ -1477,7 +1479,7 @@ closeAssessmentBtn.addEventListener("click", (e) => {
 });
 
 // reload view assessmnent form
-cancelAssessmentBtn.addEventListener("click", (e) => {
+reloadAssessmentBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const stdClass = takeAssessmentStdClass.value;
     const programme = takeAssessmentStdProgramme.value;

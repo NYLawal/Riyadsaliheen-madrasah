@@ -588,6 +588,7 @@ const cancelAssessmentBtn = document.getElementById("cancelassessment-btn")
 const closeAssessmentBtn = document.getElementById("closeassessment-btn")
 const takeAssessmentStdProgramme= document.getElementById("takeassessment-studentprogramme")
 const takeAssessmentStdClass= document.getElementById("takeassessment-studentclass")
+const getAssessmentLinkText = document.getElementById("assessmentlink-text")
 const tableOfLessons = document.getElementById("tableOfLessons")
 const tableOfLessonsBody = document.getElementById("tableofLessonsBody")
 const tableOfLessonsHeading = document.getElementById("tableOfLessonsHead")
@@ -601,6 +602,7 @@ const quizLink = document.getElementById("quizlink");
 studentAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     studentAssessmentForm.style.display = "block"
+    getAssessmentLinkText.style.display = "none";
     sidebar.style.display = "none";
 });
 
@@ -610,6 +612,7 @@ closeAssessmentBtn.addEventListener("click", (e) => {
     takeAssessmentStdClass.value = "select your class"
     takeAssessmentStdProgramme.value = "select your programme"
     studentAssessmentForm.style.display = "none";
+    getAssessmentLinkText.style.display = "none";
     tableOfLessonsHeading.innerHTML ="";
     tableOfLessonsBody.innerHTML ="";
 });
@@ -659,6 +662,7 @@ const getAssessmentLink = (className, programme) => {
             tableOfLessonsHeading.innerHTML ="";
             tableOfLessonsBody.innerHTML ="";
             submitDetailsForAssessmentBtn.style.display = "none";
+            getAssessmentLinkText.style.display = "block";
                 const tblhead1 = document.createElement("th")
                 const tblhead2 = document.createElement("th")
                 const tblhead3 = document.createElement("th")
