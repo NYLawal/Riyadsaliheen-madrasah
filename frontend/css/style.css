@@ -475,11 +475,12 @@ height: 250px;
 /* ==================================================
                     REPORT CARD
 ================================================== */
-.report-heading, .greenbkgd-heading, .std-details, .pndpsignatures{
+.report-heading, .greenbkgd-heading,  .pndpsignatures{ 
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
+
 .report-heading h4, .report-heading p{
     margin-bottom: 0;
 }
@@ -490,6 +491,7 @@ height: 250px;
     outline: 4px solid #317a10; 
     /* border: 2px dashed #378015; */
     padding: 16px;
+    max-width: 800px;
 }
 .greenbkgd-heading{
     background-color: #317a10;
@@ -497,11 +499,11 @@ height: 250px;
     padding-top:15px;
 }
 .detail-left{
-    /* position: relative; */
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
+    font-weight: bold;
 }
 .detail-left.psign{
     flex-direction: column;
@@ -509,22 +511,29 @@ height: 250px;
     align-items: center;
     gap: 0;
 }
+.displayflex-col .detail-left-span{
+    text-decoration: none;
+}
+.displayflex-col p{
+    line-height: 0.5;
+}
+.displayflex-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
 .pndpsignatures{
 justify-content: space-between;
 }
 .detail-left-span{
-/* position: absolute; */
-/* top: 0;
-left: calc(15%); */
 color: rgb(0, 14, 6);
 font-weight: 500;
+text-decoration: underline;
 }
-
-
 
 @media (max-width:1199px){
     .detail-right{
-        display: none;
+        /* display: none; */
     }
     .std-details{
         flex-direction: column;
@@ -533,17 +542,10 @@ font-weight: 500;
     }
     .std-details p{
         width: 90%;
-        padding-left: 50px;
     }
     .left-details, .right-details{
         width: 100%;
     }
-    /* #detail-avgpercent, #detail-maxattendance, #detail-present, #detail-absent{
-        left: 55%;
-    }
-    #detail-session{
-        left: 30%;
-    } */
     .pndpsignatures{
         flex-direction: column;
         align-items: flex-start;
@@ -564,9 +566,6 @@ font-weight: 500;
       }
     .subject-collapse{
         display:none;
-    }
-    .std-details p{
-        padding-left: 30px;
     }
   }
  
@@ -635,10 +634,13 @@ font-weight: 500;
         margin-top: 2rem;
         margin-bottom: -1rem;
     }
-    /* .std-details p {
-        font-size: 14px;
-        max-width: 80%;
-    } */
+    .report-heading{
+        font-size: 11px;
+        text-align: left;
+    }
+    .report-heading .addrndphone{
+        font-size: 11px;
+    }
 }
 @media (min-width:1200px){
     .border-green{
@@ -648,22 +650,16 @@ font-weight: 500;
         height:260px;
     }
     .detail-left{
-        position: relative;
+        /* position: relative; */
     }
-    .detail-left-span{
-        position: absolute;
-        top: 0;
-        left: 15%;
-    }
-    .signaturesndremarks .detail-left-span{
+    
+    /* .signaturesndremarks .detail-left-span{
         left:27%
-     }
-    #detail-session, #detail-ameedcomment{
-        left: 20%;
-    }
-    #detail-avgpercent, #detail-maxattendance, #detail-present, #detail-absent, #detail-classnumber{
-        left: 45%;
-    }
+     } */
+   .dsply-flex{
+    display: flex;
+    gap: 15px;
+   }
 }
 
 

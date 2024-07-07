@@ -782,6 +782,9 @@ const getQuiz = () => {
         });
 };
 
+
+// REPORT CARD ********************************************************************
+// ***************************************************************************
 const resultSheet = document.getElementById("resultsheet")
 const stdResultSheetForm = document.getElementById("studentresult-form")
 const resultSheetAdmNo = document.getElementById("resultsheet-admNumber")
@@ -813,8 +816,9 @@ const reportCardMaxAttendance = document.getElementById("detail-maxattendance")
 const reportCardClassNumber = document.getElementById("detail-classnumber")
 const reportCardTeacherComment = document.getElementById("detail-tcomment")
 const reportCardAmeedComment = document.getElementById("detail-ameedcomment")
+const reportCardTeacherSignature = document.getElementById("detail-tsignature")
 
-// open reult sheet
+// open result sheet
 resultSheet.addEventListener("click", (e) => {
     e.preventDefault();
     stdResultSheetForm.style.display = "block";
@@ -865,11 +869,10 @@ generateResultBtn.addEventListener("click", (e) => {
 downloadbtn.addEventListener("click", (e) => {
     e.preventDefault();
     // downloadPDF()
-    html2canvas(myform).then(function (canvas) {                   
+    html2canvas(myform, { logging: true, letterRendering: 1, allowTaint: true,  useCORS: true }).then(function (canvas) {                   
         var anchorTag = document.createElement("a");
          document.body.appendChild(anchorTag);
         //  document.getElementById("previewImg").appendChild(canvas);
-        canvas.style.outline = "4px solid #378015"
          anchorTag.download = "resultsheet.jpg";
          anchorTag.href = canvas.toDataURL();
          anchorTag.target = '_blank';
@@ -943,6 +946,8 @@ const downloadScores = (admNo, term, session) => {
             reportCardMaxAttendance.innerText = response.data.maxAttendance
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
+            console.log(response.data.teacherSignature)
+            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.teacherSignature} alt="teacher signature" width="60">`
             function calculateAttendance(){
             let maxAttendance = response.data.maxAttendance ;
             let timesPresent = 0;

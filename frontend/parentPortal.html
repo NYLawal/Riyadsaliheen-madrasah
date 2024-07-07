@@ -473,7 +473,7 @@
     </section>
 
     <!-- Result download -->
-    <section class="bg-light py-3 px-4 studentassessment-form" id="studentresult-form">
+    <section class="bg-light py-3 px-4 studentassessment-form" id="studentresult-form" >
       <div class="container green-text">
         <div class="row justify-content-center mb-3">
           <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
@@ -521,38 +521,50 @@
         <div class="row justify-content-center">
           <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
             <form action="/" id="student-reportcard" name="student-reportcard">
-              <div class="text-center report-heading">
-                <div class="mt-3">
+              <div class="row text-center report-heading">
+                <div class="col-9 mt-1 schoolnamendaddress">
                   <h3 class="green-text arabic-detail"> مدرسة رياض الصالحين للدراسات العربية والإسلامية</h3>
                   <h3 class="green-text arabic-detail">منطقة أولمبي، ولاية أوغن، نيجيريا</h3>
-                  <h2 class="green-text fw-bold" style="font-size: 28px;">RIYAD SALIHEEN</h2>
-                  <h4 class="green-text fw-bold">ARABIC AND ISLAMIC INSTITUTE </h4>
-                  <p class="mt-0 mb-0 green-text">Saint Lucy Estate, House 9 Road D, Olambe, Ogun State</p>
-                  <p class="mt-0 mb-0 green-text">Tel: 08029710300, 08028924949, 08020721422, 08163068097</p>
+                  <h2 class="green-text fw-bold" style="font-size: 22px;">RIYAD SALIHEEN</h2>
+                  <h4 class="green-text fw-bold" style="font-size: 20px;">ARABIC AND ISLAMIC INSTITUTE </h4>
+                  <p class="mt-0 mb-0 green-text addrndphone">Saint Lucy Estate, House 9 Road D, Olambe, Ogun State</p>
+                  <p class="mt-0 mb-0 green-text addrndphone">Tel: 08029710300, 08028924949, 08020721422, 08163068097</p>
                 </div>
-                <div class="">
-                  <img src="../images/logo2.png" alt="Logo" width="150px" height="150px">
+                <div class="col-3">
+                  <img src="../images/logo2.png" alt="Logo" width="80px" height="80px">
                 </div>
               </div>
-              <div class="greenbkgd-heading text-white mt-1">
-                <p>Student Report Sheet</p>
-                <p class="arabic-detail">كشف درجات الطالب</p>
+              <div class="row">
+                <div class="greenbkgd-heading text-white mt-1">
+                  <p>Student Report Sheet</p>
+                  <p class="arabic-detail">كشف درجات الطالب</p>
+                </div>
               </div>
               <div class="std-details mt-3">
-                <div class="left-details">
-                  <p class="detail-left">Name:<span class="detail-left-span" id="detail-name"></span><span class="detail-right">_________________________________ اسم الطالب</span></p>
-                  <p class="detail-left">Session: <span class="detail-left-span" id="detail-session"></span><span class="detail-right"> ______________________________ العام الدراسي</span></p>
-                  <p class="detail-left">No. in Class: <span class="detail-left-span" id="detail-classnumber"></span><span class="detail-right">______________________ عدد الطالب في الفصل</span></p>
-                  <p class="detail-left">Average percentage: <span class="detail-left-span" id="detail-avgpercent"></span><span class="detail-right">____________________ المعدل المئوي</span></p>
-                  <p class="detail-left">No. of times present: <span class="detail-left-span" id="detail-present"></span><span class="detail-right">_____________________ عدد الحضور</span></p> 
-                </div>
-                <div class="right-details">
-                  <p class="detail-left">Class: <span class="detail-left-span" id="detail-class"></span><span class="detail-right"> ___________________________ الفصل</span></p>
-                  <p class="detail-left">Term: <span class="detail-left-span" id="detail-term"></span><span class="detail-right"> ____________________________ الفترة</span></p>
-                  <p class="detail-left">Position: <span class="detail-left-span" id="detail-position"></span><span class="detail-right">_________________________ الترتيب</span></p>
-                  <p class="detail-left">Max. Attendance: <span class="detail-left-span" id="detail-maxattendance"></span><span class="detail-right">_______________ أقصى الحضور</span></p>
-                  <p class="detail-left">No. of times absent: <span class="detail-left-span" id="detail-absent"></span><span class="detail-right">______________ عدد الغياب</span></p>
-                </div>
+                <!-- <div class="left-details"> -->
+                  <div class="dsply-flex">
+                    <p class="detail-left">Name:<span class="detail-left-span" id="detail-name"></span><span class="detail-right"> اسم الطالب</span></p>
+                  <p class="detail-left">Class: <span class="detail-left-span" id="detail-class"></span><span class="detail-right"> الفصل</span></p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">Session: <span class="detail-left-span" id="detail-session"></span><span class="detail-right">  العام الدراسي</span></p>
+                    <p class="detail-left">Term: <span class="detail-left-span" id="detail-term"></span><span class="detail-right"> الفترة</span></p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">No. in Class: <span class="detail-left-span" id="detail-classnumber"></span><span class="detail-right"> عدد الطالب في الفصل</span></p>
+                    <p class="detail-left">Position: <span class="detail-left-span" id="detail-position"></span><span class="detail-right"> الترتيب</span></p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">Average percentage: <span class="detail-left-span" id="detail-avgpercent"></span><span class="detail-right"> المعدل المئوي</span></p>
+                    <p class="detail-left">Max. Attendance: <span class="detail-left-span" id="detail-maxattendance"></span><span class="detail-right"> أقصى الحضور</span></p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">No. of times present: <span class="detail-left-span" id="detail-present"></span><span class="detail-right"> عدد الحضور</span></p> 
+                    <p class="detail-left">No. of times absent: <span class="detail-left-span" id="detail-absent"></span><span class="detail-right"> عدد الغياب</span></p>
+                  </div>
+                <!-- </div> -->
+                <!-- <div class="right-details"> -->
+              <!-- </div> -->
               </div>
               <div class="table" id="firstsecondterm-table">
                 <table class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3" id="table-reportdwn">
@@ -590,18 +602,22 @@
                 </table>
               </div>
               <div class="signaturesndremarks mt-3">
-                <div class="">
-                  <p class="detail-left">Class Teacher's Comment: <span class="detail-left-span" id="detail-tcomment"></span><span class="detail-right">_________________________________________________ اسم الطالب</span></p>
-                  <p class="detail-left">Class Teacher's Signature: <span class="detail-left-span" id="detail-tsignature"></span><span class="detail-right"> _______________________________________________ العام الدراسي</span></p>
-                  <p class="detail-left">Principal's Remark: <span class="detail-left-span" id="detail-ameedcomment"></span><span class="detail-right">___________________________________________ عدد الطالب في الفصل</span></p>
-                  <p class="detail-left">Next Term Begins: <span class="detail-left-span" id="detail-avgpercent"></span><span class="detail-right">____________________________________________ المعدل المئوي</span></p> 
-                </div>
+                  <div class="displayflex-col">
+                    <p class="detail-left">Class Teacher's Comment: <span class="detail-right"> تعليق مدرس الفصل</span></p>
+                    <p class="detail-left-span" id="detail-tcomment"></p>
+                  </div>
+                  <p class="detail-left">Class Teacher's Signature: <span class="detail-left-span" id="detail-tsignature"></span><span class="detail-right"> توقيع مدرس الفصل</span></p>
+                  <div class="displayflex-col">
+                    <p class="detail-left">Principal's Remark: <span class="detail-right"> ملاحظة العميد</span></p>
+                    <p class="detail-left-span" id="detail-ameedcomment"></p>
+                  </div>
+                  <p class="detail-left">Next Term Begins: <span class="detail-left-span" id="detail-avgpercent"></span><span class="detail-right"> بداية فترة الجديدة</span></p> 
                 <div class="pndpsignatures">
                   <div class="">
-                    <p class="detail-left psign"><span class="detail-left-span" id="detail-present"></span><span class="detail-right">____________________</span><span class="detail-right"> عدد الحضور</span>Principal's Signature with date: </p> 
+                    <p class="detail-left psign"><span class="detail-left-span" id="detail-present"></span><span class="detail-right"></span><span class="detail-right"> توقيع العميد مع التاريخ</span>Principal's Signature with date: </p> 
                   </div>
                   <div class="">
-                    <p class="detail-left psign"><span class="detail-left-span" id="detail-present"></span><span class="detail-right">_____________________</span><span class="detail-right"> عدد الحضور</span>Proprietor's Signature with date: </p> 
+                    <p class="detail-left psign"><span class="detail-left-span" id="detail-present"></span><span class="detail-right"></span><span class="detail-right"> توقيع المدير مع التاريخ</span>Proprietor's Signature with date: </p> 
                   </div>
                 </div>
               </div>

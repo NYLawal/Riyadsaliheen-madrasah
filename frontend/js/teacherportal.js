@@ -49,6 +49,10 @@ let studentpage = [];
 let lastpage = [];
 let studentNamesStore = [];
 let classSubjectsReturned = [];
+let teacherDetails = {
+    teacherClass: "",
+    teacherProgramme: ""
+}
 
 const token = localStorage.getItem('access_token')
 
@@ -68,6 +72,9 @@ const getTeacherClass = () => {
         })
         .then(function (response) {
             console.log(response)
+            teacherDetails.teacherClass = response.data.teacher.teacherClass
+            teacherDetails.teacherProgramme = response.data.teacher.teacherProgramme
+
             nameOfClass.value = response.data.teacher.teacherClass
             addClass.value = response.data.teacher.teacherClass
             classnameForReportSelect.value = response.data.teacher.teacherClass
@@ -1836,6 +1843,13 @@ const deleteAssessment = (className, programme, taskInfo) => {
 
 // SET CLASS DETAILS
 const setClassDetailsLink = document.getElementById("set-classdetails")
+const setClassDetailsForm = document.getElementById("class-detailsform")
+const formToSubmitDetails = document.getElementById("form-classdetails")
+const noOfstudentsInClass = document.getElementById("noInClass")
+const imgFile = document.getElementById("imgfile")
+const closeSign = document.getElementById("closesign")
+const setDetailsButton = document.getElementById("setclassdetails-btn")
+let imagesArray = []
 
 // display set class details form
 setClassDetailsLink.addEventListener("click", (e) => {
@@ -1843,6 +1857,105 @@ setClassDetailsLink.addEventListener("click", (e) => {
     setClassDetailsForm.style.display = "block"
     sidebar.style.display = "none";
 });
+// preview signature chosen
+function displayImages() {
+    let images = ""
+    const output = document.getElementById("output")
+    imagesArray.forEach((image, index) => {
+      images += `<div class="image">
+                  <img src="${URL.createObjectURL(image)}" alt="image">
+                  <span id="closesign" onclick="deleteImage(${index})">&times;</span>
+                </div>`
+    })
+    output.innerHTML = images
+  }
+// request for signature preview when input changes
+imgFile.addEventListener("change", () => {
+    const file = imgFile.files
+    imagesArray.push(file[0])
+    displayImages()
+  })
+// delete signature chosen when cancel button is clicked
+  function deleteImage(index) {
+    imagesArray.splice(index, 1)
+    displayImages()
+  }
+
+  const setDetails = (className,programme,formData) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/addDetails/?className=${className}&programme=${programme}`, formData,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response);
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// request to set details
+formToSubmitDetails.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const noInClass = noOfstudentsInClass.value;
+    const className = teacherDetails.teacherClass;
+    const programme = teacherDetails.teacherProgramme;
+    if (noInClass == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please input a the number of students in your class"
+        });
+    }
+    else{
+        // const formData = {
+        //     noInClass, 
+        //     image
+        // }
+        const formData = new FormData(formToSubmitDetails);
+            const formDataObj = {};
+//   formData.append("productImage", myimage);
+  formData.forEach((value, key) => (formDataObj[key] = value));
+  console.log(formDataObj)
+        setDetails(className,programme,formDataObj);
+    }
+});
+
+  
 
 // logout
 logoutLink.addEventListener("click", (e) => {

@@ -108,7 +108,8 @@ html, body {
     height: inherit;
     /* padding: 20px; */
     }
-    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#markattendance, form#student-assessment{
+    form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#markattendance, 
+    form#student-assessment, form#form-classdetails{
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -136,18 +137,18 @@ html, body {
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input,  #promotestudents-form select,
     #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #editstudentstatus-form select,
     #editstudentstatus-form input, #teacherassign-form select, #viewclassscores-form select,  #viewclassscores-form input, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select,
-    .studentassessment-form select, .studentassessment-form input{
+    .studentassessment-form select, .studentassessment-form input, #class-detailsform select, #class-detailsform input{
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
     #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,
-    #viewclassscores-form input,  #subjectedit-form input, #editstudentstatus-form input, .studentassessment-form input {
+    #viewclassscores-form input,  #subjectedit-form input, #editstudentstatus-form input, .studentassessment-form input, #class-detailsform input {
     width: calc(100% - 10px);
     padding: 5px;
     }
     #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select, .studentassessment-form select,
-    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select, #markattendance-form select{
+    #addscores-form select, #teacherassign-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #subjectedit-form select, #markattendance-form select, #class-detailsform select{
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -242,7 +243,8 @@ html, body {
     }
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn,
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#assessment-btn, button#deleteassessment-btn, button#genresult-btn,
-    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn, button#closeresultsheet-btn {
+    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn,
+    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn {
     width: 150px;
     padding: 10px;
     border: none;
@@ -514,8 +516,15 @@ a.disable {
 #viewprogressreport-btn:hover{
 color:black;
 }
+output img{
+    width: 80px;
+    /* height: 50px; */
+}
+#closesign:hover{
+    cursor: pointer;
+}
 
-/* ****************************** Parent Portal */
+/* ****************************** Prent Portal */
 
 
 

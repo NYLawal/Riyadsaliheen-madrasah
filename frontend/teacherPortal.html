@@ -1149,6 +1149,39 @@
       </div>
     </section>
 
+    <!-- Set Class details -->
+    <section class="bg-light py-3" id="class-detailsform">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="http://localhost:5000/api/v1/class/addDetails" method="post" enctype="multipart/form-data" id="form-classdetails"> 
+              <!-- Text input -->
+              <div class="item">
+                  <label class="form-label" for="pname">No of students in class</label>
+                <input type="number" id="noInClass" name="noinclass" class="form-control" />
+              </div>
+              <!-- Text input -->
+              <!-- <div class="item">
+                <label class="form-label" for="pcategory">image url</label>
+              <input type="text" id="pimage" name="pimage" class="form-control" />
+            </div> -->
+            <div class="item">
+              <label class="form-label" for="signature">Choose Signature</label>
+              <input type="file" id="imgfile" accept="image/jpeg, image/png, image/jpg" name="signatureImage">
+              <output for="" id="output"> </output>
+            </div>
+              <!-- Submit button -->
+               <div class="btn-block"> 
+                 <button type="submit" class="mb-4" id="setclassdetails-btn">Set</button>
+               </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
 
 
     <!-- Footer  -->
