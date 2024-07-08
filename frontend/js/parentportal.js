@@ -296,20 +296,20 @@ viewSelectForVisualReport.addEventListener("change", (e) => {
 
 viewChartReportButton.addEventListener("click", (e) => {
     e.preventDefault()
-    if (viewSelectForVisualReport.value == "select view"){
+    if (viewSelectForVisualReport.value == "select view") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
             text: "You have not selected any view"
         });
     }
-    if (viewSelectForVisualReport.value == "subject"){
+    if (viewSelectForVisualReport.value == "subject") {
         performanceBarChartTermly.style.display = "none";
         performanceBarChart.style.display = "block";
         let admNo = admNoForVisualReport.value;
         let term = termSelectForVisualReport.value;
         let session = sessionSelectForVisualReport.value;
-        if (admNo == "" || session == "select session" || term == "select term"){
+        if (admNo == "" || session == "select session" || term == "select term") {
             Swal.fire({
                 icon: "error",
                 title: "Invalid input detected",
@@ -317,14 +317,14 @@ viewChartReportButton.addEventListener("click", (e) => {
             });
         }
         else
-        visualReportScores(admNo, term, session)
-    }  
-    else if (viewSelectForVisualReport.value == "term"){
+            visualReportScores(admNo, term, session)
+    }
+    else if (viewSelectForVisualReport.value == "term") {
         performanceBarChart.style.display = "none";
         performanceBarChartTermly.style.display = "block";
         let admNo = admNoForVisualReport.value;
         let session = sessionSelectForVisualReport.value;
-        if (admNo == "" || session == "select session"){
+        if (admNo == "" || session == "select session") {
             Swal.fire({
                 icon: "error",
                 title: "Invalid input detected",
@@ -332,13 +332,13 @@ viewChartReportButton.addEventListener("click", (e) => {
             });
         }
         else
-        visualReportByTerm(admNo, session)
-    }  
-    else if (viewSelectForVisualReport.value == "session"){
+            visualReportByTerm(admNo, session)
+    }
+    else if (viewSelectForVisualReport.value == "session") {
         performanceBarChart.style.display = "none";
         performanceBarChartTermly.style.display = "block";
         let admNo = admNoForVisualReport.value;
-        if (admNo == ""){
+        if (admNo == "") {
             Swal.fire({
                 icon: "error",
                 title: "Invalid input detected",
@@ -346,9 +346,9 @@ viewChartReportButton.addEventListener("click", (e) => {
             });
         }
         else
-        visualReportBySession(admNo)
-    }  
-    
+            visualReportBySession(admNo)
+    }
+
 })
 
 // view student scores by subject
@@ -368,7 +368,7 @@ const visualReportScores = (admNo, term, session) => {
             let xValues = [];
             let yValues = [];
             subjectView = [...response.data.report]
-            
+
             for (let i = 0; i < subjectView.length; i++) {
                 xValues.push(subjectView[i].subjectName)
                 yValues.push(subjectView[i].totalScore)
@@ -379,7 +379,7 @@ const visualReportScores = (admNo, term, session) => {
                 data: {
                     labels: xValues,
                     datasets: [{
-                        barThickness:36,
+                        barThickness: 36,
                         backgroundColor: barColors,
                         data: yValues
                     }]
@@ -392,11 +392,11 @@ const visualReportScores = (admNo, term, session) => {
                     },
                     scales: {
                         yAxes: [{
-                          ticks: {
-                            beginAtZero: true,
-                          }
+                            ticks: {
+                                beginAtZero: true,
+                            }
                         }]
-                      },
+                    },
                 }
             });
         })
@@ -443,18 +443,18 @@ const visualReportBySession = (admNo) => {
             let xValues = [];
             let yValues = [];
             for (let j = 0; j < response.data.result.length; j++) {
-               let finalTerm = response.data.result[j].term.find(aterm => aterm.termName == "third")
+                let finalTerm = response.data.result[j].term.find(aterm => aterm.termName == "third")
                 yValues.push(finalTerm.avgPercentage.toFixed(2))
                 xValues.push(response.data.result[j].sessionName)
             }
-            
+
             let barColors = "#5ec52e";
             new Chart("progressChartTermly", {
                 type: "bar",
                 data: {
                     labels: xValues,
                     datasets: [{
-                        barThickness:44,
+                        barThickness: 44,
                         backgroundColor: barColors,
                         data: yValues
                     }]
@@ -463,11 +463,11 @@ const visualReportBySession = (admNo) => {
                     legend: { display: false },
                     scales: {
                         yAxes: [{
-                          ticks: {
-                            beginAtZero: true,
-                          }
+                            ticks: {
+                                beginAtZero: true,
+                            }
                         }]
-                      },
+                    },
                     title: {
                         display: true,
                         text: `Report by Session for ${response.data.message}`
@@ -518,7 +518,7 @@ const visualReportByTerm = (admNo, session) => {
             let xValues = [];
             let yValues = [];
             subjectView = [...response.data.report]
-            
+
             for (let i = 0; i < subjectView.length; i++) {
                 xValues.push(subjectView[i].termName)
                 yValues.push(subjectView[i].avgPercentage.toFixed(2))
@@ -529,7 +529,7 @@ const visualReportByTerm = (admNo, session) => {
                 data: {
                     labels: xValues,
                     datasets: [{
-                        barThickness:44,
+                        barThickness: 44,
                         backgroundColor: barColors,
                         data: yValues
                     }]
@@ -538,11 +538,11 @@ const visualReportByTerm = (admNo, session) => {
                     legend: { display: false },
                     scales: {
                         yAxes: [{
-                          ticks: {
-                            beginAtZero: true,
-                          }
+                            ticks: {
+                                beginAtZero: true,
+                            }
                         }]
-                      },
+                    },
                     title: {
                         display: true,
                         text: `${session} session Report for ${response.data.message}`
@@ -586,8 +586,8 @@ const studentAssessmentForm = document.getElementById("studentassessment-form")
 const submitDetailsForAssessmentBtn = document.getElementById("assessment-btn")
 const cancelAssessmentBtn = document.getElementById("cancelassessment-btn")
 const closeAssessmentBtn = document.getElementById("closeassessment-btn")
-const takeAssessmentStdProgramme= document.getElementById("takeassessment-studentprogramme")
-const takeAssessmentStdClass= document.getElementById("takeassessment-studentclass")
+const takeAssessmentStdProgramme = document.getElementById("takeassessment-studentprogramme")
+const takeAssessmentStdClass = document.getElementById("takeassessment-studentclass")
 const getAssessmentLinkText = document.getElementById("assessmentlink-text")
 const tableOfLessons = document.getElementById("tableOfLessons")
 const tableOfLessonsBody = document.getElementById("tableofLessonsBody")
@@ -613,8 +613,8 @@ closeAssessmentBtn.addEventListener("click", (e) => {
     takeAssessmentStdProgramme.value = "select your programme"
     studentAssessmentForm.style.display = "none";
     getAssessmentLinkText.style.display = "none";
-    tableOfLessonsHeading.innerHTML ="";
-    tableOfLessonsBody.innerHTML ="";
+    tableOfLessonsHeading.innerHTML = "";
+    tableOfLessonsBody.innerHTML = "";
 });
 
 // reload view assessmnent form
@@ -622,7 +622,7 @@ cancelAssessmentBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const stdClass = takeAssessmentStdClass.value;
     const programme = takeAssessmentStdProgramme.value;
-    getAssessmentLink(stdClass,programme)
+    getAssessmentLink(stdClass, programme)
 });
 
 // submit request to get assessment
@@ -630,7 +630,7 @@ submitDetailsForAssessmentBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const stdClass = takeAssessmentStdClass.value;
     const programme = takeAssessmentStdProgramme.value;
-    if (stdClass =="select class" || programme == "select programme") {
+    if (stdClass == "select class" || programme == "select programme") {
         Swal.fire({
             icon: "error",
             title: "Inavlid Input Detected",
@@ -638,7 +638,7 @@ submitDetailsForAssessmentBtn.addEventListener("click", (e) => {
         });
     }
     else
-    getAssessmentLink(stdClass, programme);
+        getAssessmentLink(stdClass, programme);
 });
 
 // get assessment link
@@ -659,31 +659,31 @@ const getAssessmentLink = (className, programme) => {
                 title: "Successful",
                 text: response.data.message
             });
-            tableOfLessonsHeading.innerHTML ="";
-            tableOfLessonsBody.innerHTML ="";
+            tableOfLessonsHeading.innerHTML = "";
+            tableOfLessonsBody.innerHTML = "";
             submitDetailsForAssessmentBtn.style.display = "none";
             getAssessmentLinkText.style.display = "block";
-                const tblhead1 = document.createElement("th")
-                const tblhead2 = document.createElement("th")
-                const tblhead3 = document.createElement("th")
-                tblhead1.innerText = "Subject"
-                tblhead2.innerText = "lesson Link"
-                tblhead3.innerText = "Assessment Link"
-                tableOfLessonsHeading.appendChild(tblhead1)
-                tableOfLessonsHeading.appendChild(tblhead2)
-                tableOfLessonsHeading.appendChild(tblhead3)
-                for (let count=0; count<response.data.lessons.length; count++){
-                    const tblrow = document.createElement("tr")
-                    const tblcol1 = document.createElement("td")
-                    const tblcol2 = document.createElement("td")
-                    const tblcol3 = document.createElement("td")
-                    tblcol1.innerText = response.data.lessons[count].subjectName
-                    tblcol2.innerText = response.data.lessons[count].lessonLink
-                    tblcol3.innerText = response.data.lessons[count].assessmentLink
-                    tblrow.appendChild(tblcol1)
-                    tblrow.appendChild(tblcol2)
-                    tblrow.appendChild(tblcol3)
-                    tableOfLessonsBody.appendChild(tblrow)
+            const tblhead1 = document.createElement("th")
+            const tblhead2 = document.createElement("th")
+            const tblhead3 = document.createElement("th")
+            tblhead1.innerText = "Subject"
+            tblhead2.innerText = "lesson Link"
+            tblhead3.innerText = "Assessment Link"
+            tableOfLessonsHeading.appendChild(tblhead1)
+            tableOfLessonsHeading.appendChild(tblhead2)
+            tableOfLessonsHeading.appendChild(tblhead3)
+            for (let count = 0; count < response.data.lessons.length; count++) {
+                const tblrow = document.createElement("tr")
+                const tblcol1 = document.createElement("td")
+                const tblcol2 = document.createElement("td")
+                const tblcol3 = document.createElement("td")
+                tblcol1.innerText = response.data.lessons[count].subjectName
+                tblcol2.innerText = response.data.lessons[count].lessonLink
+                tblcol3.innerText = response.data.lessons[count].assessmentLink
+                tblrow.appendChild(tblcol1)
+                tblrow.appendChild(tblcol2)
+                tblrow.appendChild(tblcol3)
+                tableOfLessonsBody.appendChild(tblrow)
             }
         })
         .catch(function (error) {
@@ -729,7 +729,7 @@ clearQuizFormButton.addEventListener("click", (e) => {
 // monthly quiz form
 monthlyQuizLink.addEventListener("click", (e) => {
     e.preventDefault();
-   getQuizForm.style.display = "block"
+    getQuizForm.style.display = "block"
     sidebar.style.display = "none";
     getQuiz()
 });
@@ -796,7 +796,7 @@ const thirdTermTbl = document.getElementById("thirdterm-table")
 const dwnresultBody = document.getElementById("result-bodydwn")
 const thirddwnresultBody = document.getElementById("thirdterm-resultbodydwn")
 const downloadbtn = document.getElementById("dwnbtn")
-const PDFdownloadbtn = document.getElementById("pdfdownload-btn")
+// const PDFdownloadbtn = document.getElementById("pdfdownload-btn")
 const closeResultSheetBtn = document.getElementById("closeresultsheet-btn")
 const myform = document.getElementById("student-reportcard")
 const tableReportdwn = document.getElementById("table-reportdwn")
@@ -817,6 +817,9 @@ const reportCardClassNumber = document.getElementById("detail-classnumber")
 const reportCardTeacherComment = document.getElementById("detail-tcomment")
 const reportCardAmeedComment = document.getElementById("detail-ameedcomment")
 const reportCardTeacherSignature = document.getElementById("detail-tsignature")
+const reportCardPrincipalSignature = document.getElementById("detail-principalsign")
+const reportCardProprietorSignature = document.getElementById("detail-proprietorsign")
+const reportCardNextTermBegins = document.getElementById("detail-nexttermdate")
 
 // open result sheet
 resultSheet.addEventListener("click", (e) => {
@@ -843,8 +846,8 @@ generateResultBtn.addEventListener("click", (e) => {
     dwnresultBody.innerHTML = "";
     thirddwnresultBody.innerHTML = "";
 
-   
-    if (termName == "first" || termName == "second" ) {
+
+    if (termName == "first" || termName == "second") {
         thirdTermTbl.style.display = "none";
         firstSecondTermTbl.style.display = "block";
     }
@@ -852,7 +855,7 @@ generateResultBtn.addEventListener("click", (e) => {
         firstSecondTermTbl.style.display = "none";
         thirdTermTbl.style.display = "block";
     }
-    if (admNo == "" ) {
+    if (admNo == "") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
@@ -865,57 +868,49 @@ generateResultBtn.addEventListener("click", (e) => {
 });
 
 
- // take screesnshot of form and download as image
+// take screesnshot of form and download as image
 downloadbtn.addEventListener("click", (e) => {
     e.preventDefault();
     // downloadPDF()
-    html2canvas(myform, { logging: true, letterRendering: 1, allowTaint: true,  useCORS: true }).then(function (canvas) {                   
+    html2canvas(myform, { logging: true, letterRendering: 1, allowTaint: true, useCORS: true }).then(function (canvas) {
         var anchorTag = document.createElement("a");
-         document.body.appendChild(anchorTag);
+        document.body.appendChild(anchorTag);
         //  document.getElementById("previewImg").appendChild(canvas);
-         anchorTag.download = "resultsheet.jpg";
-         anchorTag.href = canvas.toDataURL();
-         anchorTag.target = '_blank';
-         anchorTag.click();
-});
-});
-
-function restoreArabic(){
-    for (i=0; i<detailRightArabic.length; i++){
-        detailRightArabic[i].style.display = "block"
-    }
-    for (j=0; j<arabicDetail.length; j++){
-        arabicDetail[j].style.display = "block"
-    }
-}
-
- // download form pdf
-PDFdownloadbtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    for (i=0; i<detailRightArabic.length; i++){
-        detailRightArabic[i].style.display = "none"
-    }
-    for (j=0; j<arabicDetail.length; j++){
-        arabicDetail[j].style.display = "none"
-    }
-    window.jsPDF = window.jspdf.jsPDF;
-    var docPDF = new jsPDF(); 
-
-function downloadPDF(){
-    let pdfform = document.querySelector("#student-reportcard");
-    docPDF.html(pdfform, {
-        callback: function(docPDF) {
-            docPDF.save('result.pdf');
-        },
-        x: 15,
-        y: 15,
-        width: 170,
-        windowWidth: 650
+        anchorTag.download = "resultsheet.jpg";
+        anchorTag.href = canvas.toDataURL();
+        anchorTag.target = '_blank';
+        anchorTag.click();
     });
-}
-downloadPDF()
-setTimeout(restoreArabic, 4000);
 });
+
+
+// download form pdf
+// PDFdownloadbtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     for (i = 0; i < detailRightArabic.length; i++) {
+//         detailRightArabic[i].style.display = "none"
+//     }
+//     for (j = 0; j < arabicDetail.length; j++) {
+//         arabicDetail[j].style.display = "none"
+//     }
+//     window.jsPDF = window.jspdf.jsPDF;
+//     var docPDF = new jsPDF();
+
+//     function downloadPDF() {
+//         let pdfform = document.querySelector("#student-reportcard");
+//         docPDF.html(pdfform, {
+//             callback: function (docPDF) {
+//                 docPDF.save('result.pdf');
+//             },
+//             x: 15,
+//             y: 15,
+//             width: 170,
+//             windowWidth: 650
+//         });
+//     }
+//     downloadPDF()
+   
+// });
 
 // view student result
 const downloadScores = (admNo, term, session) => {
@@ -946,19 +941,21 @@ const downloadScores = (admNo, term, session) => {
             reportCardMaxAttendance.innerText = response.data.maxAttendance
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
-            console.log(response.data.teacherSignature)
+            reportCardNextTermBegins.innerText = response.data.nextTermDate
             reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.teacherSignature} alt="teacher signature" width="60">`
-            function calculateAttendance(){
-            let maxAttendance = response.data.maxAttendance ;
-            let timesPresent = 0;
-            let timesAbsent = 0;
-            for (let i = 0; i < response.data.attendance.length; i++) {
-                if ( response.data.attendance[i].presence == 'yes'){
-                    timesPresent = timesPresent + 1
-                }
-                }            reportCardMaxAttendance.innerText = maxAttendance
-            reportCardAbsent.innerText = maxAttendance-timesPresent
-            reportCardPresent.innerText = timesPresent
+            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.principalSign} alt="teacher signature" width="60">`
+            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.proprietorSign} alt="teacher signature" width="60">`
+            function calculateAttendance() {
+                let maxAttendance = response.data.maxAttendance;
+                let timesPresent = 0;
+                let timesAbsent = 0;
+                for (let i = 0; i < response.data.attendance.length; i++) {
+                    if (response.data.attendance[i].presence == 'yes') {
+                        timesPresent = timesPresent + 1
+                    }
+                } reportCardMaxAttendance.innerText = maxAttendance
+                reportCardAbsent.innerText = maxAttendance - timesPresent
+                reportCardPresent.innerText = timesPresent
             }
             calculateAttendance()
 
@@ -1058,11 +1055,11 @@ const downloadScores = (admNo, term, session) => {
             if (response.data.termName == 'third') {
                 tblcoltotalhead.colSpan = 8
                 tblcolmarkhead.colSpan = 8
-                
+
                 thirddwnresultBody.appendChild(tblrowtotal)
                 thirddwnresultBody.appendChild(tblrowmark)
             }
-            else if (response.data.termName == 'first' ||response.data.termName == 'second' ) {
+            else if (response.data.termName == 'first' || response.data.termName == 'second') {
                 dwnresultBody.appendChild(tblrowtotal)
                 dwnresultBody.appendChild(tblrowmark)
             }

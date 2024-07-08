@@ -9,6 +9,7 @@
     color: #d0f1c1;
     padding-top: 1rem;
     max-width: 300px;
+    overflow-y: scroll;
 }
 #bsbSidebar1 .offcanvas-header {
     padding: 20px;
@@ -71,7 +72,7 @@ ul ul a {
 .staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #teacher-class, #class-label, #teacher-prg, #programme-label,
 #updatescores-form, #reportscores-form, #viewclassscores-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form,
-#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report, .studentassessment-form, #setstudentassessment-form
+#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report, .studentassessment-form, #setstudentassessment-form, #class-detailsform
 { 
     display: none;
 }
@@ -244,7 +245,7 @@ html, body {
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn,
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#assessment-btn, button#deleteassessment-btn, button#genresult-btn,
     button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn,
-    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn {
+    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn,  button#closeclassdetails-btn {
     width: 150px;
     padding: 10px;
     border: none;
@@ -522,6 +523,11 @@ output img{
 }
 #closesign:hover{
     cursor: pointer;
+}
+.setdetails-instruction{
+    max-width: 400px;
+    font-weight: 600;
+    text-align:justify;
 }
 
 /* ****************************** Prent Portal */

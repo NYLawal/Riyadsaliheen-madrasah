@@ -2021,7 +2021,7 @@ editStudentStatusButton.addEventListener("click", (e) => {
         });
     }
     else
-    editStudentStatus(admNo, formdata)
+        editStudentStatus(admNo, formdata)
 });
 
 
@@ -2067,7 +2067,7 @@ const viewScores = (admNo, term, session) => {
                 title: "Successful",
                 text: "Scores returned for " + response.data.message
             });
-           
+
             for (let i = 0; i < response.data.report.length; i++) {
                 // serial_no++
                 // thirdTermReportTable.style.display = "none"
@@ -2234,15 +2234,15 @@ addPrincipalCommentBtn.addEventListener("click", (e) => {
         const formdata = {
             ameedComment
         }
-        addPrincipalComment(admNo, term, session,formdata) 
-    }  
+        addPrincipalComment(admNo, term, session, formdata)
+    }
 });
 
 // add principal comment
 const addPrincipalComment = (admNo, term, session, comment) => {
     let errorMsg;
     axios
-    .patch(`${baseUrl}/scores/addComment/?admNo=${admNo}&termName=${term}&sessionName=${session}`, comment,
+        .patch(`${baseUrl}/scores/addComment/?admNo=${admNo}&termName=${term}&sessionName=${session}`, comment,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -2894,6 +2894,10 @@ const reportCardMaxAttendance = document.getElementById("detail-maxattendance")
 const reportCardClassNumber = document.getElementById("detail-classnumber")
 const reportCardTeacherComment = document.getElementById("detail-tcomment")
 const reportCardAmeedComment = document.getElementById("detail-ameedcomment")
+const reportCardTeacherSignature = document.getElementById("detail-tsignature")
+const reportCardPrincipalSignature = document.getElementById("detail-principalsign")
+const reportCardProprietorSignature = document.getElementById("detail-proprietorsign")
+const reportCardNextTermBegins = document.getElementById("detail-nexttermdate")
 
 // open result sheet
 resultSheet.addEventListener("click", (e) => {
@@ -2920,8 +2924,8 @@ generateResultBtn.addEventListener("click", (e) => {
     dwnresultBody.innerHTML = "";
     thirddwnresultBody.innerHTML = "";
 
-   
-    if (termName == "first" || termName == "second" ) {
+
+    if (termName == "first" || termName == "second") {
         thirdTermTbl.style.display = "none";
         firstSecondTermTbl.style.display = "block";
     }
@@ -2929,7 +2933,7 @@ generateResultBtn.addEventListener("click", (e) => {
         firstSecondTermTbl.style.display = "none";
         thirdTermTbl.style.display = "block";
     }
-    if (admNo == "" ) {
+    if (admNo == "") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
@@ -2942,58 +2946,49 @@ generateResultBtn.addEventListener("click", (e) => {
 });
 
 
- // take screesnshot of form and download as image
+// take screesnshot of form and download as image
 downloadbtn.addEventListener("click", (e) => {
     e.preventDefault();
     // downloadPDF()
-    html2canvas(myform).then(function (canvas) {                   
+    html2canvas(myform).then(function (canvas) {
         var anchorTag = document.createElement("a");
-         document.body.appendChild(anchorTag);
+        document.body.appendChild(anchorTag);
         //  document.getElementById("previewImg").appendChild(canvas);
         canvas.style.outline = "4px solid #378015"
-         anchorTag.download = "resultsheet.jpg";
-         anchorTag.href = canvas.toDataURL();
-         anchorTag.target = '_blank';
-         anchorTag.click();
-});
-});
-
-function restoreArabic(){
-    for (i=0; i<detailRightArabic.length; i++){
-        detailRightArabic[i].style.display = "block"
-    }
-    for (j=0; j<arabicDetail.length; j++){
-        arabicDetail[j].style.display = "block"
-    }
-}
-
- // download form pdf
-PDFdownloadbtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    for (i=0; i<detailRightArabic.length; i++){
-        detailRightArabic[i].style.display = "none"
-    }
-    for (j=0; j<arabicDetail.length; j++){
-        arabicDetail[j].style.display = "none"
-    }
-    window.jsPDF = window.jspdf.jsPDF;
-    var docPDF = new jsPDF(); 
-
-function downloadPDF(){
-    let pdfform = document.querySelector("#student-reportcard");
-    docPDF.html(pdfform, {
-        callback: function(docPDF) {
-            docPDF.save('result.pdf');
-        },
-        x: 15,
-        y: 15,
-        width: 170,
-        windowWidth: 650
+        anchorTag.download = "resultsheet.jpg";
+        anchorTag.href = canvas.toDataURL();
+        anchorTag.target = '_blank';
+        anchorTag.click();
     });
-}
-downloadPDF()
-setTimeout(restoreArabic, 4000);
 });
+
+// download form pdf
+// PDFdownloadbtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     for (i=0; i<detailRightArabic.length; i++){
+//         detailRightArabic[i].style.display = "none"
+//     }
+//     for (j=0; j<arabicDetail.length; j++){
+//         arabicDetail[j].style.display = "none"
+//     }
+//     window.jsPDF = window.jspdf.jsPDF;
+//     var docPDF = new jsPDF(); 
+
+// function downloadPDF(){
+//     let pdfform = document.querySelector("#student-reportcard");
+//     docPDF.html(pdfform, {
+//         callback: function(docPDF) {
+//             docPDF.save('result.pdf');
+//         },
+//         x: 15,
+//         y: 15,
+//         width: 170,
+//         windowWidth: 650
+//     });
+// }
+// downloadPDF()
+
+// });
 
 // view student result
 const downloadScores = (admNo, term, session) => {
@@ -3024,17 +3019,21 @@ const downloadScores = (admNo, term, session) => {
             reportCardMaxAttendance.innerText = response.data.maxAttendance
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
-            function calculateAttendance(){
-            let maxAttendance = response.data.maxAttendance ;
-            let timesPresent = 0;
-            let timesAbsent = 0;
-            for (let i = 0; i < response.data.attendance.length; i++) {
-                if ( response.data.attendance[i].presence == 'yes'){
-                    timesPresent = timesPresent + 1
-                }
-                }            reportCardMaxAttendance.innerText = maxAttendance
-            reportCardAbsent.innerText = maxAttendance-timesPresent
-            reportCardPresent.innerText = timesPresent
+            reportCardNextTermBegins.innerText = response.data.nextTermDate
+            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.teacherSignature} alt="teacher signature" width="60">`
+            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.principalSign} alt="teacher signature" width="60">`
+            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.proprietorSign} alt="teacher signature" width="60">`
+            function calculateAttendance() {
+                let maxAttendance = response.data.maxAttendance;
+                let timesPresent = 0;
+                let timesAbsent = 0;
+                for (let i = 0; i < response.data.attendance.length; i++) {
+                    if (response.data.attendance[i].presence == 'yes') {
+                        timesPresent = timesPresent + 1
+                    }
+                } reportCardMaxAttendance.innerText = maxAttendance
+                reportCardAbsent.innerText = maxAttendance - timesPresent
+                reportCardPresent.innerText = timesPresent
             }
             calculateAttendance()
 
@@ -3134,11 +3133,11 @@ const downloadScores = (admNo, term, session) => {
             if (response.data.termName == 'third') {
                 tblcoltotalhead.colSpan = 8
                 tblcolmarkhead.colSpan = 8
-                
+
                 thirddwnresultBody.appendChild(tblrowtotal)
                 thirddwnresultBody.appendChild(tblrowmark)
             }
-            else if (response.data.termName == 'first' ||response.data.termName == 'second' ) {
+            else if (response.data.termName == 'first' || response.data.termName == 'second') {
                 dwnresultBody.appendChild(tblrowtotal)
                 dwnresultBody.appendChild(tblrowmark)
             }
@@ -3169,6 +3168,286 @@ const downloadScores = (admNo, term, session) => {
             });
         });
 };
+
+
+// SET CLASS DETAILS
+const setClassDetailsLink = document.getElementById("setclassdetails")
+const setEOTDetailsForm = document.getElementById("class-detailsform")
+const formToSubmitDetails = document.getElementById("form-classdetails")
+const selectTaskForReport = document.getElementById("selecttask-forreportcard")
+const maxTermAttendance = document.getElementById("maxAttendance")
+const nextTermBegins = document.getElementById("date-inputfield")
+const imgFilePrincipal = document.getElementById("imgfileprincipal")
+const imgFileProprietor = document.getElementById("imgfileproprietor")
+const closeSign = document.getElementById("closesign")
+const setDetailsButton = document.getElementById("setclassdetails-btn")
+const closeDetailsButton = document.getElementById("closeclassdetails-btn")
+let imagesArray = []
+
+
+// display set class details form
+setClassDetailsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    setEOTDetailsForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close set class details form
+closeDetailsButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    setEOTDetailsForm.style.display = "none";
+});
+
+// close set class details form
+selectTaskForReport.addEventListener("change", (e) => {
+    e.preventDefault();
+    if (selectTaskForReport.value == "maxattendance") {
+        maxTermAttendance.removeAttribute("disabled")
+        nextTermBegins.removeAttribute("disabled")
+        imgFilePrincipal.setAttribute("disabled", true)
+        imgFileProprietor.setAttribute("disabled", true)
+    }
+    else if (selectTaskForReport.value == "principalsign") {
+        maxTermAttendance.setAttribute("disabled", true)
+        maxTermAttendance.setAttribute("placeholder", "")
+        nextTermBegins.setAttribute("disabled", true)
+        imgFilePrincipal.removeAttribute("disabled")
+        imgFileProprietor.setAttribute("disabled", true)
+    }
+    else if (selectTaskForReport.value == "proprietorsign") {
+        maxTermAttendance.setAttribute("disabled", true)
+        maxTermAttendance.setAttribute("placeholder", "")
+        nextTermBegins.setAttribute("disabled", true)
+        imgFilePrincipal.setAttribute("disabled", true)
+        imgFileProprietor.removeAttribute("disabled")
+    }
+});
+
+// preview signature chosen
+function displayImages() {
+    let images = ""
+    const output = document.getElementById("output")
+    imagesArray.forEach((image, index) => {
+        images += `<div class="image">
+                  <img src="${URL.createObjectURL(image)}" alt="image">
+                  <span id="closesign" onclick="deleteImage(${index})">&times;</span>
+                </div>`
+    })
+    output.innerHTML = images
+}
+// request for signature preview when input for principal signature changes
+imgFilePrincipal.addEventListener("change", () => {
+    const file = imgFilePrincipal.files
+    imagesArray.push(file[0])
+    displayImages()
+})
+// request for signature preview when input for proprietor signature changes
+imgFileProprietor.addEventListener("change", () => {
+    const file = imgFileProprietor.files
+    imagesArray.push(file[0])
+    displayImages()
+})
+
+// delete signature chosen when cancel button is clicked
+function deleteImage(index) {
+    imagesArray.splice(index, 1)
+    displayImages()
+}
+
+//set maximum attendance and next term begins
+const setDetails = (formData) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/staff/setDetails/`, formData,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                    // "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response);
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//set principal's signature
+const setPrincipalSignature = (formData) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/principalSignature/`, formData,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response);
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+
+};
+
+//set proprietor's signature
+const setProproprietorSignature = (formData) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/proprietorSignature/`, formData,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response);
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// request to set details
+formToSubmitDetails.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const maxAttendance = maxTermAttendance.value;
+    const nextTermDate = nextTermBegins.value;
+    if (selectTaskForReport.value == "select a task") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "You have not selected any task"
+        });
+    }
+    else if (selectTaskForReport.value == "maxattendance" && (maxAttendance == "" || nextTermDate == "")) {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please check that you have inputs for each active field"
+        });
+    }
+    else if (selectTaskForReport.value == "principalsign" && (imgFilePrincipal.value == "")) {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please check that you have inputs for principal's signature"
+        });
+    }
+    else if (selectTaskForReport.value == "proprietorsign" && (imgFileProprietor.value == "")) {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Please check that you have inputs for proprietor's signature"
+        });
+    }
+    else {
+        const formData = new FormData(formToSubmitDetails);
+        const formDataObj = {};
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        if (selectTaskForReport.value == "principalsign"){
+        setPrincipalSignature(formDataObj)
+        }
+        else if (selectTaskForReport.value == "proprietorsign"){
+        setProproprietorSignature(formDataObj)
+        }
+        else if (selectTaskForReport.value == "maxattendance")
+        setDetails(formDataObj);
+    }
+});
+
+
 
 // ************************************************************************
 // logout

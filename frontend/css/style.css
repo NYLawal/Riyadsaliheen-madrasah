@@ -532,9 +532,6 @@ text-decoration: underline;
 }
 
 @media (max-width:1199px){
-    .detail-right{
-        /* display: none; */
-    }
     .std-details{
         flex-direction: column;
         align-items: flex-start;
@@ -546,10 +543,10 @@ text-decoration: underline;
     .left-details, .right-details{
         width: 100%;
     }
-    .pndpsignatures{
+    /* .pndpsignatures{
         flex-direction: column;
         align-items: flex-start;
-    }
+    } */
 }
 
 /* ==================================================

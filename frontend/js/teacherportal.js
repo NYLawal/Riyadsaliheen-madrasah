@@ -116,8 +116,8 @@ const getTeacherClass = () => {
                 console.log(error.response.headers);
                 errorMsg = error.response.data.message
                 if (error.response.data.message == "Error: unauthorised access! Log in to resume your tasks")
-                    window.location.href =  "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-                    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
+                    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -247,7 +247,7 @@ const displayStudentsByClass = (page) => {
                 tblcol9.innerText = response.data.studentsperpage[i].parentEmail
                 tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
                 tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
-                
+
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -1460,7 +1460,7 @@ setAssessmentLink.addEventListener("click", (e) => {
     e.preventDefault();
     setAssessmentForm.style.display = "block"
     sidebar.style.display = "none";
-}); 
+});
 
 // display view assessment form
 viewAssessmentLink.addEventListener("click", (e) => {
@@ -1469,7 +1469,7 @@ viewAssessmentLink.addEventListener("click", (e) => {
     sidebar.style.display = "none";
     const stdClass = takeAssessmentStdClass.value;
     const programme = takeAssessmentStdProgramme.value;
-    getAssessmentLink(stdClass,programme)
+    getAssessmentLink(stdClass, programme)
 });
 
 // display delete assessment form
@@ -1490,7 +1490,7 @@ reloadAssessmentBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const stdClass = takeAssessmentStdClass.value;
     const programme = takeAssessmentStdProgramme.value;
-    getAssessmentLink(stdClass,programme)
+    getAssessmentLink(stdClass, programme)
 });
 
 // close set assessmnent form
@@ -1538,14 +1538,14 @@ submitDetailsToSetAssessmentBtn.addEventListener("click", (e) => {
             text: "Check that you have inputs for all fields. Type 'none' if you want to omit a lesson/assessment"
         });
     }
-   else if (subjectName == "none") {
+    else if (subjectName == "none") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input Detected",
             text: "You need to input a valid subject. Subject cannot be omitted"
         });
     }
-   else if (assessmentLink == "none" && lessonLink == "none") {
+    else if (assessmentLink == "none" && lessonLink == "none") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input Detected",
@@ -1572,7 +1572,7 @@ submitDetailstoEditAssessmentBtn.addEventListener("click", (e) => {
     const assessmentLink = takeAssessmentLinktoAssessment.value;
     const lessonLink = takeAssessmentLinktoLesson.value;
     const subjectName = takeAssessmentSubject.value;
-    if (className =="select your class" || programme == "select your programme") {
+    if (className == "select your class" || programme == "select your programme") {
         Swal.fire({
             icon: "error",
             title: "Inavlid Input Detected",
@@ -1586,14 +1586,14 @@ submitDetailstoEditAssessmentBtn.addEventListener("click", (e) => {
             text: "Check that you have inputs for all fields. Type 'none' if you want to omit a lesson/assessment"
         });
     }
-   else if (subjectName == "none") {
+    else if (subjectName == "none") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input Detected",
             text: "You need to input a valid subject. Subject cannot be omitted"
         });
     }
-   else if (assessmentLink == "none" && lessonLink == "none") {
+    else if (assessmentLink == "none" && lessonLink == "none") {
         Swal.fire({
             icon: "error",
             title: "Invalid Input Detected",
@@ -1616,7 +1616,7 @@ submitDetailstoDeleteAssessmentBtn.addEventListener("click", (e) => {
     const className = delAssessmentStdClass.value;
     const programme = delAssessmentStdProgramme.value;
     const subjectName = delAssessmentSubject.value;
-    if (subjectName =="none" || subjectName == "") {
+    if (subjectName == "none" || subjectName == "") {
         Swal.fire({
             icon: "error",
             title: "Inavlid Input Detected",
@@ -1649,29 +1649,29 @@ const getAssessmentLink = (className, programme) => {
                 title: "Successful",
                 text: response.data.message
             });
-            tableOfLessonsHeading.innerHTML ="";
-            tableOfLessonsBody.innerHTML ="";
-                const tblhead1 = document.createElement("th")
-                const tblhead2 = document.createElement("th")
-                const tblhead3 = document.createElement("th")
-                tblhead1.innerText = "Subject"
-                tblhead2.innerText = "lesson Link"
-                tblhead3.innerText = "Assessment Link"
-                tableOfLessonsHeading.appendChild(tblhead1)
-                tableOfLessonsHeading.appendChild(tblhead2)
-                tableOfLessonsHeading.appendChild(tblhead3)
-                for (let count=0; count<response.data.lessons.length; count++){
-                    const tblrow = document.createElement("tr")
-                    const tblcol1 = document.createElement("td")
-                    const tblcol2 = document.createElement("td")
-                    const tblcol3 = document.createElement("td")
-                    tblcol1.innerText = response.data.lessons[count].subjectName
-                    tblcol2.innerText = response.data.lessons[count].lessonLink
-                    tblcol3.innerText = response.data.lessons[count].assessmentLink
-                    tblrow.appendChild(tblcol1)
-                    tblrow.appendChild(tblcol2)
-                    tblrow.appendChild(tblcol3)
-                    tableOfLessonsBody.appendChild(tblrow)
+            tableOfLessonsHeading.innerHTML = "";
+            tableOfLessonsBody.innerHTML = "";
+            const tblhead1 = document.createElement("th")
+            const tblhead2 = document.createElement("th")
+            const tblhead3 = document.createElement("th")
+            tblhead1.innerText = "Subject"
+            tblhead2.innerText = "lesson Link"
+            tblhead3.innerText = "Assessment Link"
+            tableOfLessonsHeading.appendChild(tblhead1)
+            tableOfLessonsHeading.appendChild(tblhead2)
+            tableOfLessonsHeading.appendChild(tblhead3)
+            for (let count = 0; count < response.data.lessons.length; count++) {
+                const tblrow = document.createElement("tr")
+                const tblcol1 = document.createElement("td")
+                const tblcol2 = document.createElement("td")
+                const tblcol3 = document.createElement("td")
+                tblcol1.innerText = response.data.lessons[count].subjectName
+                tblcol2.innerText = response.data.lessons[count].lessonLink
+                tblcol3.innerText = response.data.lessons[count].assessmentLink
+                tblrow.appendChild(tblcol1)
+                tblrow.appendChild(tblcol2)
+                tblrow.appendChild(tblcol3)
+                tableOfLessonsBody.appendChild(tblrow)
             }
         })
         .catch(function (error) {
@@ -1811,7 +1811,7 @@ const deleteAssessment = (className, programme, taskInfo) => {
                 title: "Successful",
                 text: response.data.message
             });
-        delAssessmentSubject.value = "";
+            delAssessmentSubject.value = "";
         })
         .catch(function (error) {
             if (error.response) {
@@ -1862,26 +1862,26 @@ function displayImages() {
     let images = ""
     const output = document.getElementById("output")
     imagesArray.forEach((image, index) => {
-      images += `<div class="image">
+        images += `<div class="image">
                   <img src="${URL.createObjectURL(image)}" alt="image">
                   <span id="closesign" onclick="deleteImage(${index})">&times;</span>
                 </div>`
     })
     output.innerHTML = images
-  }
+}
 // request for signature preview when input changes
 imgFile.addEventListener("change", () => {
     const file = imgFile.files
     imagesArray.push(file[0])
     displayImages()
-  })
+})
 // delete signature chosen when cancel button is clicked
-  function deleteImage(index) {
+function deleteImage(index) {
     imagesArray.splice(index, 1)
     displayImages()
-  }
+}
 
-  const setDetails = (className,programme,formData) => {
+const setDetails = (className, programme, formData) => {
     let errorMsg;
     axios
         .post(`${baseUrl}/class/addDetails/?className=${className}&programme=${programme}`, formData,
@@ -1938,24 +1938,19 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
-            text: "Please input a the number of students in your class"
+            text: "Please input the number of students in your class"
         });
     }
-    else{
-        // const formData = {
-        //     noInClass, 
-        //     image
-        // }
+    else {
         const formData = new FormData(formToSubmitDetails);
-            const formDataObj = {};
-//   formData.append("productImage", myimage);
-  formData.forEach((value, key) => (formDataObj[key] = value));
-  console.log(formDataObj)
-        setDetails(className,programme,formDataObj);
+        const formDataObj = {};
+        formData.forEach((value, key) => (formDataObj[key] = value));
+        console.log(formDataObj)
+        setDetails(className, programme, formDataObj);
     }
 });
 
-  
+
 
 // logout
 logoutLink.addEventListener("click", (e) => {
