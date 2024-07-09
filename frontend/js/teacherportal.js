@@ -1849,6 +1849,7 @@ const noOfstudentsInClass = document.getElementById("noInClass")
 const imgFile = document.getElementById("imgfile")
 const closeSign = document.getElementById("closesign")
 const setDetailsButton = document.getElementById("setclassdetails-btn")
+const closeDetailsButton = document.getElementById("closeclassdetails-btn")
 let imagesArray = []
 
 // display set class details form
@@ -1857,6 +1858,15 @@ setClassDetailsLink.addEventListener("click", (e) => {
     setClassDetailsForm.style.display = "block"
     sidebar.style.display = "none";
 });
+
+// close set class details form
+closeDetailsButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    setClassDetailsForm.style.display = "none";
+    imgFile.value = "";
+    noOfstudentsInClass.value = "";
+});
+
 // preview signature chosen
 function displayImages() {
     let images = ""
@@ -1934,11 +1944,11 @@ formToSubmitDetails.addEventListener("submit", (e) => {
     const noInClass = noOfstudentsInClass.value;
     const className = teacherDetails.teacherClass;
     const programme = teacherDetails.teacherProgramme;
-    if (noInClass == "") {
+    if (noInClass == "" || imgFile.value =="") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
-            text: "Please input the number of students in your class"
+            text: "Please fill in the details for each field"
         });
     }
     else {

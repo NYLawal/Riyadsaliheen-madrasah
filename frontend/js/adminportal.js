@@ -2950,11 +2950,10 @@ generateResultBtn.addEventListener("click", (e) => {
 downloadbtn.addEventListener("click", (e) => {
     e.preventDefault();
     // downloadPDF()
-    html2canvas(myform).then(function (canvas) {
+    html2canvas(myform, { logging: true, letterRendering: 1, allowTaint: true, useCORS: true }).then(function (canvas) {
         var anchorTag = document.createElement("a");
         document.body.appendChild(anchorTag);
         //  document.getElementById("previewImg").appendChild(canvas);
-        canvas.style.outline = "4px solid #378015"
         anchorTag.download = "resultsheet.jpg";
         anchorTag.href = canvas.toDataURL();
         anchorTag.target = '_blank';
@@ -3185,20 +3184,20 @@ const closeDetailsButton = document.getElementById("closeclassdetails-btn")
 let imagesArray = []
 
 
-// display set class details form
+// display set card details form
 setClassDetailsLink.addEventListener("click", (e) => {
     e.preventDefault();
     setEOTDetailsForm.style.display = "block"
     sidebar.style.display = "none";
 });
 
-// close set class details form
+// close set card details form
 closeDetailsButton.addEventListener("click", (e) => {
     e.preventDefault();
     setEOTDetailsForm.style.display = "none";
 });
 
-// close set class details form
+// select task to perform for setting card details
 selectTaskForReport.addEventListener("change", (e) => {
     e.preventDefault();
     if (selectTaskForReport.value == "maxattendance") {
