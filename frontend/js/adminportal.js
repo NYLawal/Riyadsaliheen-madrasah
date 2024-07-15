@@ -721,7 +721,7 @@ studSearchKey.addEventListener("change", (e) => {
     else if (studSearchKey.value == "entryClass") {
         searchMe.innerHTML =
             `<select id="searchstud-entryclass">
-    <option value="tamyidi">tamyidi</option>
+    <option value="tamhidi">tamhidi</option>
     <option value="adonah">adonah</option>
     <option value="rawdoh">rawdoh</option>
     <option value="awwal ibtidaahi">awwal ibtidaahi</option>
@@ -756,7 +756,7 @@ studSearchKey.addEventListener("change", (e) => {
     else if (studSearchKey.value == "presentClass") {
         searchMe.innerHTML =
             `<select id="searchstud-presentclass">
-    <option value="tamyidi">tamyidi</option>
+    <option value="tamhidi">tamhidi</option>
     <option value="adonah">adonah</option>
     <option value="rawdoh">rawdoh</option>
     <option value="awwal ibtidaahi">awwal ibtidaahi</option>
@@ -3174,6 +3174,7 @@ const setClassDetailsLink = document.getElementById("setclassdetails")
 const setEOTDetailsForm = document.getElementById("class-detailsform")
 const formToSubmitDetails = document.getElementById("form-classdetails")
 const selectTaskForReport = document.getElementById("selecttask-forreportcard")
+const selectProgrammeForReport = document.getElementById("selectprogramme-forreportcard")
 const maxTermAttendance = document.getElementById("maxAttendance")
 const nextTermBegins = document.getElementById("date-inputfield")
 const imgFilePrincipal = document.getElementById("imgfileprincipal")
@@ -3254,10 +3255,10 @@ function deleteImage(index) {
 }
 
 //set maximum attendance and next term begins
-const setDetails = (formData) => {
+const setDetails = (formData, programme) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/staff/setDetails/`, formData,
+        .post(`${baseUrl}/staff/setDetails/?programme=${programme}`, formData,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -3302,10 +3303,10 @@ const setDetails = (formData) => {
 };
 
 //set principal's signature
-const setPrincipalSignature = (formData) => {
+const setPrincipalSignature = (formData, programme) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/class/principalSignature/`, formData,
+        .post(`${baseUrl}/class/principalSignature/?programme=${programme}`, formData,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -3351,10 +3352,10 @@ const setPrincipalSignature = (formData) => {
 };
 
 //set proprietor's signature
-const setProproprietorSignature = (formData) => {
+const setProproprietorSignature = (formData, programme) => {
     let errorMsg;
     axios
-        .post(`${baseUrl}/class/proprietorSignature/`, formData,
+        .post(`${baseUrl}/class/proprietorSignature/?programme=${programme}`, formData,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token,
@@ -3403,11 +3404,19 @@ formToSubmitDetails.addEventListener("submit", (e) => {
     e.preventDefault()
     const maxAttendance = maxTermAttendance.value;
     const nextTermDate = nextTermBegins.value;
+    const programme = selectProgrammeForReport.value
     if (selectTaskForReport.value == "select a task") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
             text: "You have not selected any task"
+        });
+    }
+    else if (selectProgrammeForReport.value == "select your programme") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "You have not selected any programme"
         });
     }
     else if (selectTaskForReport.value == "maxattendance" && (maxAttendance == "" || nextTermDate == "")) {
@@ -3436,13 +3445,13 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         const formDataObj = {};
         formData.forEach((value, key) => (formDataObj[key] = value));
         if (selectTaskForReport.value == "principalsign"){
-        setPrincipalSignature(formDataObj)
+        setPrincipalSignature(formDataObj, programme)
         }
         else if (selectTaskForReport.value == "proprietorsign"){
-        setProproprietorSignature(formDataObj)
+        setProproprietorSignature(formDataObj, programme)
         }
         else if (selectTaskForReport.value == "maxattendance")
-        setDetails(formDataObj);
+        setDetails(formDataObj, programme);
     }
 });
 

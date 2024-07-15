@@ -15,58 +15,56 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link href="./css/styleportal.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link
+      href="./css/styleportal.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      href="./css/style.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
   <body>
     <main>
       <!-- navigation bar begins-->
-      <nav
-      class="navbar navbar-expand-lg fixed-top"
-      style="background-color: #d0f1c1"
-    >
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #d0f1c1">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><img src="../images/logo2.png" alt="logo" width="90" height="90"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <a class="navbar-brand" href="#"><img src="../images/logo2.png" alt="logo" width="90" height="90" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../index.html"
-                >Home</a
-              >
+              <a class="nav-link" aria-current="page" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">About Us</a>
             </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Academics
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="admissions.html">Admissions</a></li>
-                <li><a class="dropdown-item" href="programmes.html">Programmes</a></li>
-                <li><a class="dropdown-item" href="login.html">Online Studies</a></li>
-                <li><a class="dropdown-item" href="login.html">Check Result</a></li>
+                <li>
+                  <a class="dropdown-item" href="admissions.html">Admissions</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="programmes.html">Programmes</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="login.html">Online Studies</a>
+                </li>
               </ul>
-            </li>             
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="careers.html">Careers</a>
             </li>
@@ -74,105 +72,584 @@
               <a class="nav-link" href="contact.html">Contact Us</a>
             </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Quick Links
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="calendar.html">Term Calendar</a></li>
-                <li><a class="dropdown-item" href="newsandevents.html">News and Events</a></li>
-                <li><a class="dropdown-item" href="assessments.html">Monthly Quiz</a></li>
-                <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-                <li><a class="dropdown-item" href="donate.html">Donate</a></li>
+                <li>
+                  <a class="dropdown-item" href="calendar.html">Term Calendar</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="newsandevents.html">News and Events</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="assessments.html">Take a Quiz</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="gallery.html">Gallery</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="donate.html">Donate</a>
+                </li>
               </ul>
             </li>
             <li class="nav-item dropdown active">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Portal
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="login.html">Staff</a></li>
                 <li><a class="dropdown-item" href="login.html">Parent</a></li>
-                <li><a class="dropdown-item" href="login.html">Student</a></li>
+                <li>
+                  <a class="dropdown-item" href="login.html">Student</a>
+                </li>
               </ul>
-            </li>        
+            </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- navigation bar ends-->
-      <div class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header" id="header-wrapper">
+      <div
+        class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header"
+        id="header-wrapper"
+      >
         <h1 class="display-5 fw-bold text-white">Welcome to Your Portal</h1>
       </div>
 
-
       <!-- Header -->
-<header id="header-demo">
-  <nav class="navbar navbar-expand-md bsb-navbar-3" style="background-color: #d0f1c1;">
-    <div class="container">
-      <ul class="navbar-nav">
-        <li class="nav-item me-3">
-          <a class="nav-link" href="#!" data-bs-toggle="offcanvas" data-bs-target="#bsbSidebar1" aria-controls="bsbSidebar1">
-            <i class="navbar-toggler-icon" id="toggler-icon"></i>
-            <span style="color: rgb(16, 59, 2);">click here</span>
-          </a>
-        </li>
-      </ul>
-     
-    </div>
-  </nav>
-</header>
-
-<section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 20px;">
-</section>
-
-<!-- Aside -->
-<aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1" aria-labelledby="bsbSidebarLabel1">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="bsbSidebarLabel1">Assalam Alaykum <span></span> </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <ul class="list-unstyled components">
-      <p class="text-tasks"> Your Tasks</p>
-      <li class="">
-          <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle" data-bs-target="#addSubmenu" aria-controls="addSubmenu">Take Assessment</a>
-          <ul class="collapse list-unstyled" id="addSubmenu">
-              <li>
-                  <a href="#">assignment</a>
+      <header id="header-demo">
+        <nav
+          class="navbar navbar-expand-md bsb-navbar-3"
+          style="background-color: #d0f1c1"
+        >
+          <div class="container">
+            <ul class="navbar-nav">
+              <li class="nav-item me-3">
+                <a
+                  class="nav-link"
+                  href="#!"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#bsbSidebar1"
+                  aria-controls="bsbSidebar1"
+                >
+                  <i class="navbar-toggler-icon" id="toggler-icon"></i>
+                  <span style="color: rgb(16, 59, 2)">click here</span>
+                </a>
               </li>
-              <li>
-                  <a href="#">quiz</a>
-              </li>
-          </ul>
-      </li>
-      <li>
-        <!-- scores and attendance for all students in a particular term -->
-          <a href="#">Check Result</a>  
-      </li>
-  </ul>
-  <ul class="list-unstyled components components2">
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <section
+        class="bg-light py-3 py-md-5"
+        id="divider-bkgd"
+        style="height: 20px"
+      ></section>
+
+      <!-- Aside -->
+      <aside
+        class="bsb-sidebar-1 offcanvas offcanvas-start"
+        tabindex="-1"
+        id="bsbSidebar1"
+        aria-labelledby="bsbSidebarLabel1"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="bsbSidebarLabel1">
+            Assalam Alaykum <span></span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="list-unstyled components">
+            <p class="text-tasks">Your Tasks</p>
+            <li class="">
+              <a
+                href=""
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                role="button"
+                class="dropdown-toggle"
+                data-bs-target="#addSubmenu"
+                aria-controls="addSubmenu"
+                >Lessons & Assessment</a
+              >
+              <ul class="collapse list-unstyled" id="addSubmenu">
+                <li>
+                  <a href="#" id="studentassessment-link">take assessment</a>
+                </li>
+                <li>
+                  <a href="#" id="monthlyquiz-link">take quiz</a>
+                </li>
+              </ul>
+            </li>
+            <!-- <li>
+      <a href="#" id="resultcheck">Check Result & Attendance</a>
+    </li>
     <li>
-      <a href="#" id="logout">Logout</a>
-  </li>
-  </ul>
-  </div>
-</aside>
+      <a href="#" id="progressreport">View Performance Report</a>
+    </li> -->
+            <li>
+              <a href="#" id="resultsheet">View Report Sheet</a>
+            </li>
+          </ul>
+          <ul class="list-unstyled components components2">
+            <li>
+              <a href="#" id="logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
 
+      <!-- Take assessment -->
+      <section
+        class="bg-light py-3 studentassessment-form"
+        id="studentassessment-form"
+      >
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form action="/" id="student-assessment" style="width: 90%">
+                <div class="banner">
+                  <h1>View Lessons and Assessments</h1>
+                </div>
+                <h2 class="mt-4 mb-2">Student Details</h2>
+                <p class="green-text">
+                  Fill in your details to get the link to lessons and/or
+                  assessments for your class
+                </p>
+                <div class="item">
+                  <select id="takeassessment-studentclass">
+                    <option selected>select class</option>
+                    <option value="tamhidi">tamhidi</option>
+                    <option value="adonah">adonah</option>
+                    <option value="rawdoh">rawdoh</option>
+                    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                    <option value="thaalith ibtidaahi">
+                      thaalith ibtidaahi
+                    </option>
+                    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                    <option value="awwal idaadi">awwal idaadi</option>
+                    <option value="thaani idaadi">thaani idaadi</option>
+                    <option value="thaalith idaadi">thaalith idaadi</option>
+                  </select>
+                </div>
+                <div class="item">
+                  <select id="takeassessment-studentprogramme">
+                    <option selected>select programme</option>
+                    <option value="children madrasah">Children Madrasah</option>
+                    <option value="adult madrasah">Adult Madrasah</option>
+                    <option value="female madrasah">Female Madrasah</option>
+                    <option value="barnomij">Barnomij</option>
+                  </select>
+                </div>
+                <p id="assessmentlink-text" class="mt-3 mb-4">
+                  Copy the link for a lesson/assessment and paste it in your
+                  browser to get access to it.
+                </p>
+                <div class="table-responsive">
+                  <table
+                    id="tableOfLessons"
+                    class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3"
+                  >
+                    <thead>
+                      <tr id="tableOfLessonsHead"></tr>
+                    </thead>
+                    <tbody id="tableofLessonsBody"></tbody>
+                  </table>
+                </div>
+                <div class="btn-block">
+                  <button
+                    class="mt-2"
+                    type="submit"
+                    href="/"
+                    id="assessment-btn"
+                  >
+                    Get Link
+                  </button>
+                </div>
+                <div class="d-flex gap-2 justify-content-around mt-5">
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="cancelassessment-btn"
+                    >Reload</a
+                  >
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="closeassessment-btn"
+                    >Close</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- get quiz -->
+      <section class="bg-light py-3 studentassessment-form" id="getquiz-form">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form action="/" id="student-assessment" style="width: 90%">
+                <div class="banner">
+                  <h1>View Monthly Quiz</h1>
+                </div>
+                <div class="item">
+                  <p id="quizlink-text" class="mt-3 mb-4">
+                    Copy the link and paste it in your browser to get access to
+                    the quiz. It is important that you take it on time, as you
+                    will no longer have access after the 30-minute deadline.
+                  </p>
+                  <input type="text" name="" placeholder="" id="quizlink" />
+                </div>
+                <!-- <div class="btn-block">
+            <button class="mt-2" type="submit" href="/" id="setquiz-btn">Get Quiz</button>
+          </div> -->
+                <div class="d-flex gap-2 justify-content-around mt-5">
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="clearquizform-btn"
+                    >Clear Form</a
+                  >
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="closequizform-btn"
+                    >Close</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      
+      <!-- Result download -->
+      <section
+        class="bg-light py-3 px-4 studentassessment-form"
+        id="studentresult-form"
+      >
+        <div class="container green-text">
+          <div class="row justify-content-center mb-3">
+            <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                class="py-2 px-4"
+                id="studentreportsheet-info"
+                style="background-color: #d0f1c1; box-shadow: none"
+              >
+                <div class="row justify-content-center mb-3 mt-2">
+                  <div class="text-center">
+                    <p>
+                      Input/select your details below and click the button to
+                      populate the result sheet.
+                    </p>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="resultsheet-admNumber" class="form-label"
+                      >Admission No <span class="text-danger">*</span></label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="resultsheet-admNumber"
+                        value=""
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="resultsheet-term" class="form-label"
+                      >Term <span class="text-danger">*</span></label
+                    >
+                    <div class="input-group">
+                      <select
+                        style="background-color: white"
+                        id="resultsheet-term"
+                      >
+                        <option value="first">First</option>
+                        <option value="second">Second</option>
+                        <option value="third">Third</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="resultsheet-session" class="form-label"
+                      >Session <span class="text-danger">*</span></label
+                    >
+                    <div class="input-group">
+                      <select
+                        style="background-color: white"
+                        id="resultsheet-session"
+                      >
+                        <option value="2023/2024">2023/2024</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="padding-left: 0">
+                  <div class="col-12 btn-block">
+                    <button type="button" id="genresult-btn" href="/">
+                      Generate Result
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                id="student-reportcard"
+                name="student-reportcard"
+              >
+                <div class="row text-center report-heading">
+                  <div class="col-9 mt-1 schoolnamendaddress">
+                    <h3 class="green-text arabic-detail">
+                      مدرسة رياض الصالحين للدراسات العربية والإسلامية
+                    </h3>
+                    <h3 class="green-text arabic-detail">
+                      منطقة أولمبي، ولاية أوغن، نيجيريا
+                    </h3>
+                    <h2 class="green-text fw-bold" style="font-size: 22px">
+                      RIYAD SALIHEEN
+                    </h2>
+                    <h4 class="green-text fw-bold" style="font-size: 20px">
+                      ARABIC AND ISLAMIC INSTITUTE
+                    </h4>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Saint Lucy Estate, House 9 Road D, Olambe, Ogun State
+                    </p>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Tel: 08029710300, 08028924949, 08020721422, 08163068097
+                    </p>
+                  </div>
+                  <div class="col-3">
+                    <img
+                      src="../images/logo2.png"
+                      alt="Logo"
+                      width="80px"
+                      height="80px"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="greenbkgd-heading text-white mt-1">
+                    <p>Student Report Sheet</p>
+                    <p class="arabic-detail">كشف درجات الطالب</p>
+                  </div>
+                </div>
+                <div class="std-details mt-3">
+                  <!-- <div class="left-details"> -->
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Name:<span
+                        class="detail-left-span"
+                        id="detail-name"
+                      ></span
+                      ><span class="detail-right"> اسم الطالب</span>
+                    </p>
+                    <p class="detail-left">
+                      Class:
+                      <span class="detail-left-span" id="detail-class"></span
+                      ><span class="detail-right"> الفصل</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Session:
+                      <span class="detail-left-span" id="detail-session"></span
+                      ><span class="detail-right"> العام الدراسي</span>
+                    </p>
+                    <p class="detail-left">
+                      Term:
+                      <span class="detail-left-span" id="detail-term"></span
+                      ><span class="detail-right"> الفترة</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      No. in Class:
+                      <span
+                        class="detail-left-span"
+                        id="detail-classnumber"
+                      ></span
+                      ><span class="detail-right"> عدد الطالب في الفصل</span>
+                    </p>
+                    <p class="detail-left">
+                      Position:
+                      <span class="detail-left-span" id="detail-position"></span
+                      ><span class="detail-right"> الترتيب</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Average percentage:
+                      <span
+                        class="detail-left-span"
+                        id="detail-avgpercent"
+                      ></span
+                      ><span class="detail-right"> المعدل المئوي</span>
+                    </p>
+                    <p class="detail-left">
+                      Max. Attendance:
+                      <span
+                        class="detail-left-span"
+                        id="detail-maxattendance"
+                      ></span
+                      ><span class="detail-right"> أقصى الحضور</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      No. of times present:
+                      <span class="detail-left-span" id="detail-present"></span
+                      ><span class="detail-right"> عدد الحضور</span>
+                    </p>
+                    <p class="detail-left">
+                      No. of times absent:
+                      <span class="detail-left-span" id="detail-absent"></span
+                      ><span class="detail-right"> عدد الغياب</span>
+                    </p>
+                  </div>
+                  <!-- </div> -->
+                  <!-- <div class="right-details"> -->
+                  <!-- </div> -->
+                </div>
+                <div class="table" id="firstsecondterm-table">
+                  <table
+                    class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3"
+                    id="table-reportdwn"
+                  >
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Test</th>
+                        <th scope="col">Exam</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Remark</th>
+                      </tr>
+                    </thead>
+                    <tbody id="result-bodydwn"></tbody>
+                  </table>
+                </div>
+                <div class="table-responsive mb-3" id="thirdterm-table">
+                  <table
+                    class="table table-bordered table-light bsb-table-xl align-middle"
+                    id="table-report-thirdtermdwn"
+                  >
+                    <thead>
+                      <tr id="">
+                        <th scope="col">#</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Test</th>
+                        <th scope="col">Exam</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">First Term</th>
+                        <th scope="col">Second Term</th>
+                        <th scope="col">Cumulative Score</th>
+                        <th scope="col">Cumulative Average</th>
+                        <th scope="col">Remark</th>
+                      </tr>
+                    </thead>
+                    <tbody id="thirdterm-resultbodydwn"></tbody>
+                  </table>
+                </div>
+                <div class="signaturesndremarks mt-3">
+                  <div class="displayflex-col">
+                    <p class="detail-left">
+                      Class Teacher's Comment:
+                      <span class="detail-right"> تعليق مدرس الفصل</span>
+                    </p>
+                    <p class="detail-left-span" id="detail-tcomment"></p>
+                  </div>
+                  <p class="detail-left">
+                    Class Teacher's Signature:
+                    <span class="detail-left-span" id="detail-tsignature"></span
+                    ><span class="detail-right"> توقيع مدرس الفصل</span>
+                  </p>
+                  <div class="displayflex-col">
+                    <p class="detail-left">
+                      Principal's Remark:
+                      <span class="detail-right"> ملاحظة العميد</span>
+                    </p>
+                    <p class="detail-left-span" id="detail-ameedcomment"></p>
+                  </div>
+                  <p class="detail-left">
+                    Next Term Begins:
+                    <span
+                      class="detail-left-span"
+                      id="detail-nexttermdate"
+                    ></span
+                    ><span class="detail-right"> بداية فترة الجديدة</span>
+                  </p>
+                  <div class="pndpsignatures">
+                    <div class="">
+                      <p class="detail-left psign">
+                        <span
+                          class="detail-left-span"
+                          id="detail-principalsign"
+                        ></span
+                        ><span class="detail-right"></span
+                        ><span class="detail-right">
+                          توقيع العميد مع التاريخ</span
+                        >Principal's Signature:
+                      </p>
+                    </div>
+                    <div class="">
+                      <p class="detail-left psign">
+                        <span
+                          class="detail-left-span"
+                          id="detail-proprietorsign"
+                        ></span
+                        ><span class="detail-right"></span
+                        ><span class="detail-right">
+                          توقيع المدير مع التاريخ</span
+                        >Proprietor's Signature:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col-12 col-md-4 btn-block">
+              <button type="button" id="dwnbtn" href="/">Download</button>
+            </div>
+            <!-- <div class="col-12 col-md-3 btn-block">
+        <button type="button" id="pdfdownload-btn" href="/">
+          Download PDF
+        </button>
+      </div> -->
+            <div class="col-12 col-md-4 btn-block">
+              <button type="button" id="closeresultsheet-btn" href="/">
+                Close Form
+              </button>
+            </div>
+            <div class="col"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- Footer  -->
       <footer class="footer">
         <!-- Widgets - Bootstrap Brain Component -->
@@ -202,7 +679,10 @@
                     <a class="text-decoration-none" href="tel:+2348163068097"
                       >+234 816 306 8097</a
                     >
-                    <a class="text-decoration-none"  style="display: block" href="tel:+2348020721422"
+                    <a
+                      class="text-decoration-none"
+                      style="display: block"
+                      href="tel:+2348020721422"
                       >+234 802 072 1422</a
                     >
                     <a
@@ -236,7 +716,9 @@
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="gallery.html" class="text-decoration-none">Gallery</a>
+                      <a href="gallery.html" class="text-decoration-none"
+                        >Gallery</a
+                      >
                     </li>
                     <li class="mb-2">
                       <a href="assessments.html" class="text-decoration-none"
@@ -244,7 +726,9 @@
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="donate.html" class="text-decoration-none">Support Us</a>
+                      <a href="donate.html" class="text-decoration-none"
+                        >Support Us</a
+                      >
                     </li>
                   </ul>
                 </div>
@@ -394,13 +878,12 @@
       </footer>
     </main>
     <!-- <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/studentportal.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="https://kit.fontawesome.com/0a5d1384fe.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
