@@ -1969,3 +1969,153 @@ logoutLink.addEventListener("click", (e) => {
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
+
+
+
+const addStudentLink = document.getElementById("add-student")
+const addStudentForm = document.getElementById("studentadd-form")
+
+const studentFNameInput = document.getElementById("stud-name-first")
+const studentLNameInput = document.getElementById("stud-name-last")
+const stdadmissionNumber = document.getElementById("stud-admno")
+const studentEmailInput = document.getElementById("stud-email")
+const studentGenderInput = document.getElementById("stud-gender")
+const studentStreetlInput = document.getElementById("stud-street")
+const studentCityInput = document.getElementById("stud-city")
+const studentStateInput = document.getElementById("stud-state")
+const studentPhoneInput = document.getElementById("stud-phone")
+const parentEmailInput = document.getElementById("stud-parent-email")
+const studentEntryClass = document.getElementById("stud-entry-class")
+const studentOrigin = document.getElementById("stud-origin")
+const studentMaritalStatus = document.getElementById("stud-mstatus")
+const studentProgramme = document.getElementById("stud-prg")
+
+const clearStdFrmLink = document.getElementById("clearfrm-btn")
+const closeStdFrmLink = document.getElementById("closefrm-btn")
+
+const sendButton = document.getElementById("send-btn")
+
+// display add student form
+addStudentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    addStudentForm.style.display = "block"
+    sidebar.style.display = "none"
+});
+
+// register a new student
+const registerStudent = (studentInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/student/registerStudent`, studentInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            //clear the form fields after successful submission
+            stdadmissionNumber.value = "";
+            studentFNameInput.value = ""
+            studentLNameInput.value = "";
+            studentEmailInput.value = "";
+            studentGenderInput.value = "";
+            studentStreetlInput.value = "";
+            studentCityInput.value = "";
+            studentStateInput.value = "";
+            studentPhoneInput.value = "";
+            parentEmailInput.value = "";
+            studentEntryClass.value = "";
+            studentOrigin.value = "";
+            studentMaritalStatus.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit student form
+sendButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const admNo = stdadmissionNumber.value;
+    const firstName = studentFNameInput.value
+    const lastName = studentLNameInput.value;
+    let email = studentEmailInput.value;
+    const gender = studentGenderInput.value;
+    const address = studentStreetlInput.value + " " + studentCityInput.value + " " + studentStateInput.value;
+    const phoneNumber = studentPhoneInput.value;
+    const parentEmail = parentEmailInput.value
+    const entryClass = studentEntryClass.value
+    const presentClass = studentEntryClass.value
+    const stateOfOrigin = studentOrigin.value
+    const maritalStatus = studentMaritalStatus.value
+    const programme = studentProgramme.value
+    if (email == "") email = "nothing@nil.com"
+    const formData = {
+        admNo,
+        firstName,
+        lastName,
+        email,
+        gender,
+        address,
+        phoneNumber,
+        parentEmail,
+        entryClass,
+        stateOfOrigin,
+        maritalStatus,
+        programme,
+        presentClass
+
+    }
+    registerStudent(formData);
+});
+
+//clear student form
+clearStdFrmLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    stdadmissionNumber.value = "";
+    studentFNameInput.value = ""
+    studentLNameInput.value = "";
+    studentEmailInput.value = "";
+    studentGenderInput.value = "";
+    studentStreetlInput.value = "";
+    studentCityInput.value = "";
+    studentStateInput.value = "";
+    studentPhoneInput.value = "";
+    parentEmailInput.value = "";
+    studentEntryClass.value = "";
+    studentOrigin.value = "";
+    studentMaritalStatus.value = "";
+});
+
+//close student form
+closeStdFrmLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    addStudentForm.style.display = "none"
+});

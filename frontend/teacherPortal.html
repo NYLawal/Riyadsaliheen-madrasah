@@ -136,6 +136,9 @@
           <li class="">
             <a href="#" id="view-students">View Students</a>
           </li>
+          <li>
+            <a href="#" id="add-student">Add Student</a>
+          </li>
           <li class="">
             <a href="#" id="addscores-link">Add Scores</a>
           </li>
@@ -247,6 +250,101 @@
       </div>
     </section>
 
+     <!-- Add Student -->
+     <section class="bg-light py-3 studentadd-form" id="studentadd-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-form">
+              <div class="banner">
+                <h1>Student Registration Form</h1>
+              </div>
+              <h2 class="mt-2 mb-3">Student Details</h2>
+              <div class="item">
+                <p>Name</p>
+                <div class="name-item">
+                  <input type="text" name="name" placeholder="First" id="stud-name-first" />
+                  <input type="text" name="name" placeholder="Last" id="stud-name-last" />
+                </div>
+              </div>
+              <div class="item">
+                <p>Admission No</p>
+                <input type="text" name="admNo" id="stud-admno" />
+              </div>
+              <div class="item">
+                <p>Gender</p>
+                <select id="stud-gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+              <div class="item">
+                <p>Entry Class</p>
+                <select id="stud-entry-class">
+                  <option value="tamhidi">tamhidi</option>
+                  <option value="adonah">adonah</option>
+                  <option value="rawdoh">rawdoh</option>
+                  <option value="awwal ibtidaahi">awwal ibtidaahi</option>
+                  <option value="thaani ibtidaahi">thaani ibtidaahi</option>
+                  <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
+                  <option value="raabi ibtidaahi">raabi ibtidaahi</option>
+                  <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
+                  <option value="awwal idaadi">awwal idaadi</option>
+                  <option value="thaani idaadi">thaani idaadi</option>
+                  <option value="thaalith idaadi">thaalith idaadi</option>
+                </select>
+              </div>
+              <div class="item">
+                <p>Address</p>
+                <input type="text" name="stdstreet" placeholder="Number and Street address" id="stud-street" />
+                <input type="text" name="stdcity" placeholder="City" id="stud-city" />
+                <input type="text" name="stdstate" placeholder="State" id="stud-state" />
+              </div>
+              <div class="item">
+                <p>Phone No</p>
+                <input type="text" name="stdphone" placeholder="e.g +234XX..." id="stud-phone" />
+              </div>
+              <div class="item">
+                <p>Email</p>
+                <input type="text" name="stdemail" id="stud-email" />
+              </div>
+              <div class="item">
+                <p>Parent Email</p>
+                <input type="text" name="stdparentemail" id="stud-parent-email" />
+              </div>
+              <div class="item">
+                <p>State of Origin</p>
+                <input type="text" name="stdorigin" id="stud-origin" />
+              </div>
+              <div class="item">
+                <p>Marital Status</p>
+                <select id="stud-mstatus">
+                  <option value="married">Married</option>
+                  <option value="single">Single</option>
+                </select>
+              </div>
+              <div class="item">
+                <p>Programme</p>
+                <select id="stud-prg">
+                  <option value="children madrasah">Children Madrasah</option>
+                  <option value="adult madrasah">Adult Madrasah</option>
+                  <option value="female madrasah">Female Madrasah</option>
+                  <option value="barnomij">Barnomij</option>
+                </select>
+              </div>
+              <div class="btn-block">
+                <button type="submit" href="/" id="send-btn">Send</button>
+              </div>
+              <div class="d-flex gap-2 justify-content-around mt-5">
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="clearfrm-btn">Clear Form</a>
+                <a href="#!" class="green-text fw-bold text-decoration-none" id="closefrm-btn">Close</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- scores input form -->
     <section class="bg-light pb-5 pt-5 mb-3" id="addscores-form">
@@ -328,6 +426,7 @@
                       <option value="Hifzul Qur'an">Hifzul Qur'an</option>
                       <option value="Huruf">Huruf</option>
                       <option value="Imlah">Imlah</option>
+                      <option value="Inshah">Inshah</option>
                       <option value="Khatu">Khatu</option>
                       <option value="Lugha">Lugha</option>
                       <option value="Nahw">Nahw</option>
@@ -643,6 +742,7 @@
                       <option value="Hifzul Qur'an">Hifzul Qur'an</option>
                       <option value="Huruf">Huruf</option>
                       <option value="Imlah">Imlah</option>
+                      <option value="Inshah">Inshah</option>
                       <option value="Khatu">Khatu</option>
                       <option value="Lugha">Lugha</option>
                       <option value="Nahw">Nahw</option>
