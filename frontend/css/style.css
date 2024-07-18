@@ -469,7 +469,22 @@ margin-top: 10rem;
 .bsb-project-2-item img{
 width: 400px;
 height: 250px;
+overflow: hidden;
 }
+
+.bsb-project-2-item img:hover{
+    transform: scale(2.5);
+    transition: all 0.3s;
+}
+section iframe:hover {
+    transform: scale(1.2);
+    transition: all 0.3s;
+  }
+
+.gallery-images{
+    display: none;
+}
+
 
 
 /* ==================================================
@@ -543,10 +558,7 @@ text-decoration: underline;
     .left-details, .right-details{
         width: 100%;
     }
-    /* .pndpsignatures{
-        flex-direction: column;
-        align-items: flex-start;
-    } */
+    
 }
 
 /* ==================================================
@@ -646,13 +658,6 @@ text-decoration: underline;
      .team-offer-arabic{
         height:260px;
     }
-    .detail-left{
-        /* position: relative; */
-    }
-    
-    /* .signaturesndremarks .detail-left-span{
-        left:27%
-     } */
    .dsply-flex{
     display: flex;
     gap: 15px;

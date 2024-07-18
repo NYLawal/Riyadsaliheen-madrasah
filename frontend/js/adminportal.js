@@ -722,16 +722,16 @@ studSearchKey.addEventListener("change", (e) => {
         searchMe.innerHTML =
             `<select id="searchstud-entryclass">
     <option value="tamhidi">tamhidi</option>
-    <option value="adonah">adonah</option>
+    <option value="hadoohah">hadoohah</option>
     <option value="rawdoh">rawdoh</option>
-    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
-    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
-    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
-    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
-    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
-    <option value="awwal idaadi">awwal idaadi</option>
-    <option value="thaani idaadi">thaani idaadi</option>
-    <option value="thaalith idaadi">thaalith idaadi</option>
+    <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+    <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+    <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+    <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+    <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+    <option value="awwal idaadiy">awwal idaadiy</option>
+    <option value="thaani idaadiy">thaani idaadiy</option>
+    <option value="thaalith idaadiy">thaalith idaadiy</option>
   </select>`
     }
     else if (studSearchKey.value == "maritalStatus") {
@@ -747,7 +747,7 @@ studSearchKey.addEventListener("change", (e) => {
                  <option value="children madrasah">Children Madrasah</option>
                  <option value="adult madrasah">Adult Madrasah</option>
                  <option value="female madrasah">Female Madrasah</option>
-                 <option value="barnomij">Barnomij</option>
+                 <option value="barnamij">Barnamij</option>
                </select>`
     }
     else if (studSearchKey.value == "studentStatus") {
@@ -757,16 +757,16 @@ studSearchKey.addEventListener("change", (e) => {
         searchMe.innerHTML =
             `<select id="searchstud-presentclass">
     <option value="tamhidi">tamhidi</option>
-    <option value="adonah">adonah</option>
+    <option value="hadoohah">hadoohah</option>
     <option value="rawdoh">rawdoh</option>
-    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
-    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
-    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
-    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
-    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
-    <option value="awwal idaadi">awwal idaadi</option>
-    <option value="thaani idaadi">thaani idaadi</option>
-    <option value="thaalith idaadi">thaalith idaadi</option>
+    <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+    <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+    <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+    <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+    <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+    <option value="awwal idaadiy">awwal idaadiy</option>
+    <option value="thaani idaadiy">thaani idaadiy</option>
+    <option value="thaalith idaadiy">thaalith idaadiy</option>
   </select>`
     }
     else if (studSearchKey.value == "classStatus") {
@@ -1171,7 +1171,11 @@ const updateItTeacherClass = document.getElementById("updateit-teacherclass")
 const updateItTeacherProgramme = document.getElementById("updateit-teacherprogramme")
 
 const promoteStudentsSessionSelect = document.getElementById("promotestudents-sessionselect")
-const promoteStudentsTermSelect = document.getElementById("promotestudents-termselect")
+const promoteStudentsProgrammeSelect = document.getElementById("promotestudents-programmeselect")
+const promoteStudentsChoiceSelect = document.getElementById("promotestudents-choiceselect")
+const promoteStudentsAdmissionNumberLabel = document.getElementById("promotestudents-admnolabel")
+const promoteStudentsAdmissionNumber = document.getElementById("promotestudents-admno")
+const promoteStudentsMinScore = document.getElementById("promotestudents-minscore")
 const promoteStudentsSubmitButton = document.getElementById("promotestudents-btn")
 
 // display editstaff query form
@@ -1599,11 +1603,11 @@ submitRemoveQuery.addEventListener("click", (e) => {
 
 });
 
-//promote students
-const promoteStudents = (termInfo) => {
+//promote one student who meet the criteria or on probation
+const promoteStudentsOne = (studInfo) => {
     let errorMsg;
     axios
-        .patch(`${baseUrl}/student/promoteStudents`, termInfo, {
+        .patch(`${baseUrl}/student/promoteOneStudent`, studInfo, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
@@ -1644,6 +1648,64 @@ const promoteStudents = (termInfo) => {
         });
 };
 
+//promote all students who meet the criteria
+const promoteStudents = (sessionInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/promoteStudents`, sessionInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click to make a choice of students to promote
+promoteStudentsChoiceSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    if (promoteStudentsChoiceSelect.value == "all") {
+        promoteStudentsAdmissionNumberLabel.style.display = "none";
+        promoteStudentsAdmissionNumber.style.display = "none";
+    }
+    else if (promoteStudentsChoiceSelect.value == "one") {
+        promoteStudentsAdmissionNumberLabel.style.display = "block";
+        promoteStudentsAdmissionNumber.style.display = "block";
+    }
+});
+
 // click promote students link to display form
 promoteStudentsLink.addEventListener("click", (e) => {
     e.preventDefault();
@@ -1654,12 +1716,28 @@ promoteStudentsLink.addEventListener("click", (e) => {
 // click promote students button to promote students
 promoteStudentsSubmitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    const termName = promoteStudentsTermSelect.value;
+    const promotionChoice = promoteStudentsChoiceSelect.value;
     const sessionName = promoteStudentsSessionSelect.value;
-    const formData = {
-        termName,
-        sessionName
+    const admNo = promoteStudentsAdmissionNumber.value;
+    const minscore = promoteStudentsMinScore.value;
+    const programme = promoteStudentsProgrammeSelect.value;
+    if (admNo == "" || minscore == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Check that you have valid inputs for all fields"
+        });
     }
+
+    const formData = {
+        programme,
+        sessionName,
+        minscore
+    }
+    const formDataOne = {
+        admNo
+    }
+
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -1670,7 +1748,8 @@ promoteStudentsSubmitButton.addEventListener("click", (e) => {
         confirmButtonText: "Yes, promote students"
     }).then((result) => {
         if (result.isConfirmed) {
-            promoteStudents(formData)
+            if (promotionChoice == "all") promoteStudents(formData)
+            else promoteStudentsOne(formDataOne);
         }
     });
 
@@ -2353,7 +2432,7 @@ const displayClassReport = (classname, programme, term, session) => {
                 // text:  response.data.message
             });
             attendanceLabel.style.display = "block";
-            // console.log(response.data.classSubjects)
+
             let tblserialnohead = document.createElement("th")
             let tbladmnohead = document.createElement("th")
             let tblnamehead = document.createElement("th")
@@ -2410,47 +2489,42 @@ const displayClassReport = (classname, programme, term, session) => {
                 atdtblrow.appendChild(atdtbladmno)
                 atdtblrow.appendChild(atdtblname)
 
-                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
-                    const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-                    for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
-                        const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
-                        let tbltotalscore = document.createElement("td")
-                        tbltotalscore.innerText = subjectToAdd.totalScore
-                        tblrow.appendChild(tbltotalscore)
-                    }
-                    let tblmark = document.createElement("td")
-                    let tblpercentage = document.createElement("td")
-                    tblmark.innerText = requestedterm.marksObtained
-                    tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
-                    tblrow.appendChild(tblmark)
-                    tblrow.appendChild(tblpercentage)
+                const requestedsession = response.data.classExists[i].scores.find(asession => asession.sessionName == session)
+                const requestedterm = requestedsession.term.find(aterm => aterm.termName == term)
+                for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
+                    const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
+                    let tbltotalscore = document.createElement("td")
+                    tbltotalscore.innerText = subjectToAdd.totalScore
+                    tblrow.appendChild(tbltotalscore)
                 }
+                let tblmark = document.createElement("td")
+                let tblpercentage = document.createElement("td")
+                tblmark.innerText = requestedterm.marksObtained
+                tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
+                tblrow.appendChild(tblmark)
+                tblrow.appendChild(tblpercentage)
+
                 //attendance
-                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
-                    let requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-                    if (i == 0 && j == 0) {  //adding term dates as heading for attendance table
-                        for (let k = 0; k < requestedterm.attendance.length; k++) {
-                            const dateToAdd = requestedterm.attendance[k].termdate
-                            let tbldate = document.createElement("th")
-                            tbldate.innerText = dateToAdd
-                            attendanceTableHeadRow.appendChild(tbldate)
-                        }
-                    }
+                if (i == 0) {  //adding term dates as heading for attendance table
                     for (let k = 0; k < requestedterm.attendance.length; k++) {
-                        const presentStatus = requestedterm.attendance[k].presence
-                        let tblpresence = document.createElement("td")
-                        if (presentStatus == 'yes') {
-                            tblpresence.innerText = "ح"
-                            // atdtblrow.appendChild(tblpresence)
-                        }
-                        else {
-                            tblpresence.innerText = "-"
-                            //  atdtblrow.appendChild(tblpresence)
-                        }
-                        // tblpresence.innerText = presentStatus
-                        atdtblrow.appendChild(tblpresence)
+                        const dateToAdd = requestedterm.attendance[k].termdate
+                        let tbldate = document.createElement("th")
+                        tbldate.innerText = dateToAdd
+                        attendanceTableHeadRow.appendChild(tbldate)
                     }
                 }
+                for (let k = 0; k < requestedterm.attendance.length; k++) {
+                    const presentStatus = requestedterm.attendance[k].presence
+                    let tblpresence = document.createElement("td")
+                    if (presentStatus == 'yes') {
+                        tblpresence.innerText = "ح"
+                    }
+                    else {
+                        tblpresence.innerText = "-"
+                    }
+                    atdtblrow.appendChild(tblpresence)
+                }
+
                 tableBodyForClassReport.appendChild(tblrow)
                 attendanceTableBody.appendChild(atdtblrow)
             }
@@ -3444,14 +3518,14 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         const formData = new FormData(formToSubmitDetails);
         const formDataObj = {};
         formData.forEach((value, key) => (formDataObj[key] = value));
-        if (selectTaskForReport.value == "principalsign"){
-        setPrincipalSignature(formDataObj, programme)
+        if (selectTaskForReport.value == "principalsign") {
+            setPrincipalSignature(formDataObj, programme)
         }
-        else if (selectTaskForReport.value == "proprietorsign"){
-        setProproprietorSignature(formDataObj, programme)
+        else if (selectTaskForReport.value == "proprietorsign") {
+            setProproprietorSignature(formDataObj, programme)
         }
         else if (selectTaskForReport.value == "maxattendance")
-        setDetails(formDataObj, programme);
+            setDetails(formDataObj, programme);
     }
 });
 

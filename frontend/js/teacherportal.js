@@ -117,7 +117,7 @@ const getTeacherClass = () => {
                 errorMsg = error.response.data.message
                 if (error.response.data.message == "Error: unauthorised access! Log in to resume your tasks")
                     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
+                    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -248,6 +248,7 @@ const displayStudentsByClass = (page) => {
                 tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
                 tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
 
+                tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
@@ -1067,14 +1068,16 @@ submitScoresButton.addEventListener("click", (e) => {
                 });
             }
             else {
-                let subject = {
-                    subjectName,
-                    testScore,
-                    examScore,
-                    totalScore,
-                    remark
+                if (totalScore != 0) {
+                    let subject = {
+                        subjectName,
+                        testScore,
+                        examScore,
+                        totalScore,
+                        remark
+                    }
+                    subjects.push(subject)
                 }
-                subjects.push(subject)
             }
         }
         addScores(formdata, admNo);
@@ -1944,7 +1947,7 @@ formToSubmitDetails.addEventListener("submit", (e) => {
     const noInClass = noOfstudentsInClass.value;
     const className = teacherDetails.teacherClass;
     const programme = teacherDetails.teacherProgramme;
-    if (noInClass == "" || imgFile.value =="") {
+    if (noInClass == "" || imgFile.value == "") {
         Swal.fire({
             icon: "error",
             title: "Empty input detected",
