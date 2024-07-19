@@ -484,7 +484,17 @@ section iframe:hover {
 .gallery-images{
     display: none;
 }
-
+.gallery-view{
+    padding: 10px;
+    border: none;
+    border-radius: 5px; 
+    background: #5ec52e;
+    width: 70px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px;
+}
 
 
 /* ==================================================

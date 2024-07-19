@@ -161,17 +161,110 @@
           <div class="row justify-content-md-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
               <!-- <h2 class="mb-4 display-5 text-center">Our Projects</h2> -->
-              <p class="text-secondary mb-5 text-center lead fs-4">
+              <p class="text-secondary mb-3 text-center lead fs-4">
                 Take a tour around our school premises and activities
               </p>
-              <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle" />
+              <hr class="w-50 mx-auto mb-4 mb-xl-9 border-dark-subtle" />
+            </div> 
+          </div>
+          <div class="row justify-content-md-center mb-5">
+            <div class="col-12 col-md-6" style="text-align: center;">
+              <button class="gallery-view" id="videos-view">Videos</button>
+              <button class="gallery-view" id="images-view">Images</button>
             </div>
           </div>
         </div>
 
-        <div class="container overflow-hidden">
+        <!-- //first video row -->
+        <div class="container overflow-hidden gallery-videos" id="gallery-videos1">
           <div class="row" style="text-align: center;">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4 mb-3">
+              <div>
+                <iframe
+                  width="320"
+                  height="240"
+                  class="video"
+                  src="https://www.youtube.com/embed/IsvCpIcnXi0?si=wF9MBsy1PPqQ2IEL"
+                >
+                </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Arabic presentation by Faisol Okoro
+                  </h6>
+                </figcaption>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+              <div>
+                <iframe
+                  width="320"
+                  height="240"
+                  class="video"
+                  src="https://www.youtube.com/embed/_YheomwxD-0?si=VPXP15JMbo5e6MeV"
+                >
+                </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Arabic presentation by Sulaimon Ajisafe
+                  </h6>
+                </figcaption>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+              <div>
+                <iframe
+                  width="320"
+                  height="240"
+                  class="video"
+                  src="https://www.youtube.com/embed/FtmA6-jcwlw?si=hYlJ12--ojacrsVs"
+                >
+                </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Arabic presentation by Fawaz AbdulKareem
+                  </h6>
+                </figcaption>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- // second video row -->
+        <div class="container overflow-hidden mt-3 gallery-videos" id="gallery-videos2">
+          <div class="row" style="text-align: center;">
+            <div class="col-12 col-md-4 mb-3">
+              <div>
+                <iframe
+                  width="320"
+                  height="240"
+                  class="video"
+                  src="https://www.youtube.com/embed/CkK7A8xXpKw?si=hDAoZYjr0NMYvV-y"
+                >
+                </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Arabic presentation by Faatimah Abdul-lateef
+                  </h6>
+                </figcaption>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+              <div>
+                <iframe
+                  width="320"
+                  height="240"
+                  class="video"
+                  src="https://www.youtube.com/embed/A0u0NFQDPT4?si=08hbM4CNIopBXuQY"
+                >
+                </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Arabic presentation by Abdullah Abdulhakeem
+                  </h6>
+                </figcaption>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
               <div>
                 <iframe
                   width="320"
@@ -180,12 +273,18 @@
                   src="https://www.youtube.com/embed/oVSYerlI06s?si=WTqu5Iz0uXAKkGNP"
                 >
                 </iframe>
+                <figcaption>
+                  <h6 class="green-text bsb-hover-fadeInLeft">
+                    Motivational speech by ustadh Kewulabi
+                  </h6>
+                </figcaption>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="container overflow-hidden gallery-images">
+       
+        <div class="container overflow-hidden gallery-images" id="gallery-images">
           <div class="row gy-2 g-md-2 g-xl-3 bsb-project-2-grid">
             <div class="col-12 col-md-4 bsb-project-2-item">
               <figure
@@ -200,9 +299,9 @@
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Speech by one of our Ustadhs
-                  </h3>
+                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                    Students on assembly
+                  </h5>
                 </figcaption>
               </figure>
             </div>
@@ -218,9 +317,9 @@
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Students on Assembly
-                  </h3>
+                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                    Learning begins here daily
+                  </h5>
                   <!-- <div class="text-white bsb-hover-fadeInDown">Nature</div> -->
                 </figcaption>
               </figure>
@@ -234,14 +333,14 @@
                   <img
                     class="img-fluid bsb-scale-up bsb-hover-scale"
                     loading="lazy"
-                    src="../images/assembly-back-view.jpg"
+                    src="../images/imgschl.jpg"
                     alt=""
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Students on Assembly
-                  </h3>
+                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                    Active learning takes place here
+                  </h5>
                   <!-- <div class="text-white bsb-hover-fadeInRight">Adventure</div> -->
                 </figcaption>
               </figure>
@@ -260,9 +359,9 @@
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
+                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
                     Students on Assembly
-                  </h3>
+                  </h5>
                   <!-- <div class="text-white bsb-hover-fadeInDown">Adventure</div> -->
                 </figcaption>
               </figure>
@@ -281,9 +380,9 @@
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     Students on Assembly
-                  </h3>
+                  </h5>
                   <!-- <div class="text-white bsb-hover-fadeInDown">Photography</div> -->
                 </figcaption>
               </figure>
@@ -297,77 +396,15 @@
                   <img
                     class="img-fluid bsb-scale bsb-hover-scale-up"
                     loading="lazy"
-                    src="../images/assembly-top-view.jpg"
-                    alt=""
-                  />
-                </a>
-                <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Students on Assembly
-                  </h3>
-                  <!-- <div class="text-white bsb-hover-fadeInDown">Design</div> -->
-                </figcaption>
-              </figure>
-            </div>
-
-            <div class="col-12 col-md-4 bsb-project-2-item">
-              <figure
-                class="rounded rounded-3 overflow-hidden bsb-overlay-hover m-0"
-              >
-                <a href="#!">
-                  <img
-                    class="img-fluid bsb-scale-up bsb-hover-scale"
-                    loading="lazy"
-                    src="../images/assembly-top-view.jpg"
-                    alt=""
-                  />
-                </a>
-                <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Students on Assembly
-                  </h3>
-                  <!-- <div class="text-white bsb-hover-fadeInRight">Design</div> -->
-                </figcaption>
-              </figure>
-            </div>
-
-            <div class="col-12 col-md-4 bsb-project-2-item">
-              <figure
-                class="rounded rounded-3 overflow-hidden bsb-overlay-hover m-0"
-              >
-                <a href="#!">
-                  <img
-                    class="img-fluid bsb-scale-up bsb-hover-scale"
-                    loading="lazy"
                     src="../images/assembly-back-view.jpg"
                     alt=""
                   />
                 </a>
                 <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     Students on Assembly
-                  </h3>
-                  <!-- <div class="text-white bsb-hover-fadeInRight">Photography</div> -->
-                </figcaption>
-              </figure>
-            </div>
-            <div class="col-12 col-md-4 bsb-project-2-item">
-              <figure
-                class="rounded rounded-3 overflow-hidden bsb-overlay-hover m-0"
-              >
-                <a href="#!">
-                  <img
-                    class="img-fluid bsb-scale-up bsb-hover-scale"
-                    loading="lazy"
-                    src="../images/assembly-back-view.jpg"
-                    alt=""
-                  />
-                </a>
-                <figcaption>
-                  <h3 class="green-text bsb-hover-fadeInLeft">
-                    Students on Assembly
-                  </h3>
-                  <!-- <div class="text-white bsb-hover-fadeInRight">Photography</div> -->
+                  </h5>
+                  <!-- <div class="text-white bsb-hover-fadeInDown">Photography</div> -->
                 </figcaption>
               </figure>
             </div>
@@ -606,5 +643,28 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const viewVideos = document.getElementById("videos-view")
+      const viewImages = document.getElementById("images-view")
+      const allImages = document.getElementById("gallery-images")
+      const allVideos1 = document.getElementById("gallery-videos1")
+      const allVideos2 = document.getElementById("gallery-videos2")
+
+     viewImages.addEventListener("click", (e) => {
+      e.preventDefault();
+    allImages.style.display = "block";
+      allVideos1.style.display = "none";
+      allVideos2.style.display = "none";
+});
+
+     viewVideos.addEventListener("click", (e) => {
+      e.preventDefault();
+    allImages.style.display = "none";
+      allVideos1.style.display = "block";
+      allVideos2.style.display = "block";
+});
+
+    </script>
   </body>
 </html>

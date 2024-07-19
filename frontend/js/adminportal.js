@@ -1217,7 +1217,7 @@ const QuerystaffEdit = (staffInfo) => {
             staffAddressUpdate.value = response.data.staffer.address
             staffPhoneUpdate.value = response.data.staffer.phoneNumber
             staffRoleUpdate.value = response.data.staffer.role
-            staffOtherRoleUpdate.value = response.data.staffer.other_role
+            staffOtherRoleUpdate.value = response.data.user.otherRole
 
             if (response.data.staffer.role == "teacher") {
                 classLabelUpdate.style.display = "block";
