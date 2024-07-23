@@ -15,189 +15,451 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link
+      href="./css/style.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
   <body>
     <main>
-       <!-- navigation bar begins-->
-     <nav
-     class="navbar navbar-expand-lg fixed-top"
-     style="background-color: #d0f1c1"
-   >
-     <div class="container-fluid">
-       <a class="navbar-brand" href="#"
-         ><img src="../images/logo2.png" alt="logo" width="90" height="90"
-       /></a>
-       <button
-         class="navbar-toggler"
-         type="button"
-         data-bs-toggle="collapse"
-         data-bs-target="#navbarNavDropdown"
-         aria-controls="navbarNavDropdown"
-         aria-expanded="false"
-         aria-label="Toggle navigation"
-       >
-         <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-         <ul class="navbar-nav">
-           <li class="nav-item">
-             <a class="nav-link" aria-current="page" href="../index.html"
-               >Home</a
-             >
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="about.html">About Us</a>
-           </li>
-           <li class="nav-item dropdown active">
-             <a
-               class="nav-link dropdown-toggle"
-               href="#"
-               role="button"
-               data-bs-toggle="dropdown"
-               aria-expanded="false"
-             >
-               Academics
-             </a>
-             <ul class="dropdown-menu">
-               <li><a class="dropdown-item current" href="admissions.html">Admissions</a></li>
-               <li><a class="dropdown-item" href="programmes.html">Programmes</a></li>
-               <li><a class="dropdown-item" href="login.html">Online Studies</a></li>
-             </ul>
-           </li>             
-           <li class="nav-item">
-             <a class="nav-link" href="careers.html">Careers</a>
-           </li>
-           <li class="nav-item">
-             <a class="nav-link" href="contact.html">Contact Us</a>
-           </li>
-           <li class="nav-item dropdown">
-             <a
-               class="nav-link dropdown-toggle"
-               href="#"
-               role="button"
-               data-bs-toggle="dropdown"
-               aria-expanded="false"
-             >
-               Quick Links
-             </a>
-             <ul class="dropdown-menu">
-               <li><a class="dropdown-item" href="calendar.html">Term Calendar</a></li>
-               <li><a class="dropdown-item" href="newsandevents.html">News and Events</a></li>
-               <li><a class="dropdown-item" href="assessments.html">Take a Quiz</a></li>
-               <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
-               <li><a class="dropdown-item" href="donate.html">Donate</a></li>
-             </ul>
-           </li>
-           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Portal
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="login.html">Staff</a></li>
-              <li><a class="dropdown-item" href="login.html">Parent</a></li>
-              <li><a class="dropdown-item" href="login.html">Student</a></li>
+      <!-- navigation bar begins-->
+      <nav
+        class="navbar navbar-expand-lg fixed-top"
+        style="background-color: #d0f1c1"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img src="../images/logo2.png" alt="logo" width="90" height="90"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item dropdown active">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Academics
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item current" href="admissions.html"
+                      >Admissions</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="programmes.html"
+                      >Programmes</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="login.html"
+                      >Online Studies</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="careers.html">Careers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Quick Links
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="calendar.html"
+                      >Term Calendar</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="newsandevents.html"
+                      >News and Events</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="assessments.html"
+                      >Take a Quiz</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="gallery.html">Gallery</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="donate.html">Donate</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Portal
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="login.html">Staff</a></li>
+                  <li><a class="dropdown-item" href="login.html">Parent</a></li>
+                  <li>
+                    <a class="dropdown-item" href="login.html">Student</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
-          </li>        
-         </ul>
-       </div>
-     </div>
-   </nav>
-   <!-- navigation bar ends-->
-      
-      <div class="text-secondary px-4 py-5 mt-4 text-center page-header" id="header-wrapper">
+          </div>
+        </div>
+      </nav>
+      <!-- navigation bar ends-->
+
+      <div
+        class="text-secondary px-4 py-5 mt-4 text-center page-header"
+        id="header-wrapper"
+      >
         <h1 class="display-5 fw-bold text-white">Study With Us</h1>
       </div>
 
       <!-- Admissions-->
-<section class="py-3 py-md-5 py-xl-8">
-  <div class="container">
-    <div class="row gy-5 gy-lg-0 align-items-lg-center">
-      <div class="col-12 ">
-        <img class="img-fluid rounded" loading="lazy" src="" alt="">
-      </div>
-      <div class="col-12 ">
-        <div class="row justify-content-xl-end">
-          <div class="col-12 col-xl-11">
-            <h2 class="h1 mb-3">Our Admission Process</h2>
-            <p class="lead fs-6 mb-3" style="text-align: justify;">
-              One of the most important factors in choosing a madrasah for yourself or your child/ward is focusing on the right one, not necessarily the best.
-              We encourage you to choose a madrasah that equips you/your child with the right tools to achieve their best and develop a lifelong love of learning. As a people, 
-              our culture is to foster lifelong learning because we believe that Arabic and Islamic education are non-stop forms of education in the life of an individual.
-            </p>
-            <p class="lead fs-6 mb-3" style="text-align: justify;">
-              It is essential to us that as a prospective parent/student of Madrasaturiyaadisaliheen, you should come to us with a clear idea of our vision, mission, core-values and expectations. 
-              We therefore recommend that you visit our madrasah. This offers a chance to ensure that everything we have to offer is suitable for you/your child.
-            </p>
-            <p class="lead fs-6 mb-3" style="text-align: justify;">
-              We do not accept children below the age of 3, because the madrasah's programme is not structured for the needs of very young children who are still emotionally dependent on the close support 
-              of their parents. Our preferred age at entry is 4 and above. However, we accept adults of all ages as long as the person is willing to learn. 
-            </p>
-            <p class="lead fs-6 mb-4" style="text-align: justify;">
-              For more information regarding our entrance requirements and examination, please contact us through any of our channels. You can visit our contact page to get more information about this. 
-            </p>
-            <h2 class="mb-4 green-text">Application Guide</h2>
-            <div class="d-flex mb-4">
-              <div>
-                <span class="btn btn-success bsb-btn-circle pe-none me-4">1</span>
-              </div>
-              <div>
-                <p class="mb-0 text-secondary">Book/choose a date for a visit to our madrasah. We do not have provisions for online application at the moment.</p>
-              </div>
+      <section class="pt-3 px-2">
+        <div class="container">
+          <div class="row align-items-lg-center">
+            <div class="col-12">
+              <img class="img-fluid rounded" loading="lazy" src="" alt="" />
             </div>
-            <div class="d-flex mb-4">
-              <div>
-                <span class="btn btn-success bsb-btn-circle pe-none me-4">2</span>
+            <div class="col-12">
+              <div class="row justify-content-xl-end">
+                <div class="col-12 col-xl-11">
+                  <h2 class="h1 mb-3">Our Admission Process</h2>
+                  <p class="lead fs-6 mb-3" style="text-align: justify">
+                    One of the most important factors in choosing a madrasah for
+                    yourself or your child/ward is focusing on the right one,
+                    not necessarily the best. We encourage you to choose a
+                    madrasah that equips you/your child with the right tools to
+                    achieve their best and develop a lifelong love of learning.
+                    As a people, our culture is to foster lifelong learning
+                    because we believe that Arabic and Islamic education are
+                    non-stop forms of education in the life of an individual.
+                  </p>
+                  <p class="lead fs-6 mb-3" style="text-align: justify">
+                    It is essential to us that as a prospective parent/student
+                    of Madrasaturiyaadisaliheen, you should come to us with a
+                    clear idea of our vision, mission, core-values and
+                    expectations. We therefore recommend that you visit our
+                    madrasah. This offers a chance to ensure that everything we
+                    have to offer is suitable for you/your child.
+                  </p>
+                  <p class="lead fs-6 mb-3" style="text-align: justify">
+                    We do not accept children below the age of 3, because the
+                    madrasah's programme is not structured for the needs of very
+                    young children who are still emotionally dependent on the
+                    close support of their parents. Our preferred age at entry
+                    is 4 and above. However, we accept adults of all ages as
+                    long as the person is willing to learn.
+                  </p>
+                  <p class="lead fs-6 mb-4" style="text-align: justify">
+                    For more information regarding our entrance requirements and
+                    examination, please contact us through any of our channels.
+                    You can visit our contact page to get more information about
+                    this.
+                  </p>
+                  <h2 class="mb-4 green-text">Application Guide</h2>
+                  <div class="d-flex mb-4">
+                    <div>
+                      <span class="btn btn-green bsb-btn-circle pe-none me-4"
+                        >1</span
+                      >
+                    </div>
+                    <div>
+                      <p class="mb-0 text-secondary">
+                        Book/choose a date for a visit to our madrasah. We do
+                        not have provisions for online application at the
+                        moment.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-4">
+                    <div>
+                      <span class="btn btn-green bsb-btn-circle pe-none me-4"
+                        >2</span
+                      >
+                    </div>
+                    <div>
+                      <p class="mb-0 text-secondary">
+                        Get yourself/your child prepared for the entrance test,
+                        which determines the class of entry to which they will
+                        be admitted.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-4">
+                    <div>
+                      <span class="btn btn-green bsb-btn-circle pe-none me-4"
+                        >3</span
+                      >
+                    </div>
+                    <div>
+                      <p class="mb-0 text-secondary">
+                        Bring along necessary documents that validate you/your
+                        child's identity, as well as their last report if they
+                        have attended a madrasah previously.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-4">
+                    <div>
+                      <span class="btn btn-green bsb-btn-circle pe-none me-4"
+                        >4</span
+                      >
+                    </div>
+                    <div>
+                      <p class="mb-0 text-secondary">
+                        Entrance tests can be done on any weekend provided we
+                        are in session, and during our opening hours (see our
+                        contact page for this). Once the student sits for their
+                        test and the scores have been collated, the student and
+                        their parent or guardian will be invited for an
+                        interview with the appropriate official, where results
+                        of the test and the admission status will be discussed.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="d-flex mb-4">
+                    <div>
+                      <span class="btn btn-green bsb-btn-circle pe-none me-4"
+                        >5</span
+                      >
+                    </div>
+                    <div>
+                      <p class="mb-0 text-secondary">
+                        For students who meet the admission criteria, an
+                        admission form must be completed and submitted.
+                        Parents/guardians will also need to go through the
+                        madrasah policy document and sign an acceptance to
+                        adhere to our rules and regulations.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p class="mb-0 text-secondary">Get yourself/your child prepared for the entrance test, which determines the class of entry to which they will be admitted.</p>
-              </div>
-            </div>
-            <div class="d-flex mb-4">
-              <div>
-                <span class="btn btn-success bsb-btn-circle pe-none me-4">3</span>
-              </div>
-              <div>
-                <p class="mb-0 text-secondary">Bring along necessary documents that validate you/your child's identity, as well as their last report if they have attended a madrasah previously.</p>
-              </div>
-            </div>
-            <div class="d-flex mb-4">
-              <div>
-                <span class="btn btn-success bsb-btn-circle pe-none me-4">4</span>
-              </div>
-              <div>
-                <p class="mb-0 text-secondary">Entrance tests can be done on any weekend provided we are in session, and during our opening hours (see our contact page for this). Once the student sits for their test and the scores have been collated, 
-                  the student and their parent or guardian will be invited for an interview with the appropriate official, where results of the test and the admission status will be discussed.
-                </p>
-              </div>
-            </div>
-            <div class="d-flex mb-4">
-              <div>
-                <span class="btn btn-success bsb-btn-circle pe-none me-4">5</span>
-              </div>
-              <div>
-                <p class="mb-0 text-secondary">
-                  For students who meet the admission criteria, an admission form must be completed and submitted. Parents/guardians will also need to go through the madrasah policy document and sign an acceptance to adhere to our rules and regulations.
-                </p>
-              </div>
-            </div>
-            <div>
-              <h6>To learn about our madrasah policy, <a href="" class="green-text">click here</a></h6>
-            </div> 
             </div>
           </div>
         </div>
-    </div>
-  </div>
-</section>
-     
-      
+      </section>
+
+      <!-- Madrasah Policy gy-5 gy-lg-0-->
+      <section class="mb-2 pb-3 px-2" id="madrasahpolicy-doc">
+        <div class="container">
+          <div class="row align-items-lg-center">
+            <div class="col-12">
+              <img class="img-fluid rounded" loading="lazy" src="" alt="" />
+            </div>
+            <div class="col-12">
+              <div class="row justify-content-xl-end">
+                <div class="col-12 col-xl-11">
+                  <h2 class="h1 mb-3 green-text">Madrasah Policy</h2>
+                  <p class="lead fs-6 mb-4" style="text-align: justify">
+                    Madrasaturiyaadisaliheen requires all students to act as
+                    responsible citizens and members of an academic and
+                    religious community. Each student is responsible to know,
+                    observe, abide by, and adhere to the madrasah's policy,
+                    rules, and regulations. Students must comply with all rules
+                    applicable to conduct in the classroom, school environment
+                    as well as school activities. The school has made this
+                    policy available to prospective parents and students. Upon
+                    enrolling in the madrasah, students are automatically placed
+                    under the established guidelines, rules and regulations.
+                    Students are responsible for familiarising themselves with
+                    all policies and procedures affecting them.
+                  </p>
+                  <div
+                    style="
+                      border: 1px dotted green;
+                      padding: 10px;
+                      padding-top: 20px;
+                      font-size: 16px;
+                      border-bottom: none;
+                    "
+                  >
+                    <h4 class="mb-3 text-center">
+                      Student Rules and Regulations
+                    </h4>
+                    <h6 class="green-text fw-bold">
+                      Attendance and Punctuality
+                    </h6>
+                    <ul>
+                      <li>
+                        Get to madrasah before
+                        <ul>
+                          <li style="list-style: none;">Morning session:- 9:00am</li>
+                          <li style="list-style: none;">Evening session:- 4:30pm</li>
+                        </ul>
+                      </li>
+                      <li>Attend all classes and events on time.</li>
+                      <li>
+                        Notify the administration in advance for any absences.
+                      </li>
+                    </ul>
+
+                    <h6 class="green-text fw-bold">Academic Conduct</h6>
+                    <ul>
+                      <li>
+                        Complete all assigned homework and projects on time.
+                      </li>
+                      <li>
+                        Adhere to academic integrity and avoid cheating or
+                        plagiarism.
+                      </li>
+                    </ul>
+
+                    <h6 class="green-text fw-bold">Behavioral Expectations</h6>
+                    <ul>
+                      <li>
+                        Treat teachers, staff, and peers with respect and
+                        kindness.
+                      </li>
+                      <li>
+                        Refrain from bullying, harassment, or intimidation.
+                      </li>
+                      <li>
+                        Display non-disruptive behavior in class or during
+                        events.
+                      </li>
+                    </ul>
+
+                    <h6 class="green-text fw-bold">Personal Responsibility</h6>
+                    <ul>
+                      <li>
+                        Take care of personal belongings and madrasah property.
+                      </li>
+                    </ul>
+
+                    <h6 class="green-text fw-bold">Safety and Well-being</h6>
+                    <ul>
+                      <li>Report any incidents or concerns to authorities.</li>
+                    </ul>
+                  </div>
+                  <div
+                    style="
+                      border: 1px dotted green;
+                      padding: 10px;
+                      font-size: 16px;
+                      border-top: none;
+                      border-bottom: none;
+                    "
+                  >
+                    <h4 class="mb-3 text-center">
+                      Consequences of Breach of Rules
+                    </h4>
+                    <h6 class="green-text fw-bold">
+                      The following are actions which may be taken where the
+                      rules and regulations are breached
+                    </h6>
+                    <ul>
+                      <li>Verbal warning</li>
+                      <li>Written warning</li>
+                      <li>Suspension</li>
+                      <li>Expulsion (in extreme cases)</li>
+                    </ul>
+                  </div>
+                  <div
+                    style="
+                      border: 1px dotted green;
+                      padding: 10px;
+                      font-size: 16px;
+                      border-top: none;
+                    "
+                  >
+                    <h4 class="mb-3 text-center">Additional Reminders</h4>
+                    <ul>
+                      <li>
+                        Mobile phones are not allowed in the madrasah for the
+                        morning session. If there's a need to bring it, the
+                        student should drop it with the management.
+                      </li>
+                      <li>No mobile phones during classes or events.</li>
+                      <li>No food or drinks in classrooms or masjid.</li>
+                      <li>
+                        Students must respect madrasah property and facilities.
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p
+                      class="lead fs-6 mt-3 mb-3 green-text"
+                      style="text-align: justify"
+                    >
+                      By enrolling in our madrasah, you agree to abide by these
+                      rules and regulations. We aim to provide a safe and
+                      supportive learning environment, and we expect our
+                      students to uphold these standards.
+                    </p>
+                    <p
+                      class="lead fs-6 mt-3 mb-3 green-text"
+                      style="text-align: justify"
+                    >
+                      Parents are advised to continuously talk to their children
+                      on the need to be self-discplined as well as the
+                      importance of obeying rules and regulations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5">
+        <div class="container">
+          <div class="row align-items-lg-center justify-content-xl-end px-xl-5">
+            <div class="col-12">
+              <h6>
+                To download this policy,
+                <a href="" class="green-text" id="download-madrasahpolicy"
+                  >click here</a
+                >
+              </h6>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Footer  -->
       <footer class="footer">
         <!-- Widgets - Bootstrap Brain Component -->
@@ -227,7 +489,10 @@
                     <a class="text-decoration-none" href="tel:+2348163068097"
                       >+234 816 306 8097</a
                     >
-                    <a class="text-decoration-none"  style="display: block" href="tel:+2348020721422"
+                    <a
+                      class="text-decoration-none"
+                      style="display: block"
+                      href="tel:+2348020721422"
                       >+234 802 072 1422</a
                     >
                     <a
@@ -261,15 +526,19 @@
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="gallery.html" class="text-decoration-none">Gallery</a>
-                    </li>
-                    <li class="mb-2">
-                      <a href="assessments.html" class="text-decoration-none"
-                        >Quiz & Assessment</a
+                      <a href="gallery.html" class="text-decoration-none"
+                        >Gallery</a
                       >
                     </li>
                     <li class="mb-2">
-                      <a href="donate.html" class="text-decoration-none">Support Us</a>
+                      <a href="assessments.html" class="text-decoration-none"
+                        >Knowledge Test</a
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <a href="donate.html" class="text-decoration-none"
+                        >Support Us</a
+                      >
                     </li>
                   </ul>
                 </div>
@@ -423,5 +692,51 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const downloadPolicy = document.getElementById("download-madrasahpolicy");
+      downloadPolicy.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.jsPDF = window.jspdf.jsPDF;
+        var docPDF = new jsPDF();
+
+        function downloadPDF() {
+          let pdfform = document.querySelector("#madrasahpolicy-doc");
+          docPDF.html(pdfform, {
+            callback: function (docPDF) {
+              docPDF.save("madrasahpolicy.pdf");
+            },
+            x: 15,
+            y: 15,
+            width: 170,
+            windowWidth: 650,
+          });
+        }
+        downloadPDF();
+      });
+
+      // download form pdf
+      // PDFdownloadbtn.addEventListener("click", (e) => {
+      //     e.preventDefault();
+      //
+      //     window.jsPDF = window.jspdf.jsPDF;
+      //     var docPDF = new jsPDF();
+
+      //     function downloadPDF() {
+      //         let pdfform = document.querySelector("#student-reportcard");
+      //         docPDF.html(pdfform, {
+      //             callback: function (docPDF) {
+      //                 docPDF.save('result.pdf');
+      //             },
+      //             x: 15,
+      //             y: 15,
+      //             width: 170,
+      //             windowWidth: 650
+      //         });
+      //     }
+      //     downloadPDF()
+
+      // });
+    </script>
   </body>
 </html>
