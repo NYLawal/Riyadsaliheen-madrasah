@@ -16,7 +16,7 @@ viewArabicQuizbtn.addEventListener("click", (e) => {
     e.preventDefault();
     result.classList.add('d-none')
     arabicQuizSection.style.display = "block";
-    englishQuizSection.display = "none";
+    englishQuizSection.style.display = "none";
 });
 
 //view english quiz
