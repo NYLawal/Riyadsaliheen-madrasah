@@ -165,10 +165,10 @@
                 Take a tour around our school premises and activities
               </p>
               <hr class="w-50 mx-auto mb-4 mb-xl-9 border-dark-subtle" />
-            </div> 
+            </div>
           </div>
           <div class="row justify-content-md-center mb-5">
-            <div class="col-12 col-md-6" style="text-align: center;">
+            <div class="col-12 col-md-6" style="text-align: center">
               <button class="gallery-view" id="videos-view">Videos</button>
               <button class="gallery-view" id="images-view">Images</button>
             </div>
@@ -176,8 +176,11 @@
         </div>
 
         <!-- //first video row -->
-        <div class="container overflow-hidden gallery-videos" id="gallery-videos1">
-          <div class="row" style="text-align: center;">
+        <div
+          class="container overflow-hidden gallery-videos"
+          id="gallery-videos1"
+        >
+          <div class="row" style="text-align: center">
             <div class="col-12 col-md-4 mb-3">
               <div>
                 <iframe
@@ -230,8 +233,11 @@
         </div>
 
         <!-- // second video row -->
-        <div class="container overflow-hidden mt-3 gallery-videos" id="gallery-videos2">
-          <div class="row" style="text-align: center;">
+        <div
+          class="container overflow-hidden mt-3 gallery-videos"
+          id="gallery-videos2"
+        >
+          <div class="row" style="text-align: center">
             <div class="col-12 col-md-4 mb-3">
               <div>
                 <iframe
@@ -283,8 +289,10 @@
           </div>
         </div>
 
-       
-        <div class="container overflow-hidden gallery-images" id="gallery-images">
+        <div
+          class="container overflow-hidden gallery-images"
+          id="gallery-images"
+        >
           <div class="row gy-2 g-md-2 g-xl-3 bsb-project-2-grid">
             <div class="col-12 col-md-4 bsb-project-2-item">
               <figure
@@ -299,7 +307,7 @@
                   />
                 </a>
                 <figcaption>
-                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     Students on assembly
                   </h5>
                 </figcaption>
@@ -317,7 +325,7 @@
                   />
                 </a>
                 <figcaption>
-                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     Learning begins here daily
                   </h5>
                   <!-- <div class="text-white bsb-hover-fadeInDown">Nature</div> -->
@@ -338,7 +346,7 @@
                   />
                 </a>
                 <figcaption>
-                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     Active learning takes place here
                   </h5>
                   <!-- <div class="text-white bsb-hover-fadeInRight">Adventure</div> -->
@@ -359,7 +367,7 @@
                   />
                 </a>
                 <figcaption>
-                  <h5 class="green-text bsb-hover-fadeInLeft  mt-2">
+                  <h5 class="green-text bsb-hover-fadeInLeft mt-2">
                     A set of classes
                   </h5>
                   <!-- <div class="text-white bsb-hover-fadeInDown">Adventure</div> -->
@@ -645,26 +653,25 @@
     ></script>
 
     <script>
-      const viewVideos = document.getElementById("videos-view")
-      const viewImages = document.getElementById("images-view")
-      const allImages = document.getElementById("gallery-images")
-      const allVideos1 = document.getElementById("gallery-videos1")
-      const allVideos2 = document.getElementById("gallery-videos2")
+      const viewVideos = document.getElementById("videos-view");
+      const viewImages = document.getElementById("images-view");
+      const allImages = document.getElementById("gallery-images");
+      const allVideos1 = document.getElementById("gallery-videos1");
+      const allVideos2 = document.getElementById("gallery-videos2");
 
-     viewImages.addEventListener("click", (e) => {
-      e.preventDefault();
-    allImages.style.display = "block";
-      allVideos1.style.display = "none";
-      allVideos2.style.display = "none";
-});
+      viewImages.addEventListener("click", (e) => {
+        e.preventDefault();
+        allImages.style.display = "block";
+        allVideos1.style.display = "none";
+        allVideos2.style.display = "none";
+      });
 
-     viewVideos.addEventListener("click", (e) => {
-      e.preventDefault();
-    allImages.style.display = "none";
-      allVideos1.style.display = "block";
-      allVideos2.style.display = "block";
-});
-
+      viewVideos.addEventListener("click", (e) => {
+        e.preventDefault();
+        allImages.style.display = "none";
+        allVideos1.style.display = "block";
+        allVideos2.style.display = "block";
+      });
     </script>
   </body>
 </html>

@@ -485,15 +485,54 @@ section iframe:hover {
     display: none;
 }
 .gallery-view{
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px; 
     background: #5ec52e;
-    width: 70px;
+    width: 100px;
     font-size: 16px;
     color: #fff;
     cursor: pointer;
     margin-right: 10px;
+}
+
+/* ==================================================
+                  Assessment page 
+====================================================*/
+.quiz-questions{
+    background-color: #2e6118;
+}
+.quiz-question-each{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+#english-quiz .quiz-question-each{
+    align-items: flex-start;
+}
+.quiz-question-each p{
+font-size: 1.5rem;
+margin-bottom: 0;
+line-height: 1.5;
+}
+#english-quiz .quiz-question-each p{
+    font-size: 1.2rem
+}
+.quiz-question-each label{
+font-size: 1.2rem;
+margin-right: 5px;
+color: #9bfd67;
+}
+#english-quiz .quiz-question-each label{
+margin-right: 0;
+margin-left: 5px;
+}
+input[type=radio]:checked {
+    accent-color: #abf789;
 }
 
 

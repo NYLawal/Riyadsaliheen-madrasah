@@ -1,5 +1,5 @@
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("passwd");
 const passwordRepeatInput = document.getElementById("passwd-repeat");
@@ -122,8 +122,8 @@ function Redirect() {
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
                         }
                         else if (userRole == 'teacher') {
-                            // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-                            window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                            // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
                         }
                     }
                 });
@@ -138,8 +138,8 @@ function Redirect() {
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
             }
             else if (userRole == 'teacher') {
-                // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
-                window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
+                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
             else if (userRole == 'student') {
                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"

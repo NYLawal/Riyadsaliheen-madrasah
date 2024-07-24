@@ -1,5 +1,5 @@
-// const baseUrl = "https://result-proc-system.onrender.com/api/v1"
-const baseUrl = "http://localhost:5000/api/v1"
+const baseUrl = "https://result-proc-system.onrender.com/api/v1"
+// const baseUrl = "http://localhost:5000/api/v1"
 
 const sidebartoggler = document.getElementById("sidebar-toggler")
 const toggler = document.getElementById("toggler-icon")
@@ -116,8 +116,8 @@ const getTeacherClass = () => {
                 console.log(error.response.headers);
                 errorMsg = error.response.data.message
                 if (error.response.data.message == "Error: unauthorised access! Log in to resume your tasks")
-                    // window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
-                    window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
+                    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+                    // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
