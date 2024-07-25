@@ -1735,7 +1735,8 @@ promoteStudentsSubmitButton.addEventListener("click", (e) => {
         minscore
     }
     const formDataOne = {
-        admNo
+        admNo,
+        programme
     }
 
     Swal.fire({
