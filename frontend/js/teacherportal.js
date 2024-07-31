@@ -431,7 +431,7 @@ subjTotalScore.addEventListener("click", (e) => {
             scoreRemark.value = "ممتاز"
         }
         else if (subjTotalScore.value >= 75 && subjTotalScore.value < 85) {
-            scoreRemark.value = "جيد جيدا"
+            scoreRemark.value = "جيد جدا"
         }
         else if (subjTotalScore.value >= 65 && subjTotalScore.value < 75) {
             scoreRemark.value = "جيد"
@@ -644,7 +644,7 @@ const viewScores = (admNo, term, session) => {
                         tblremark.innerText = "ممتاز"
                     }
                     else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
-                        tblremark.innerText = "جيد جيدا"
+                        tblremark.innerText = "جيد جدا"
                     }
                     else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
                         tblremark.innerText = "جيد"
@@ -896,7 +896,7 @@ addSubjecttotal.addEventListener("click", (e) => {
             addSubjectremark.value = "ممتاز"
         }
         else if (addSubjecttotal.value >= 75 && addSubjecttotal.value < 85) {
-            addSubjectremark.value = "جيد جيدا"
+            addSubjectremark.value = "جيد جدا"
         }
         else if (addSubjecttotal.value >= 65 && addSubjecttotal.value < 75) {
             addSubjectremark.value = "جيد"

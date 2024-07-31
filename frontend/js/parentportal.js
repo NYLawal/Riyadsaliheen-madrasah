@@ -112,7 +112,7 @@ const viewScores = (admNo, term, session) => {
                         tblremark.innerText = "ممتاز"
                     }
                     else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
-                        tblremark.innerText = "جيد جيدا"
+                        tblremark.innerText = "جيد جدا"
                     }
                     else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
                         tblremark.innerText = "جيد"
@@ -1009,7 +1009,7 @@ const downloadScores = (admNo, term, session) => {
                         tblremark.innerText = "ممتاز"
                     }
                     else if (tblcumaverage.innerText >= 75 && tblcumaverage.innerText < 85) {
-                        tblremark.innerText = "جيد جيدا"
+                        tblremark.innerText = "جيد جدا"
                     }
                     else if (tblcumaverage.innerText >= 65 && tblcumaverage.innerText < 75) {
                         tblremark.innerText = "جيد"
