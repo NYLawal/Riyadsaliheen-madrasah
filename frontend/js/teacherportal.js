@@ -1182,7 +1182,7 @@ const displayClassReport = (classname, programme, term, session) => {
                     }
                     let tblmark = document.createElement("td")
                     let tblpercentage = document.createElement("td")
-                    tblmark.innerText = requestedterm.marksObtained
+                    tblmark.innerText = requestedterm.marksObtained.toFixed(2)
                     tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
                     tblrow.appendChild(tblmark)
                     tblrow.appendChild(tblpercentage)
