@@ -1174,10 +1174,12 @@ const displayClassReport = (classname, programme, term, session) => {
 
                 for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
                     const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
+            
                     for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                         const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
                         let tbltotalscore = document.createElement("td")
-                        tbltotalscore.innerText = subjectToAdd.totalScore
+                        if (subjectToAdd == undefined){tbltotalscore.innerText = ""}
+                        else tbltotalscore.innerText = subjectToAdd.totalScore
                         tblrow.appendChild(tbltotalscore)
                     }
                     let tblmark = document.createElement("td")

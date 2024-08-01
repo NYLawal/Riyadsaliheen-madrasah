@@ -2478,24 +2478,15 @@ const displayClassReport = (classname, programme, term, session) => {
                 tblrow.appendChild(tblserialno)
                 tblrow.appendChild(tbladmno)
                 tblrow.appendChild(tblname)
-                //for attendance
-                let atdtblrow = document.createElement("tr")
-                let atdtblserialno = document.createElement("th")
-                let atdtbladmno = document.createElement("td")
-                let atdtblname = document.createElement("td")
-                atdtblserialno.innerText = i + 1
-                atdtbladmno.innerText = response.data.classExists[i].admissionNumber
-                atdtblname.innerText = response.data.classExists[i].student_name
-                atdtblrow.appendChild(atdtblserialno)
-                atdtblrow.appendChild(atdtbladmno)
-                atdtblrow.appendChild(atdtblname)
 
                 const requestedsession = response.data.classExists[i].scores.find(asession => asession.sessionName == session)
                 const requestedterm = requestedsession.term.find(aterm => aterm.termName == term)
                 for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                     const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
+                    console.log(subjectToAdd)
                     let tbltotalscore = document.createElement("td")
-                    tbltotalscore.innerText = subjectToAdd.totalScore
+                    if (subjectToAdd == undefined){tbltotalscore.innerText = ""}
+                    else tbltotalscore.innerText = subjectToAdd.totalScore
                     tblrow.appendChild(tbltotalscore)
                 }
                 let tblmark = document.createElement("td")
@@ -2505,17 +2496,34 @@ const displayClassReport = (classname, programme, term, session) => {
                 tblrow.appendChild(tblmark)
                 tblrow.appendChild(tblpercentage)
 
+                tableBodyForClassReport.appendChild(tblrow)
+            }
+            for (let i = 0; i < response.data.attendanceExists.length; i++) {
+                //for attendance
+                let atdtblrow = document.createElement("tr")
+                let atdtblserialno = document.createElement("th")
+                let atdtbladmno = document.createElement("td")
+                let atdtblname = document.createElement("td")
+                atdtblserialno.innerText = i + 1
+                atdtbladmno.innerText = response.data.attendanceExists[i].admissionNumber
+                atdtblname.innerText = response.data.attendanceExists[i].student_name
+                atdtblrow.appendChild(atdtblserialno)
+                atdtblrow.appendChild(atdtbladmno)
+                atdtblrow.appendChild(atdtblname)
+
                 //attendance
+                const requestedsessionatd = response.data.attendanceExists[i].attendanceRecord.find(asession => asession.sessionName == session)
+                const requestedtermatd = requestedsessionatd.term.find(aterm => aterm.termName == term)
                 if (i == 0) {  //adding term dates as heading for attendance table
-                    for (let k = 0; k < requestedterm.attendance.length; k++) {
-                        const dateToAdd = requestedterm.attendance[k].termdate
+                    for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                        const dateToAdd = requestedtermatd.attendance[k].termdate
                         let tbldate = document.createElement("th")
                         tbldate.innerText = dateToAdd
                         attendanceTableHeadRow.appendChild(tbldate)
                     }
                 }
-                for (let k = 0; k < requestedterm.attendance.length; k++) {
-                    const presentStatus = requestedterm.attendance[k].presence
+                for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                    const presentStatus = requestedtermatd.attendance[k].presence
                     let tblpresence = document.createElement("td")
                     if (presentStatus == 'yes') {
                         tblpresence.innerText = "ح"
@@ -2525,8 +2533,6 @@ const displayClassReport = (classname, programme, term, session) => {
                     }
                     atdtblrow.appendChild(tblpresence)
                 }
-
-                tableBodyForClassReport.appendChild(tblrow)
                 attendanceTableBody.appendChild(atdtblrow)
             }
         })
