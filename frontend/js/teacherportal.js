@@ -203,7 +203,7 @@ const displayStudentsByClass = (page) => {
                 let option = document.createElement("option")
                 option.innerText = response.data.students[j].admNo
                 addAdmNo.appendChild(option)
-                
+
                 let option2 = document.createElement("option")
                 option2.innerText = response.data.students[j].admNo
                 admissionNumberForReport.appendChild(option2)
@@ -871,7 +871,7 @@ addSubjectSelect.addEventListener("change", (e) => {
         tblcol0.innerText = addResultBody.children.length + 1
         tblcol1.innerText = addSubjectSelect.value
         if (addOtherSubject.value != "" && addSubjectSelect.value == "Other") tblcol1.innerText = addOtherSubject.value;
-        tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none; min-width:30px"/>`
+        tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none; min-width:28px"/>`
         tblcol3.innerHTML = `<input type="number" min="0" max="60" name="addexam" placeholder="" id="addexam" style="border:none"/>`
         tblcol6.innerHTML = `<i class="fa fa-trash delsubjecticon" id="delsubjecticon"></i>`
         tblrow.appendChild(tblcol0)

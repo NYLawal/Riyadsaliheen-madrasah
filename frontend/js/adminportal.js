@@ -1857,6 +1857,8 @@ const QueryStudentUpdate = (studentInfo) => {
 
 //submit studentupdate query form
 studentAdmNoToEdit.addEventListener("keypress", (e) => {
+    console.log(e.code)
+    console.log(e.key)
     if (e.key === "Enter" || e.code === "Enter" || e.code === 'Space' && studentAdmNoToEdit.value != "") {
         e.preventDefault();
         const admNo = studentAdmNoToEdit.value;
