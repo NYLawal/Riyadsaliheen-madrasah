@@ -795,13 +795,8 @@ const closeAddScoresButton = document.getElementById("closeinputform-btn")
 
 const addTerm = document.getElementById("addterm")
 const addSession = document.getElementById("addsession")
-// const addSubject= document.getElementById("addsubject")
 const addOtherSubject = document.getElementById("addothersubject")
 const addSubjectSelect = document.getElementById("addsubjectselect")
-const addSubjecttest = document.getElementById("addtest")
-const addSubjectexam = document.getElementById("addexam")
-const addSubjecttotal = document.getElementById("addtotal")
-const addSubjectremark = document.getElementById("addremark")
 const addResultBody = document.getElementById("addresultbody")
 const addTermComment = document.getElementById("addcomment")
 const submitScoresButton = document.getElementById("submitscores-btn")
@@ -819,12 +814,19 @@ addScoresLink.addEventListener("click", (e) => {
 // close addscores form
 closeAddScoresButton.addEventListener("click", (e) => {
     e.preventDefault();
-    addSubjecttest.value = "";
-    addSubjectexam.value = "";
-    addSubjecttotal.value = "";
-    addSubjectremark.value = "";
     addTermComment.value = "";
-    addResultBody.innerHTML = "";
+    for (let count = 0; count < addResultBody.childElementCount; count++) {
+        let subjectNameTD = addResultBody.children[count].firstElementChild.nextElementSibling;
+        let subjectName = subjectNameTD.innerText;
+        let testScoreTD = subjectNameTD.nextElementSibling
+        testScoreTD.firstElementChild.value = ""
+        let examScoreTD = testScoreTD.nextElementSibling
+        examScoreTD.firstElementChild.value = ""
+        let totalScoreTD = examScoreTD.nextElementSibling
+        totalScoreTD.innerText = ""
+        let remarkTD = totalScoreTD.nextElementSibling
+        remarkTD.innerText = ""
+    }
     addScoresForm.style.display = "none";
 });
 
@@ -850,63 +852,17 @@ addSubjectSelect.addEventListener("change", (e) => {
         addOtherSubject.value = "";
         addOtherSubject.setAttribute("disabled", true)
     }
-    // if subject is already on the table, reject same subject addition
-    if (addResultBody.childElementCount >= 1) {
-        for (let count = 0; count < addResultBody.childElementCount; count++) {
-            if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Hello!",
-                    text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
-                });
-            }
-        }
-    }
-})
-
-// add scores to result body on click of total input field
-addSubjecttotal.addEventListener("click", (e) => {
-    e.preventDefault();
     let subjectSelected = addSubjectSelect.value
-    if (subjectSelected == "Other") subjectSelected = addOtherSubject.value
-    if (addSubjectSelect.value == "select one" || (addSubjectSelect.value == "Other" && addOtherSubject.value == "")) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input!",
-            text: "Input a valid subject"
-        });
-    }
-    else if (!classSubjectsReturned.includes(subjectSelected)) {
+
+    if (!classSubjectsReturned.includes(subjectSelected)) {
         Swal.fire({
             icon: "error",
             title: "Sorry",
             text: `${subjectSelected} is not a valid subject for your class`
         });
     }
-    else if (+addSubjecttest.value > 40 || +addSubjectexam.value > 60) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Score!",
-            text: "Please check the test or exam score inputted"
-        });
-    } else {
-        addSubjecttotal.value = +addSubjecttest.value + (+addSubjectexam.value);
-        //display appropriate remark according to the score
-        if (addSubjecttotal.value >= 85) {
-            addSubjectremark.value = "ممتاز"
-        }
-        else if (addSubjecttotal.value >= 75 && addSubjecttotal.value < 85) {
-            addSubjectremark.value = "جيد جدا"
-        }
-        else if (addSubjecttotal.value >= 65 && addSubjecttotal.value < 75) {
-            addSubjectremark.value = "جيد"
-        }
-        else if (addSubjecttotal.value >= 50 && addSubjecttotal.value < 65) {
-            addSubjectremark.value = "ناجح"
-        }
-        else if (addSubjecttotal.value >= 0 && addSubjecttotal.value < 50) {
-            addSubjectremark.value = "راسب"
-        }
+
+    else {
         let tblrow = document.createElement("tr")
         let tblcol0 = document.createElement("th")
         let tblcol1 = document.createElement("td")
@@ -918,10 +874,8 @@ addSubjecttotal.addEventListener("click", (e) => {
         tblcol0.innerText = addResultBody.children.length + 1
         tblcol1.innerText = addSubjectSelect.value
         if (addOtherSubject.value != "" && addSubjectSelect.value == "Other") tblcol1.innerText = addOtherSubject.value;
-        tblcol2.innerText = addSubjecttest.value
-        tblcol3.innerText = addSubjectexam.value
-        tblcol4.innerText = addSubjecttotal.value
-        tblcol5.innerText = addSubjectremark.value
+        tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none"/>`
+        tblcol3.innerHTML = `<input type="number" min="0" max="60" name="addexam" placeholder="" id="addexam" style="border:none"/>`
         tblcol6.innerHTML = `<i class="fa fa-trash delsubjecticon" id="delsubjecticon"></i>`
         tblrow.appendChild(tblcol0)
         tblrow.appendChild(tblcol1)
@@ -931,23 +885,53 @@ addSubjecttotal.addEventListener("click", (e) => {
         tblrow.appendChild(tblcol5)
         tblrow.appendChild(tblcol6)
         tblrow.classList.add("tablerows")
-
-        for (let count = 0; count < addResultBody.childElementCount; count++) {
-            if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == tblcol1.innerText) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Hello!",
-                    text: `You already inputted ${addSubjectSelect.value} scores for this student. Use the delete icon if you wish to cancel your previous input.`
-                });
-                addResultBody.removeChild(tblrow)
-            }
-
-        }
         addResultBody.appendChild(tblrow)
 
-    }
+        let addSubjecttest = tblcol2.firstElementChild.value;
+        let addSubjectexam = tblcol3.firstElementChild.value;
+        // on click of the total score field
+        tblcol4.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (subjectSelected == "Other") subjectSelected = addOtherSubject.value
+            if (addSubjectSelect.value == "select one" || (addSubjectSelect.value == "Other" && addOtherSubject.value == "")) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Input!",
+                    text: "Input a valid subject"
+                });
+            }
+            else if (+tblcol2.firstElementChild.value > 40 || +tblcol3.firstElementChild.value > 60) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Score!",
+                    text: "Please check the test or exam score inputted"
+                });
+            } else {
+                tblcol4.innerText = +tblcol2.firstElementChild.value + (+tblcol3.firstElementChild.value);
+                let addSubjecttotal = +tblcol4.innerText;
 
+                //display appropriate remark according to the score
+                if (addSubjecttotal >= 85) {
+                    tblcol5.innerText = "ممتاز"
+                }
+                else if (addSubjecttotal >= 75 && addSubjecttotal < 85) {
+                    tblcol5.innerText = "جيد جدا"
+                }
+                else if (addSubjecttotal >= 65 && addSubjecttotal < 75) {
+                    tblcol5.innerText = "جيد"
+                }
+                else if (addSubjecttotal >= 50 && addSubjecttotal < 65) {
+                    tblcol5.innerText = "ناجح"
+                }
+                else if (addSubjecttotal >= 0 && addSubjecttotal < 50) {
+                    tblcol5.innerText = "راسب"
+                }
+            }
+            let addSubjectremark = tblcol5.innerText;
+        })
+    }
 })
+
 
 // listen for click on the table, if delete button is clicked, remove the row and adjust the numbering
 scoresTable.addEventListener("click", (e) => {
@@ -980,12 +964,19 @@ const addScores = ({ ...scoreinfo }, admNo) => {
                 title: "Successful",
                 text: response.data.message
             });
-            addSubjecttest.value = "";
-            addSubjectexam.value = "";
-            addSubjecttotal.value = "";
-            addSubjectremark.value = "";
             addTermComment.value = "";
-            addResultBody.innerHTML = "";
+            for (let count = 0; count < addResultBody.childElementCount; count++) {
+                let subjectNameTD = addResultBody.children[count].firstElementChild.nextElementSibling;
+                let subjectName = subjectNameTD.innerText;
+                let testScoreTD = subjectNameTD.nextElementSibling
+                testScoreTD.firstElementChild.value = ""
+                let examScoreTD = testScoreTD.nextElementSibling
+                examScoreTD.firstElementChild.value = ""
+                let totalScoreTD = examScoreTD.nextElementSibling
+                totalScoreTD.innerText = ""
+                let remarkTD = totalScoreTD.nextElementSibling
+                remarkTD.innerText = ""
+            }
         })
         .catch(function (error) {
             if (error.response) {
@@ -1052,22 +1043,24 @@ submitScoresButton.addEventListener("click", (e) => {
             let subjectNameTD = addResultBody.children[count].firstElementChild.nextElementSibling;
             let subjectName = subjectNameTD.innerText;
             let testScoreTD = subjectNameTD.nextElementSibling
-            let testScore = testScoreTD.innerText
+            let testScore = testScoreTD.firstElementChild.value
             let examScoreTD = testScoreTD.nextElementSibling
-            let examScore = examScoreTD.innerText
+            let examScore = examScoreTD.firstElementChild.value
             let totalScoreTD = examScoreTD.nextElementSibling
             let totalScore = totalScoreTD.innerText
             let remarkTD = totalScoreTD.nextElementSibling
             let remark = remarkTD.innerText
 
-            if (testScore == "" || examScore == "") {
+            if (testScore == "" || examScore == "" || totalScore == "") {
                 Swal.fire({
                     icon: "error",
                     title: "Empty input detected",
                     text: "Please fill out all fields"
                 });
+                subjects = [];
+                break;
             }
-            else {
+
                 if (totalScore != 0) {
                     let subject = {
                         subjectName,
@@ -1078,8 +1071,9 @@ submitScoresButton.addEventListener("click", (e) => {
                     }
                     subjects.push(subject)
                 }
-            }
+    
         }
+        if (subjects.length !=0)
         addScores(formdata, admNo);
     }
 })
@@ -1174,11 +1168,11 @@ const displayClassReport = (classname, programme, term, session) => {
 
                 for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
                     const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
-            
+
                     for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                         const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
                         let tbltotalscore = document.createElement("td")
-                        if (subjectToAdd == undefined){tbltotalscore.innerText = ""}
+                        if (subjectToAdd == undefined) { tbltotalscore.innerText = "" }
                         else tbltotalscore.innerText = subjectToAdd.totalScore
                         tblrow.appendChild(tbltotalscore)
                     }
