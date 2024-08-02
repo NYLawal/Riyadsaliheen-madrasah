@@ -40,6 +40,17 @@ const createStudentButton = document.getElementById("createstudent-btn")
 const studentNameBar = document.getElementById("student-namebar")
 const nameBar = document.getElementById("namebar")
 
+const viewStudentSelect = document.getElementById("viewstudent-select")
+const studSearchDiv = document.getElementById("search-students")
+const studSearchKey = document.getElementById("stud-searchkey")
+const studSearchValue = document.getElementById("stud-searchvalue")
+const searchStudentGender = document.getElementById("searchstud-gender")
+const searchMe = document.getElementById("searchme")
+const searchButton = document.getElementById("search-btn")
+const studentStatus = document.getElementById("search-studstatus")
+
+// const studentViewPagination = document.getElementById("stdview-pagination")
+const viewStudentPageRequest = document.getElementById("viewstd-pagerequest")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStudentPageOne = document.getElementById("viewstd-page1")
@@ -322,6 +333,179 @@ closeViewStudentBtn.addEventListener("click", (e) => {
     viewStudentsForm.style.display = "none"
 });
 
+// display student list all/by search/one
+viewStudentSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML = ""
+    pstdNumber.innerHTML = ""
+    if (viewStudentSelect.value == "all") {
+        studSearchDiv.style.display = "none"
+        displayStudentsByClass(1)
+    }
+    else if (viewStudentSelect.value == "bycriteria") {
+        studSearchDiv.style.display = "block";
+        studSearchValue.focus()
+    }
+});
+
+// display students by search key
+studSearchKey.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML = ""
+    pstdNumber.innerHTML = ""
+    if (studSearchKey.value == "admNo" || studSearchKey.value == "firstName" || studSearchKey.value == "lastName" || studSearchKey.value == "address" || studSearchKey.value == "stateOfOrigin") {
+        searchMe.innerHTML = `<input type="text" name="stdsearchvalue" placeholder="Input your search term" id="searchstud-value"/>`
+        const searchValueBox = document.getElementById("searchstud-value")
+        searchValueBox.focus()
+    }
+    else if (studSearchKey.value == "gender") {
+        searchMe.innerHTML =
+            `<select id="searchstud-gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>`
+    }
+});
+
+// clear table if search value changes
+studSearchValue.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML = ""
+    pstdNumber.innerHTML = ""
+})
+
+let searchMeFirst = searchMe.firstChild
+searchMeFirst.addEventListener("change", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML = ""
+    pstdNumber.innerHTML = ""
+})
+
+// display students by search key and value
+const displayStudents = (key, value, page) => {
+    let errorMsg;
+    let serial_no = 0;
+    axios
+        .get(`${baseUrl}/student/${page}/?${key}=${value}`, {
+            // params: { page} ,
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
+            for (let i = 0; i < response.data.studentsperpage.length; i++) {
+                // serial_no++
+                let tblrow = document.createElement("tr")
+                let tblcol0 = document.createElement("td")
+                let tblcol1 = document.createElement("td")
+                let tblcol2 = document.createElement("td")
+                let tblcol3 = document.createElement("td")
+                let tblcol4 = document.createElement("td")
+                let tblcol5 = document.createElement("td")
+                let tblcol6 = document.createElement("td")
+                let tblcol7 = document.createElement("td")
+                let tblcol8 = document.createElement("td")
+                let tblcol9 = document.createElement("td")
+                let tblcol10 = document.createElement("td")
+                let tblcol11 = document.createElement("td")
+                let tblcol12 = document.createElement("td")
+                let tblcol13 = document.createElement("td")
+                let tblcol14 = document.createElement("td")
+                tblcol0.innerText = response.data.studentsperpage[i].serialNo
+                tblcol1.innerText = response.data.studentsperpage[i].admNo
+                tblcol2.innerText = response.data.studentsperpage[i].firstName
+                tblcol3.innerText = response.data.studentsperpage[i].lastName
+                tblcol4.innerText = response.data.studentsperpage[i].gender
+                tblcol5.innerText = response.data.studentsperpage[i].entryClass
+                tblcol6.innerText = response.data.studentsperpage[i].address
+                tblcol7.innerText = response.data.studentsperpage[i].phoneNumber
+                tblcol8.innerText = response.data.studentsperpage[i].email
+                tblcol9.innerText = response.data.studentsperpage[i].parentEmail
+                tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
+                tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
+                tblcol12.innerText = response.data.studentsperpage[i].programme
+                tblcol13.innerText = response.data.studentsperpage[i].presentClass
+                tblcol14.innerText = response.data.studentsperpage[i].dateOfRegistration
+                tblrow.appendChild(tblcol0)
+                tblrow.appendChild(tblcol1)
+                tblrow.appendChild(tblcol2)
+                tblrow.appendChild(tblcol3)
+                tblrow.appendChild(tblcol4)
+                tblrow.appendChild(tblcol5)
+                tblrow.appendChild(tblcol6)
+                tblrow.appendChild(tblcol7)
+                tblrow.appendChild(tblcol8)
+                tblrow.appendChild(tblcol9)
+                tblrow.appendChild(tblcol10)
+                tblrow.appendChild(tblcol11)
+                tblrow.appendChild(tblcol12)
+                tblrow.appendChild(tblcol13)
+                tblrow.appendChild(tblcol14)
+                if (value == "past") {
+                    // remove present class from student's view
+                    viewStudentsTableHead.removeChild(viewStudentsPresentClass)
+                    tblrow.removeChild(tblcol13)
+                    // add status to table heading
+                    let tblheadstatus = document.createElement("th");
+                    tblheadstatus.innerText = "Status"
+                    viewStudentsTableHead.appendChild(tblheadstatus)
+                    // add non-student status to table view
+                    let tblcol15 = document.createElement("td");
+                    tblcol15.innerText = response.data.studentsperpage[i].nonStudentStatus
+                    tblrow.appendChild(tblcol15)
+                }
+                studentTableBody.appendChild(tblrow)
+            }
+            console.log("response says page is ", response.data.page)
+            studentpage.push(response.data.page)
+            lastpage.push(response.data.pgnum)
+
+            // disable next button if end of page is reached
+            // if (response.data.pgnum === response.data.page) {
+            //     viewStudentPageNext.classList.add("disable")
+            // }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit view student form
+searchButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    studentTableBody.innerHTML = ""
+    pstdNumber.innerHTML = ""
+    let key = studSearchKey.value;
+    let value;
+     value = searchMe.firstChild.value || studSearchValue.value
+
+    displayStudents(key, value, 1);
+});
+
 // display next students list page
 viewStudentPageNext.addEventListener("click", (e) => {
     e.preventDefault();
@@ -363,6 +547,46 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     else {
         studentTableBody.innerHTML = "";
         displayStudentsByClass(pageNumber - 1)
+    }
+});
+
+// display students list by page requested
+viewStudentPageRequest.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+        let maxpage = lastpage.pop()
+        let pageNumber = viewStudentPageRequest.value
+        if (pageNumber < 1) {
+            Swal.fire({
+                icon: "error",
+                title: "Beginning of File Reached",
+                text: "The page requested does not exist"
+            });
+        }
+        else if (pageNumber > maxpage) {
+            Swal.fire({
+                icon: "error",
+                title: "End of File Reached",
+                text: "The page requested does not exist"
+            });
+        }
+        else {
+            studentTableBody.innerHTML = "";
+            viewStudentPagePrevious.classList.remove("disable")
+            viewStudentPageNext.classList.remove("disable")
+
+            if (viewStudentSelect.value == "all") {
+                displayStudentsByClass(pageNumber)
+            }
+            else if (viewStudentSelect.value == "bycriteria") {
+                const key = studSearchKey.value
+                let value;
+                if (key === "studentStatus") value = "past"
+                else { value = searchMe.firstChild.value || studSearchValue.value }
+                displayStudents(key, value, pageNumber);
+                console.log(key, value, pageNumber)
+            }
+        }
     }
 });
 

@@ -193,6 +193,28 @@
                 <button type="button" class="btn-close btn-close closebtn-icon" id="vstdclose-icon"
                   aria-label="Close"></button>
                 <h4 class="mb-2">Students' List</h4>
+                <div class="item mb-4">
+                  <select id="viewstudent-select">
+                    <option value="all">All</option>
+                    <option value="bycriteria">By Search</option>
+                    <!-- <option value="one">One</option> -->
+                  </select>
+                </div>
+                <div id="search-students" class="pt-3 pb-4">
+                  <p id="view-search-term" class="mt-4 mb-2">Input the search key and value in the box below</p>
+                  <select id="stud-searchkey">
+                    <option value="admNo" id="search-admNo">Admission Number</option>
+                    <option value="firstName" id="search-firstname">First Name</option>
+                    <option value="lastName" id="search-lastname">Last name</option>
+                    <option value="gender" id="search-gender">Gender</option>
+                  </select>
+                  <div id="searchme" class="mt-2">
+                    <input type="text" name="stdsearchvalue" placeholder="e.g Yusuf" id="stud-searchvalue" />
+                  </div>
+                  <div class="btn-block">
+                    <button class="mt-1" type="submit" href="/" id="search-btn">Search</button>
+                  </div>
+                </div>
                 <div>
                   <p id="student-number" class="mt-2 mb-2"></p>
                 </div>
@@ -232,12 +254,10 @@
                   <li class="page-item">
                     <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
                   </li>
-                  <!-- <li class="page-item" >
-                <a class="page-link pagination-color" href="#" id="viewstd-page2">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link  pagination-color" href="#" id="viewstd-page3">3</a>
-              </li> -->
+                  <li class="page-item">
+                    <input class="page-link pagination-color" href="#" id="viewstd-pagerequest" placeholder="page"
+                      style="width: 50px;">
+                  </li>
                   <li class="page-item">
                     <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next >>
                     </a>

@@ -193,6 +193,12 @@ html, body {
         opacity: 0;
         cursor: pointer;
         }
+        .item i.fa-arrow-alt-circle-right {
+            right: 16px;
+            top:38px;
+            z-index: 1;
+            cursor: pointer;
+            }
     input[type=checkbox]  {
     display: none;
     }

@@ -1775,6 +1775,7 @@ const editStudentStatusCloseIcon = document.getElementById('editstudentstatus-cl
 const editStudentStatusForm = document.getElementById('editstudentstatus-form')
 const admNoForNonStudentStatus = document.getElementById('admnofor-nonstudentstatus')
 const selectForNonStudentStatus = document.getElementById('nonstudentstatus-select')
+const goArrow = document.getElementById('go_arrow')
 
 const studentAdmNoToEdit = document.getElementById('studupd-admno')
 const studentFirstNameUpdate = document.getElementById("studupd-firstname")
@@ -1855,11 +1856,9 @@ const QueryStudentUpdate = (studentInfo) => {
         });
 };
 
-//submit studentupdate query form
+//submit studentupdate query form on pressing Enter key
 studentAdmNoToEdit.addEventListener("keypress", (e) => {
-    console.log(e.code)
-    console.log(e.key)
-    if (e.key === "Enter" || e.code === "Enter" || e.code === 'Space' && studentAdmNoToEdit.value != "") {
+    if (e.key === "Enter" || e.code === "Enter" && studentAdmNoToEdit.value != "") {
         e.preventDefault();
         const admNo = studentAdmNoToEdit.value;
         const formData = {
@@ -1868,6 +1867,25 @@ studentAdmNoToEdit.addEventListener("keypress", (e) => {
         QueryStudentUpdate(formData);
     }
     else if (e.key === "Enter" && studentAdmNoToEdit.value == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Error Processing Input",
+            text: "A valid admission number is required for the query"
+        });
+    }
+});
+
+//submit studentupdate query form on clicking go arrow
+goArrow.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (studentAdmNoToEdit.value != "") {
+        const admNo = studentAdmNoToEdit.value;
+        const formData = {
+            admNo
+        }
+        QueryStudentUpdate(formData);
+    }
+    else if (studentAdmNoToEdit.value == "") {
         Swal.fire({
             icon: "error",
             title: "Error Processing Input",
