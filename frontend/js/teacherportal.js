@@ -509,34 +509,42 @@ searchButton.addEventListener("click", (e) => {
 // display next students list page
 viewStudentPageNext.addEventListener("click", (e) => {
     e.preventDefault();
-    let maxpage = lastpage[lastpage.length - 1]
+    let maxpage = lastpage.pop()
     let pageNumber = studentpage.pop()
-    if (pageNumber <= maxpage) {
+    if (pageNumber < maxpage) {
         viewStudentPagePrevious.classList.remove("disable")
         studentTableBody.innerHTML = ""
-        // let pageNumber = studentpage.pop()
-        displayStudentsByClass(pageNumber + 1)
+        if (viewStudentSelect.value == "all") {
+            displayStudentsByClass(pageNumber + 1)
+        }
+        else if (viewStudentSelect.value == "bycriteria") {
+            const key = studSearchKey.value
+            let value;
+            if (key === "studentStatus") value = "past"
+            else { value = searchMe.firstChild.value || studSearchValue.value }
+            displayStudents(key, value, pageNumber + 1);
+            console.log(key, value, pageNumber)
+        }
     }
     else {
+        viewStudentPageNext.classList.add("disable")
         lastpage.push(maxpage)
+        studentpage.push(pageNumber)
         Swal.fire({
             icon: "error",
             title: "End of File Reached",
             text: "The page requested does not exist"
         });
     }
-
 });
 
 // display previous students list page
 viewStudentPagePrevious.addEventListener("click", (e) => {
     e.preventDefault();
     viewStudentPageNext.classList.remove("disable")
-    // console.log(studentpage)
     let pageNumber = studentpage.pop()
-    // console.log("page is ", pageNumber)
-    if (pageNumber == 1) {
-        // studentpage.push(1)
+    if (pageNumber <= 1) {
+        studentpage.push(1)
         viewStudentPagePrevious.classList.add("disable")
         Swal.fire({
             icon: "error",
@@ -546,9 +554,21 @@ viewStudentPagePrevious.addEventListener("click", (e) => {
     }
     else {
         studentTableBody.innerHTML = "";
-        displayStudentsByClass(pageNumber - 1)
+
+        if (viewStudentSelect.value == "all") {
+            displayStudentsByClass(pageNumber - 1)
+        }
+        else if (viewStudentSelect.value == "bycriteria") {
+            const key = studSearchKey.value
+            let value;
+            if (key === "studentStatus") value = "past"
+            else { value = searchMe.firstChild.value || studSearchValue.value }
+            displayStudents(key, value, pageNumber - 1);
+            console.log(key, value, pageNumber)
+        }
     }
 });
+
 
 // display students list by page requested
 viewStudentPageRequest.addEventListener("keyup", (e) => {
@@ -1095,7 +1115,7 @@ addSubjectSelect.addEventListener("change", (e) => {
         tblcol0.innerText = addResultBody.children.length + 1
         tblcol1.innerText = addSubjectSelect.value
         if (addOtherSubject.value != "" && addSubjectSelect.value == "Other") tblcol1.innerText = addOtherSubject.value;
-        tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none; min-width:28px"/>`
+        tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none; min-width:25px"/>`
         tblcol3.innerHTML = `<input type="number" min="0" max="60" name="addexam" placeholder="" id="addexam" style="border:none"/>`
         tblcol6.innerHTML = `<i class="fa fa-trash delsubjecticon" id="delsubjecticon"></i>`
         tblrow.appendChild(tblcol0)
