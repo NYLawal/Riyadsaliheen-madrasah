@@ -140,6 +140,9 @@
               <li>
                 <a href="#" id="view-students">students</a>
               </li>
+              <li>
+                <a href="#" id="viewclassubjects-link">class subjects</a>
+              </li>
             </ul>
           </li>
           <li class="">
@@ -188,6 +191,9 @@
         <ul class="list-unstyled components components2">
           <li>
             <a href="#" id="setclassdetails">Set Report Card Details</a>
+          </li>
+          <li>
+            <a href="#" id="deletescores">Delete Term Scores</a>
           </li>
           <li>
             <a href="#" id="logout">Logout</a>
@@ -512,7 +518,6 @@
                       </tr>
                     </thead>
                     <tbody id="stafftbl-body">
-
                     </tbody>
                   </table>
                 </div>
@@ -778,7 +783,7 @@
               <div class="item">
                 <div class="item">
                   <p>Admission No</p>
-                  <input href="#" name ="admNo" id="studupd-admno"/>
+                  <input href="#" name="admNo" id="studupd-admno" />
                   <i class="fas fa-arrow-alt-circle-right" id="go_arrow"></i>
                 </div>
                 <p>Name</p>
@@ -922,7 +927,77 @@
       </div>
     </section>
 
-    
+    <!-- View class subjects -->
+    <section class="bg-light mb-5" id="subjectview-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div class="card border border-light-subtle rounded-3 shadow-sm">
+              <div class="card-body p-5">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="subjectviewclose-icon"
+                  aria-label="Close"></button>
+                <div class="text-center mb-3">
+                  <a href="#!">
+                    <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+                  </a>
+                </div>
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="subjectview-h2">Provide the information
+                  below</h2>
+                <form action="#!">
+                  <div class="row gy-2 overflow-hidden">
+                    <div class="col-12">
+                      <div class="">
+                        <label for="viewsubject-classelect" class="form-label">Class</label>
+                        <select name="" id="viewsubject-classelect">
+                          <option selected>select one</option>
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="">
+                        <label for="viewsubject-programmeselect" class="form-label">Programme</label>
+                        <select name="" id="viewsubject-programmeselect">
+                          <option selected>select one</option>
+                          <option value="children madrasah">Children Madrasah</option>
+                          <option value="adult madrasah">Adult Madrasah</option>
+                          <option value="female madrasah">Female Madrasah</option>
+                          <option value="barnamij">Barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 submitbtn-div">
+                      <div class="d-grid my-3 mt-md-4 mt-2 ">
+                        <button class="btn btn-lg" type="submit" id="viewsubjects-btn">View Subjects</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div>
+                  <label for="subjectstable" class="form-label mb-0"> Class Subjects</label>
+                  <table class="table mt-2 text-center table-dark" id="subjectstable">
+                    <tbody id="subjectsviewtblbody">
+                     
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
 
     <!-- Edit class subjects -->
     <section class="bg-light mb-5" id="subjectedit-form">
@@ -938,7 +1013,7 @@
                     <img src="../images/logo2.png" alt="Logo" width="50" height="50">
                   </a>
                 </div>
-                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the information
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="subjectedit-h2">Provide the information
                   below, and input
                   the subject to add or remove</h2>
                 <form action="#!">
@@ -1012,9 +1087,6 @@
                         </select>
                       </div>
                     </div>
-                    <!-- <div class="col-12" style="display: none;" id="editsubject-otherdiv">
-                      <input type="text" name="" placeholder="input the other subject" id="editsubject-othersubjectaddselect" />
-                    </div> -->
                     <div class="col-12">
                       <label for="editsubject-subjectaddselect" class="form-label">Other Subject (if not in the list
                         above)</label>
@@ -1422,7 +1494,7 @@
           <div class="col-12 col-lg-9 col-xl-9">
             <div class="card widget-card border-light">
               <div class="card-body p-4">
-                <button type="button" class="btn-close btn-close closebtn-icon" id="viewclassreport-icon"
+                <button type="button" class="btn-close closebtn-icon" id="viewclassreport-icon"
                   aria-label="Close"></button>
                 <form action="/" class="py-3 px-md-4 px-2" id="classcoresreport" style=" box-shadow: none">
                   <div class="row gy-4 gy-xl-5 mb-3">
@@ -1732,6 +1804,82 @@
             </button>
           </div>
           <div class="col"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delete a term report for a student -->
+    <section class="py-5 py-md-3 mb-5" id="deletescores-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h3 class="mb-3 display-5 text-center">Term Scores Delete Form</h3>
+            <p class="text-secondary mb-1 text-center">
+              Please be sure about this, as the action is not reversible.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="deletescores-closeicon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="form-deletescores" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col-12 col-md-3">
+                      <label for="admno-fordeletescores" class="form-label">Admission Number <span
+                          class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="" id="admno-fordeletescores">
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="programme-fordeletescores" class="form-label">Programme <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="programme-fordeletescores">
+                          <option selected>select a programme</option>
+                          <option value="children madrasah">children madrasah</option>
+                          <option value="adult madrasah">adult madrasah</option>
+                          <option value="female madrasah">female madrasah</option>
+                          <option value="barnamij">barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="term-fordeletescores" class="form-label">Term <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="term-fordeletescores">
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="session-fordeletescores" class="form-label">Session <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="session-fordeletescores">
+                          <option value="2023/2024">2023/2024</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-6 btn-block">
+                      <button type="button" id="deletescores-btn" href="/">
+                        Delete Scores
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

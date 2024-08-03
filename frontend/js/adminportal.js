@@ -2523,7 +2523,7 @@ const displayClassReport = (classname, programme, term, session) => {
             for (n = 0; n <= tableBodyForClassReport.childElementCount - 1; n++) {
                 classAverages.push(tableBodyForClassReport.children[n].lastElementChild.innerText)
             }
-            let sorted_array = classAverages.sort( (a, b) =>  b - a );
+            let sorted_array = classAverages.sort((a, b) => b - a);
             let newClassReportTable = document.createElement("tbody")
             for (n = 0; n <= sorted_array.length; n++) {
                 for (m = 0; m <= tableBodyForClassReport.childElementCount - 1; m++) {
@@ -2635,6 +2635,100 @@ classnameForReportSelect.addEventListener("change", (e) => {
     attendanceLabel.style.display = "none";
 });
 
+// VIEW SUBJECTS***************************************************************
+// ****************************************************************************
+const viewClassSubjectsLink = document.getElementById("viewclassubjects-link");
+const viewSubjectsFormCloseIcon = document.getElementById("subjectviewclose-icon");
+const viewSubjectsForm = document.getElementById("subjectview-form");
+const viewSubjectsClass = document.getElementById("viewsubject-classelect");
+const viewSubjectsProgramme = document.getElementById("viewsubject-programmeselect");
+const viewSubjectsSubmitButton = document.getElementById("viewsubjects-btn");
+const viewSubjectsTableBody = document.getElementById("subjectsviewtblbody");
+
+
+// click view subjects link to display form
+viewClassSubjectsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewSubjectsForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close view subjects form
+viewSubjectsFormCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewSubjectsForm.style.display = "none";
+});
+
+//view class  subjects
+const getClassSubjects = (teacherClass, teacherProgramme) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/class/getSubjects/?className=${teacherClass}&programme=${teacherProgramme}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: "Successful! See subjects below"
+            });
+            for (k = 0; k < response.data.classExists.subjects.length; k++) {
+                let tblrow = document.createElement("tr")
+                let tblcol = document.createElement("td")
+                tblcol.innerText = response.data.classExists.subjects[k]
+                tblrow.appendChild(tblcol)
+                viewSubjectsTableBody.appendChild(tblrow)
+            }
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click viewsubjects button
+viewSubjectsSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    viewSubjectsTableBody.innerHTML = ""
+    const className = viewSubjectsClass.value;
+    const programme = viewSubjectsProgramme.value;
+    if (viewSubjectsClass.value == "select one" || viewSubjectsProgramme.value == "select one") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please check that you selected a class and programme"
+        });
+    }
+    else {
+        getClassSubjects(className, programme)
+    }
+});
+
 // EDIT SUBJECTS***************************************************************
 // ****************************************************************************
 const editSubjectsFormCloseIcon = document.getElementById("subjecteditclose-icon");
@@ -2705,7 +2799,6 @@ editSubjectsAddSubjectButton.addEventListener("click", (e) => {
     const programme = editSubjectsProgramme.value;
     let subject = editSubjectsSubject.value;
     if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value != "") subject = editSubjectsSubjectOther.value
-    console.log(subject)
     if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one") {
         Swal.fire({
             icon: "error",
@@ -2791,7 +2884,7 @@ editSubjectsRemoveSubjectButton.addEventListener("click", (e) => {
     }
 });
 
-// click edit subjects link to display form
+// allow or deny other subject input
 editSubjectsSubject.addEventListener("change", (e) => {
     e.preventDefault();
     if (editSubjectsSubject.value == "Other") {
@@ -3572,6 +3665,109 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         else if (selectTaskForReport.value == "maxattendance")
             setDetails(formDataObj, programme);
     }
+});
+
+
+// DELETE TERM SCORES ********************************************************************
+const deleteScoresForm = document.getElementById("deletescores-form")
+const closeDeleteScoresFormBtn = document.getElementById("deletescores-closeicon")
+const deleteScoresLink = document.getElementById("deletescores")
+const admNoForDeleteScores = document.getElementById("admno-fordeletescores")
+const programmeForDeleteScores = document.getElementById("programme-fordeletescores")
+const termForDeleteScores = document.getElementById("term-fordeletescores")
+const sessionForDeleteScores = document.getElementById("session-fordeletescores")
+const deleteScoresSubmitButton = document.getElementById("deletescores-btn")
+
+// open delete scores form
+deleteScoresLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    deleteScoresForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close delete scores form
+closeDeleteScoresFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    admNoForDeleteScores.value = "";
+    deleteScoresForm.style.display = "none";
+});
+
+// delete scores
+const deleteScores = (admNo, programme, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/scores/deleteScores/?admNo=${admNo}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+
+// delete scores on click of button
+deleteScoresSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const admNo = admNoForDeleteScores.value
+    const programme = programmeForDeleteScores.value
+    const sessionName = sessionForDeleteScores.value
+    const termName = termForDeleteScores.value
+
+    if (programme == "select a programme" || admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check that you have valid inputs"
+        });
+    }
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteScores(admNo, programme, termName, sessionName)
+        }
+    });
+
 });
 
 
