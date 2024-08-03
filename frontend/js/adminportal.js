@@ -2505,7 +2505,7 @@ const displayClassReport = (classname, programme, term, session) => {
                     const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
                     console.log(subjectToAdd)
                     let tbltotalscore = document.createElement("td")
-                    if (subjectToAdd == undefined){tbltotalscore.innerText = ""}
+                    if (subjectToAdd == undefined) { tbltotalscore.innerText = "" }
                     else tbltotalscore.innerText = subjectToAdd.totalScore
                     tblrow.appendChild(tbltotalscore)
                 }
@@ -2518,8 +2518,25 @@ const displayClassReport = (classname, programme, term, session) => {
 
                 tableBodyForClassReport.appendChild(tblrow)
             }
+            // Sort the class report table according to average percentage descending
+            let classAverages = []
+            for (n = 0; n <= tableBodyForClassReport.childElementCount - 1; n++) {
+                classAverages.push(tableBodyForClassReport.children[n].lastElementChild.innerText)
+            }
+            let sorted_array = classAverages.sort( (a, b) =>  b - a );
+            let newClassReportTable = document.createElement("tbody")
+            for (n = 0; n <= sorted_array.length; n++) {
+                for (m = 0; m <= tableBodyForClassReport.childElementCount - 1; m++) {
+                    if (tableBodyForClassReport.children[m].lastElementChild.innerText == sorted_array[n]) {
+                        tableBodyForClassReport.children[m].firstElementChild.innerText = n + 1
+                        newClassReportTable.appendChild(tableBodyForClassReport.children[m])
+                    }
+                }
+            }
+            tableBodyForClassReport.innerHTML = newClassReportTable.innerHTML
+
+            //for attendance
             for (let i = 0; i < response.data.attendanceExists.length; i++) {
-                //for attendance
                 let atdtblrow = document.createElement("tr")
                 let atdtblserialno = document.createElement("th")
                 let atdtbladmno = document.createElement("td")

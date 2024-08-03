@@ -1426,6 +1426,22 @@ const displayClassReport = (classname, programme, term, session) => {
                 }
                 tableBodyForClassReport.appendChild(tblrow)
             }
+            // Sort the class report table according to average percentage descending
+            let classAverages = []
+            for (n = 0; n <= tableBodyForClassReport.childElementCount-1; n++){
+                classAverages.push(tableBodyForClassReport.children[n].lastElementChild.innerText)
+            }
+            let sorted_array = classAverages.sort(function(a, b){return b - a});
+            let newClassReportTable = document.createElement("tbody")
+            for (n = 0; n <= sorted_array.length; n++){   
+            for (m = 0; m <= tableBodyForClassReport.childElementCount-1; m++){
+             if (tableBodyForClassReport.children[m].lastElementChild.innerText == sorted_array[n]){
+                tableBodyForClassReport.children[m].firstElementChild.innerText = n+1
+              newClassReportTable.appendChild(tableBodyForClassReport.children[m])
+             } 
+            }
+            }
+            tableBodyForClassReport.innerHTML = newClassReportTable.innerHTML
         })
         .catch(function (error) {
             if (error.response) {
