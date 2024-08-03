@@ -2703,8 +2703,9 @@ editSubjectsAddSubjectButton.addEventListener("click", (e) => {
     e.preventDefault();
     const className = editSubjectsClass.value;
     const programme = editSubjectsProgramme.value;
-    const subject = editSubjectsSubject.value;
+    let subject = editSubjectsSubject.value;
     if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value != "") subject = editSubjectsSubjectOther.value
+    console.log(subject)
     if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one") {
         Swal.fire({
             icon: "error",
@@ -2773,7 +2774,7 @@ editSubjectsRemoveSubjectButton.addEventListener("click", (e) => {
     e.preventDefault();
     const className = editSubjectsClass.value;
     const programme = editSubjectsProgramme.value;
-    const subject = editSubjectsSubject.value;
+    let subject = editSubjectsSubject.value;
     if (editSubjectsSubject.value == "Other" && editSubjectsSubjectOther.value != "") subject = editSubjectsSubjectOther.value
     if (editSubjectsClass.value == "select one" || editSubjectsProgramme.value == "select one" || editSubjectsSubject.value == "select one") {
         Swal.fire({
