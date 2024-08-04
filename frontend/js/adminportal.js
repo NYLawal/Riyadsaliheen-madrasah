@@ -3231,9 +3231,9 @@ const downloadScores = (admNo, term, session) => {
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
             reportCardNextTermBegins.innerText = response.data.nextTermDate
-            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.teacherSignature} alt="teacher signature" width="60">`
-            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.principalSign} alt="teacher signature" width="60">`
-            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.proprietorSign} alt="teacher signature" width="60">`
+            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.teacherSignature}" alt="teacher signature" width="60">`
+            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.principalSign}" alt="principal signature" width="60">`
+            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.proprietorSign}" alt="proprietor signature" width="60">`
             function calculateAttendance() {
                 let maxAttendance = response.data.maxAttendance;
                 let timesPresent = 0;

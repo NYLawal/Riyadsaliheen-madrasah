@@ -1536,26 +1536,29 @@ viewAttendanceLink.addEventListener("click", (e) => {
     tableHeadAttendance.innerHTML = "";
     //populate with fresh data
     let tblserialnohead = document.createElement("th")
+    let tbladmNohead = document.createElement("th")
     let tblnamehead = document.createElement("th")
     let tblpresent = document.createElement("th")
     tblserialnohead.innerText = "Serial No"
+    tbladmNohead.innerText = "Adm No"
     tblnamehead.innerText = "Name"
     tblpresent.innerText = "Present"
     tableHeadRowAttendance.appendChild(tblserialnohead)
+    tableHeadRowAttendance.appendChild(tbladmNohead)
     tableHeadRowAttendance.appendChild(tblnamehead)
     tableHeadRowAttendance.appendChild(tblpresent)
     for (let j = 0; j < studentNamesStore.length; j++) {
         let tblrow = document.createElement("tr")
         let tblserialno = document.createElement("th")
-        // let tbladmno = document.createElement("td")
+        let tblatdadmno = document.createElement("td")
         let tblname = document.createElement("td")
         let tblpresence = document.createElement("td")
         tblserialno.innerText = j + 1
-        // tbladmno.innerText = response.data.classExists[i].admissionNumber
+        tblatdadmno.innerText = studentNamesStore[j].admission_number
         tblname.innerText = studentNamesStore[j].student_name
         tblpresence.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
         tblrow.appendChild(tblserialno)
-        // tblrow.appendChild(tbladmno)
+        tblrow.appendChild(tblatdadmno)
         tblrow.appendChild(tblname)
         tblrow.appendChild(tblpresence)
         tableBodyForAttendance.appendChild(tblrow)
@@ -1637,7 +1640,8 @@ const markAttendance = (stdattendance, classname, programme, term, session) => {
 markAttendanceButton.addEventListener("click", (e) => {
     e.preventDefault();
     let attendance = []
-    let student_name
+    let student_name;
+    let admissionNumber;
     let termdate = dateInputField.value;
     if (termdate == "") {
         Swal.fire({
@@ -1653,13 +1657,15 @@ markAttendanceButton.addEventListener("click", (e) => {
         const session = sessionForAttendance.value
 
         for (let i = 0; i < tableBodyForAttendance.childElementCount; i++) {
-            let presence
-            student_name = tableBodyForAttendance.children[i].children[1].innerText
-            if (tableBodyForAttendance.children[i].children[2].firstElementChild.classList.contains("fa-check")) {
+            let presence;
+            admissionNumber = tableBodyForAttendance.children[i].children[1].innerText
+            student_name = tableBodyForAttendance.children[i].children[2].innerText
+            if (tableBodyForAttendance.children[i].children[3].firstElementChild.classList.contains("fa-check")) {
                 presence = "yes"
             }
             else { presence = "no" }
             let stdAttendance = {
+                admissionNumber,
                 student_name,
                 termdate,
                 presence
