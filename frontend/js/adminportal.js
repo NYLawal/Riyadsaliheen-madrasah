@@ -1775,6 +1775,7 @@ const editStudentStatusCloseIcon = document.getElementById('editstudentstatus-cl
 const editStudentStatusForm = document.getElementById('editstudentstatus-form')
 const admNoForNonStudentStatus = document.getElementById('admnofor-nonstudentstatus')
 const selectForNonStudentStatus = document.getElementById('nonstudentstatus-select')
+const selectForStudentStatus = document.getElementById('studentstatus-select')
 const goArrow = document.getElementById('go_arrow')
 
 const studentAdmNoToEdit = document.getElementById('studupd-admno')
@@ -2059,7 +2060,7 @@ editStudentStatusCloseIcon.addEventListener("click", (e) => {
 });
 
 
-// update student
+// update student status
 const editStudentStatus = (admNo, studentstatus) => {
     let errorMsg;
     axios
@@ -2106,12 +2107,26 @@ const editStudentStatus = (admNo, studentstatus) => {
 };
 
 // click edit status button to update student status
+selectForStudentStatus.addEventListener("change", (e) => {
+    e.preventDefault();
+    const status = selectForStudentStatus.value
+    if (status == "current") {
+        selectForNonStudentStatus.setAttribute("disabled", true)
+    }
+    else if (status == "past") {
+        selectForNonStudentStatus.removeAttribute("disabled")
+    }   
+});
+
+// click edit status button to update student status
 editStudentStatusButton.addEventListener("click", (e) => {
     e.preventDefault();
     const admNo = admNoForNonStudentStatus.value
-    const status = selectForNonStudentStatus.value
+    const status = selectForStudentStatus.value
+    const statusReason = selectForNonStudentStatus.value
     const formdata = {
-        status
+        status,
+        statusReason
     }
     if (admNo == "") {
         Swal.fire({
@@ -2200,8 +2215,8 @@ const viewScores = (admNo, term, session) => {
                     let tbltestscore = document.createElement("td")
                     let tblexamscore = document.createElement("td")
                     let tbltotalscore = document.createElement("td")
-                    let tblfirstterm = document.createElement("td")
                     let tblsecondterm = document.createElement("td")
+                    let tblfirstterm = document.createElement("td")
                     let tblcumscore = document.createElement("td")
                     let tblcumaverage = document.createElement("td")
                     let tblremark = document.createElement("td")
@@ -2210,8 +2225,8 @@ const viewScores = (admNo, term, session) => {
                     tbltestscore.innerText = response.data.report[i].testScore
                     tblexamscore.innerText = response.data.report[i].examScore
                     tbltotalscore.innerText = response.data.report[i].totalScore || 0
-                    tblfirstterm.innerText = response.data.firstTermScore[i]
                     tblsecondterm.innerText = response.data.secondTermScore[i]
+                    tblfirstterm.innerText = response.data.firstTermScore[i]
                     tblcumscore.innerText = response.data.report[i].cumulativeScore
                     tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
                     // add remark according to avrage score
@@ -2237,8 +2252,8 @@ const viewScores = (admNo, term, session) => {
                     ttblrow.appendChild(tbltestscore)
                     ttblrow.appendChild(tblexamscore)
                     ttblrow.appendChild(tbltotalscore)
-                    ttblrow.appendChild(tblfirstterm)
                     ttblrow.appendChild(tblsecondterm)
+                    ttblrow.appendChild(tblfirstterm)
                     ttblrow.appendChild(tblcumscore)
                     ttblrow.appendChild(tblcumaverage)
                     ttblrow.appendChild(tblremark)

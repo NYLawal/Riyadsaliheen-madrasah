@@ -866,8 +866,8 @@ const viewScores = (admNo, term, session) => {
                     let tbltestscore = document.createElement("td")
                     let tblexamscore = document.createElement("td")
                     let tbltotalscore = document.createElement("td")
-                    let tblfirstterm = document.createElement("td")
                     let tblsecondterm = document.createElement("td")
+                    let tblfirstterm = document.createElement("td")
                     let tblcumscore = document.createElement("td")
                     let tblcumaverage = document.createElement("td")
                     let tblremark = document.createElement("td")
@@ -876,8 +876,8 @@ const viewScores = (admNo, term, session) => {
                     tbltestscore.innerText = response.data.report[i].testScore
                     tblexamscore.innerText = response.data.report[i].examScore
                     tbltotalscore.innerText = response.data.report[i].totalScore || 0
-                    tblfirstterm.innerText = response.data.firstTermScore[i]
                     tblsecondterm.innerText = response.data.secondTermScore[i]
+                    tblfirstterm.innerText = response.data.firstTermScore[i]
                     tblcumscore.innerText = response.data.report[i].cumulativeScore
                     tblcumaverage.innerText = response.data.report[i].cumulativeAverage.toFixed(2)
                     // add remark according to avrage score
@@ -903,8 +903,8 @@ const viewScores = (admNo, term, session) => {
                     ttblrow.appendChild(tbltestscore)
                     ttblrow.appendChild(tblexamscore)
                     ttblrow.appendChild(tbltotalscore)
-                    ttblrow.appendChild(tblfirstterm)
                     ttblrow.appendChild(tblsecondterm)
+                    ttblrow.appendChild(tblfirstterm)
                     ttblrow.appendChild(tblcumscore)
                     ttblrow.appendChild(tblcumaverage)
                     ttblrow.appendChild(tblremark)
