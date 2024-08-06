@@ -2425,6 +2425,7 @@ const tableHeadClassReport = document.getElementById("classreport-tblhead")
 const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow")
 const tableBodyForClassReport = document.getElementById("classreport-tblbody")
 const viewClassReportButton = document.getElementById("viewclassreport-btn")
+const downloadClassReportButton = document.getElementById("downloadclassreport-btn")
 const attendanceLabel = document.getElementById("attendance-label")
 const attendanceTableHeadRow = document.getElementById("classattendance-tblheadrow")
 const attendanceTableBodyRow = document.getElementById("classattendance-tblbodyrow")
@@ -2649,6 +2650,99 @@ classnameForReportSelect.addEventListener("change", (e) => {
     attendanceTableBody.innerHTML = "";
     attendanceLabel.style.display = "none";
 });
+
+// download class report
+downloadClassReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = classnameForReportSelect.value
+    const programme = programmeForReportSelect.value
+    const sessionName = sessionForClassReport.value
+    const termName = termForClassReport.value
+    if (tableBodyForClassReport.childElementCount == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Request",
+            text: "Click the view report button to display the report before downloading"
+        });
+    }
+    else
+    tableToCSV(className, programme, sessionName, termName)
+});
+
+function tableToCSV(className, programme, sessionName, termName) {
+
+    // Variable to store the final csv data
+    let csv_data = [];
+ // Get the table head row data, then each column data  and 
+    let rowshead =  tableHeadRowClassReport.children;
+    let csvrow = [];
+        for (let k = 0; k < rowshead.length; k++) {
+            csvrow.push(rowshead[k].innerText);
+        }
+         // Combine each column value with comma
+         csv_data.push(csvrow.join(","));
+    
+
+    // Get each table body row data
+    let rows =  tableBodyForClassReport.children;
+    for (let i = 0; i < rows.length; i++) {
+        // Get each column data
+        let cols = rows[i].children;
+
+        // Stores each csv row data
+        let csvrow = [];
+        for (let j = 0; j < cols.length; j++) {
+
+            // Get the text data of each cell of
+            // a row and push it to csvrow
+            csvrow.push(cols[j].innerText);
+        }
+
+        // Combine each column value with comma
+        csv_data.push(csvrow.join(","));
+    }
+    // Combine each row data with new line character
+    csv_data = csv_data.join('\n');
+
+    // Call this function to download csv file  
+    downloadCSVFile(csv_data, className, programme, sessionName, termName);
+}
+
+function downloadCSVFile(csv_data, className, programme, sessionName, termName) {
+    // Create CSV file object and feed our
+    // csv_data into it
+    CSVFile = new Blob([csv_data], { type: "text/csv" });
+
+    // Create to temporary link to initiate
+    // download process
+    let temp_link = document.createElement('a');
+
+    //create filename to reflect variables
+    let filename = `${sessionName} ${termName} Term Report for ${className} ${programme}`
+
+    // Download csv file
+    temp_link.download = filename+".csv";
+    let url = window.URL.createObjectURL(CSVFile);
+    temp_link.href = url;
+
+    // This link should not be displayed
+    temp_link.style.display = "none";
+    document.body.appendChild(temp_link);
+
+    // Automatically click the link to trigger download 
+    temp_link.click();
+    document.body.removeChild(temp_link);
+}
+
+
+
+
+
+
+
+
+
+
 
 // VIEW SUBJECTS***************************************************************
 // ****************************************************************************

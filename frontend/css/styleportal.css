@@ -251,7 +251,7 @@ html, body {
     button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn,
     button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#deletescores-btn, button#assessment-btn, button#deleteassessment-btn, button#genresult-btn,
     button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn,
-    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn,  button#closeclassdetails-btn {
+    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn,  button#closeclassdetails-btn, button#downloadclassreport-btn {
     width: 150px;
     padding: 10px;
     border: none;
