@@ -143,6 +143,9 @@
               <li>
                 <a href="#" id="viewclassubjects-link">class subjects</a>
               </li>
+              <li>
+                <a href="#" id="viewclassesassigned-link">assigned classes</a>
+              </li>
             </ul>
           </li>
           <li class="">
@@ -161,7 +164,7 @@
             </ul>
           </li>
           <li>
-            <a href="#" id="assign-teacher">Assign Teacher</a>
+            <a href="#" id="assign-teacher">Assign/Deassign Teacher</a>
           </li>
           <li>
             <a href="#" id="remove-staff">Remove Staff</a>
@@ -186,15 +189,23 @@
           </li>
           <li>
             <a href="#" id="resultsheet">Download Student Report</a>
-            <!-- </li> -->
         </ul>
         <ul class="list-unstyled components components2">
           <li>
             <a href="#" id="setclassdetails">Set Report Card Details</a>
           </li>
-          <li>
-            <a href="#" id="deletescores">Delete Term Scores</a>
-          </li>
+          <li class="">
+            <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle"
+              data-bs-target="#deleteSubmenu" aria-controls="deleteSubmenu">Delete</a>
+            <ul class="collapse list-unstyled" id="deleteSubmenu">
+              <li>
+                <a href="#" id="deletestudent">Student</a>
+              </li>
+              <li>
+                <a href="#" id="deletescores">Term Scores</a>
+              </li>
+            </ul>
+          </li> 
           <li>
             <a href="#" id="logout">Logout</a>
           </li>
@@ -392,94 +403,6 @@
       </div>
     </section>
 
-    <!-- Add Class -->
-    <!-- <section class="bg-light mb-5 addclass-form" id="addclass-form">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-        <div class="card border border-light-subtle rounded-3 shadow-sm">
-          <div class="card-body p-5">
-            <button type="button" class="btn-close btn-close closebtn-icon"  id="editstfclose-icon" aria-label="Close"></button>
-            <div class="text-center mb-3">
-              <a href="#!">
-                <img src="../images/logo2.png" alt="Logo" width="50" height="50">
-              </a>
-            </div>
-            <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">Provide the below information.</h2>
-            <form action="#!">
-              <div class="row gy-2 overflow-hidden">
-                </div>
-                <div class="col-12">
-                  <div class="item">
-                    <p>Class Name</p>
-                    <select id="stud-entry-class">
-                      <option value="tamhidi">tamhidi</option>
-                      <option value="hadoonah">hadoonah</option>
-                      <option value="rawdoh">rawdoh</option>
-                      <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
-                      <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
-                      <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
-                      <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
-                      <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
-                      <option value="awwal idaadiy">awwal idaadiy</option>
-                      <option value="thaani idaadiy">thaani idaadiy</option>
-                      <option value="thaalith idaadiy">thaalith idaadiy</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="item">
-                  <p>Subject</p>
-                  <select style="background-color: white" id="addsubjectselect">
-                    <option selected>select one</option>
-                      <option value="الأذكار">الأذكار</option>
-                      <option value="القرآن المجود">القرآن المجود</option>
-                      <option value="الفقه">الفقه</option>
-                      <option value="الحروف">الحروف</option>
-                      <option value="الإملاء">الإملاء</option>
-                      <option value="الإنشاء">الإنشاء</option>
-                      <option value="الخط">الخط</option>
-                      <option value="النحو">النحو</option>
-                      <option value="الصرف">الصرف</option>
-                      <option value="التعبير">التعبير</option>
-                      <option value="التهجية">التهجية</option>
-                      <option value="التدريبات اللغوية">
-                       التدريبات اللغوية
-                      </option>
-                      <option value="التفسير">التفسير</option>
-                      <option value="التجويد">التجويد</option>
-                      <option value="القراءة">القراءة</option>
-                      <option value="حفظ القرآن">حفظ القرآن</option>
-                      <option value="التوحيد">التوحيد</option>
-                      <option value="الفقه والسلوك">الفقه والسلوك</option>
-                      <option value="الحديث">الحديث</option>
-                      <option value="اللغة العربية">اللغة العربية</option>
-                      <option value="المتون">المتون</option>
-                      <option value="المعجم">المعجم</option>
-                      <option value="السيرة">السيرة</option>
-                      <option value="درس من القرآن">درس من القرآن</option>
-                      <option value="القراءة والكتابة">القراءة والكتابة</option>
-                     <option value="لدرس العام">الدرس العام</option>
-                     <option value="قراءة القرآن">قراءة القرآن</option>
-                      <option value="Other">Other</option>
-                  </select>
-                </div>
-                </div>
-                <div class="col-12 submitbtn-div">
-                  <div class="d-grid my-3 mt-4">
-                    <button class="btn btn-lg" type="submit" id="submiteditquery-btn">Submit</button>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-
     <!-- View Staff -->
     <section class="py-3 py-md-5" id="viewstaff-form">
       <div class="container">
@@ -501,7 +424,7 @@
                   <p id="staff-number"></p>
                 </div>
                 <!-- </div> -->
-                <div class="table-responsive">
+                <div class="table-responsive overflow-auto mb-3" style="height: 300px;"> 
                   <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstaff-table">
                     <thead id="thheading">
                       <tr id="tclass">
@@ -523,7 +446,7 @@
                 </div>
               </div>
               <!-- pagination -->
-              <nav aria-label="..." class="mt-2">
+              <nav aria-label="..." class="mt-2" style="display: none;">
                 <ul class="pagination pagination-sm justify-content-center" id="staffview-pagination">
                   <li class="page-item" id="stftab-disabled">
                     <a class="page-link component-active-color" href="" id="viewstaff-pageprevious">
@@ -993,12 +916,11 @@
                 <div>
                   <label for="subjectstable" class="form-label mb-0"> Class Subjects</label>
                   <table class="table mt-2 text-center table-dark" id="subjectstable">
-                    <tbody id="subjectsviewtblbody">
-                     
+                    <tbody id="subjectsviewtblbody">   
                     </tbody>
                   </table>
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1135,7 +1057,7 @@
                   </a>
                 </div>
                 <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="assignteacher-h2">Provide these details
-                  for the staffer you want to assign as teacher.</h2>
+                  for the staffer you want to assign or deassign.</h2>
                 <form action="#!">
                   <div class="row gy-2 overflow-hidden">
                     <!-- </div> -->
@@ -1169,15 +1091,64 @@
                         <option value="thaalith idaadiy">thaalith idaadiy</option>
                       </select>
                     </div>
-                    <div class="col-12 submitbtn-div">
+                    <div class="col-6 submitbtn-div">
                       <div class="d-grid my-3 mt-4">
-                        <button class="btn btn-lg" type="submit" id="submitassignteacher-btn">Submit</button>
+                        <button class="btn btn-lg" type="submit" id="submitassignteacher-btn">Assign</button>
                       </div>
                     </div>
-
-                    <!-- </div> -->
+                    <div class="col-6 submitbtn-div">
+                      <div class="d-grid my-3 mt-4">
+                        <button class="btn btn-lg" type="submit" id="submitdeassignteacher-btn">Deassign</button>
+                      </div>
+                    </div>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- View Assigned Classes -->
+    <section class="bg-light mb-5 classesassigned-form" id="classesassigned-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div class="card border border-light-subtle rounded-3 shadow-sm">
+              <div class="card-body p-5">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="assignedclassesclose-icon"
+                  aria-label="Close"></button>
+                <div class="text-center mb-3">
+                  <a href="#!">
+                    <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+                  </a>
+                </div>
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="assignteacher-h2">Provide the email
+                  of the staffer whose assigned classes you want to view, then click the view button.</h2>
+                <form action="#!">
+                  <div class="row gy-2 overflow-hidden">
+                    <!-- </div> -->
+                    <div class="col-12">
+                      <label for="classesassignedto-staffemail" class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" id="classesassignedto-staffemail"
+                        placeholder="name@example.com" required>
+                    </div>
+                    <div class="col-12 submitbtn-div">
+                      <div class="d-grid my-3 mt-4">
+                        <button class="btn btn-lg" type="submit" id="viewassignedclasses-btn">View</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div>
+                  <label for="classestable" class="form-label mb-0"> Assigned Classes </label>
+                  <table class="table mt-2 text-center table-light" id="classestable">
+                    <tbody id="assignedclasses-tblbody">   
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -1956,6 +1927,51 @@
                 <button type="button" class="mb-2" id="closeclassdetails-btn">Close Form</button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delete a student -->
+    <section class="py-5 py-md-3 mb-5" id="deletestudent-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h3 class="mb-3 display-5 text-center">Student Deletion Form</h3>
+            <p class="text-secondary mb-1 text-center">
+              Please be sure about this, as the action is not reversible.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="deletestudent-closeicon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="form-deletestudent" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-6">
+                      <label for="admno-fordeletestudent" class="form-label">Admission Number <span
+                          class="text-danger">*</span></label>
+                          <input type="text" class="form-control" name="" id="admno-fordeletestudent">
+                    </div>
+                    <div class="col"></div> 
+                  </div>
+                  <div class="row">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-6 btn-block">
+                      <button type="button" id="deletestudent-btn" href="/">
+                        Delete Student
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

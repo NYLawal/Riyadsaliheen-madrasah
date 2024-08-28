@@ -115,12 +115,6 @@
       </nav>
     </header>
 
-    <!-- <section
-        class="bg-light"
-        id="divider-bkgd"
-        style="height: 20px"
-      ></section> -->
-
     <!-- Aside -->
     <aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1"
       aria-labelledby="bsbSidebarLabel1">
@@ -177,6 +171,9 @@
         </ul>
         <ul class="list-unstyled components components2">
           <li>
+            <a href="#" id="switchclass">Switch Class</a>
+          </li>
+          <li>
             <a href="#" id="logout">Logout</a>
           </li>
         </ul>
@@ -197,7 +194,6 @@
                   <select id="viewstudent-select">
                     <option value="all">All</option>
                     <option value="bycriteria">By Search</option>
-                    <!-- <option value="one">One</option> -->
                   </select>
                 </div>
                 <div id="search-students" class="pt-3 pb-4">
@@ -218,7 +214,7 @@
                 <div>
                   <p id="student-number" class="mt-2 mb-2"></p>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive overflow-auto mb-3" style="height: 300px;">
                   <table class="table table-dark bsb-table-xl text-nowrap align-middle" id="viewstudent-table">
                     <thead>
                       <tr id="">
@@ -227,25 +223,20 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Gender</th>
-                        <th>Entry Class</th>
                         <th>Address</th>
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Parent's Email</th>
                         <th>State of Origin</th>
                         <th>Marital Status</th>
-                        <!-- <th>Programme</th>
-                    <th>Present Class</th>
-                    <th>Date of Registration</th> -->
                       </tr>
                     </thead>
                     <tbody id="studenttbl-body"></tbody>
                   </table>
                 </div>
               </div>
-
               <!-- pagination -->
-              <nav aria-label="..." class="mt-2">
+              <nav aria-label="..." class="mt-2" style="display: none;">
                 <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
                   <li class="page-item" id="tab-disabled">
                     <a class="page-link component-active-color" href="" id="viewstd-pageprevious">
@@ -430,7 +421,6 @@
                   </div>
                   <div class="col-6 item">
                     <p>Admission No</p>
-                    <!-- <input type="text" placeholder="" id="addadmno" /> -->
                     <select name="addadmno" id="addadmno" style="background-color: white;"></select>
                   </div>
                 </div>
@@ -1281,6 +1271,50 @@
     </section>
 
 
+    <!-- Switch Class -->
+    <section class="bg-light mb-5 switchclass-form" id="switchclass-form">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div class="card border border-light-subtle rounded-3 shadow-sm">
+              <div class="card-body p-5">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="switchclassclose-icon"
+                  aria-label="Close"></button>
+                <div class="text-center mb-3">
+                  <a href="#!">
+                    <img src="../images/logo2.png" alt="Logo" width="50" height="50">
+                  </a>
+                </div>
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4 px-2" id="assignteacher-h2">You should see all classes assigned to you below.
+                  You can switch between classes by clicking on the class you wish to switch to from the list, then click the button. 
+                </h2>
+                <form action="#!">
+                  <div class="row gy-2 overflow-hidden">
+                    <div class="col-12">
+                      <p class="mt-2 mb-2">Assigned Classes</p>
+                      <select id="switchclass-programme">
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <label for="switchclass-class" class="form-label">Switch to:</label>
+                      <input type="text" class="form-control" name="" id="switchclass-class"
+                      required>
+                    </div>
+                    <div class="col-12 submitbtn-div">
+                      <div class="d-grid my-3 mt-4">
+                        <button class="btn btn-lg" type="submit" id="switchclass-btn">Switch</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- Footer  -->
     <footer class="footer">
@@ -1432,7 +1466,6 @@
       </div>
     </footer>
   </main>
-  <!-- <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>

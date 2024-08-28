@@ -49,12 +49,10 @@ const searchMe = document.getElementById("searchme")
 const searchButton = document.getElementById("search-btn")
 const studentStatus = document.getElementById("search-studstatus")
 
-// const studentViewPagination = document.getElementById("stdview-pagination")
 const viewStudentPageRequest = document.getElementById("viewstd-pagerequest")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
 const viewStudentPageOne = document.getElementById("viewstd-page1")
-const addNewSession = document.getElementById("addnewsession-link")
 
 let studentpage = [];
 let lastpage = [];
@@ -148,6 +146,7 @@ const getTeacherClass = () => {
 
         });
 };
+
 // get class subjects
 const getClassSubjects = (teacherClass, teacherProgramme) => {
     let errorMsg;
@@ -210,14 +209,14 @@ const displayStudentsByClass = (page) => {
             console.log(response)
             studentTableBody.innerHTML = "";
             for (let j = 0; j < response.data.students.length; j++) {
-                if (response.data.students.length != studentNamesStore.length){
-                let option = document.createElement("option")
-                option.innerText = response.data.students[j].admNo
-                addAdmNo.appendChild(option)
+                if (response.data.students.length != studentNamesStore.length) {
+                    let option = document.createElement("option")
+                    option.innerText = response.data.students[j].admNo
+                    addAdmNo.appendChild(option)
 
-                let option2 = document.createElement("option")
-                option2.innerText = response.data.students[j].admNo
-                admissionNumberForReport.appendChild(option2)
+                    let option2 = document.createElement("option")
+                    option2.innerText = response.data.students[j].admNo
+                    admissionNumberForReport.appendChild(option2)
                 }
                 // add student name and admission number to an array
                 studentNamesStore[j] = {
@@ -226,16 +225,16 @@ const displayStudentsByClass = (page) => {
                 }
             }
             addName.value = studentNamesStore[0].student_name;
-            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
-            for (let i = 0; i < response.data.studentsperpage.length; i++) {
-                // serial_no++;
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.`
+            let serial_no = 0;
+            for (let i = 0; i < response.data.students.length; i++) {
+                serial_no++;
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
                 let tblcol4 = document.createElement("td")
-                let tblcol5 = document.createElement("td")
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
@@ -243,25 +242,23 @@ const displayStudentsByClass = (page) => {
                 let tblcol10 = document.createElement("td")
                 let tblcol11 = document.createElement("td")
 
-                tblcol0.innerText = response.data.studentsperpage[i].serialNo
-                tblcol1.innerText = response.data.studentsperpage[i].admNo
-                tblcol2.innerText = response.data.studentsperpage[i].firstName
-                tblcol3.innerText = response.data.studentsperpage[i].lastName
-                tblcol4.innerText = response.data.studentsperpage[i].gender
-                tblcol5.innerText = response.data.studentsperpage[i].entryClass
-                tblcol6.innerText = response.data.studentsperpage[i].address
-                tblcol7.innerText = response.data.studentsperpage[i].phoneNumber
-                tblcol8.innerText = response.data.studentsperpage[i].email
-                tblcol9.innerText = response.data.studentsperpage[i].parentEmail
-                tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
-                tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
+                tblcol0.innerText = serial_no;
+                tblcol1.innerText = response.data.students[i].admNo
+                tblcol2.innerText = response.data.students[i].firstName
+                tblcol3.innerText = response.data.students[i].lastName
+                tblcol4.innerText = response.data.students[i].gender
+                tblcol6.innerText = response.data.students[i].address
+                tblcol7.innerText = response.data.students[i].phoneNumber
+                tblcol8.innerText = response.data.students[i].email
+                tblcol9.innerText = response.data.students[i].parentEmail
+                tblcol10.innerText = response.data.students[i].stateOfOrigin
+                tblcol11.innerText = response.data.students[i].maritalStatus
 
                 tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
                 tblrow.appendChild(tblcol4)
-                tblrow.appendChild(tblcol5)
                 tblrow.appendChild(tblcol6)
                 tblrow.appendChild(tblcol7)
                 tblrow.appendChild(tblcol8)
@@ -387,66 +384,50 @@ const displayStudents = (key, value, page) => {
     let serial_no = 0;
     axios
         .get(`${baseUrl}/student/${page}/?${key}=${value}`, {
-            // params: { page} ,
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
         .then(function (response) {
             console.log(response)
-            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.  Page ${response.data.page}`
-            for (let i = 0; i < response.data.studentsperpage.length; i++) {
-                // serial_no++
+            pstdNumber.innerText = `${response.data.noOfStudents} registered students found.`
+            for (let i = 0; i < response.data.students.length; i++) {
+                serial_no++;
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
                 let tblcol2 = document.createElement("td")
                 let tblcol3 = document.createElement("td")
                 let tblcol4 = document.createElement("td")
-                let tblcol5 = document.createElement("td")
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
                 let tblcol9 = document.createElement("td")
                 let tblcol10 = document.createElement("td")
                 let tblcol11 = document.createElement("td")
-                let tblcol12 = document.createElement("td")
-                let tblcol13 = document.createElement("td")
-                let tblcol14 = document.createElement("td")
-                tblcol0.innerText = response.data.studentsperpage[i].serialNo
-                tblcol1.innerText = response.data.studentsperpage[i].admNo
-                tblcol2.innerText = response.data.studentsperpage[i].firstName
-                tblcol3.innerText = response.data.studentsperpage[i].lastName
-                tblcol4.innerText = response.data.studentsperpage[i].gender
-                tblcol5.innerText = response.data.studentsperpage[i].entryClass
-                tblcol6.innerText = response.data.studentsperpage[i].address
-                tblcol7.innerText = response.data.studentsperpage[i].phoneNumber
-                tblcol8.innerText = response.data.studentsperpage[i].email
-                tblcol9.innerText = response.data.studentsperpage[i].parentEmail
-                tblcol10.innerText = response.data.studentsperpage[i].stateOfOrigin
-                tblcol11.innerText = response.data.studentsperpage[i].maritalStatus
-                tblcol12.innerText = response.data.studentsperpage[i].programme
-                tblcol13.innerText = response.data.studentsperpage[i].presentClass
-                tblcol14.innerText = response.data.studentsperpage[i].dateOfRegistration
+                tblcol0.innerText = serial_no;
+                tblcol1.innerText = response.data.students[i].admNo
+                tblcol2.innerText = response.data.students[i].firstName
+                tblcol3.innerText = response.data.students[i].lastName
+                tblcol4.innerText = response.data.students[i].gender
+                tblcol6.innerText = response.data.students[i].address
+                tblcol7.innerText = response.data.students[i].phoneNumber
+                tblcol8.innerText = response.data.students[i].email
+                tblcol9.innerText = response.data.students[i].parentEmail
+                tblcol10.innerText = response.data.students[i].stateOfOrigin
+                tblcol11.innerText = response.data.students[i].maritalStatus
                 tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
                 tblrow.appendChild(tblcol3)
                 tblrow.appendChild(tblcol4)
-                tblrow.appendChild(tblcol5)
                 tblrow.appendChild(tblcol6)
                 tblrow.appendChild(tblcol7)
                 tblrow.appendChild(tblcol8)
                 tblrow.appendChild(tblcol9)
                 tblrow.appendChild(tblcol10)
                 tblrow.appendChild(tblcol11)
-                tblrow.appendChild(tblcol12)
-                tblrow.appendChild(tblcol13)
-                tblrow.appendChild(tblcol14)
                 if (value == "past") {
-                    // remove present class from student's view
-                    viewStudentsTableHead.removeChild(viewStudentsPresentClass)
-                    tblrow.removeChild(tblcol13)
                     // add status to table heading
                     let tblheadstatus = document.createElement("th");
                     tblheadstatus.innerText = "Status"
@@ -461,11 +442,6 @@ const displayStudents = (key, value, page) => {
             console.log("response says page is ", response.data.page)
             studentpage.push(response.data.page)
             lastpage.push(response.data.pgnum)
-
-            // disable next button if end of page is reached
-            // if (response.data.pgnum === response.data.page) {
-            //     viewStudentPageNext.classList.add("disable")
-            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -501,7 +477,7 @@ searchButton.addEventListener("click", (e) => {
     pstdNumber.innerHTML = ""
     let key = studSearchKey.value;
     let value;
-     value = searchMe.firstChild.value || studSearchValue.value
+    value = searchMe.firstChild.value || studSearchValue.value
 
     displayStudents(key, value, 1);
 });
@@ -1302,20 +1278,20 @@ submitScoresButton.addEventListener("click", (e) => {
                 break;
             }
 
-                if (totalScore != 0) {
-                    let subject = {
-                        subjectName,
-                        testScore,
-                        examScore,
-                        totalScore,
-                        remark
-                    }
-                    subjects.push(subject)
+            if (totalScore != 0) {
+                let subject = {
+                    subjectName,
+                    testScore,
+                    examScore,
+                    totalScore,
+                    remark
                 }
-    
+                subjects.push(subject)
+            }
+
         }
-        if (subjects.length !=0)
-        addScores(formdata, admNo);
+        if (subjects.length != 0)
+            addScores(formdata, admNo);
     }
 })
 
@@ -1428,18 +1404,18 @@ const displayClassReport = (classname, programme, term, session) => {
             }
             // Sort the class report table according to average percentage descending
             let classAverages = []
-            for (n = 0; n <= tableBodyForClassReport.childElementCount-1; n++){
+            for (n = 0; n <= tableBodyForClassReport.childElementCount - 1; n++) {
                 classAverages.push(tableBodyForClassReport.children[n].lastElementChild.innerText)
             }
-            let sorted_array = classAverages.sort(function(a, b){return b - a});
+            let sorted_array = classAverages.sort(function (a, b) { return b - a });
             let newClassReportTable = document.createElement("tbody")
-            for (n = 0; n <= sorted_array.length; n++){   
-            for (m = 0; m <= tableBodyForClassReport.childElementCount-1; m++){
-             if (tableBodyForClassReport.children[m].lastElementChild.innerText == sorted_array[n]){
-                tableBodyForClassReport.children[m].firstElementChild.innerText = n+1
-              newClassReportTable.appendChild(tableBodyForClassReport.children[m])
-             } 
-            }
+            for (n = 0; n <= sorted_array.length; n++) {
+                for (m = 0; m <= tableBodyForClassReport.childElementCount - 1; m++) {
+                    if (tableBodyForClassReport.children[m].lastElementChild.innerText == sorted_array[n]) {
+                        tableBodyForClassReport.children[m].firstElementChild.innerText = n + 1
+                        newClassReportTable.appendChild(tableBodyForClassReport.children[m])
+                    }
+                }
             }
             tableBodyForClassReport.innerHTML = newClassReportTable.innerHTML
         })
@@ -2220,6 +2196,158 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         console.log(formDataObj)
         setDetails(className, programme, formDataObj);
     }
+});
+
+// SWITCH CLASSES ************************************************************************
+//****************************************************************************************
+const switchClassesLink = document.getElementById("switchclass")
+const switchClassesForm = document.getElementById("switchclass-form")
+const switchClassCloseIcon = document.getElementById("switchclassclose-icon")
+const switchClassProgrammes = document.getElementById("switchclass-programme")
+const switchClassClasses = document.getElementById("switchclass-class")
+const switchClassSubmitBtn = document.getElementById("switchclass-btn")
+let assignedClassesStore = [];
+
+// display switch class form
+switchClassesLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.style.display = "none";
+    getAssignedClasses()
+});
+
+// get classes assigned to staffer
+const getAssignedClasses = (email) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/staff/getClassesAssigned?email=${email}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            switchClassProgrammes.innerHTML = "";
+            console.log(switchClassProgrammes)
+            switchClassesForm.style.display = "block";
+           
+            assignedClassesStore = [...response.data.assignedClasses]
+           
+            //append each programme to programmes dropdown
+            for (let n = 0; n < assignedClassesStore.length; n++) {
+                let optionprg = document.createElement("option")
+                optionprg.innerText = assignedClassesStore[n].class + "_" + assignedClassesStore[n].programme;
+                switchClassProgrammes.appendChild(optionprg)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// change the programme to see corresponding class
+switchClassProgrammes.addEventListener("change", (e) => {
+    e.preventDefault();
+   
+    for (let n = 0; n < switchClassProgrammes.children.length; n++) {
+        if (switchClassProgrammes.value == switchClassProgrammes.children[n].innerText)
+        switchClassClasses.value = switchClassProgrammes.children[n].innerText
+    }
+});
+
+// submit switch class form to change class
+switchClassSubmitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newClasstoSwitch = switchClassClasses.value.split("_");
+    console.log(newClasstoSwitch) 
+
+    const teacherClass = newClasstoSwitch[0]
+    const teacherProgramme = newClasstoSwitch[1]
+    const formData = {
+        teacherProgramme,
+        teacherClass
+    }
+    switchClasses(formData)
+});
+
+// switch class for staffer
+const switchClasses = (staffInfo) =>  {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/staff/switchClass`, staffInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            getTeacherClass();
+            displayStudentsByClass(1);
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// close switch class form
+switchClassCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    switchClassProgrammes.innerHTML = "";
+    switchClassClasses.value = "";
+    switchClassesForm.style.display = "none";
 });
 
 

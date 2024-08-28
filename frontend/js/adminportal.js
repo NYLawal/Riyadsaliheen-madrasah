@@ -4,7 +4,6 @@ const baseUrl = "https://result-proc-system.onrender.com/api/v1"
 
 const sidebar = document.getElementById("bsbSidebar1")
 const toggler = document.getElementById("toggler-icon")
-// const addNewSession = document.getElementById("addnewsession-link")
 
 const addStudentScores = document.getElementById("add-scores")
 const addStafferLink = document.getElementById("add-staffer")
@@ -76,8 +75,6 @@ const searchButton = document.getElementById("search-btn")
 const studentStatus = document.getElementById("search-studstatus")
 
 const studentViewPagination = document.getElementById("stdview-pagination")
-// const viewStudentPage2 = document.getElementById("viewstd-page2")
-// const viewStudentPage3 = document.getElementById("viewstd-page3")
 const viewStudentPageRequest = document.getElementById("viewstd-pagerequest")
 const viewStudentPageNext = document.getElementById("viewstd-pagenext")
 const viewStudentPagePrevious = document.getElementById("viewstd-pageprevious")
@@ -133,7 +130,7 @@ staffRole.addEventListener("change", (e) => {
 
 // display all staff members
 const displayAllStaff = (page) => {
-    // let serial_no = 0;
+    let serial_no = 0;
     let errorMsg;
     axios
         .get(`${baseUrl}/staff/viewStaff/${page}`, {
@@ -148,8 +145,8 @@ const displayAllStaff = (page) => {
             tClassHeading.innerHTML = ""
             tProgrammeHeading.style.display = "none";
             tProgrammeHeading.innerHTML = "";
-            for (let i = 0; i < response.data.staff_list.length; i++) {
-                // serial_no++
+            for (let i = 0; i < response.data.staff.length; i++) {
+                serial_no++;
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
@@ -159,15 +156,14 @@ const displayAllStaff = (page) => {
                 let tblcol5 = document.createElement("td")
                 let tblcol6 = document.createElement("td")
                 let tblcol7 = document.createElement("td")
-                // tblcol0.innerText = serial_no
-                tblcol0.innerText = response.data.staff_list[i].serialNo
-                tblcol1.innerText = response.data.staff_list[i].stafferName
-                tblcol2.innerText = response.data.staff_list[i].email
-                tblcol3.innerText = response.data.staff_list[i].gender
-                tblcol4.innerText = response.data.staff_list[i].address
-                tblcol5.innerText = response.data.staff_list[i].phoneNumber
-                tblcol6.innerText = response.data.staff_list[i].role
-                tblcol7.innerText = response.data.staff_list[i].isAdmin
+                tblcol0.innerText = serial_no
+                tblcol1.innerText = response.data.staff[i].stafferName
+                tblcol2.innerText = response.data.staff[i].email
+                tblcol3.innerText = response.data.staff[i].gender
+                tblcol4.innerText = response.data.staff[i].address
+                tblcol5.innerText = response.data.staff[i].phoneNumber
+                tblcol6.innerText = response.data.staff[i].role
+                tblcol7.innerText = response.data.staff[i].isAdmin
                 tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
@@ -182,11 +178,6 @@ const displayAllStaff = (page) => {
             console.log("response says pagenum is ", response.data.pgnum)
             staffpage.push(response.data.page)
             stafflastpage.push(response.data.pgnum)
-
-            // disable next button if end of page is reached
-            // if (response.data.pgnum === response.data.page) {
-            //     viewStaffPageNext.classList.add("disable")
-            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -218,7 +209,7 @@ const displayAllStaff = (page) => {
 // display all teachers
 const displayTeachers = (page) => {
     let errorMsg;
-    // let serial_no = 0;
+    let serial_no = 0;
     axios
         .get(`${baseUrl}/staff/viewTeachers/${page}`, {
             headers: {
@@ -231,12 +222,11 @@ const displayTeachers = (page) => {
             tClassHeading.style.display = "inline-block";
             tClassHeading.innerHTML = "Class";
             tClassHeading.style.borderBottom = "none";
-            // tClass.appendChild(tProgrammeHeading)
             tProgrammeHeading.style.display = "inline-block";
             tProgrammeHeading.innerHTML = "Programme";
             tProgrammeHeading.style.borderBottom = "none";
-            for (let i = 0; i < response.data.teachers_list.length; i++) {
-                // serial_no++
+            for (let i = 0; i < response.data.teachers.length; i++) {
+                serial_no++;
                 let tblrow = document.createElement("tr")
                 let tblcol0 = document.createElement("td")
                 let tblcol1 = document.createElement("td")
@@ -248,17 +238,16 @@ const displayTeachers = (page) => {
                 let tblcol7 = document.createElement("td")
                 let tblcol8 = document.createElement("td")
                 let tblcol9 = document.createElement("td")
-                // tblcol0.innerText = serial_no;
-                tblcol0.innerText = response.data.teachers_list[i].serialNo
-                tblcol1.innerText = response.data.teachers_list[i].stafferName
-                tblcol2.innerText = response.data.teachers_list[i].email
-                tblcol3.innerText = response.data.teachers_list[i].gender
-                tblcol4.innerText = response.data.teachers_list[i].address
-                tblcol5.innerText = response.data.teachers_list[i].phoneNumber
-                tblcol6.innerText = response.data.teachers_list[i].role
-                tblcol7.innerText = response.data.teachers_list[i].isAdmin
-                tblcol8.innerText = response.data.teachers_list[i].teacherClass
-                tblcol9.innerText = response.data.teachers_list[i].teacherProgramme
+                tblcol0.innerText = serial_no;
+                tblcol1.innerText = response.data.teachers[i].stafferName
+                tblcol2.innerText = response.data.teachers[i].email
+                tblcol3.innerText = response.data.teachers[i].gender
+                tblcol4.innerText = response.data.teachers[i].address
+                tblcol5.innerText = response.data.teachers[i].phoneNumber
+                tblcol6.innerText = response.data.teachers[i].role
+                tblcol7.innerText = response.data.teachers[i].isAdmin
+                tblcol8.innerText = response.data.teachers[i].teacherClass
+                tblcol9.innerText = response.data.teachers[i].teacherProgramme
                 tblrow.appendChild(tblcol0)
                 tblrow.appendChild(tblcol1)
                 tblrow.appendChild(tblcol2)
@@ -722,7 +711,7 @@ studSearchKey.addEventListener("change", (e) => {
         searchMe.innerHTML =
             `<select id="searchstud-entryclass">
     <option value="tamhidi">tamhidi</option>
-    <option value="hadoohah">hadoohah</option>
+    <option value="hadoonah">hadoonah</option>
     <option value="rawdoh">rawdoh</option>
     <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
     <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
@@ -757,7 +746,7 @@ studSearchKey.addEventListener("change", (e) => {
         searchMe.innerHTML =
             `<select id="searchstud-presentclass">
     <option value="tamhidi">tamhidi</option>
-    <option value="hadoohah">hadoohah</option>
+    <option value="hadoonah">hadoonah</option>
     <option value="rawdoh">rawdoh</option>
     <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
     <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
@@ -869,11 +858,6 @@ const displayStudents = (key, value, page) => {
             console.log("response says page is ", response.data.page)
             studentpage.push(response.data.page)
             lastpage.push(response.data.pgnum)
-
-            // disable next button if end of page is reached
-            // if (response.data.pgnum === response.data.page) {
-            //     viewStudentPageNext.classList.add("disable")
-            // }
         })
         .catch(function (error) {
             if (error.response) {
@@ -914,60 +898,6 @@ searchButton.addEventListener("click", (e) => {
 
     displayStudents(key, value, 1);
 });
-
-// view student pagination
-// studentViewPagination.addEventListener("click", (e) => {
-//     e.preventDefault();
-
-//     let targetElement = e.target.id;
-//     let target = e.target;
-//     target.style.boxShadow = "none"
-//     target.style.color = "green"
-
-//     let page;
-//     switch (targetElement) {
-//         case "viewstd-page1":
-//             page = 1;
-//             break;
-//         case "viewstd-page2":
-//             page = 2;
-//             break;
-//         case "viewstd-page3":
-//             page = 3
-//             break;
-//     }
-//     if (targetElement == "viewstd-page1" || targetElement == "viewstd-page2" || targetElement == "viewstd-page3") {
-//         let maxpage = lastpage[lastpage.length - 1]
-//         // console.log("last page is ", maxpage)
-//         // console.log("page is ", page)
-//         if (page <= maxpage) {
-//             studentTableBody.innerHTML = ""
-//             viewStudentPagePrevious.classList.remove("disable")
-//             viewStudentPageNext.classList.remove("disable")
-
-//             if (viewStudentSelect.value == "all") {
-//                 displayAllStudents(page)
-//             }
-//             else if (viewStudentSelect.value == "bycriteria") {
-//                 const key = studSearchKey.value
-//                 let value;
-//                 if (key === "studentStatus") value = "past"
-//                 else { value = searchMe.firstChild.value || studSearchValue.value }
-//                 displayStudents(key, value, page);
-//                 console.log(key, value, page)
-//             }
-//         }
-//         // else  viewStudentPageNext.classList.add("disable")
-//         else {
-//             lastpage.push(maxpage)
-//             Swal.fire({
-//                 icon: "error",
-//                 title: "End of File Reached",
-//                 text: "The page requested does not exist"
-//             });
-//         }
-//     }
-// });
 
 
 // display next students list page
@@ -1147,6 +1077,7 @@ const assignTeacherProgrammeSelect = document.getElementById('assignteacher-prog
 const submitEditQuery = document.getElementById('submiteditquery-btn')
 const submitRemoveQuery = document.getElementById('submitremovequery-btn')
 const submitAssignTeacher = document.getElementById('submitassignteacher-btn')
+const submitDeAssignTeacher = document.getElementById('submitdeassignteacher-btn')
 
 const updateStaffForm = document.getElementById('staffupdate-form')
 const assignTeacherForm = document.getElementById('teacherassign-form')
@@ -1218,6 +1149,8 @@ const QuerystaffEdit = (staffInfo) => {
             staffPhoneUpdate.value = response.data.staffer.phoneNumber
             staffRoleUpdate.value = response.data.staffer.role
             staffOtherRoleUpdate.value = response.data.user.otherRole
+            teacherClassUpdate.value = response.data.staffer.teacherClass;
+            teacherProgrammeUpdate.value = response.data.staffer.teacherProgramme;
 
             if (response.data.staffer.role == "teacher") {
                 classLabelUpdate.style.display = "block";
@@ -1225,9 +1158,7 @@ const QuerystaffEdit = (staffInfo) => {
                 updateItTeacherClass.style.display = "block";
                 programmeLabelUpdate.style.display = "block";
                 teacherProgrammeUpdate.style.display = "block";
-                updateItTeacherProgramme.style.display = "block";
-                teacherClassUpdate.value = response.data.staffer.teacherClass;
-                teacherProgrammeUpdate.value = response.data.staffer.teacherProgramme;
+                updateItTeacherProgramme.style.display = "block";   
             }
             editStaffQueryForm.style.display = "none";
         })
@@ -1321,7 +1252,6 @@ updateItTeacherProgramme.addEventListener("change", (e) => {
 
 // display class select when the user presses enter key on the keyboard after inputting role as teacher
 staffRoleUpdate.addEventListener("keyup", function (e) {
-    // if (e.key === "Enter" && staffRoleUpdate.value == "teacher") {
     if (staffRoleUpdate.value == "teacher") {
         e.preventDefault();
         classLabelUpdate.style.display = "block";
@@ -1420,7 +1350,7 @@ UpdateButton.addEventListener("click", (e) => {
             text: "A teacher must be assigned a class and a programme"
         });
     }
-
+   
     const formData = {
         email,
         stafferName,
@@ -1489,19 +1419,98 @@ const assignTeacher = (staffInfo) => {
         });
 };
 
-//submit assign teacher form
+//click assign teacher button
 submitAssignTeacher.addEventListener("click", (e) => {
     e.preventDefault();
     const email = teacherEmailToAssign.value;
     const teacherClass = assignTeacherClassSelect.value;
     const teacherProgramme = assignTeacherProgrammeSelect.value;
+    if (email == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Input a valid email"
+        });
+    }
+    else {
     const formData = {
         email,
         teacherClass,
         teacherProgramme
     }
     assignTeacher(formData);
+}
 });
+
+//click deassign teacher button
+submitDeAssignTeacher.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = teacherEmailToAssign.value;
+    const teacherClass = assignTeacherClassSelect.value;
+    const teacherProgramme = assignTeacherProgrammeSelect.value;
+    if (email == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Input a valid email"
+        });
+    }
+    else {
+        const formData = {
+        email,
+        teacherClass,
+        teacherProgramme
+    }
+    deassignTeacher(formData);
+}
+});
+
+// deassign staff as teacher from a class
+const deassignTeacher = (staffInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/staff/deassignTeacher`, staffInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            teacherEmailToAssign.value = "";
+            assignTeacherClassSelect.value = "";
+            assignTeacherProgrammeSelect.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
 
 // close assignteacher query form
 closeAssignButtonIcon.addEventListener("click", (e) => {
@@ -1509,6 +1518,107 @@ closeAssignButtonIcon.addEventListener("click", (e) => {
     assignTeacherForm.style.display = "none";
     teacherEmailToAssign.value = "";
 });
+
+// VIEW CLASS ASSIGNED TO STAFF***************************************************************
+// ****************************************************************************
+const viewAssignedClassesLink = document.getElementById("viewclassesassigned-link");
+const assignedClassesForm = document.getElementById("classesassigned-form");
+const assignedClassesCloseIcon = document.getElementById("assignedclassesclose-icon");
+const stafferEmailForClassesAssigned = document.getElementById("classesassignedto-staffemail");
+const submitViewAssignedClasses = document.getElementById("viewassignedclasses-btn");
+const assignedClassesTblBody = document.getElementById("assignedclasses-tblbody");
+
+// display assignteacher query form
+viewAssignedClassesLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignedClassesForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// get classes assigned to staffer
+const getAssignedClasses = (email) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/staff/getClassesAssigned/?email=${email}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            stafferEmailForClassesAssigned.value = "";
+            assignedClassesTblBody.innerHTML = "";
+
+            //append classes assigned to table
+            for (k = 0; k < response.data.assignedClasses.length; k++) {
+                let tblrow = document.createElement("tr")
+                let tblcolotherclass = document.createElement("td")
+                tblcolotherclass.innerText = response.data.assignedClasses[k].class
+                let tblcolotherprg = document.createElement("td")
+                tblcolotherprg.innerText = response.data.assignedClasses[k].programme
+                tblrow.appendChild(tblcolotherclass)
+                tblrow.appendChild(tblcolotherprg)
+                assignedClassesTblBody.appendChild(tblrow)
+            }
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//click get assigned classes button
+submitViewAssignedClasses.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignedClassesTblBody.innerHTML = "";
+    const email = stafferEmailForClassesAssigned.value;
+    if (email == ""){
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Input a valid email"
+        });
+    }
+    else getAssignedClasses(email);
+});
+
+// close view assigned classes form
+assignedClassesCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    assignedClassesForm.style.display = "none";
+    stafferEmailForClassesAssigned.value = "";
+    assignedClassesTblBody.innerHTML = "";
+});
+
+// ****************************************************
+
 
 // display removestaff query form
 removeStaffLink.addEventListener("click", (e) => {
@@ -1524,10 +1634,10 @@ closeRemoveButtonIcon.addEventListener("click", (e) => {
     staffEmailToRemove.value = "";
 });
 
+
 // remove staff
 const removeStaff = (payload) => {
     let errorMsg;
-
     axios
         .delete(`${baseUrl}/staff/deleteStaff`, {
             data: payload,
@@ -2735,15 +2845,6 @@ function downloadCSVFile(csv_data, className, programme, sessionName, termName) 
 }
 
 
-
-
-
-
-
-
-
-
-
 // VIEW SUBJECTS***************************************************************
 // ****************************************************************************
 const viewClassSubjectsLink = document.getElementById("viewclassubjects-link");
@@ -2791,7 +2892,6 @@ const getClassSubjects = (teacherClass, teacherProgramme) => {
                 tblrow.appendChild(tblcol)
                 viewSubjectsTableBody.appendChild(tblrow)
             }
-
         })
         .catch(function (error) {
             if (error.response) {
@@ -3874,6 +3974,106 @@ deleteScoresSubmitButton.addEventListener("click", (e) => {
     }).then((result) => {
         if (result.isConfirmed) {
             deleteScores(admNo, programme, termName, sessionName)
+        }
+    });
+
+});
+
+
+// DELETE STUDENT ********************************************************************
+//************************************************************************************
+const deleteStudentForm = document.getElementById("deletestudent-form")
+const closeDeleteStudentFormBtn = document.getElementById("deletestudent-closeicon")
+const deleteStudentLink = document.getElementById("deletestudent")
+const admNoForDeleteStudent = document.getElementById("admno-fordeletestudent")
+// const programmeForDeleteStudent = document.getElementById("programme-fordeletestudent")
+const deleteStudentSubmitButton = document.getElementById("deletestudent-btn")
+
+// open delete student form
+deleteStudentLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    deleteStudentForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close delete student form
+closeDeleteStudentFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    admNoForDeleteStudent.value = "";
+    deleteStudentForm.style.display = "none";
+});
+
+// delete student
+const deleteStudent = (admNo) => {
+    let errorMsg;
+    axios
+        .delete(`${baseUrl}/student/deleteStudent/?admNo=${admNo}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+            admNoForDeleteStudent.value = "";
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// delete student on click of button
+deleteStudentSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const admNo = admNoForDeleteStudent.value
+
+    if (admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check that you have valid input for admission number"
+        });
+    }
+    else
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteStudent(admNo)
         }
     });
 
