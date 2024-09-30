@@ -729,7 +729,6 @@ clearQuizFormButton.addEventListener("click", (e) => {
 // monthly quiz form
 monthlyQuizLink.addEventListener("click", (e) => {
     e.preventDefault();
-    getQuizForm.style.display = "block"
     sidebar.style.display = "none";
     getQuiz()
 });
@@ -753,6 +752,7 @@ const getQuiz = () => {
                 title: "Successful",
                 text: response.data.message
             });
+            getQuizForm.style.display = "block"
             quizLink.value = response.data.quizPresent.quizlink
         })
         .catch(function (error) {
@@ -909,7 +909,7 @@ downloadbtn.addEventListener("click", (e) => {
 //         });
 //     }
 //     downloadPDF()
-   
+
 // });
 
 // view student result
@@ -1090,6 +1090,150 @@ const downloadScores = (admNo, term, session) => {
             });
         });
 };
+
+
+//  **************************** WEEKLY ATTENDANCE REPORT *********************************
+// ********************************************************************************************
+const wklyAttendanceForm = document.getElementById("wklyattendance-form")
+const closeWklyAttendanceFormBtn = document.getElementById("wklyattendance-icon")
+const viewWklyAttendanceReportLink = document.getElementById("attendancecheck")
+const admissionNoForAttendance = document.getElementById("admno-forattendance")
+const termForWklyAttendance = document.getElementById("term-forwklyattendancereport")
+const sessionForWklyAttendance = document.getElementById("session-forwklyattendancereport")
+const tableWklyAttendance = document.getElementById("wklyattendancereport-table")
+const tableHeadWklyAttendance = document.getElementById("wklyattendance-tblhead")
+const tableBodyForWklyAttendance = document.getElementById("wklyattendance-tblbody")
+const viewWklyAttendanceReportButton = document.getElementById("viewwklyattendancereport-btn")
+const wklyAttendanceLabel = document.getElementById("wklyattendance-label")
+
+
+// open weekly attendance report form
+viewWklyAttendanceReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    wklyAttendanceForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close weekly attendance report form
+closeWklyAttendanceFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    tableWklyAttendance.style.display = "none";
+    wklyAttendanceForm.style.display = "none";
+});
+
+// display weekly attendance report
+const displayAttendanceReport = (admno, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/attendance/viewOneAttendance/?admissionNumber=${admno}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+            tableWklyAttendance.style.display = "block"
+            wklyAttendanceLabel.style.display = "block"
+            wklyAttendanceLabel.style.fontSize = "14px"
+            wklyAttendanceLabel.innerText = `Weekly Attendance for ${response.data.attendanceExists.student_name}`
+            let atdtblrowhead = document.createElement("tr")
+            let atdtbldatehead = document.createElement("th")
+            let atdtblstatushead = document.createElement("th")
+            atdtbldatehead.innerText = "Date"
+            atdtblstatushead.innerText = "Status"
+            atdtblrowhead.appendChild(atdtbldatehead)
+            atdtblrowhead.appendChild(atdtblstatushead)
+            tableHeadWklyAttendance.appendChild(atdtblrowhead)
+
+            //attendance
+            const requestedsessionatd = response.data.attendanceExists.attendanceRecord.find(asession => asession.sessionName == session)
+            const requestedtermatd = requestedsessionatd.term.find(aterm => aterm.termName == term)
+            //adding term dates as heading for attendance table
+            for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                const dateToAdd = requestedtermatd.attendance[k].termdate
+                let atdtblrow = document.createElement("tr")
+                let tbldate = document.createElement("td")
+                tbldate.innerText = dateToAdd
+                atdtblrow.appendChild(tbldate)
+
+                let tblpresence = document.createElement("td")
+                const presentStatus = requestedtermatd.attendance[k].presence
+                if (presentStatus == 'yes') {
+                    tblpresence.innerText = "Present"
+                    tblpresence.style.backgroundColor = "#368014"
+                    tblpresence.style.color = "#ffffff"
+                }
+                else {
+                    tblpresence.innerText = "-"
+                    tblpresence.style.backgroundColor = "#970202"
+                    tblpresence.style.color = "#FFFFFF"
+                }
+                atdtblrow.appendChild(tblpresence)
+                tableBodyForWklyAttendance.appendChild(atdtblrow)
+            }
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+            tableWklyAttendance.style.display = "none";
+        });
+};
+
+// display weekly attendance on click of button
+viewWklyAttendanceReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    const sessionName = sessionForWklyAttendance.value
+    const termName = termForWklyAttendance.value
+
+    let admNo = admissionNoForAttendance.value;
+    if (admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Admission number is required"
+        });
+    }
+    else
+        displayAttendanceReport(admNo, termName, sessionName)
+});
+
+
+
 
 // LOGOUT ********************************************************************
 // ***************************************************************************

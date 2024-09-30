@@ -296,6 +296,7 @@ const displayTeachers = (page) => {
             });
         });
 };
+
 // display staff list all/teachers
 viewStaffSelect.addEventListener("change", (e) => {
     e.preventDefault();
@@ -842,12 +843,14 @@ const displayStudents = (key, value, page) => {
                 tblrow.appendChild(tblcol14)
                 if (value == "past") {
                     // remove present class from student's view
-                    viewStudentsTableHead.removeChild(viewStudentsPresentClass)
-                    tblrow.removeChild(tblcol13)
-                    // add status to table heading
-                    let tblheadstatus = document.createElement("th");
-                    tblheadstatus.innerText = "Status"
-                    viewStudentsTableHead.appendChild(tblheadstatus)
+                    viewStudentsPresentClass.style.display = "none";
+                    tblcol13.style.display = "none";
+                    // add status to table heading for the first student iteration only, to avoid duplication
+                    if (i == 0) {
+                        let tblheadstatus = document.createElement("th");
+                        tblheadstatus.innerText = "Status"
+                        viewStudentsTableHead.appendChild(tblheadstatus)
+                    }
                     // add non-student status to table view
                     let tblcol15 = document.createElement("td");
                     tblcol15.innerText = response.data.studentsperpage[i].nonStudentStatus
@@ -1064,7 +1067,6 @@ const editStaffQueryForm = document.getElementById('staffedit-queryform')
 const closeEditButtonIcon = document.getElementById('editstfclose-icon')
 const closeRemoveButtonIcon = document.getElementById('removestfclose-icon')
 const closeAssignButtonIcon = document.getElementById('assignteacherclose-icon')
-const promoteStudentsButtonIcon = document.getElementById('promotestudents-closeicon')
 const editStaffLink = document.getElementById('edit-staff')
 const removeStaffLink = document.getElementById('remove-staff')
 const assignTeacherLink = document.getElementById('assign-teacher')
@@ -1082,7 +1084,6 @@ const submitDeAssignTeacher = document.getElementById('submitdeassignteacher-btn
 const updateStaffForm = document.getElementById('staffupdate-form')
 const assignTeacherForm = document.getElementById('teacherassign-form')
 const removeStaffForm = document.getElementById('staffremove-form')
-const promoteStudentsForm = document.getElementById('promotestudents-form')
 const cancelUpdateButton = document.getElementById('cancelupdate-btn')
 const closeUpdateButton = document.getElementById('closeupdate-btn')
 const UpdateButton = document.getElementById('update-btn')
@@ -1100,14 +1101,6 @@ const programmeLabelUpdate = document.getElementById("upd-programmelabel")
 const teacherProgrammeUpdate = document.getElementById("upd-teacherprogramme")
 const updateItTeacherClass = document.getElementById("updateit-teacherclass")
 const updateItTeacherProgramme = document.getElementById("updateit-teacherprogramme")
-
-const promoteStudentsSessionSelect = document.getElementById("promotestudents-sessionselect")
-const promoteStudentsProgrammeSelect = document.getElementById("promotestudents-programmeselect")
-const promoteStudentsChoiceSelect = document.getElementById("promotestudents-choiceselect")
-const promoteStudentsAdmissionNumberLabel = document.getElementById("promotestudents-admnolabel")
-const promoteStudentsAdmissionNumber = document.getElementById("promotestudents-admno")
-const promoteStudentsMinScore = document.getElementById("promotestudents-minscore")
-const promoteStudentsSubmitButton = document.getElementById("promotestudents-btn")
 
 // display editstaff query form
 editStaffLink.addEventListener("click", (e) => {
@@ -1158,7 +1151,7 @@ const QuerystaffEdit = (staffInfo) => {
                 updateItTeacherClass.style.display = "block";
                 programmeLabelUpdate.style.display = "block";
                 teacherProgrammeUpdate.style.display = "block";
-                updateItTeacherProgramme.style.display = "block";   
+                updateItTeacherProgramme.style.display = "block";
             }
             editStaffQueryForm.style.display = "none";
         })
@@ -1350,7 +1343,7 @@ UpdateButton.addEventListener("click", (e) => {
             text: "A teacher must be assigned a class and a programme"
         });
     }
-   
+
     const formData = {
         email,
         stafferName,
@@ -1425,30 +1418,7 @@ submitAssignTeacher.addEventListener("click", (e) => {
     const email = teacherEmailToAssign.value;
     const teacherClass = assignTeacherClassSelect.value;
     const teacherProgramme = assignTeacherProgrammeSelect.value;
-    if (email == ""){
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Input a valid email"
-        });
-    }
-    else {
-    const formData = {
-        email,
-        teacherClass,
-        teacherProgramme
-    }
-    assignTeacher(formData);
-}
-});
-
-//click deassign teacher button
-submitDeAssignTeacher.addEventListener("click", (e) => {
-    e.preventDefault();
-    const email = teacherEmailToAssign.value;
-    const teacherClass = assignTeacherClassSelect.value;
-    const teacherProgramme = assignTeacherProgrammeSelect.value;
-    if (email == ""){
+    if (email == "") {
         Swal.fire({
             icon: "error",
             title: "Error",
@@ -1457,12 +1427,35 @@ submitDeAssignTeacher.addEventListener("click", (e) => {
     }
     else {
         const formData = {
-        email,
-        teacherClass,
-        teacherProgramme
+            email,
+            teacherClass,
+            teacherProgramme
+        }
+        assignTeacher(formData);
     }
-    deassignTeacher(formData);
-}
+});
+
+//click deassign teacher button
+submitDeAssignTeacher.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = teacherEmailToAssign.value;
+    const teacherClass = assignTeacherClassSelect.value;
+    const teacherProgramme = assignTeacherProgrammeSelect.value;
+    if (email == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Input a valid email"
+        });
+    }
+    else {
+        const formData = {
+            email,
+            teacherClass,
+            teacherProgramme
+        }
+        deassignTeacher(formData);
+    }
 });
 
 // deassign staff as teacher from a class
@@ -1517,6 +1510,288 @@ closeAssignButtonIcon.addEventListener("click", (e) => {
     e.preventDefault();
     assignTeacherForm.style.display = "none";
     teacherEmailToAssign.value = "";
+});
+
+
+const promoteStudentsButtonIcon = document.getElementById('promotestudents-closeicon')
+const promoteStudentsForm = document.getElementById('promotestudents-form')
+const promoteStudentsSessionLabel = document.getElementById("promotestudents-sessionlabel")
+const promoteStudentsSessionSelect = document.getElementById("promotestudents-sessionselect")
+const promoteStudentsProgrammeSelect = document.getElementById("promotestudents-programmeselect")
+const promoteStudentsChoiceSelect = document.getElementById("promotestudents-choiceselect")
+const promoteStudentsAdmissionNumberLabel = document.getElementById("promotestudents-admnolabel")
+const promoteStudentsAdmissionNumber = document.getElementById("promotestudents-admno")
+const promoteStudentsMinScoreLabel = document.getElementById("promotestudents-minscorelabel")
+const promoteStudentsMinScore = document.getElementById("promotestudents-minscore")
+const promoteStudentsSubmitButton = document.getElementById("promotestudents-btn")
+const demoteStudentsSubmitButton = document.getElementById("demotestudents-btn")
+
+
+//promote one student who meet the criteria or on probation
+const promoteStudentsOne = (studInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/promoteOneStudent`, studInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+//promote all students who meet the criteria
+const promoteStudents = (sessionInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/promoteStudents`, sessionInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click to make a choice of students to promote
+promoteStudentsChoiceSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    if (promoteStudentsChoiceSelect.value == "all") {
+        promoteStudentsAdmissionNumberLabel.style.display = "none";
+        promoteStudentsAdmissionNumber.style.display = "none";
+        promoteStudentsMinScoreLabel.style.display = "block";
+        promoteStudentsMinScore.style.display = "block";
+        promoteStudentsSessionLabel.style.display = "block";
+        promoteStudentsSessionSelect.style.display = "block";
+
+    }
+    else if (promoteStudentsChoiceSelect.value == "one") {
+        promoteStudentsAdmissionNumberLabel.style.display = "block";
+        promoteStudentsAdmissionNumber.style.display = "block";
+        promoteStudentsMinScoreLabel.style.display = "none";
+        promoteStudentsMinScore.style.display = "none";
+        promoteStudentsSessionLabel.style.display = "none";
+        promoteStudentsSessionSelect.style.display = "none";
+    }
+});
+
+// click promote students link to display form
+promoteStudentsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    promoteStudentsForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// click promote students button to promote students
+promoteStudentsSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const promotionChoice = promoteStudentsChoiceSelect.value;
+    const sessionName = promoteStudentsSessionSelect.value;
+    const admNo = promoteStudentsAdmissionNumber.value;
+    const minscore = promoteStudentsMinScore.value;
+    const programme = promoteStudentsProgrammeSelect.value;
+
+    if (promotionChoice == "all" && minscore == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Check that you have valid inputs for all fields"
+        });
+    }
+    else if (promotionChoice == "one" && admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Admission number cannot be empty"
+        });
+    }
+    else {
+        const formData = {
+            programme,
+            sessionName,
+            minscore
+        }
+        const formDataOne = {
+            admNo,
+            programme
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, promote students"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (promotionChoice == "all") promoteStudents(formData)
+                else promoteStudentsOne(formDataOne);
+            }
+        });
+    }
+
+});
+
+// click demote students button to demote students
+demoteStudentsSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const sessionName = promoteStudentsSessionSelect.value;
+    const admNo = promoteStudentsAdmissionNumber.value;
+    const programme = promoteStudentsProgrammeSelect.value;
+
+    if (promoteStudentsChoiceSelect.value == "all") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Request",
+            text: "You cannot demote all students at once"
+        });
+    }
+    else if (admNo == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty input detected",
+            text: "Admission number cannot be empty"
+        });
+    }
+    else {
+        const formDataOne = {
+            admNo,
+            programme
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, demote student"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                demoteStudent(formDataOne);
+            }
+        });
+    }
+});
+
+//demote a student
+const demoteStudent = (studInfo) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/demoteStudent`, studInfo, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// close promote students form
+promoteStudentsButtonIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    promoteStudentsAdmissionNumber.value = "";
+    promoteStudentsMinScore.value = "";
+    promoteStudentsForm.style.display = "none";
 });
 
 // VIEW CLASS ASSIGNED TO STAFF***************************************************************
@@ -1599,7 +1874,7 @@ submitViewAssignedClasses.addEventListener("click", (e) => {
     e.preventDefault();
     assignedClassesTblBody.innerHTML = "";
     const email = stafferEmailForClassesAssigned.value;
-    if (email == ""){
+    if (email == "") {
         Swal.fire({
             icon: "error",
             title: "Error",
@@ -1713,164 +1988,6 @@ submitRemoveQuery.addEventListener("click", (e) => {
 
 });
 
-//promote one student who meet the criteria or on probation
-const promoteStudentsOne = (studInfo) => {
-    let errorMsg;
-    axios
-        .patch(`${baseUrl}/student/promoteOneStudent`, studInfo, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
-        .then(function (response) {
-            console.log(response)
-            Swal.fire({
-                icon: "success",
-                title: "Successful",
-                text: response.data.message
-            });
-
-        })
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                errorMsg = error.response.data.message
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                errorMsg = "Network Error"
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                errorMsg = error.message
-            }
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: errorMsg
-            });
-        });
-};
-
-//promote all students who meet the criteria
-const promoteStudents = (sessionInfo) => {
-    let errorMsg;
-    axios
-        .patch(`${baseUrl}/student/promoteStudents`, sessionInfo, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
-        .then(function (response) {
-            console.log(response)
-            Swal.fire({
-                icon: "success",
-                title: "Successful",
-                text: response.data.message
-            });
-
-        })
-        .catch(function (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                errorMsg = error.response.data.message
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                errorMsg = "Network Error"
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-                errorMsg = error.message
-            }
-            Swal.fire({
-                icon: "error",
-                title: "Error Processing Input",
-                text: errorMsg
-            });
-        });
-};
-
-// click to make a choice of students to promote
-promoteStudentsChoiceSelect.addEventListener("change", (e) => {
-    e.preventDefault();
-    if (promoteStudentsChoiceSelect.value == "all") {
-        promoteStudentsAdmissionNumberLabel.style.display = "none";
-        promoteStudentsAdmissionNumber.style.display = "none";
-    }
-    else if (promoteStudentsChoiceSelect.value == "one") {
-        promoteStudentsAdmissionNumberLabel.style.display = "block";
-        promoteStudentsAdmissionNumber.style.display = "block";
-    }
-});
-
-// click promote students link to display form
-promoteStudentsLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    promoteStudentsForm.style.display = "block";
-    sidebar.style.display = "none";
-});
-
-// click promote students button to promote students
-promoteStudentsSubmitButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const promotionChoice = promoteStudentsChoiceSelect.value;
-    const sessionName = promoteStudentsSessionSelect.value;
-    const admNo = promoteStudentsAdmissionNumber.value;
-    const minscore = promoteStudentsMinScore.value;
-    const programme = promoteStudentsProgrammeSelect.value;
-    if (admNo == "" || minscore == "") {
-        Swal.fire({
-            icon: "error",
-            title: "Empty input detected",
-            text: "Check that you have valid inputs for all fields"
-        });
-    }
-
-    const formData = {
-        programme,
-        sessionName,
-        minscore
-    }
-    const formDataOne = {
-        admNo,
-        programme
-    }
-
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, promote students"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            if (promotionChoice == "all") promoteStudents(formData)
-            else promoteStudentsOne(formDataOne);
-        }
-    });
-
-});
-
-// close promote students form
-promoteStudentsButtonIcon.addEventListener("click", (e) => {
-    e.preventDefault();
-    promoteStudentsForm.style.display = "none";
-});
 
 
 // ************************** STUDENTS *****************************************
@@ -2225,7 +2342,7 @@ selectForStudentStatus.addEventListener("change", (e) => {
     }
     else if (status == "past") {
         selectForNonStudentStatus.removeAttribute("disabled")
-    }   
+    }
 });
 
 // click edit status button to update student status
@@ -2523,7 +2640,257 @@ closeStudentReportFormBtn.addEventListener("click", (e) => {
     reportScoresForm.style.display = "none";
 });
 
-// CLASS REPORT ********************************************************************
+
+//  **************************** WEEKLY ATTENDANCE REPORT *********************************
+// ********************************************************************************************
+const wklyAttendanceForm = document.getElementById("wklyattendance-form")
+const closeWklyAttendanceFormBtn = document.getElementById("wklyattendance-icon")
+const viewWklyAttendanceReportLink = document.getElementById("weeklyattendance")
+const classnameForWklyAttendance = document.getElementById("classname-forwklyattendancereport")
+const programmeForWklyAttendance = document.getElementById("programme-forwklyattendancereport")
+const termForWklyAttendance = document.getElementById("term-forwklyattendancereport")
+const sessionForWklyAttendance = document.getElementById("session-forwklyattendancereport")
+const tableWklyAttendance = document.getElementById("wklyattendancereport-table")
+const tableHeadWklyAttendance = document.getElementById("wklyattendance-tblhead")
+const tableBodyForWklyAttendance = document.getElementById("wklyattendance-tblbody")
+const viewWklyAttendanceReportButton = document.getElementById("viewwklyattendancereport-btn")
+const deleteAttendanceButton = document.getElementById("deleteattendance-btn")
+const wklyAttendanceLabel = document.getElementById("wklyattendance-label")
+
+
+// open weekly attendance report form
+viewWklyAttendanceReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    wklyAttendanceForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close weekly attendance report form
+closeWklyAttendanceFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    tableWklyAttendance.style.display = "none";
+    wklyAttendanceForm.style.display = "none";
+});
+
+// display weekly attendance report
+const displayWklyAttendanceReport = (classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/attendance/viewAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+            tableWklyAttendance.style.display = "block"
+            wklyAttendanceLabel.style.display = "block"
+            let atdtblrowhead = document.createElement("tr")
+            let atdtblserialnohead = document.createElement("th")
+            let atdtbladmnohead = document.createElement("th")
+            let atdtblnamehead = document.createElement("th")
+            atdtblserialnohead.innerText = "Serial No"
+            atdtbladmnohead.innerText = "Admission No"
+            atdtblnamehead.innerText = "Name"
+            atdtblrowhead.appendChild(atdtblserialnohead)
+            atdtblrowhead.appendChild(atdtbladmnohead)
+            atdtblrowhead.appendChild(atdtblnamehead)
+            tableHeadWklyAttendance.appendChild(atdtblrowhead)
+
+            for (let i = 0; i < response.data.attendanceExists.length; i++) {
+                let atdtblrow = document.createElement("tr")
+                let atdtblserialno = document.createElement("th")
+                let atdtbladmno = document.createElement("td")
+                let atdtblname = document.createElement("td")
+                atdtblserialno.innerText = i + 1
+                atdtbladmno.innerText = response.data.attendanceExists[i].admissionNumber
+                atdtblname.innerText = response.data.attendanceExists[i].student_name
+                atdtblrow.appendChild(atdtblserialno)
+                atdtblrow.appendChild(atdtbladmno)
+                atdtblrow.appendChild(atdtblname)
+
+                //attendance
+                const requestedsessionatd = response.data.attendanceExists[i].attendanceRecord.find(asession => asession.sessionName == session)
+                const requestedtermatd = requestedsessionatd.term.find(aterm => aterm.termName == term)
+                if (i == 0) {  //adding term dates as heading for attendance table
+                    for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                        const dateToAdd = requestedtermatd.attendance[k].termdate
+                        let tbldate = document.createElement("th")
+                        tbldate.innerText = dateToAdd
+                        atdtblrowhead.appendChild(tbldate)
+                    }
+                }
+                for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                    const presentStatus = requestedtermatd.attendance[k].presence
+                    let tblpresence = document.createElement("td")
+                    if (presentStatus == 'yes') {
+                        tblpresence.innerText = "Present"
+                        tblpresence.style.backgroundColor = "#368014"
+                        tblpresence.style.color = "#ffffff"
+                    }
+                    else {
+                        tblpresence.innerText = "-"
+                        tblpresence.style.backgroundColor = "#970202"
+                        tblpresence.style.color = "#FFFFFF"
+                    }
+                    atdtblrow.appendChild(tblpresence)
+                }
+                tableBodyForWklyAttendance.appendChild(atdtblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+             tableWklyAttendance.style.display = "none";
+        });
+};
+
+// display weekly attendance on click of button
+viewWklyAttendanceReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    const className = classnameForWklyAttendance.value
+    const programme = programmeForWklyAttendance.value
+    const sessionName = sessionForWklyAttendance.value
+    const termName = termForWklyAttendance.value
+
+    if (programme == "select a programme" || className == "select a class") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check the programme or class you entered"
+        });
+    }
+    else
+        displayWklyAttendanceReport(className, programme, termName, sessionName)
+});
+
+// clear table body when class is changed
+classnameForWklyAttendance.addEventListener("change", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    tableWklyAttendance.style.display = "none";
+    wklyAttendanceLabel.style.display = "none";
+});
+
+// delete attendance
+const deleteAttendance = (programme, term, session) => {
+    let errorMsg;
+    axios
+        .delete(`${baseUrl}/attendance/deleteTermAttendance/?programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// display weekly attendance on click of button
+deleteAttendanceButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    const programme = programmeForWklyAttendance.value
+    const sessionName = sessionForWklyAttendance.value
+    const termName = termForWklyAttendance.value
+
+    if (programme == "select a programme") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check the programme or class you entered"
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Are you sure?",
+            text: `You're about to delete ${termName} term ${sessionName} attendance for ${programme}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteAttendance(programme, termName, sessionName)
+            }
+        });
+
+    }
+});
+
+
+// ***************************************** CLASS REPORT ***************************
+// **********************************************************************************
 const reportClassScoresForm = document.getElementById("viewclassscores-form")
 const closeClassReportFormBtn = document.getElementById("viewclassreport-icon")
 const viewClassReportLink = document.getElementById("classreport-link")
@@ -2768,7 +3135,7 @@ downloadClassReportButton.addEventListener("click", (e) => {
     const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
     const termName = termForClassReport.value
-    if (tableBodyForClassReport.childElementCount == ""){
+    if (tableBodyForClassReport.childElementCount == "") {
         Swal.fire({
             icon: "error",
             title: "Invalid Request",
@@ -2776,25 +3143,25 @@ downloadClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
-    tableToCSV(className, programme, sessionName, termName)
+        tableToCSV(className, programme, sessionName, termName)
 });
 
 function tableToCSV(className, programme, sessionName, termName) {
 
     // Variable to store the final csv data
     let csv_data = [];
- // Get the table head row data, then each column data  and 
-    let rowshead =  tableHeadRowClassReport.children;
+    // Get the table head row data, then each column data  and 
+    let rowshead = tableHeadRowClassReport.children;
     let csvrow = [];
-        for (let k = 0; k < rowshead.length; k++) {
-            csvrow.push(rowshead[k].innerText);
-        }
-         // Combine each column value with comma
-         csv_data.push(csvrow.join(","));
-    
+    for (let k = 0; k < rowshead.length; k++) {
+        csvrow.push(rowshead[k].innerText);
+    }
+    // Combine each column value with comma
+    csv_data.push(csvrow.join(","));
+
 
     // Get each table body row data
-    let rows =  tableBodyForClassReport.children;
+    let rows = tableBodyForClassReport.children;
     for (let i = 0; i < rows.length; i++) {
         // Get each column data
         let cols = rows[i].children;
@@ -2831,7 +3198,7 @@ function downloadCSVFile(csv_data, className, programme, sessionName, termName) 
     let filename = `${sessionName} ${termName} Term Report for ${className} ${programme}`
 
     // Download csv file
-    temp_link.download = filename+".csv";
+    temp_link.download = filename + ".csv";
     let url = window.URL.createObjectURL(CSVFile);
     temp_link.href = url;
 
@@ -2943,8 +3310,6 @@ viewSubjectsSubmitButton.addEventListener("click", (e) => {
 const editSubjectsFormCloseIcon = document.getElementById("subjecteditclose-icon");
 const editSubjectsForm = document.getElementById("subjectedit-form");
 const editClassSubjectsLink = document.getElementById("editclassubjects-link");
-
-// const editClassSubjectsForm = document.getElementById("edit-classubjects");
 const editSubjectsClass = document.getElementById("editsubject-classelect");
 const editSubjectsProgramme = document.getElementById("editsubject-programmeselect");
 const editSubjectsSubject = document.getElementById("editsubject-subjectselect");
@@ -3589,8 +3954,9 @@ const downloadScores = (admNo, term, session) => {
         });
 };
 
-
+// *********************************************************************************************
 // SET CLASS DETAILS
+// ************************************************************************************************
 const setClassDetailsLink = document.getElementById("setclassdetails")
 const setEOTDetailsForm = document.getElementById("class-detailsform")
 const formToSubmitDetails = document.getElementById("form-classdetails")
@@ -4063,20 +4429,222 @@ deleteStudentSubmitButton.addEventListener("click", (e) => {
         });
     }
     else
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            deleteStudent(admNo)
-        }
-    });
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteStudent(admNo)
+            }
+        });
 
+});
+
+
+// ******************** DEMOTE STUDENTS FROM CLASS **************************************
+// **************************************************************************************
+
+const changeClassForm = document.getElementById("changeclass-form")
+const changeClassCloseIcon = document.getElementById("changeclass-icon")
+const changeClassLink = document.getElementById("changeclass")
+const classnameForClassChangeSelect = document.getElementById("classname-fordemote")
+const proposedClassForClassChangeSelect = document.getElementById("proposedclass-fordemote")
+const programmeForClasssChangeSelect = document.getElementById("programme-fordemote")
+const tableHeadClassChange = document.getElementById("changestdsclass-tblhead")
+const tableHeadRowClassChange = document.getElementById("changestdsclass-tblheadrow")
+const tableBodyForClassChange = document.getElementById("changestdsclass-tblbody")
+const viewStudentsForClassChangeButton = document.getElementById("viewstdsforclasschange-btn")
+const changeStudentsClassButton = document.getElementById("changestdsclass-btn")
+
+
+// open class change form
+changeClassLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    changeClassForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// view students in present class chosen
+viewStudentsForClassChangeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    //clear table if already populated
+    tableBodyForClassChange.innerHTML = "";
+    tableHeadRowClassChange.innerHTML = "";
+    tableHeadClassChange.innerHTML = "";
+    let presentclass = classnameForClassChangeSelect.value;
+    let programme = programmeForClasssChangeSelect.value;
+    displayStudentsByClass(presentclass, programme)
+});
+
+
+// display students in class chosen
+const displayStudentsByClass = (presentclass, programme) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/student/byClass/1/?presentClass=${presentclass}&programme=${programme}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            // studentTableBody.innerHTML = "";
+            let studentNamesStore = [];
+            for (let j = 0; j < response.data.students.length; j++) {
+                // add student name and admission number to an array
+                studentNamesStore[j] = {
+                    admission_number: response.data.students[j].admNo,
+                    student_name: response.data.students[j].firstName + " " + response.data.students[j].lastName
+                }
+            }
+            //populate table with fresh data
+            let tblserialnohead = document.createElement("th")
+            let tbladmNohead = document.createElement("th")
+            let tblnamehead = document.createElement("th")
+            let tblpresent = document.createElement("th")
+            tblserialnohead.innerText = "Serial No"
+            tbladmNohead.innerText = "Adm No"
+            tblnamehead.innerText = "Name"
+            tblpresent.innerText = "Change Class"
+            tableHeadRowClassChange.appendChild(tblserialnohead)
+            tableHeadRowClassChange.appendChild(tbladmNohead)
+            tableHeadRowClassChange.appendChild(tblnamehead)
+            tableHeadRowClassChange.appendChild(tblpresent)
+            for (let j = 0; j < studentNamesStore.length; j++) {
+                let tblrow = document.createElement("tr")
+                let tblserialno = document.createElement("th")
+                let tblatdadmno = document.createElement("td")
+                let tblname = document.createElement("td")
+                let tblpresence = document.createElement("td")
+                tblserialno.innerText = j + 1
+                tblatdadmno.innerText = studentNamesStore[j].admission_number
+                tblname.innerText = studentNamesStore[j].student_name
+                tblpresence.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
+                tblrow.appendChild(tblserialno)
+                tblrow.appendChild(tblatdadmno)
+                tblrow.appendChild(tblname)
+                tblrow.appendChild(tblpresence)
+                tableBodyForClassChange.appendChild(tblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// click to indicate addition or removal of student from list of those to change class for
+tableBodyForClassChange.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains("fa-check")) {
+        e.target.classList.remove("fa-check")
+    }
+    else if (e.target.firstElementChild.classList.contains("fa")) {
+        e.target.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
+    }
+
+});
+
+// close change class form
+changeClassCloseIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForClassChange.innerHTML = "";
+    tableHeadRowClassChange.innerHTML = "";
+    tableHeadClassChange.innerHTML = "";
+    changeClassForm.style.display = "none";
+});
+
+// change class 
+const changeStudentsClass = (studsdata, proposedclass) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/student/changeClass/${proposedclass}`, studsdata,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+
+// change class for students selected on click of button
+changeStudentsClassButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    let studentsList = []
+    let admissionNumber;
+
+    const proposedclass = proposedClassForClassChangeSelect.value
+
+    for (let i = 0; i < tableBodyForClassChange.childElementCount; i++) {
+        admissionNumber = tableBodyForClassChange.children[i].children[1].innerText
+        if (tableBodyForClassChange.children[i].children[3].firstElementChild.classList.contains("fa-check")) {
+            studentsList.push(admissionNumber)
+        }
+    }
+    const formdata = {
+        studentsList
+    }
+    changeStudentsClass(formdata, proposedclass)
 });
 
 
@@ -4089,3 +4657,7 @@ logoutLink.addEventListener("click", (e) => {
     window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
+
+
+
+

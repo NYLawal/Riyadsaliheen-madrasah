@@ -69,10 +69,10 @@ ul ul a {
 #bsbSidebar1 button.btn-close{
     background-color: rgb(4, 201, 4);
 }
-.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form,
+.staffadd-form, .studentadd-form, #viewstaff-form, #viewstudent-form, #staffedit-queryform,  #staffupdate-form, #markattendance-form, #changeclass-form,
 #studentupdate-form, #staffremove-form, #teacherassign-form, #classesassigned-form, #switchclass-form, #teacher-class, #class-label, #teacher-prg, #programme-label, #subjectview-form,
 #updatescores-form, #reportscores-form, #viewclassscores-form, #deletescores-form, #deletestudent-form, #promotestudents-form, #addscores-form, #subjectedit-form, #editstudentstatus-form,
-#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report, .studentassessment-form, #setstudentassessment-form, #class-detailsform
+#sessionselect-forvisualreport, #termselect-forvisualreport, #performance-report, .studentassessment-form, #setstudentassessment-form, #class-detailsform, #wklyattendance-form
 { 
     display: none;
 }
@@ -110,7 +110,7 @@ html, body {
     /* padding: 20px; */
     }
     form#student-form, form#staff-form, form#staff-formupdate,  form#student-formupdate, form#scoresadd, form#scoresupdate, form#classcoresreport, form#form-deletescores, form#markattendance, 
-    form#student-assessment, form#form-classdetails, form#form-deletestudent{
+    form#student-assessment, form#form-classdetails, form#form-deletestudent, form#changeofclass, form#wklyattendancereport{
     /* width: 80%; */
     padding: 20px;
     border-radius: 6px;
@@ -136,20 +136,21 @@ html, body {
     height: 100%;
     }
     #studentadd-form input, #studentadd-form select, #staffadd-form input, #staffadd-form select, #staffupdate-form input, #staffupdate-form select, #studentupdate-form input,  #promotestudents-form select, #promotestudents-form input,
-    #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #editstudentstatus-form select,
+    #studentupdate-form select, #addscores-form input, #addscores-form select, #updatescores-form input, #updatescores-form select, #reportscores-form select, #reportscores-form input, #editstudentstatus-form select, #changeclass-form input, #changeclass-form select,
     #editstudentstatus-form input, #teacherassign-form select, #switchclass-form select, #viewclassscores-form select,  #viewclassscores-form input, #deletescores-form input, #deletescores-form select, #subjectedit-form select, #subjectedit-form input, #markattendance-form input, #markattendance-form select,
-    .studentassessment-form select, .studentassessment-form input, #class-detailsform select, #class-detailsform input, #subjectview-form select, #subjectview-form input, #deletestudent-form input, #deletestudent-form select{
+    .studentassessment-form select, .studentassessment-form input, #class-detailsform select, #class-detailsform input, #subjectview-form select, #subjectview-form input, #deletestudent-form input, #deletestudent-form select, #wklyattendance-form select, #wklyattendance-form input{
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     }
-    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,
+    #studentadd-form input, #staffadd-form input, #staffupdate-form input, #updatescores-form input, #studentupdate-form input, #addscores-form input, #reportscores-form input, #markattendance-form input,  #changeclass-form input, #wklyattendance-form input,
     #viewclassscores-form input, #deletescores-form input, #deletestudent-form input, #subjectedit-form input, #subjectview-form input, #editstudentstatus-form input, .studentassessment-form input, #class-detailsform input, #promotestudents-form input {
     width: calc(100% - 10px);
     padding: 5px;
     }
-    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select, .studentassessment-form select, #subjectview-form select, #deletestudent-form select,
-    #addscores-form select, #teacherassign-form select, #switchclass-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #deletescores-form select, #subjectedit-form select, #markattendance-form select, #class-detailsform select{
+    #studentadd-form select, #staffadd-form select, #staffupdate-form select, #studentupdate-form select, #promotestudents-form select, #editstudentstatus-form select, .studentassessment-form select, #subjectview-form select, #deletestudent-form select, #changeclass-form select,
+    #addscores-form select, #teacherassign-form select, #switchclass-form select, #reportscores-form select, #updatescores-form select, #viewclassscores-form select, #deletescores-form select, #subjectedit-form select, #markattendance-form select, #class-detailsform select,
+    #wklyattendance-form select{
     width: 100%;
     padding: 7px 0;
     background: transparent;
@@ -248,10 +249,11 @@ html, body {
     margin-top: 10px;
     text-align: center;
     }
-    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn,
-    button#addcomment-btn, button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#deletescores-btn, button#assessment-btn, button#deleteassessment-btn, button#genresult-btn,
-    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn,
-    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn,  button#closeclassdetails-btn, button#downloadclassreport-btn, button#deletestudent-btn {
+    button#send-btn,  button#submit-btn , button#search-btn, button#update-btn,  button#studupd-btn, button#statusupd-btn, button#markattendance-btn, button#setquiz-btn, button#editquiz-btn, button#addcomment-btn, 
+    button#addscores-btn, button#updatescores-btn, button#createstudent-btn, button#viewclassreport-btn, button#deletescores-btn, button#assessment-btn, button#deleteassessment-btn, button#genresult-btn, 
+    button#viewreport-btn, button#closeupdateform-btn, button#submitscores-btn,  button#closereportform-btn, button#closeinputform-btn, button#editassessment-btn, button#dwnbtn, button#pdfdownload-btn, 
+    button#closeresultsheet-btn, button#addprincipalcomment-btn, button#setclassdetails-btn,  button#closeclassdetails-btn, button#downloadclassreport-btn, button#deletestudent-btn, button#viewstdsforclasschange-btn, 
+    button#changestdsclass-btn, button#viewwklyattendancereport-btn, button#deleteattendance-btn, #changedateattendance-btn, #editstdattendance-btn, #deletedayattendance-btn, #viewattendance-btn, #submitrequest-btn {
     width: 150px;
     padding: 10px;
     border: none;
@@ -364,7 +366,7 @@ html, body {
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* view staff  and student styles */
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-    #viewstaff-form .card, #viewstudent-form .card, #viewclassscores-form .card, #deletescores-form .card, #deletestudent-form .card{
+    #viewstaff-form .card, #viewstudent-form .card, #viewclassscores-form .card, #wklyattendance-form .card, #deletescores-form .card, #deletestudent-form .card{
         box-shadow: 0 0 5px 0 #bbbdbb;
     }
     #viewstaff-form .card .card-body h4,  #viewstaff-form .card .card-body .item{
@@ -404,7 +406,8 @@ html, body {
         background-color: #7ff549;
     }
 
-   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon, #deletescores-form .closebtn-icon,#deletestudent-form .closebtn-icon, #markattendance-form .closebtn-icon, #performance-report .closebtn-icon{
+   #viewstudent-form .closebtn-icon,  #viewstaff-form .closebtn-icon, #viewclassscores-form .closebtn-icon, #deletescores-form .closebtn-icon,#deletestudent-form .closebtn-icon, 
+   #markattendance-form .closebtn-icon, #performance-report .closebtn-icon, #changeclass-form .closebtn-icon, #wklyattendance-form .closebtn-icon{
    position: absolute;
    right: 20px;
 }
@@ -425,7 +428,8 @@ a.disable {
 #staffedit-queryform input{
     margin-bottom: 10px;
 }
-#submiteditquery-btn, #submitremovequery-btn, #submitassignteacher-btn, #submitdeassignteacher-btn, #viewassignedclasses-btn, #switchclass-btn, #promotestudents-btn, button#removenewsubject-btn, button#addnewsubject-btn, button#viewsubjects-btn, #editstudentstatus-btn{
+#submiteditquery-btn, #submitremovequery-btn, #submitassignteacher-btn, #submitdeassignteacher-btn, #viewassignedclasses-btn, #switchclass-btn, 
+#demotestudents-btn, #promotestudents-btn, button#removenewsubject-btn, button#addnewsubject-btn, button#viewsubjects-btn, #editstudentstatus-btn{
     padding: 10px;
     border: none;
     border-radius: 5px; 
@@ -508,7 +512,7 @@ a.disable {
  .form-label-marks {
     margin-bottom: 5px;
 }
-#attendance-label{
+#attendance-label, #wklyattendance-label{
     display: none;
     font-weight: bold;
     font-size: 24px;
@@ -535,8 +539,11 @@ output img{
     font-weight: 600;
     text-align:justify;
 }
-
-/* ****************************** Prent Portal */
+#atdchoice-desc{
+    font-size: 12px; 
+    color: rgb(156, 5, 5); 
+    margin-left: 5px;
+}
 
 
 

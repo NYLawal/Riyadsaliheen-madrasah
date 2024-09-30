@@ -170,7 +170,7 @@
             <a href="#" id="remove-staff">Remove Staff</a>
           </li>
           <li>
-            <a href="#" id="promotestudents-link">Promote Students</a>
+            <a href="#" id="promotestudents-link">Promote/Demote Students</a>
           </li>
           <li>
             <a href="#" id="setassessment-link">Set Quiz</a>
@@ -180,10 +180,13 @@
               data-bs-target="#reportSubmenu" aria-controls="reportSubmenu">View Report</a>
             <ul class="collapse list-unstyled" id="reportSubmenu">
               <li>
-                <a href="#" id="studentreport-link">student</a>
+                <a href="#" id="studentreport-link">EoT student report</a>
               </li>
               <li>
-                <a href="#" id="classreport-link">class</a>
+                <a href="#" id="classreport-link">EoT class report</a>
+              </li>
+              <li>
+                <a href="#" id="weeklyattendance">Term attendance</a>
               </li>
             </ul>
           </li>
@@ -206,6 +209,9 @@
               </li>
             </ul>
           </li> 
+          <li>
+            <a href="#" id="changeclass">Change Students Class</a>
+          </li>
           <li>
             <a href="#" id="logout">Logout</a>
           </li>
@@ -1216,9 +1222,7 @@
                     <img src="../images/logo2.png" alt="Logo" width="50" height="50">
                   </a>
                 </div>
-                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">You are about to promote
-                  students who have met the minimum score criteria. Choose the programme and session, then set the
-                  minimum score below.</h2>
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4" id="staffedit-h2">You are about to promote or demote students. Type in or select inputs for each field as appropriate.</h2>
                 <form action="#!">
                   <div class="row gy-2 overflow-hidden">
                     <div class="col-12">
@@ -1233,7 +1237,7 @@
                       </div>
                       <div class="col-12 mt-2">
                         <div class="">
-                          <label for="promotestudents-choiceselect" class="form-label">Students to Promote</label>
+                          <label for="promotestudents-choiceselect" class="form-label">Students to Promote/Demote</label>
                           <select name="" id="promotestudents-choiceselect">
                             <option value="all">All</option>
                             <option value="one">One</option>
@@ -1249,22 +1253,28 @@
                         </div>
                         <div class="col-12 mt-2">
                           <div class="">
-                            <label for="promotestudents-minscore" class="form-label" id="">What's the minimum score for
+                            <label for="promotestudents-minscore" class="form-label" id="promotestudents-minscorelabel">What's the minimum score for
                               promotion?</label>
                             <input type="number" id="promotestudents-minscore" placeholder="type in the minimum score">
                           </div>
                         </div>
                         <div class="col-12 mt-2">
                           <div class="">
-                            <label for="sessiontopromote" class="form-label">Session</label>
+                            <label for="sessiontopromote" class="form-label" id="promotestudents-sessionlabel">Session</label>
                             <select name="" id="promotestudents-sessionselect">
                               <option value="2023/2024">2023/2024</option>
+                              <option value="2024/2025">2024/2025</option>
                             </select>
                           </div>
                         </div>
                         <div class="col-12 submitbtn-div">
                           <div class="d-grid my-3 mt-4">
-                            <button class="btn btn-lg" type="submit" id="promotestudents-btn">Submit</button>
+                            <button class="btn btn-lg" type="submit" id="promotestudents-btn">Promote</button>
+                          </div>
+                        </div>
+                        <div class="col-12 submitbtn-div">
+                          <div class="d-grid my-3 mt-4">
+                            <button class="btn btn-lg" type="submit" id="demotestudents-btn">Demote</button>
                           </div>
                         </div>
                       </div>
@@ -1349,6 +1359,7 @@
                     <div class="input-group">
                       <select style="background-color: white" id="session-forreport">
                         <option value="2023/2024">2023/2024</option>
+                        <option value="2024/2025">2024/2025</option>
                       </select>
                     </div>
                   </div>
@@ -1443,11 +1454,8 @@
                         Close Form
                       </button>
                     </div>
-                    <!-- <div class="col"></div> -->
                   </div>
                 </form>
-                <!-- </div>
-          </div> -->
               </form>
             </div>
           </div>
@@ -1460,7 +1468,7 @@
       <div class="container">
         <div class="row justify-content-md-center">
           <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
-            <h3 class="mb-3 display-5 text-center">Class Scores and Attendance Report</h3>
+            <h3 class="mb-3 display-5 text-center">End of Term Report by Class</h3>
             <p class="text-secondary mb-1 text-center">
               To view a class report, input the class as well
               as the term and session in the form below.
@@ -1526,6 +1534,7 @@
                       <div class="input-group">
                         <select style="background-color: white" id="session-forclassreport">
                           <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
@@ -1574,23 +1583,117 @@
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-              <!-- pagination -->
-              <!-- <nav aria-label="..." class="mt-2">
-                <ul class="pagination pagination-sm justify-content-center" id="stdview-pagination">
-                  <li class="page-item" id="tab-disabled">
-                    <a class="page-link component-active-color" href="" id="viewstd-pageprevious">
-                      << Previous</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link component-active-color" href="#" id="viewstd-pagenext">Next >>
-                    </a>
-                  </li>
-                </ul>
-              </nav> -->
+    <!-- View Weekly Attendance by Term -->
+    <section class="py-5 py-md-3 mb-5" id="wklyattendance-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h3 class="mb-3 display-5 text-center">Attendance Report</h3>
+            <p class="text-secondary mb-1 text-center">
+              You can view attendance report for weeks where students attendance have been recorded. You can as well delete attendance for the past term.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4">
+                <button type="button" class="btn-close closebtn-icon" id="wklyattendance-icon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="wklyattendancereport" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col-12 col-md-3">
+                      <label for="classname-forwklyattendancereport" class="form-label">Class <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="classname-forwklyattendancereport">
+                          <option selected>select a class</option>
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="programme-forwklyattendancereport" class="form-label">Programme <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="programme-forwklyattendancereport">
+                          <option selected>select a programme</option>
+                          <option value="children madrasah">children madrasah</option>
+                          <option value="adult madrasah">adult madrasah</option>
+                          <option value="female madrasah">female madrasah</option>
+                          <option value="barnamij">barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="term-forwklyattendancereport" class="form-label">Term <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="term-forwklyattendancereport">
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="session-forwklyattendancereport" class="form-label">Session <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="session-forwklyattendancereport">
+                          <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="viewwklyattendancereport-btn" href="/">
+                        View Report
+                      </button>
+                    </div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="deleteattendance-btn" href="/">
+                        Delete
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </form>
+                <div>
+                  <p id="student-number" class="mt-2 mb-2"></p>
+                </div>
+                <div>
+                  <p id="wklyattendance-label" class="mt-4 mb-2 green-text">Weekly Attendance</p>
+                </div>
+                <div class="table-responsive overflow-auto" style="height: 400px; display: none;" id="wklyattendancereport-table">
+                  <table class="table table-light bsb-table-xl text-nowrap align-middle text-center">
+                    <thead id="wklyattendance-tblhead">
+                    </thead>
+                    <tbody id="wklyattendance-tblbody">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1631,6 +1734,7 @@
                   <div class="input-group">
                     <select style="background-color: white" id="resultsheet-session">
                       <option value="2023/2024">2023/2024</option>
+                      <option value="2024/2025">2024/2025</option>
                     </select>
                   </div>
                 </div>
@@ -1846,6 +1950,7 @@
                       <div class="input-group">
                         <select style="background-color: white" id="session-fordeletescores">
                           <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
@@ -1971,6 +2076,114 @@
                   </div>
                 </form>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- Change Class for some students -->
+     <section class="py-5 py-md-3 mt-5 mb-5" id="changeclass-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h4 class="mb-3 display-5 text-center">Change Students' Class</h4>
+            <p class="text-secondary mb-1 text-center">
+             Ensure you pick the correct classes and programme before clicking each button as applicable.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4" style=" box-shadow: 0 0 10px 0 #c9cac9; ">
+                <button type="button" class="btn-close btn-close closebtn-icon" id="changeclass-icon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="changeofclass" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-2 d-flex">
+                    <div class="col-12 col-md-4">
+                      <label for="classname-fordemote" class="form-label">Present Class <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="classname-fordemote">
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="programme-fordemote" class="form-label">Programme <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="programme-fordemote">
+                          <option value="children madrasah">children madrasah</option>
+                          <option value="adult madrasah">adult madrasah</option>
+                          <option value="female madrasah">female madrasah</option>
+                          <option value="barnamij">barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="proposedclass-fordemote" class="form-label">Proposed Class <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="proposedclass-fordemote">
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                        </select>
+                      </div>
+                    </div>                     
+                  </div>
+                </form>
+                <div class="table-responsive">
+                  <table class="table table-light table-striped bsb-table-xl text-nowrap align-middle"
+                    id="changestdsclass-table">
+                    <thead id="changestdsclass-tblhead">
+                      <tr id="changestdsclass-tblheadrow">
+
+                      </tr>
+                    </thead>
+                    <tbody id="changestdsclass-tblbody">
+
+
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row">
+                  <div class="col"></div>
+                  <div class="col-12 col-md-4 btn-block">
+                    <button type="button" id="viewstdsforclasschange-btn" href="/">
+                    View Students
+                    </button>
+                  </div>
+                  <div class="col-12 col-md-4 btn-block">
+                    <button type="button" id="changestdsclass-btn" href="/">
+                    Change Class
+                    </button>
+                  </div>
+                  <div class="col"></div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

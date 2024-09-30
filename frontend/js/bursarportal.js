@@ -237,6 +237,7 @@ const displayTeachers = (page) => {
             });
         });
 };
+
 // display staff list all/teachers
 viewStaffSelect.addEventListener("change", (e) => {
     e.preventDefault();
@@ -414,17 +415,17 @@ studSearchKey.addEventListener("change", (e) => {
     else if (studSearchKey.value == "entryClass") {
         searchMe.innerHTML =
             `<select id="searchstud-entryclass">
-    <option value="tamyidi">tamyidi</option>
-    <option value="adonah">adonah</option>
+    <option value="tamhidi">tamhidi</option>
+    <option value="hadoonah">hadoonah</option>
     <option value="rawdoh">rawdoh</option>
-    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
-    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
-    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
-    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
-    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
-    <option value="awwal idaadi">awwal idaadi</option>
-    <option value="thaani idaadi">thaani idaadi</option>
-    <option value="thaalith idaadi">thaalith idaadi</option>
+    <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+    <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+    <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+    <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+    <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+    <option value="awwal idaadiy">awwal idaadiy</option>
+    <option value="thaani idaadiy">thaani idaadiy</option>
+    <option value="thaalith idaadiy">thaalith idaadiy</option>
   </select>`
     }
     else if (studSearchKey.value == "maritalStatus") {
@@ -449,17 +450,17 @@ studSearchKey.addEventListener("change", (e) => {
     else if (studSearchKey.value == "presentClass") {
         searchMe.innerHTML =
             `<select id="searchstud-presentclass">
-    <option value="tamyidi">tamyidi</option>
-    <option value="adonah">adonah</option>
+     <option value="tamhidi">tamhidi</option>
+    <option value="hadoonah">hadoonah</option>
     <option value="rawdoh">rawdoh</option>
-    <option value="awwal ibtidaahi">awwal ibtidaahi</option>
-    <option value="thaani ibtidaahi">thaani ibtidaahi</option>
-    <option value="thaalith ibtidaahi">thaalith ibtidaahi</option>
-    <option value="raabi ibtidaahi">raabi ibtidaahi</option>
-    <option value="khaamis ibtidaahi">khaamis ibtidaahi</option>
-    <option value="awwal idaadi">awwal idaadi</option>
-    <option value="thaani idaadi">thaani idaadi</option>
-    <option value="thaalith idaadi">thaalith idaadi</option>
+    <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+    <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+    <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+    <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+    <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+    <option value="awwal idaadiy">awwal idaadiy</option>
+    <option value="thaani idaadiy">thaani idaadiy</option>
+    <option value="thaalith idaadiy">thaalith idaadiy</option>
   </select>`
     }
     else if (studSearchKey.value == "classStatus") {
@@ -766,12 +767,170 @@ viewStaffPagePrevious.addEventListener("click", (e) => {
 });
 
 
-// //close staff form
-// closeLink.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     addStafferForm.style.display = "none"
-// });
+//  **************************** WEEKLY ATTENDANCE REPORT *********************************
+// ********************************************************************************************
+const wklyAttendanceForm = document.getElementById("wklyattendance-form")
+const closeWklyAttendanceFormBtn = document.getElementById("wklyattendance-icon")
+const viewWklyAttendanceReportLink = document.getElementById("weeklyattendance")
+const classnameForWklyAttendance = document.getElementById("classname-forwklyattendancereport")
+const programmeForWklyAttendance = document.getElementById("programme-forwklyattendancereport")
+const termForWklyAttendance = document.getElementById("term-forwklyattendancereport")
+const sessionForWklyAttendance = document.getElementById("session-forwklyattendancereport")
+const tableWklyAttendance = document.getElementById("wklyattendancereport-table")
+const tableHeadWklyAttendance = document.getElementById("wklyattendance-tblhead")
+const tableBodyForWklyAttendance = document.getElementById("wklyattendance-tblbody")
+const viewWklyAttendanceReportButton = document.getElementById("viewwklyattendancereport-btn")
+const wklyAttendanceLabel = document.getElementById("wklyattendance-label")
 
+
+// open weekly attendance report form
+viewWklyAttendanceReportLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    wklyAttendanceForm.style.display = "block";
+    sidebar.style.display = "none";
+});
+
+// close weekly attendance report form
+closeWklyAttendanceFormBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    tableWklyAttendance.style.display = "none";
+    wklyAttendanceForm.style.display = "none";
+});
+
+// display weekly attendance report
+const displayWklyAttendanceReport = (classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/attendance/viewAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+            tableWklyAttendance.style.display = "block"
+            wklyAttendanceLabel.style.display = "block"
+            let atdtblrowhead = document.createElement("tr")
+            let atdtblserialnohead = document.createElement("th")
+            let atdtbladmnohead = document.createElement("th")
+            let atdtblnamehead = document.createElement("th")
+            atdtblserialnohead.innerText = "Serial No"
+            atdtbladmnohead.innerText = "Admission No"
+            atdtblnamehead.innerText = "Name"
+            atdtblrowhead.appendChild(atdtblserialnohead)
+            atdtblrowhead.appendChild(atdtbladmnohead)
+            atdtblrowhead.appendChild(atdtblnamehead)
+            tableHeadWklyAttendance.appendChild(atdtblrowhead)
+
+            for (let i = 0; i < response.data.attendanceExists.length; i++) {
+                let atdtblrow = document.createElement("tr")
+                let atdtblserialno = document.createElement("th")
+                let atdtbladmno = document.createElement("td")
+                let atdtblname = document.createElement("td")
+                atdtblserialno.innerText = i + 1
+                atdtbladmno.innerText = response.data.attendanceExists[i].admissionNumber
+                atdtblname.innerText = response.data.attendanceExists[i].student_name
+                atdtblrow.appendChild(atdtblserialno)
+                atdtblrow.appendChild(atdtbladmno)
+                atdtblrow.appendChild(atdtblname)
+
+                //attendance
+                const requestedsessionatd = response.data.attendanceExists[i].attendanceRecord.find(asession => asession.sessionName == session)
+                const requestedtermatd = requestedsessionatd.term.find(aterm => aterm.termName == term)
+                if (i == 0) {  //adding term dates as heading for attendance table
+                    for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                        const dateToAdd = requestedtermatd.attendance[k].termdate
+                        let tbldate = document.createElement("th")
+                        tbldate.innerText = dateToAdd
+                        atdtblrowhead.appendChild(tbldate)
+                    }
+                }
+                for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                    const presentStatus = requestedtermatd.attendance[k].presence
+                    let tblpresence = document.createElement("td")
+                    if (presentStatus == 'yes') {
+                        tblpresence.innerText = "Present"
+                        tblpresence.style.backgroundColor = "#368014"
+                        tblpresence.style.color = "#ffffff"
+                    }
+                    else {
+                        tblpresence.innerText = "-"
+                        tblpresence.style.backgroundColor = "#970202"
+                        tblpresence.style.color = "#FFFFFF"
+                    }
+                    atdtblrow.appendChild(tblpresence)
+                }
+                tableBodyForWklyAttendance.appendChild(atdtblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+             tableWklyAttendance.style.display = "none";
+        });
+};
+
+// display weekly attendance on click of button
+viewWklyAttendanceReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    wklyAttendanceLabel.style.display = "none";
+    const className = classnameForWklyAttendance.value
+    const programme = programmeForWklyAttendance.value
+    const sessionName = sessionForWklyAttendance.value
+    const termName = termForWklyAttendance.value
+
+    if (programme == "select a programme" || className == "select a class") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input",
+            text: "Check the programme or class you entered"
+        });
+    }
+    else
+        displayWklyAttendanceReport(className, programme, termName, sessionName)
+});
+
+// clear table body when class is changed
+classnameForWklyAttendance.addEventListener("change", (e) => {
+    e.preventDefault();
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    tableWklyAttendance.style.display = "none";
+    wklyAttendanceLabel.style.display = "none";
+});
 
 
 

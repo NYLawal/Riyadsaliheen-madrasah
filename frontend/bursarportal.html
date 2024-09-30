@@ -184,11 +184,8 @@
         </nav>
       </header>
 
-      <section
-        class="bg-light py-3 py-md-5"
-        id="divider-bkgd"
-        style="height: 20px"
-      ></section>
+      <section class="bg-light py-3 py-md-5" id="divider-bkgd" style="height: 20px;">
+      </section>
 
       <!-- Aside -->
       <aside
@@ -233,7 +230,7 @@
               </ul>
             </li>
 
-            <li class="">
+            <li class="" style="display: none;">
               <a
                 href=""
                 data-bs-toggle="collapse"
@@ -242,20 +239,19 @@
                 class="dropdown-toggle"
                 data-bs-target="#updateStudentPayment"
                 aria-controls="updateStudentPayment"
-                >Payment Status</a
+                >Update Payment Status</a
               >
               <ul class="collapse list-unstyled" id="updateStudentPayment">
                 <li>
-                  <a href="#" id="viewbyclass-paymentstatus">by class</a>
+                  <a href="#" id="paymentstatus-byclass">by class</a>
                 </li>
                 <li>
-                  <a href="#" id="viewbystudent-paymentstatus">by student</a>
+                  <a href="#" id="paymentstatus-bystudent">by student</a>
                 </li>
               </ul>
             </li>
             <li>
-              <!-- scores and attendance for all students in a particular term -->
-              <a href="#">Class Attendance</a>
+              <a href="#" id="weeklyattendance">Class Attendance</a>
             </li>
           </ul>
           <ul class="list-unstyled components components2">
@@ -489,6 +485,114 @@
         </div>
       </section>
 
+      <!-- View Weekly Attendance by Term -->
+    <section class="py-5 py-md-3 mb-5" id="wklyattendance-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h3 class="mb-3 display-5 text-center">Attendance Report</h3>
+            <p class="text-secondary mb-1 text-center">
+              View attendance report for weeks where students attendance have been recorded.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4">
+                <button type="button" class="btn-close closebtn-icon" id="wklyattendance-icon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="wklyattendancereport" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col-12 col-md-3">
+                      <label for="classname-forwklyattendancereport" class="form-label">Class <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="classname-forwklyattendancereport">
+                          <option selected>select a class</option>
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="programme-forwklyattendancereport" class="form-label">Programme <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="programme-forwklyattendancereport">
+                          <option selected>select a programme</option>
+                          <option value="children madrasah">children madrasah</option>
+                          <option value="adult madrasah">adult madrasah</option>
+                          <option value="female madrasah">female madrasah</option>
+                          <option value="barnamij">barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="term-forwklyattendancereport" class="form-label">Term <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="term-forwklyattendancereport">
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="session-forwklyattendancereport" class="form-label">Session <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="session-forwklyattendancereport">
+                          <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-5">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="viewwklyattendancereport-btn" href="/">
+                        View Report
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </form>
+                <div>
+                  <p id="student-number" class="mt-2 mb-2"></p>
+                </div>
+                <div>
+                  <p id="wklyattendance-label" class="mt-4 mb-2 green-text">Weekly Attendance</p>
+                </div>
+                <div class="table-responsive overflow-auto" style="height: 400px; display: none;" id="wklyattendancereport-table">
+                  <table class="table table-light bsb-table-xl text-nowrap align-middle text-center">
+                    <thead id="wklyattendance-tblhead">
+                    </thead>
+                    <tbody id="wklyattendance-tblbody">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
       <!-- Footer  -->
       <footer class="footer">
         <!-- Widgets - Bootstrap Brain Component -->
@@ -716,7 +820,7 @@
         </div>
       </footer>
     </main>
-    <!-- <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+   
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

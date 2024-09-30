@@ -56,7 +56,7 @@ const viewStudentPageOne = document.getElementById("viewstd-page1")
 
 let studentpage = [];
 let lastpage = [];
-let studentNamesStore = [];
+let studentNamesStore;
 let classSubjectsReturned = [];
 let teacherDetails = {
     teacherClass: "",
@@ -208,6 +208,7 @@ const displayStudentsByClass = (page) => {
         .then(function (response) {
             console.log(response)
             studentTableBody.innerHTML = "";
+            studentNamesStore = [];
             for (let j = 0; j < response.data.students.length; j++) {
                 if (response.data.students.length != studentNamesStore.length) {
                     let option = document.createElement("option")
@@ -267,7 +268,6 @@ const displayStudentsByClass = (page) => {
                 tblrow.appendChild(tblcol11)
                 studentTableBody.appendChild(tblrow)
             }
-            console.log("response says page is ", response.data.page)
             studentpage.push(response.data.page)
             lastpage.push(response.data.pgnum)
 
@@ -1453,7 +1453,6 @@ viewClassReportButton.addEventListener("click", (e) => {
     tableBodyForClassReport.innerHTML = "";
     tableHeadRowClassReport.innerHTML = "";
     tableBodyForAttendance.innerHTML = "";
-    tableHeadRowAttendance.innerHTML = "";
     const className = classnameForReportSelect.value
     const programme = programmeForReportSelect.value
     const sessionName = sessionForClassReport.value
@@ -1479,10 +1478,8 @@ classnameForReportSelect.addEventListener("change", (e) => {
 });
 
 
-
 // ******************** ATTENDANCE **************************************
 // **********************************************************************
-// const classReportLink = document.getElementById("viewclassreport-link")
 const attendanceForm = document.getElementById("markattendance-form")
 const closeAttendanceFormIcon = document.getElementById("markattendance-icon")
 const viewAttendanceLink = document.getElementById("markattendance-link")
@@ -1490,14 +1487,25 @@ const classnameForAttendanceSelect = document.getElementById("classname-foratten
 const programmeForAttendanceSelect = document.getElementById("programme-forattendance")
 const termForAttendance = document.getElementById("term-forattendance")
 const sessionForAttendance = document.getElementById("session-forattendance")
-const tableAttendance = document.getElementById("table-attendance")
-const tableHeadAttendance = document.getElementById("markattendance-tblhead")
-const tableHeadRowAttendance = document.getElementById("markattendance-tblheadrow")
-const tableBodyForAttendance = document.getElementById("markattendance-tblbody")
-const markAttendanceButton = document.getElementById("markattendance-btn")
+const attendanceOptionSelect = document.getElementById("choice-forattendance")
 const dateInputField = document.getElementById("date-inputfield")
 const datepickIcon = document.getElementById("datepick-icon")
-
+const attendanceChoiceDescripiton = document.getElementById("atdchoice-desc")
+const submitRequestForAttendance = document.getElementById("submitrequest-btn")
+// for mark attendance
+const tableMarkAttendance = document.getElementById("markattendance-table")
+const tableHeadAttendance = document.getElementById("markattendance-tblhead")
+const tableBodyForAttendance = document.getElementById("markattendance-tblbody")
+// for view attendance
+const tableWklyAttendance = document.getElementById("wklyattendancereport-table")
+const tableHeadWklyAttendance = document.getElementById("wklyattendance-tblhead")
+const tableBodyForWklyAttendance = document.getElementById("wklyattendance-tblbody")
+// for edit a student attendance
+const atdAdmissionNoCol = document.getElementById("atdcol-foradmNo")
+const admissionNoForAttendance = document.getElementById("admno-forattendance")
+// for changing an attendance date
+const atdNewDateCol = document.getElementById("atdcol-fornewDate")
+const newDatepickForAttendance = document.getElementById("newdate-inputfield")
 
 
 // open class attendance form
@@ -1505,12 +1513,102 @@ viewAttendanceLink.addEventListener("click", (e) => {
     e.preventDefault();
     attendanceForm.style.display = "block";
     sidebar.style.display = "none";
+});
 
-    //clear table if already populated
+// change attendance option
+attendanceOptionSelect.addEventListener("change", (e) => {
+    e.preventDefault();
+    tableWklyAttendance.style.display = "none";
+    tableMarkAttendance.style.display = "block";
     tableBodyForAttendance.innerHTML = "";
-    tableHeadRowAttendance.innerHTML = "";
     tableHeadAttendance.innerHTML = "";
-    //populate with fresh data
+    atdNewDateCol.style.display = "none";
+    atdAdmissionNoCol.style.display = "none";
+
+    if (attendanceOptionSelect.value == "mark attendance") {
+        attendanceChoiceDescripiton.innerText = "Mark attendance for the day whose date you have selected"
+        viewListRequest()
+    }
+    else if (attendanceOptionSelect.value == "view attendance") {
+        attendanceChoiceDescripiton.innerText = "View attendance marked so far for this term"
+    }
+    else if (attendanceOptionSelect.value == "edit student attendance") {
+        attendanceChoiceDescripiton.innerText = "Edit a day's attendance for a particular student"
+        atdAdmissionNoCol.style.display = "block";
+    }
+    else if (attendanceOptionSelect.value == "change a date") {
+        attendanceChoiceDescripiton.innerText = "Change a date mistakenly picked while marking an attendance"
+        atdNewDateCol.style.display = "block";
+    }
+    else if (attendanceOptionSelect.value == "delete a day") {
+        attendanceChoiceDescripiton.innerText = "Delete the attendance marked for a particular date."
+    }
+});
+
+// submit request for attendance based on the option selected
+submitRequestForAttendance.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (attendanceOptionSelect.value == "Select Task") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Input Detected",
+            text: "You have not selected any task"
+        });
+    }
+    if (attendanceOptionSelect.value == "view attendance") {
+        tableMarkAttendance.style.display = "none"
+        tableWklyAttendance.style.display = "block";
+        tableBodyForWklyAttendance.innerHTML = "";
+        tableHeadWklyAttendance.innerHTML = "";
+        const className = classnameForAttendanceSelect.value
+        const programme = programmeForAttendanceSelect.value
+        const sessionName = sessionForAttendance.value
+        const termName = termForAttendance.value
+
+        displayWklyAttendanceReport(className, programme, termName, sessionName)
+    }
+    else if (attendanceOptionSelect.value == "mark attendance") {
+        markAttendanceRequest()
+    }
+    else if (attendanceOptionSelect.value == "edit student attendance") {
+        let admNo = admissionNoForAttendance.value;
+        let attendanceDate = dateInputField.value;
+        if (admNo == "" || attendanceDate == "") {
+            Swal.fire({
+                icon: "error",
+                title: "Empty Input Detected",
+                text: "Check that you have inputs for the student's admission number and date"
+            });
+        }
+        else {
+            const classname = classnameForAttendanceSelect.value
+            const programme = programmeForAttendanceSelect.value
+            const term = termForAttendance.value
+            const session = sessionForAttendance.value
+            const atdDate = {
+                attendanceDate
+            }
+            editStudentAttendance(admNo, classname, programme, term, session, atdDate)
+        }
+    }
+    else if (attendanceOptionSelect.value == "change a date") {
+        editAttendanceDateRequest()
+    }
+    else if (attendanceOptionSelect.value == "delete a day") {
+        deleteDayAttendanceRequest()
+    }
+    else { }
+});
+
+// request to view list of students in class
+const viewListRequest = () => {
+    //clear table if already populated
+    tableWklyAttendance.style.display = "none";
+    tableMarkAttendance.style.display = "block";
+    tableBodyForAttendance.innerHTML = "";
+    tableHeadAttendance.innerHTML = "";
+    // populate with fresh data
+    let tblrowhead = document.createElement("tr")
     let tblserialnohead = document.createElement("th")
     let tbladmNohead = document.createElement("th")
     let tblnamehead = document.createElement("th")
@@ -1519,10 +1617,10 @@ viewAttendanceLink.addEventListener("click", (e) => {
     tbladmNohead.innerText = "Adm No"
     tblnamehead.innerText = "Name"
     tblpresent.innerText = "Present"
-    tableHeadRowAttendance.appendChild(tblserialnohead)
-    tableHeadRowAttendance.appendChild(tbladmNohead)
-    tableHeadRowAttendance.appendChild(tblnamehead)
-    tableHeadRowAttendance.appendChild(tblpresent)
+    tblrowhead.appendChild(tblserialnohead)
+    tblrowhead.appendChild(tbladmNohead)
+    tblrowhead.appendChild(tblnamehead)
+    tblrowhead.appendChild(tblpresent)
     for (let j = 0; j < studentNamesStore.length; j++) {
         let tblrow = document.createElement("tr")
         let tblserialno = document.createElement("th")
@@ -1539,36 +1637,75 @@ viewAttendanceLink.addEventListener("click", (e) => {
         tblrow.appendChild(tblpresence)
         tableBodyForAttendance.appendChild(tblrow)
     }
-});
+    tableHeadAttendance.appendChild(tblrowhead)
+};
 
-// click to indicate present or absent
+// click class list to indicate present or absent
 tableBodyForAttendance.addEventListener("click", (e) => {
     e.preventDefault();
     if (e.target.classList.contains("fa-check")) {
         e.target.classList.remove("fa-check")
     }
     else if (e.target.firstElementChild.classList.contains("fa")) {
-        // console.log(e.target)
-        // e.target.classList.add("fa-check")
         e.target.innerHTML = `<i class="fa fa-check ispresenticon" id="ispresenticon"></i>`
     }
-
 });
 
-// close attendance form
-closeAttendanceFormIcon.addEventListener("click", (e) => {
-    e.preventDefault();
-    tableBodyForAttendance.innerHTML = "";
-    tableHeadRowAttendance.innerHTML = "";
-    tableHeadAttendance.innerHTML = "";
-    attendanceForm.style.display = "none";
-});
+// request to mark attendance on click of button
+const markAttendanceRequest = () => {
+    const classname = classnameForAttendanceSelect.value
+    const programme = programmeForAttendanceSelect.value
+    const term = termForAttendance.value
+    const session = sessionForAttendance.value
+    let attendance = []
+    let student_name;
+    let admissionNumber;
+    let termdate = dateInputField.value;
+    if (termdate == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please input a valid date, be sure to pick the correct one"
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Want to continue?",
+            text: `You are about to mark attendance for ${termdate} of ${term} term, ${session} session`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, mark attendance!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                for (let i = 0; i < tableBodyForAttendance.childElementCount; i++) {
+                    let presence;
+                    admissionNumber = tableBodyForAttendance.children[i].children[1].innerText
+                    student_name = tableBodyForAttendance.children[i].children[2].innerText
+                    if (tableBodyForAttendance.children[i].children[3].firstElementChild.classList.contains("fa-check")) {
+                        presence = "yes"
+                    }
+                    else { presence = "no" }
+                    let stdAttendance = {
+                        admissionNumber,
+                        student_name,
+                        termdate,
+                        presence
+                    }
+                    attendance.push(stdAttendance)
+                }
+                markAttendance(attendance, classname, programme, term, session)
+            }
+        });
+    }
+};
 
 // mark attendance 
 const markAttendance = (stdattendance, classname, programme, term, session) => {
     let errorMsg;
     axios
-        .patch(`${baseUrl}/scores/markAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`, stdattendance,
+        .post(`${baseUrl}/attendance/markAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`, stdattendance,
             {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -1611,48 +1748,330 @@ const markAttendance = (stdattendance, classname, programme, term, session) => {
         });
 };
 
+// view attendance
+const displayWklyAttendanceReport = (classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/attendance/viewAttendance/?className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                // text:  response.data.message
+            });
+            tableWklyAttendance.style.display = "block"
+            // wklyAttendanceLabel.style.display = "block"
+            let atdtblrowhead = document.createElement("tr")
+            let atdtblserialnohead = document.createElement("th")
+            let atdtbladmnohead = document.createElement("th")
+            let atdtblnamehead = document.createElement("th")
+            atdtblserialnohead.innerText = "Serial No"
+            atdtbladmnohead.innerText = "Admission No"
+            atdtblnamehead.innerText = "Name"
+            atdtblrowhead.appendChild(atdtblserialnohead)
+            atdtblrowhead.appendChild(atdtbladmnohead)
+            atdtblrowhead.appendChild(atdtblnamehead)
+            tableHeadWklyAttendance.appendChild(atdtblrowhead)
 
-// mark attendance on click of button
-markAttendanceButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    let attendance = []
-    let student_name;
-    let admissionNumber;
-    let termdate = dateInputField.value;
-    if (termdate == "") {
+            for (let i = 0; i < response.data.attendanceExists.length; i++) {
+                let atdtblrow = document.createElement("tr")
+                let atdtblserialno = document.createElement("th")
+                let atdtbladmno = document.createElement("td")
+                let atdtblname = document.createElement("td")
+                atdtblserialno.innerText = i + 1
+                atdtbladmno.innerText = response.data.attendanceExists[i].admissionNumber
+                atdtblname.innerText = response.data.attendanceExists[i].student_name
+                atdtblrow.appendChild(atdtblserialno)
+                atdtblrow.appendChild(atdtbladmno)
+                atdtblrow.appendChild(atdtblname)
+
+                //attendance
+                const requestedsessionatd = response.data.attendanceExists[i].attendanceRecord.find(asession => asession.sessionName == session)
+                const requestedtermatd = requestedsessionatd.term.find(aterm => aterm.termName == term)
+                if (i == 0) {  //adding term dates as heading for attendance table
+                    for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                        const dateToAdd = requestedtermatd.attendance[k].termdate
+                        let tbldate = document.createElement("th")
+                        tbldate.innerText = dateToAdd
+                        atdtblrowhead.appendChild(tbldate)
+                    }
+                }
+                for (let k = 0; k < requestedtermatd.attendance.length; k++) {
+                    const presentStatus = requestedtermatd.attendance[k].presence
+                    let tblpresence = document.createElement("td")
+                    if (presentStatus == 'yes') {
+                        tblpresence.innerText = "Present"
+                        tblpresence.style.backgroundColor = "#368014"
+                        tblpresence.style.color = "#ffffff"
+                    }
+                    else {
+                        tblpresence.innerText = "-"
+                        tblpresence.style.backgroundColor = "#970202"
+                        tblpresence.style.color = "#FFFFFF"
+                    }
+                    atdtblrow.appendChild(tblpresence)
+                }
+                tableBodyForWklyAttendance.appendChild(atdtblrow)
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+            tableWklyAttendance.style.display = "none";
+        });
+};
+
+//change attendance date
+const editStudentAttendance = (admNo, classname, programme, term, session, atdDate) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/attendance/changeAttendanceStatus/?admissionNumber=${admNo}&className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`, atdDate,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            dateInputField.value = "";
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// request to change attendance date on click of button
+const editAttendanceDateRequest = () => {
+    let newDate = newDatepickForAttendance.value;
+    let prevDate = dateInputField.value;
+    if (newDate == "" || prevDate == "") {
         Swal.fire({
             icon: "error",
             title: "Invalid input detected",
-            text: "Please input a valid date, be sure to pick the correct one"
+            text: "Please input the previous and new dates"
         });
     }
     else {
-        const classname = classnameForAttendanceSelect.value
-        const programme = programmeForAttendanceSelect.value
-        const term = termForAttendance.value
-        const session = sessionForAttendance.value
-
-        for (let i = 0; i < tableBodyForAttendance.childElementCount; i++) {
-            let presence;
-            admissionNumber = tableBodyForAttendance.children[i].children[1].innerText
-            student_name = tableBodyForAttendance.children[i].children[2].innerText
-            if (tableBodyForAttendance.children[i].children[3].firstElementChild.classList.contains("fa-check")) {
-                presence = "yes"
+        Swal.fire({
+            title: "Are You Sure?",
+            text: `You are about to change ${prevDate} to ${newDate} on your attendance register`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, change date!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const classname = classnameForAttendanceSelect.value
+                const programme = programmeForAttendanceSelect.value
+                const term = termForAttendance.value
+                const session = sessionForAttendance.value
+                const newdate = {
+                    newDate
+                }
+                editAttendanceDate(prevDate, classname, programme, term, session, newdate)
             }
-            else { presence = "no" }
-            let stdAttendance = {
-                admissionNumber,
-                student_name,
-                termdate,
-                presence
-            }
-            attendance.push(stdAttendance)
-        }
-        markAttendance(attendance, classname, programme, term, session)
+        });
     }
+}
+
+//change attendance date
+const editAttendanceDate = (prevdate, classname, programme, term, session, newdate) => {
+    let errorMsg;
+    axios
+        .patch(`${baseUrl}/attendance/changeAttendanceDate/?prevDate=${prevdate}&className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`, newdate,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            dateInputField.value = "";
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// request to delete attendance for a day
+const deleteDayAttendanceRequest = () => {
+    let atdDate = dateInputField.value;
+    if (atdDate == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid input detected",
+            text: "Please input the date"
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Are You Sure?",
+            text: `You are about to delete attendance for ${atdDate} on your attendance register`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete date!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const classname = classnameForAttendanceSelect.value
+                const programme = programmeForAttendanceSelect.value
+                const term = termForAttendance.value
+                const session = sessionForAttendance.value
+                deleteDayAttendance(atdDate, classname, programme, term, session)
+            }
+        });
+    }
+}
+
+//delete attendance for a day
+const deleteDayAttendance = (attendanceDate, classname, programme, term, session) => {
+    let errorMsg;
+    axios
+        .delete(`${baseUrl}/attendance/deleteDayAttendance/?atdDate=${attendanceDate}&className=${classname}&programme=${programme}&termName=${term}&sessionName=${session}`,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            dateInputField.value = "";
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// close attendance form
+closeAttendanceFormIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    tableBodyForAttendance.innerHTML = "";
+    tableHeadAttendance.innerHTML = "";
+    tableBodyForWklyAttendance.innerHTML = "";
+    tableHeadWklyAttendance.innerHTML = "";
+    atdNewDateCol.style.display = "none";
+    atdAdmissionNoCol.style.display = "none";
+    attendanceForm.style.display = "none";
 });
 
-// VIEW/SET/EDIT/DELETE ASSESSMENT
+
+// ***********************************************************************************************
+// ****************************** VIEW/SET/EDIT/DELETE ASSESSMENT ********************************
+
 const setAssessmentLink = document.getElementById("setassessment-link")
 const viewAssessmentLink = document.getElementById("viewassessment-link")
 const delAssessmentLink = document.getElementById("deleteassessment-link")
@@ -2234,9 +2653,9 @@ const getAssignedClasses = (email) => {
             switchClassProgrammes.innerHTML = "";
             console.log(switchClassProgrammes)
             switchClassesForm.style.display = "block";
-           
+
             assignedClassesStore = [...response.data.assignedClasses]
-           
+
             //append each programme to programmes dropdown
             for (let n = 0; n < assignedClassesStore.length; n++) {
                 let optionprg = document.createElement("option")
@@ -2274,10 +2693,10 @@ const getAssignedClasses = (email) => {
 // change the programme to see corresponding class
 switchClassProgrammes.addEventListener("change", (e) => {
     e.preventDefault();
-   
+
     for (let n = 0; n < switchClassProgrammes.children.length; n++) {
         if (switchClassProgrammes.value == switchClassProgrammes.children[n].innerText)
-        switchClassClasses.value = switchClassProgrammes.children[n].innerText
+            switchClassClasses.value = switchClassProgrammes.children[n].innerText
     }
 });
 
@@ -2285,7 +2704,7 @@ switchClassProgrammes.addEventListener("change", (e) => {
 switchClassSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const newClasstoSwitch = switchClassClasses.value.split("_");
-    console.log(newClasstoSwitch) 
+    console.log(newClasstoSwitch)
 
     const teacherClass = newClasstoSwitch[0]
     const teacherProgramme = newClasstoSwitch[1]
@@ -2297,7 +2716,7 @@ switchClassSubmitBtn.addEventListener("click", (e) => {
 });
 
 // switch class for staffer
-const switchClasses = (staffInfo) =>  {
+const switchClasses = (staffInfo) => {
     let errorMsg;
     axios
         .post(`${baseUrl}/staff/switchClass`, staffInfo, {

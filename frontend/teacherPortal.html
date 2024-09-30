@@ -137,8 +137,23 @@
             <a href="#" id="addscores-link">Add Scores</a>
           </li>
           <li class="">
-            <a href="#" id="markattendance-link">Mark Attendance</a>
+            <a href="#" id="markattendance-link">Attendance</a>
           </li>
+          <!-- <li class="">
+            <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle"
+              data-bs-target="#atdSubmenu" aria-controls="atdSubmenu">Attendance</a>
+            <ul class="collapse list-unstyled" id="atdSubmenu">
+              <li>
+                <a href="#" id="">View</a>
+              </li>
+              <li>
+                <a href="#" id="">Set/Edit</a>
+              </li>
+              <li>
+                <a href="#" id="">Delete</a>
+              </li>
+            </ul>
+          </li> -->
           <li>
             <a href="#" id="updatescores-link">Edit Scores</a>
           </li>
@@ -261,8 +276,8 @@
       </div>
     </section>
 
-     <!-- Add Student -->
-     <section class="bg-light py-3 studentadd-form" id="studentadd-form">
+    <!-- Add Student -->
+    <section class="bg-light py-3 studentadd-form" id="studentadd-form">
       <div class="container">
         <div class="row justify-content-center">
           <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
@@ -408,8 +423,7 @@
                     <div class="input-group">
                       <select style="background-color: white" id="addsession">
                         <option value="2023/2024">2023/2024</option>
-                        <option value="2022/2023">2022/2023</option>
-                        <!-- <option value="2024/2025">2024/2025</option> -->
+                        <option value="2024/2025">2024/2025</option>
                       </select>
                     </div>
                   </div>
@@ -441,7 +455,7 @@
                       <option value="التعبير">التعبير</option>
                       <option value="التهجية">التهجية</option>
                       <option value="التدريبات اللغوية">
-                       التدريبات اللغوية
+                        التدريبات اللغوية
                       </option>
                       <option value="التفسير">التفسير</option>
                       <option value="التجويد">التجويد</option>
@@ -459,14 +473,14 @@
                       <option value="الدرس العام">الدرس العام</option>
                       <option value="قراءة القرآن">قراءة القرآن</option>
                       <option value="Other">Other</option>
-                      </select>
+                    </select>
                   </div>
                   <div class="col-6 col-md-4 item">
                     <p>Other Subject</p>
                     <input type="text" name="addothersubject" placeholder="" id="addothersubject" disabled />
                   </div>
                 </div>
-                
+
                 <label for="table" class="form-label mb-0">Scores</label>
                 <table class="table table-bordered mt-2 text-center" id="scorestable">
                   <thead>
@@ -513,7 +527,7 @@
         </div>
       </div>
     </section>
-     
+
 
     <!-- scores report form -->
     <section class="bg-light pt-5 pb-5 reportscores-form" id="reportscores-form">
@@ -556,6 +570,7 @@
                     <div class="input-group">
                       <select style="background-color: white" id="session-forreport">
                         <option value="2023/2024">2023/2024</option>
+                        <option value="2024/2025">2024/2025</option>
                       </select>
                     </div>
                   </div>
@@ -647,11 +662,8 @@
                         Close Form
                       </button>
                     </div>
-                    <!-- <div class="col"></div> -->
                   </div>
                 </form>
-                <!-- </div>
-                </div> -->
               </form>
             </div>
           </div>
@@ -710,6 +722,7 @@
                     <div class="input-group">
                       <select style="background-color: white" id="session">
                         <option value="2023/2024">2023/2024</option>
+                        <option value="2024/2025">2024/2025</option>
                       </select>
                     </div>
                   </div>
@@ -731,7 +744,7 @@
                       <option value="التعبير">التعبير</option>
                       <option value="التهجية">التهجية</option>
                       <option value="التدريبات اللغوية">
-                       التدريبات اللغوية
+                        التدريبات اللغوية
                       </option>
                       <option value="التفسير">التفسير</option>
                       <option value="التجويد">التجويد</option>
@@ -749,7 +762,7 @@
                       <option value="الدرس العام">الدرس العام</option>
                       <option value="قراءة القرآن">قراءة القرآن</option>
                       <option value="Other">Other</option>
-                      </select>
+                    </select>
                   </div>
                   <div class="col-6 col-md-4 item">
                     <p>Other Subject</p>
@@ -861,6 +874,7 @@
                       <div class="input-group">
                         <select style="background-color: white" id="session-forclassreport">
                           <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
@@ -875,7 +889,6 @@
                     <div class="col"></div>
                   </div>
                 </form>
-                <!-- <h4 class="mb-2" style="color: white;">Class Report</h4> -->
                 <div>
                   <p id="student-number" class="mt-2 mb-2"></p>
                 </div>
@@ -884,44 +897,12 @@
                     id="viewstudent-table">
                     <thead id="classreport-tblhead">
                       <tr id="classreport-tblheadrow">
-                        <!-- <th>Serial No</th>
-                    <th>Admission No</th>
-                    <th>Name</th> -->
                       </tr>
                     </thead>
                     <tbody id="classreport-tblbody"></tbody>
                   </table>
                 </div>
               </div>
-
-              <!-- pagination -->
-              <!-- <nav aria-label="..." class="mt-2">
-            <ul
-              class="pagination pagination-sm justify-content-center"
-              id="stdview-pagination"
-            >
-              <li class="page-item" id="tab-disabled">
-                <a
-                  class="page-link component-active-color"
-                  href=""
-                  id="viewstd-pageprevious"
-                >
-                  << Previous</a
-                >
-              </li>
-              <li class="page-item">
-          <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
-        </li>
-              <li class="page-item">
-                <a
-                  class="page-link component-active-color"
-                  href="#"
-                  id="viewstd-pagenext"
-                  >Next >>
-                </a>
-              </li>
-            </ul>
-          </nav> -->
             </div>
           </div>
         </div>
@@ -929,14 +910,18 @@
     </section>
 
 
-    <!-- Mark Attendance -->
+    <!-- Attendance - Mark, View, Edit -->
     <section class="py-5 py-md-3 mt-5 mb-5" id="markattendance-form">
       <div class="container">
         <div class="row justify-content-md-center">
           <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
             <h3 class="mb-3 display-5 text-center">Class Attendance</h3>
             <p class="text-secondary mb-1 text-center">
-              Input the term and session in the form below, then choose the appropriate date.
+              Select or input values for each field as appropriate. Be sure to select the correct task
+              you want to perform before clicking the submit button.
+              <span style="color: rgb(156, 5, 5);">Before submitting any request, make sure you have 
+                the correct term and session selected 
+              </span>
             </p>
             <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
           </div>
@@ -944,7 +929,7 @@
         <div class="row justify-content-center">
           <div class="col-12 col-lg-9 col-xl-9">
             <div class="card widget-card border-light">
-              <div class="card-body p-4" style=" box-shadow: 0 0 10px 0 #c9cac9; ">
+              <div class="card-body p-4" style=" box-shadow: 0 0 10px 0 #c9cac9;">
                 <button type="button" class="btn-close btn-close closebtn-icon" id="markattendance-icon"
                   aria-label="Close"></button>
                 <form action="/" class="py-3 px-md-4 px-2" id="markattendance" style=" box-shadow: none">
@@ -954,7 +939,6 @@
                           class="text-danger">*</span></label>
                       <div class="input-group">
                         <input id="classname-forattendance">
-
                       </div>
                     </div>
                     <div class="col-12 col-md-3">
@@ -980,71 +964,75 @@
                       <div class="input-group">
                         <select style="background-color: white" id="session-forattendance">
                           <option value="2023/2024">2023/2024</option>
+                          <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
                   </div>
                   <div class="row gy-4 gy-xl-5 mt-1 mb-2">
                     <div class="item col-12 col-md-6">
+                      <label for="choice-forattendance" class="form-label">What do you intend doing? <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="choice-forattendance">
+                          <option selected>Select Task</option>
+                          <option value="mark attendance">Mark attendance for the day</option>
+                          <option value="view attendance">View weekly attendance</option>
+                          <option value="edit student attendance">Edit attendance for a student</option>
+                          <option value="change a date">Edit a mistake in date</option>
+                          <option value="delete a day">Delete a day's attendance</option>
+                        </select>
+                      </div>
+                      <p id="atdchoice-desc" class="green-text mt-0"></p>
+                    </div>
+                    <div class="item col-12 col-md-6">
                       <p>Choose Date:</p>
                       <input type="date" name="bdate" id="date-inputfield" required />
                       <i class="fas fa-calendar-alt" id="datepick-icon"></i>
                     </div>
                   </div>
+                  <div class="row gy-4 gy-xl-5 mb-2 mt-1" id="atdrow-byoption">
+                    <div class="item col-12 col-md-6" id="atdcol-fornewDate" style="display: none;">
+                      <p id="newdatelabel-forattendance">New Date:</p>
+                      <input type="date" name="bdate" id="newdate-inputfield" required />
+                      <i class="fas fa-calendar-alt" id="newdatepick-icon"></i>
+                    </div>
+                    <div class="item col-12 col-md-6" id="atdcol-foradmNo" style="display: none;">
+                      <label for="admno-forattendance" class="form-label" id="admnolabel-forattendance">Admission
+                        Number</label>
+                      <div class="input-group">
+                        <input id="admno-forattendance">
+                      </div>
+                    </div>
+                  </div>
                 </form>
-                <div class="table-responsive">
-                  <table class="table table-light table-striped bsb-table-xl text-nowrap align-middle"
-                    id="markattendance-table">
+                <div class="table-responsive" style="display: none;" id="markattendance-table">
+                  <table class="table table-light table-striped bsb-table-xl text-nowrap align-middle">
                     <thead id="markattendance-tblhead">
-                      <tr id="markattendance-tblheadrow">
-
-                      </tr>
                     </thead>
                     <tbody id="markattendance-tblbody">
-
-
                     </tbody>
                   </table>
                 </div>
-                <div class="row">
+                <div class="table-responsive overflow-auto" style="max-height: 400px; display: none;"
+                  id="wklyattendancereport-table">
+                  <table class="table table-light bsb-table-xl text-nowrap align-middle text-center">
+                    <thead id="wklyattendance-tblhead">
+                    </thead>
+                    <tbody id="wklyattendance-tblbody">
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row" id="submit-request">
                   <div class="col"></div>
-                  <div class="col-12 col-md-6 btn-block">
-                    <button type="button" id="markattendance-btn" href="/">
-                      Mark Attendance
+                  <div class="col-12 col-md-6 btn-block mt-0 mb-3">
+                    <button type="button" id="submitrequest-btn" href="/">
+                      Submit Request
                     </button>
                   </div>
                   <div class="col"></div>
                 </div>
               </div>
-
-              <!-- pagination -->
-              <!-- <nav aria-label="..." class="mt-2">
-            <ul
-              class="pagination pagination-sm justify-content-center"
-              id="stdview-pagination"
-            >
-              <li class="page-item" id="tab-disabled">
-                <a
-                  class="page-link component-active-color"
-                  href=""
-                  id="viewstd-pageprevious"
-                >
-                  << Previous</a
-                >
-              </li>
-              <li class="page-item">
-          <a class="page-link pagination-color" href="#" id="viewstd-page1">1</a>
-        </li>
-              <li class="page-item">
-                <a
-                  class="page-link component-active-color"
-                  href="#"
-                  id="viewstd-pagenext"
-                  >Next >>
-                </a>
-              </li>
-            </ul>
-          </nav> -->
             </div>
           </div>
         </div>
@@ -1246,25 +1234,26 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
-            <form action="https://result-proc-system.onrender.com/api/v1/class/addDetails" method="post" enctype="multipart/form-data" id="form-classdetails"> 
+            <form action="https://result-proc-system.onrender.com/api/v1/class/addDetails" method="post"
+              enctype="multipart/form-data" id="form-classdetails">
               <!-- Text input -->
               <div class="item">
-                  <label class="form-label" for="pname">No of students in class</label>
-                <input type="number" id="noInClass" name="noInClass"  class="form-control" />
+                <label class="form-label" for="pname">No of students in class</label>
+                <input type="number" id="noInClass" name="noInClass" class="form-control" />
               </div>
-            <div class="item">
-              <label class="form-label" for="signature">Choose Signature</label>
-              <input type="file" id="imgfile" accept="image/jpeg, image/png, image/jpg" name="signatureImage">
-              <output for="" id="output"> </output>
-            </div>
+              <div class="item">
+                <label class="form-label" for="signature">Choose Signature</label>
+                <input type="file" id="imgfile" accept="image/jpeg, image/png, image/jpg" name="signatureImage">
+                <output for="" id="output"> </output>
+              </div>
               <!-- Submit button -->
-               <div class="btn-block"> 
-                 <button type="submit" class="mb-4" id="setclassdetails-btn">Set</button>
-               </div>
-               <div class="btn-block"> 
+              <div class="btn-block">
+                <button type="submit" class="mb-4" id="setclassdetails-btn">Set</button>
+              </div>
+              <div class="btn-block">
                 <button type="button" class="mb-2" id="closeclassdetails-btn">Close Form</button>
               </div>
-              </form>
+            </form>
           </div>
         </div>
       </div>
@@ -1285,8 +1274,10 @@
                     <img src="../images/logo2.png" alt="Logo" width="50" height="50">
                   </a>
                 </div>
-                <h2 class="fs-6 fw-normal text-center text-secondary mb-4 px-2" id="assignteacher-h2">You should see all classes assigned to you below.
-                  You can switch between classes by clicking on the class you wish to switch to from the list, then click the button. 
+                <h2 class="fs-6 fw-normal text-center text-secondary mb-4 px-2" id="assignteacher-h2">You should see all
+                  classes assigned to you below.
+                  You can switch between classes by clicking on the class you wish to switch to from the list, then
+                  click the button.
                 </h2>
                 <form action="#!">
                   <div class="row gy-2 overflow-hidden">
@@ -1297,8 +1288,7 @@
                     </div>
                     <div class="col-12">
                       <label for="switchclass-class" class="form-label">Switch to:</label>
-                      <input type="text" class="form-control" name="" id="switchclass-class"
-                      required>
+                      <input type="text" class="form-control" name="" id="switchclass-class" required>
                     </div>
                     <div class="col-12 submitbtn-div">
                       <div class="d-grid my-3 mt-4">
