@@ -191,14 +191,11 @@
                 </li>
               </ul>
             </li>
-            <!-- <li>
-      <a href="#" id="resultcheck">Check Result & Attendance</a>
-    </li>
-    <li>
-      <a href="#" id="progressreport">View Performance Report</a>
-    </li> -->
             <li>
               <a href="#" id="resultsheet">View Report Sheet</a>
+            </li>
+            <li>
+              <a href="#" id="billing-view">View Bill</a>
             </li>
           </ul>
           <ul class="list-unstyled components components2">
@@ -242,6 +239,7 @@
                     <option value="awwal idaadiy">awwal idaadiy</option>
                     <option value="thaani idaadiy">thaani idaadiy</option>
                     <option value="thaalith idaadiy">thaalith idaadiy</option>
+                    <option value="mutawasith">mutawasith</option>
                   </select>
                 </div>
                 <div class="item">
@@ -650,6 +648,150 @@
           </div>
         </div>
       </section>
+
+        <!-- Student Bill -->
+     <section class="bg-light py-3 px-4 studentassessment-form" id="studentbill-form">
+      <div class="container green-text">
+        <div class="row justify-content-center mb-3">
+          <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
+            <form action="/" class="py-2 px-4" id="studentreportsheet-info"
+              style="background-color: #d0f1c1; box-shadow: none">
+              <div class="row justify-content-center mb-3 mt-2">
+                <div class="text-center mb-2">
+                  <p style="color: rgb(2, 36, 9);">Input the admission number then click the button to view your latest bill. 
+                    You should also see your last payment and balance due for this billing.</p>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-admNumber" class="form-label">Admission No <span
+                      class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="billview-admNumber" value="" required />
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-lastpay" class="form-label">Last Payment Made</label>
+                  <div class="input-group">
+                    <input type="number" min="0" placeholder="0" class="form-control" id="billview-lastpay" value="" required />
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-baldue" class="form-label">Balance Due</label>
+                  <div class="input-group">
+                    <input type="number" min="0" placeholder="0" class="form-control" id="billview-baldue" value="" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding-left: 0; padding-bottom: 10px;">
+                <div class="col"></div>
+                <div class="col-12 col-md-4 btn-block">
+                  <button type="button" id="billview-btn" href="/">
+                    Generate Bill
+                  </button>
+                </div>
+                <div class="col"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-reportcard" name="student-reportcard">
+              <div class="row text-center report-heading">
+                <div class="col-12 mt-1 schoolnamendaddress">
+                  <h3 class="green-text arabic-detail"> مدرسة رياض الصالحين للدراسات العربية والإسلامية</h3>
+                  <h3 class="green-text arabic-detail">منطقة أولمبي، ولاية أوغن، نيجيريا</h3>
+                  <h2 class="green-text fw-bold" style="font-size: 22px;">RIYAD SALIHEEN</h2>
+                  <h4 class="green-text fw-bold" style="font-size: 20px;">ARABIC AND ISLAMIC INSTITUTE </h4>
+                  <p class="mt-0 mb-0 green-text addrndphone">Saint Lucy Estate, House 9 Road D, Olambe, Ogun State</p>
+                  <p class="mt-0 mb-0 green-text addrndphone">Tel: 07014509569
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="greenbkgd-heading text-white mt-1">
+                  <p>MODRSASAH BILL</p>
+                  <p class="arabic-detail">الفاتورة</p>
+                </div>
+              </div>
+              <div class="std-details mt-3">
+                  <p class="detail-left">Name:<span class="detail-left-span" id="detail-billname"></span><span
+                      class="detail-right"> اسم الطالب</span></p>
+                  <p class="detail-left">Class: <span class="detail-left-span" id="detail-billclass"></span><span
+                      class="detail-right"> الفصل</span></p>
+                  <p class="detail-left">Session: <span class="detail-left-span" id="detail-billsession"></span><span
+                      class="detail-right"> العام الدراسي</span></p>
+                  <p class="detail-left">Term: <span class="detail-left-span" id="detail-billterm"></span><span
+                      class="detail-right"> الفترة</span></p>
+              </div>
+              <div class="table" id="bill-table">
+                <table class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3" id="">
+                  <thead>
+                    <tr>
+                      <th scope="col">Items</th>
+                      <th scope="col">#</th>
+                      <th scope="col">k</th>
+                    </tr>
+                  </thead>
+                  <tbody id="billingview-tbody">
+                    <tr>
+                      <th>Tuition Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم المدرسة</th>
+                    </tr>
+                    <tr>
+                      <th>Textbooks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; الكراسة</th>
+                    </tr>
+                    <tr>
+                      <th>Development Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; المبلغ المفروض للتطور</th>
+                    </tr>
+                    <tr>
+                      <th>Graduation Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم التخريج</th>
+                    </tr>
+                    <tr>
+                      <th>Portal Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم البوابة</th>
+                    </tr>
+                    <tr>
+                      <th>Examination Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم الإمتحنات</th>
+                    </tr>
+                    <tr>
+                      <th>Uniform(1) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; بذلة نظامية</th>
+                    </tr>
+                    <tr>
+                      <th>Last Term Balance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; باقية الفترة السابقة</th>
+                    </tr>
+                    <tr>
+                      <th>Full Quranic Memorisation Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم تحفيظ القرآن الكريم كاملا</th>
+                    </tr>
+                    <tr>
+                      <th>Admission Form &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; استمارة القبول</th>
+                    </tr>
+                    <tr>
+                      <th>Parent Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>Staff Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>Scholarship Grant &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; مجموع المبلغ</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col"></div>
+          <div class="col-12 col-md-3 btn-block">
+            <button type="button" id="billviewform-closebtn" href="/">
+              Close Form
+            </button>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </section>
 
       <!-- Footer  -->
       <footer class="footer">

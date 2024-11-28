@@ -125,7 +125,7 @@ const getTeacherClass = () => {
                 console.log(error.response.headers);
                 errorMsg = error.response.data.message
                 if (error.response.data.message == "Error: unauthorised access! Log in to resume your tasks")
-                    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+                    window.location.href = "https://riyadarabicschool.netlify.app/frontend/login.html"
                     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
             } else if (error.request) {
                 // The request was made but no response was received
@@ -1057,7 +1057,7 @@ addAdmNo.addEventListener("change", (e) => {
         }
 })
 
-// on change of subject selection to other, enable the other subject input field
+// on change of subject selection
 addSubjectSelect.addEventListener("change", (e) => {
     e.preventDefault();
     //allow subject to be selected from list or inputted if 'other' is chosen from list of subjects
@@ -1070,15 +1070,13 @@ addSubjectSelect.addEventListener("change", (e) => {
         addOtherSubject.setAttribute("disabled", true)
     }
     let subjectSelected = addSubjectSelect.value
-
-    if (!classSubjectsReturned.includes(subjectSelected)) {
+    if (!classSubjectsReturned.includes(subjectSelected) && addSubjectSelect.value != "Other") {
         Swal.fire({
             icon: "error",
             title: "Sorry",
             text: `${subjectSelected} is not a valid subject for your class`
         });
     }
-
     else {
         let tblrow = document.createElement("tr")
         let tblcol0 = document.createElement("th")
@@ -1089,8 +1087,8 @@ addSubjectSelect.addEventListener("change", (e) => {
         let tblcol5 = document.createElement("td")
         let tblcol6 = document.createElement("td")
         tblcol0.innerText = addResultBody.children.length + 1
-        tblcol1.innerText = addSubjectSelect.value
         if (addOtherSubject.value != "" && addSubjectSelect.value == "Other") tblcol1.innerText = addOtherSubject.value;
+        tblcol1.innerText = addSubjectSelect.value
         tblcol2.innerHTML = `<input type="number" min="0" max="40" name="addtest" placeholder="" id="addtest"  style="border:none; min-width:25px"/>`
         tblcol3.innerHTML = `<input type="number" min="0" max="60" name="addexam" placeholder="" id="addexam" style="border:none"/>`
         tblcol6.innerHTML = `<i class="fa fa-trash delsubjecticon" id="delsubjecticon"></i>`
@@ -1146,6 +1144,52 @@ addSubjectSelect.addEventListener("change", (e) => {
             }
             let addSubjectremark = tblcol5.innerText;
         })
+         // check if subject is already entered
+        if (addResultBody.children.length > 1){
+            for (let count = 0; count < addResultBody.childElementCount-1; count++) {
+                if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addSubjectSelect.value) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Sorry",
+                        text: `${addSubjectSelect.value} is already on the list`
+                    });
+                    addResultBody.removeChild(tblrow)
+                }
+            }
+        }
+    }
+})
+
+// if enter key is pressed after inputting other subject
+addOtherSubject.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+        for (let count = 0; count < addResultBody.childElementCount; count++) {
+            if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == "Other") {
+                if (!classSubjectsReturned.includes(addOtherSubject.value)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Sorry",
+                        text: `${addOtherSubject.value} is not a valid subject for your class. Change the subject or delete the row`
+                    });
+                }
+                else addResultBody.children[count].firstElementChild.nextElementSibling.innerText = addOtherSubject.value
+            }
+        }
+        // check if subject is already entered
+        if (addResultBody.children.length > 1){
+            for (let count = 0; count < addResultBody.childElementCount-1; count++) {
+                if (addResultBody.children[count].firstElementChild.nextElementSibling.innerText == addOtherSubject.value) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Sorry",
+                        text: `${addOtherSubject.value} is already on the list`
+                    });
+                    console.log(addResultBody.lastElementChild)
+                    addResultBody.removeChild(addResultBody.lastElementChild)
+                }
+            }
+        }
     }
 })
 
@@ -1347,7 +1391,6 @@ const displayClassReport = (classname, programme, term, session) => {
                 // text:  response.data.message
             });
 
-            // console.log(response.data.classSubjects)
             let tblserialnohead = document.createElement("th")
             let tbladmnohead = document.createElement("th")
             let tblnamehead = document.createElement("th")
@@ -1383,8 +1426,9 @@ const displayClassReport = (classname, programme, term, session) => {
                 tblrow.appendChild(tbladmno)
                 tblrow.appendChild(tblname)
 
-                for (let j = 0; j < response.data.classExists[i].scores.length; j++) {
-                    const requestedterm = response.data.classExists[i].scores[j].term.find(aterm => aterm.termName == term)
+                const requestedsession = response.data.classExists[i].scores.find(asession => asession.sessionName == session)
+                if (requestedsession) {
+                    const requestedterm = requestedsession.term.find(aterm => aterm.termName == term)
 
                     for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
                         const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
@@ -1466,8 +1510,7 @@ viewClassReportButton.addEventListener("click", (e) => {
         });
     }
     else
-        console.log(className, programme, termName, sessionName)
-    displayClassReport(className, programme, termName, sessionName)
+        displayClassReport(className, programme, termName, sessionName)
 });
 
 // clear table body when class is changed
@@ -2575,7 +2618,7 @@ const setDetails = (className, programme, formData) => {
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
-                errorMsg = error.response.data.message
+                errorMsg = error.response.data
             } else if (error.request) {
                 // The request was made but no response was received
                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -2612,7 +2655,7 @@ formToSubmitDetails.addEventListener("submit", (e) => {
         const formData = new FormData(formToSubmitDetails);
         const formDataObj = {};
         formData.forEach((value, key) => (formDataObj[key] = value));
-        console.log(formDataObj)
+        // console.log(formDataObj)
         setDetails(className, programme, formDataObj);
     }
 });
@@ -2775,7 +2818,7 @@ switchClassCloseIcon.addEventListener("click", (e) => {
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    window.location.href = "https://riyadarabicschool.netlify.app/frontend/login.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
 

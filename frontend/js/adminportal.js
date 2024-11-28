@@ -665,8 +665,7 @@ viewStudentsLink.addEventListener("click", (e) => {
     e.preventDefault();
     viewStudentsForm.style.display = "block"
     sidebar.style.display = "none"
-    // viewStudentPage1.style.backgroundColor = "green"
-    page = displayAllStudents(1)
+    // page = displayAllStudents(1)
 });
 
 // close view student form
@@ -1055,7 +1054,7 @@ closeStdFrmLink.addEventListener("click", (e) => {
 // redirect to teacher's portal to be able to add scores for student
 addStudentScores.addEventListener("click", (e) => {
     e.preventDefault();
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+    window.location.href = "https://riyadarabicschool.netlify.app/frontend/teacherPortal.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
 });
 
@@ -1985,7 +1984,6 @@ submitRemoveQuery.addEventListener("click", (e) => {
     const formData = {
         email
     }
-
 });
 
 
@@ -2366,6 +2364,180 @@ editStudentStatusButton.addEventListener("click", (e) => {
         editStudentStatus(admNo, formdata)
 });
 
+
+// ************************************************************************
+// ADD OR REMOVE CLASS
+// *************************************************************************
+
+const classAddLink = document.getElementById("add-class");
+const classAddForm = document.getElementById("classadd-form");
+const classAddCloseButton = document.getElementById("addclassclose-icon");
+const classnameForClassAdd = document.getElementById("addclass-classname");
+const programmeForClassAdd = document.getElementById("addclass-programme");
+const classAddSubmitButton = document.getElementById("submitaddclass-btn");
+const classRemoveSubmitButton = document.getElementById("submitremoveclass-btn");
+
+// display class add/remove form
+classAddLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    classAddForm.style.display = "block"
+    sidebar.style.display = "none";
+});
+
+// close class add/remove form
+classAddCloseButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    classAddForm.style.display = "none";
+    classnameForClassAdd.value = ""
+    programmeForClassAdd.value = ""
+});
+
+// add a class
+const addClass = (classInfo) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/class/addClass/`, classInfo,
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit request to add class
+classAddSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = classnameForClassAdd.value;
+    const programme = programmeForClassAdd.value;
+    if (className == "" || programme == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Check that you have inputted both the classname and programme"
+        });
+    }
+    else {
+        const formdata = {
+            className,
+            programme
+        }
+        addClass(formdata)
+    }
+});
+
+// remove a class
+const removeClass = (payload) => {
+    let errorMsg;
+    axios
+    .delete(`${baseUrl}/class/removeClass/`,
+        {
+                data: payload,
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            }
+        )
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text:  response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// submit request to remove class
+classRemoveSubmitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const className = classnameForClassAdd.value;
+    const programme = programmeForClassAdd.value;
+    if (className == "" || programme == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Check that you have inputted both the classname and programme"
+        });
+    }
+    else {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeClass(formData);
+            }
+        });
+    }
+    const formData = {
+         className,
+         programme
+    }
+});
 
 
 // REPORT ********************************************************************
@@ -2903,6 +3075,7 @@ const tableHeadRowClassReport = document.getElementById("classreport-tblheadrow"
 const tableBodyForClassReport = document.getElementById("classreport-tblbody")
 const viewClassReportButton = document.getElementById("viewclassreport-btn")
 const downloadClassReportButton = document.getElementById("downloadclassreport-btn")
+const ameedCommentonReportButton = document.getElementById("ameedcomment-btn")
 const attendanceLabel = document.getElementById("attendance-label")
 const attendanceTableHeadRow = document.getElementById("classattendance-tblheadrow")
 const attendanceTableBodyRow = document.getElementById("classattendance-tblbodyrow")
@@ -2975,10 +3148,13 @@ const displayClassReport = (classname, programme, term, session) => {
             }
             let tblmarksobtained = document.createElement("th")
             let tblavgpercentage = document.createElement("th")
+            let tblcomment = document.createElement("th")
             tblmarksobtained.innerText = "Mark Obtained"
             tblavgpercentage.innerText = "Average Percentage"
+            tblcomment.innerText = "Ameed's Comment"
             tableHeadRowClassReport.appendChild(tblmarksobtained)
             tableHeadRowClassReport.appendChild(tblavgpercentage)
+            tableHeadRowClassReport.appendChild(tblcomment)
 
             for (let i = 0; i < response.data.classExists.length; i++) {
                 let tblrow = document.createElement("tr")
@@ -2994,9 +3170,9 @@ const displayClassReport = (classname, programme, term, session) => {
 
                 const requestedsession = response.data.classExists[i].scores.find(asession => asession.sessionName == session)
                 const requestedterm = requestedsession.term.find(aterm => aterm.termName == term)
-                for (let k = 3; k < tableHeadRowClassReport.children.length - 2; k++) {
+                if (!requestedterm) continue;  //if student has no report for the term, continue to the next
+                for (let k = 3; k < tableHeadRowClassReport.children.length - 3; k++) {
                     const subjectToAdd = requestedterm.subjects.find(asubject => asubject.subjectName == tableHeadRowClassReport.children[k].innerText)
-                    console.log(subjectToAdd)
                     let tbltotalscore = document.createElement("td")
                     if (subjectToAdd == undefined) { tbltotalscore.innerText = "" }
                     else tbltotalscore.innerText = subjectToAdd.totalScore
@@ -3008,7 +3184,7 @@ const displayClassReport = (classname, programme, term, session) => {
                 tblpercentage.innerText = requestedterm.avgPercentage.toFixed(2)
                 tblrow.appendChild(tblmark)
                 tblrow.appendChild(tblpercentage)
-
+               
                 tableBodyForClassReport.appendChild(tblrow)
             }
             // Sort the class report table according to average percentage descending
@@ -3018,8 +3194,8 @@ const displayClassReport = (classname, programme, term, session) => {
             }
             let sorted_array = classAverages.sort((a, b) => b - a);
             let newClassReportTable = document.createElement("tbody")
-            for (n = 0; n <= sorted_array.length; n++) {
-                for (m = 0; m <= tableBodyForClassReport.childElementCount - 1; m++) {
+            for (let n = 0; n <= sorted_array.length; n++) {
+                for (let m = 0; m <= tableBodyForClassReport.childElementCount - 1; m++) {
                     if (tableBodyForClassReport.children[m].lastElementChild.innerText == sorted_array[n]) {
                         tableBodyForClassReport.children[m].firstElementChild.innerText = n + 1
                         newClassReportTable.appendChild(tableBodyForClassReport.children[m])
@@ -3027,6 +3203,24 @@ const displayClassReport = (classname, programme, term, session) => {
                 }
             }
             tableBodyForClassReport.innerHTML = newClassReportTable.innerHTML
+
+            // add comment dropdown to each student row in the report
+            for (let p = 0; p <= tableBodyForClassReport.childElementCount - 1; p++){
+                let tblpcomment = document.createElement("td")
+                tableBodyForClassReport.children[p].appendChild(tblpcomment)
+                tableBodyForClassReport.children[p].lastElementChild.innerHTML = `<select id="amdcomment">
+                     <option value="نشاط ممتاز، بارك الله فيك. An excellent result keep it up.">نشاط ممتاز، بارك الله فيك. An excellent result keep it up</option>
+                     <option value="نشاط جيد جداً، يمكنك الحصول على درجات أعلى في الفترة المقبلة. A very good result, you can score higher next term.">نشاط جيد جداً، يمكنك الحصول على درجات أعلى في الفترة المقبلة. A very good result, you can score higher next term.</option>
+                     <option value="نشاط جيد، يمكنك الحصول على درجات أعلى في الفترة المقبلة. A good result, you can score higher next term.">نشاط جيد، يمكنك الحصول على درجات أعلى في الفترة المقبلة. A good result, you can score higher next term.</option>
+                     <option value="نشاط لا بأس به، اهتم بدرسك. An average result, pay attention to your studies.">نشاط لا بأس به، اهتم بدرسك. An average result, pay attention to your studies.</option>
+                     <option value="نشاط ضعيف، اهتم بدرسك.  A poor result, pay attention to your studies.">نشاط ضعيف، اهتم بدرسك.  A poor result, pay attention to your studies.</option>
+                     <option value="نشاط ضعيف جداً، اهتم بدرسك. A very poor result, pay attention to your studies.">نشاط ضعيف جداً، اهتم بدرسك. A very poor result, pay attention to your studies.</option>
+                     <option value="انتقل إلى الفصل التالي. Promoted to the next class.">انتقل إلى الفصل التالي. Promoted to the next class.</option>
+                     <option value="انتقلي إلى الفصل التالي. Promoted to the next class">انتقلي إلى الفصل التالي. Promoted to the next class.</option>
+                     <option value="سيعيد الفصل. To repeat the class.">سيعيد الفصل. To repeat the class.</option>
+                     <option value="ستعيد الفصل. To repeat the class.">ستعيد الفصل. To repeat the class.</option>
+                  </select>`
+            }
 
             //for attendance
             for (let i = 0; i < response.data.attendanceExists.length; i++) {
@@ -3093,7 +3287,6 @@ const displayClassReport = (classname, programme, term, session) => {
         });
 };
 
-
 // display class scores on click of button
 viewClassReportButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -3117,6 +3310,97 @@ viewClassReportButton.addEventListener("click", (e) => {
     else
         displayClassReport(className, programme, termName, sessionName)
 });
+
+//add principal's comment for students in a class at once
+const addAmeedComment = ({...stdcomments}, classname, term, session) => {
+    let errorMsg;
+    axios
+        .post(`${baseUrl}/scores/addComments/?className=${classname}&termName=${term}&sessionName=${session}`, stdcomments, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// add comment for students via class report on click of button
+ameedCommentonReportButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (tableBodyForClassReport.childElementCount == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Invalid Request",
+            text: "No class report dsiplayed"
+        });
+    }
+    else {
+    const className = classnameForReportSelect.value
+    const sessionName = sessionForClassReport.value
+    const termName = termForClassReport.value
+    let stdscomments = []
+    let formdata = {
+        stdscomments
+    }
+    for (let count = 0; count < tableBodyForClassReport.childElementCount; count++) {
+        let admNoTD = tableBodyForClassReport.children[count].firstElementChild.nextElementSibling;
+        let admNo = admNoTD.innerText;
+        let commentTD = tableBodyForClassReport.children[count].lastElementChild.firstElementChild
+        let comment = commentTD.value
+        let stdcomment = {
+            admNo,
+            comment
+        }
+        stdscomments.push(stdcomment)
+    }
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You are about to add comments for students of this class",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, add the comments"
+    }).then((result) => {
+        if (result.isConfirmed) {
+           addAmeedComment(formdata, className, termName, sessionName)
+        }
+    });
+}
+});
+
 
 // clear table body when class is changed
 classnameForReportSelect.addEventListener("change", (e) => {
@@ -3153,7 +3437,7 @@ function tableToCSV(className, programme, sessionName, termName) {
     // Get the table head row data, then each column data  and 
     let rowshead = tableHeadRowClassReport.children;
     let csvrow = [];
-    for (let k = 0; k < rowshead.length; k++) {
+    for (let k = 0; k < rowshead.length-1; k++) {
         csvrow.push(rowshead[k].innerText);
     }
     // Combine each column value with comma
@@ -3168,7 +3452,7 @@ function tableToCSV(className, programme, sessionName, termName) {
 
         // Stores each csv row data
         let csvrow = [];
-        for (let j = 0; j < cols.length; j++) {
+        for (let j = 0; j < cols.length-1; j++) {
 
             // Get the text data of each cell of
             // a row and push it to csvrow
@@ -3487,6 +3771,7 @@ editSubjectsFormCloseIcon.addEventListener("click", (e) => {
 
 // ************************************************************************
 // SET ASSESSMENT
+// *************************************************************************
 
 const setAssessmentLink = document.getElementById("setassessment-link");
 const setQuizForm = document.getElementById("setquiz-form");
@@ -3805,9 +4090,16 @@ const downloadScores = (admNo, term, session) => {
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
             reportCardNextTermBegins.innerText = response.data.nextTermDate
-            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.teacherSignature}" alt="teacher signature" width="60">`
-            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.principalSign}" alt="principal signature" width="60">`
-            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.proprietorSign}" alt="proprietor signature" width="60">`
+            // set max height for signatures
+            reportCardTeacherSignature.classList.add("signatureimages")
+            reportCardPrincipalSignature.classList.add("signatureimages")
+            reportCardProprietorSignature.classList.add("signatureimages")
+            // to ensure signature is not loaded from cache, in case there's a change
+            let timestamp = new Date().getTime();
+            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.teacherSignature}?t= + ${timestamp}" alt="teacher signature" width="60">`
+            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.principalSign}?t= + ${timestamp}" alt="principal signature" width="60">`
+            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.proprietorSign}?t= + ${timestamp}" alt="proprietor signature" width="60">`
+    
             function calculateAttendance() {
                 let maxAttendance = response.data.maxAttendance;
                 let timesPresent = 0;
@@ -3845,8 +4137,6 @@ const downloadScores = (admNo, term, session) => {
                 tblrow.appendChild(tblremark)
                 dwnresultBody.appendChild(tblrow)
                 if (response.data.termName == 'third') {
-                    // firstSecondTermTbl.style.display = "none";
-                    // thirdTermTbl.style.display = "block";
                     let ttblrow = document.createElement("tr")
                     let tblserialno = document.createElement("th")
                     let tblsubject = document.createElement("td")
@@ -4649,15 +4939,69 @@ changeStudentsClassButton.addEventListener("click", (e) => {
 
 
 
+
 // ************************************************************************
 // logout
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    window.location.href = "https://riyadarabicschool.netlify.app/frontend/login.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
 });
 
+// ********************************************************************************
+// TROUBLESHOOTING FOR DUPLICATES IN SCORES DATABASE
+// ********************************************************************************
+// const getduplicatesbtn = document.getElementById("duplicates")
+
+// getduplicatesbtn.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     getDuplicates()
+// });
 
 
-
+// const getDuplicates = () => {
+//     let errorMsg;
+//     axios
+//         .get(`${baseUrl}/scores/getDupl/`, {
+//             headers: {
+//                 'Authorization': 'Bearer ' + token
+//             }
+//         })
+//         .then(function (response) {
+//             console.log(response)
+//             Swal.fire({
+//                 icon: "success",
+//                 title: "Successful",
+//                 text: "Successful! See details below"
+//             });
+//             // for (k = 0; k < response.data.classExists.subjects.length; k++) {
+                
+//             // }
+//         })
+//         .catch(function (error) {
+//             if (error.response) {
+//                 // The request was made and the server responded with a status code
+//                 // that falls out of the range of 2xx
+//                 console.log(error.response.data);
+//                 console.log(error.response.status);
+//                 console.log(error.response.headers);
+//                 errorMsg = error.response.data.message
+//             } else if (error.request) {
+//                 // The request was made but no response was received
+//                 // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+//                 // http.ClientRequest in node.js
+//                 console.log(error.request);
+//                 errorMsg = "Network Error"
+//             } else {
+//                 // Something happened in setting up the request that triggered an Error
+//                 console.log('Error', error.message);
+//                 errorMsg = error.message
+//             }
+//             Swal.fire({
+//                 icon: "error",
+//                 title: "Error Processing Input",
+//                 text: errorMsg
+//             });
+//         });
+// };

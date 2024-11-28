@@ -1,201 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Madrasatu Riyadisaliheen</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../images/logowhite.jpg"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link
+      href="./css/styleportal.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <link
+      href="./css/style.css"
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Madrasatu Riyadisaliheen</title>
-  <link rel="shortcut icon" type="image/x-icon" href="../images/logowhite.jpg" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-  <link href="./css/styleportal.css" rel="stylesheet" type="text/css" media="screen" />
-  <link href="./css/style.css" rel="stylesheet" type="text/css" media="screen" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  
-</head>
-
-<body>
-  <main>
-    <!-- navigation bar begins-->
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #d0f1c1">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="../images/logo2.png" alt="logo" width="90" height="90" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="../index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Academics
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="admissions.html">Admissions</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="programmes.html">Programmes</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="login.html">Online Studies</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="careers.html">Careers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Quick Links
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="calendar.html">Term Calendar</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="newsandevents.html">News and Events</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="assessments.html">Take a Quiz</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="gallery.html">Gallery</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="donate.html">Donate</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown active">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Portal
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="login.html">Staff</a></li>
-                <li><a class="dropdown-item" href="login.html">Parent</a></li>
-                <li><a class="dropdown-item" href="login.html">Student</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- navigation bar ends-->
-
-    <div class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header" id="header-wrapper">
-      <h1 class="display-5 fw-bold text-white">Welcome to Your Portal</h1>
-    </div>
-
-    <!-- Header -->
-    <header id="header-demo">
-      <nav class="navbar navbar-expand-md bsb-navbar-3" style="background-color: #d0f1c1">
-        <div class="container">
-          <ul class="navbar-nav">
-            <li class="nav-item me-3">
-              <a class="nav-link" href="#!" data-bs-toggle="offcanvas" data-bs-target="#bsbSidebar1"
-                aria-controls="bsbSidebar1">
-                <i class="navbar-toggler-icon" id="toggler-icon"></i>
-                <span style="color: rgb(16, 59, 2)">click here</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-
-    <!-- Aside -->
-    <aside class="bsb-sidebar-1 offcanvas offcanvas-start" tabindex="-1" id="bsbSidebar1"
-      aria-labelledby="bsbSidebarLabel1">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="bsbSidebarLabel1">
-          Assalam Alaykum <span></span>
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="list-unstyled components">
-          <p class="text-tasks">Your Tasks</p>
-          <li>
-            <a href="#" id="attendancecheck">Weekly Attendance</a>
-          </li>
-          <li class="">
-            <a href="" data-bs-toggle="collapse" aria-expanded="false" role="button" class="dropdown-toggle"
-              data-bs-target="#addSubmenu" aria-controls="addSubmenu">Lessons & Assessment</a>
-            <ul class="collapse list-unstyled" id="addSubmenu">
-              <li>
-                <a href="#" id="studentassessment-link">take assessment</a>
+  <body>
+    <main>
+      <!-- navigation bar begins-->
+      <nav
+        class="navbar navbar-expand-lg fixed-top"
+        style="background-color: #d0f1c1"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"
+            ><img src="../images/logo2.png" alt="logo" width="90" height="90"
+          /></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../index.html"
+                  >Home</a
+                >
               </li>
-              <li>
-                <a href="#" id="monthlyquiz-link">take quiz</a>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">About Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Academics
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="admissions.html"
+                      >Admissions</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="programmes.html"
+                      >Programmes</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="login.html"
+                      >Online Studies</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="careers.html">Careers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Quick Links
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="calendar.html"
+                      >Term Calendar</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="newsandevents.html"
+                      >News and Events</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="assessments.html"
+                      >Take a Quiz</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="gallery.html">Gallery</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="donate.html">Donate</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown active">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Portal
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="login.html">Staff</a></li>
+                  <li><a class="dropdown-item" href="login.html">Parent</a></li>
+                  <li>
+                    <a class="dropdown-item" href="login.html">Student</a>
+                  </li>
+                </ul>
               </li>
             </ul>
-          </li>
-          <li>
-            <a href="#" id="resultcheck">End of Term Report</a>
-          </li>
-          <li>
-            <a href="#" id="progressreport">View Performance Report</a>
-          </li>
-          <li>
-            <a href="#" id="resultsheet">View Report Sheet</a>
-          </li>
-        </ul>
-        <ul class="list-unstyled components components2">
-          <li>
-            <a href="#" id="logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- View Weekly Attendance by Term -->
-    <section class="py-5 py-md-3 mb-5" id="wklyattendance-form">
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
-            <h3 class="mb-3 display-5 text-center">Attendance Report</h3>
-            <p class="text-secondary mb-1 text-center">
-              You can view attendance report for weeks where your ward's attendance have been recorded. Make sure you select the 
-              correct term and session before clicking the button.
-            </p>
-            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-9 col-xl-9">
-            <div class="card widget-card border-light">
-              <div class="card-body p-4">
-                <button type="button" class="btn-close closebtn-icon" id="wklyattendance-icon"
-                  aria-label="Close"></button>
-                <form action="/" class="py-3 px-md-4 px-2" id="wklyattendancereport" style=" box-shadow: none">
+      </nav>
+      <!-- navigation bar ends-->
+
+      <div
+        class="text-secondary px-4 py-5 mt-4 mb-0 text-center page-header"
+        id="header-wrapper"
+      >
+        <h1 class="display-5 fw-bold text-white">Welcome to Your Portal</h1>
+      </div>
+
+      <!-- Header -->
+      <header id="header-demo">
+        <nav
+          class="navbar navbar-expand-md bsb-navbar-3"
+          style="background-color: #d0f1c1"
+        >
+          <div class="container">
+            <ul class="navbar-nav">
+              <li class="nav-item me-3">
+                <a
+                  class="nav-link"
+                  href="#!"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#bsbSidebar1"
+                  aria-controls="bsbSidebar1"
+                >
+                  <i class="navbar-toggler-icon" id="toggler-icon"></i>
+                  <span style="color: rgb(16, 59, 2)">click here</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Aside -->
+      <aside
+        class="bsb-sidebar-1 offcanvas offcanvas-start"
+        tabindex="-1"
+        id="bsbSidebar1"
+        aria-labelledby="bsbSidebarLabel1"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="bsbSidebarLabel1">
+            Assalam Alaykum <span></span>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="list-unstyled components">
+            <p class="text-tasks">Your Tasks</p>
+            <li>
+              <a href="#" id="attendancecheck">Weekly Attendance</a>
+            </li>
+            <li class="">
+              <a
+                href=""
+                data-bs-toggle="collapse"
+                aria-expanded="false"
+                role="button"
+                class="dropdown-toggle"
+                data-bs-target="#addSubmenu"
+                aria-controls="addSubmenu"
+                >Lessons & Assessment</a
+              >
+              <ul class="collapse list-unstyled" id="addSubmenu">
+                <li>
+                  <a href="#" id="studentassessment-link">take assessment</a>
+                </li>
+                <li>
+                  <a href="#" id="monthlyquiz-link">take quiz</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" id="resultcheck">End of Term Report</a>
+            </li>
+            <li>
+              <a href="#" id="progressreport">View Performance Report</a>
+            </li>
+            <li>
+              <a href="#" id="resultsheet">View Report Sheet</a>
+            </li>
+            <li>
+              <a href="#" id="billing-view">View Bill</a>
+            </li>
+          </ul>
+          <ul class="list-unstyled components components2">
+            <li>
+              <a href="#" id="logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- View Weekly Attendance by Term -->
+      <section class="py-5 py-md-3 mb-5" id="wklyattendance-form">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+              <h3 class="mb-3 display-5 text-center">Attendance Report</h3>
+              <p class="text-secondary mb-1 text-center">
+                You can view attendance report for weeks where your ward's
+                attendance have been recorded. Make sure you select the correct
+                term and session before clicking the button.
+              </p>
+              <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-9">
+              <div class="card widget-card border-light">
+                <div class="card-body p-4">
+                  <button
+                    type="button"
+                    class="btn-close closebtn-icon"
+                    id="wklyattendance-icon"
+                    aria-label="Close"
+                  ></button>
+                  <form
+                    action="/"
+                    class="py-3 px-md-4 px-2"
+                    id="wklyattendancereport"
+                    style="box-shadow: none"
+                  >
+                    <div class="row gy-4 gy-xl-5 mb-3">
+                      <div class="col-12 col-md-4">
+                        <label
+                          for="admno-forattendance"
+                          class="form-label"
+                          id="admnolabel-forattendance"
+                          >Admission Number
+                          <span class="text-danger">*</span></label
+                        >
+                        <div class="input-group">
+                          <input id="admno-forattendance" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label
+                          for="term-forwklyattendancereport"
+                          class="form-label"
+                          >Term <span class="text-danger">*</span></label
+                        >
+                        <div class="input-group">
+                          <select
+                            style="background-color: white"
+                            id="term-forwklyattendancereport"
+                          >
+                            <option value="first">First</option>
+                            <option value="second">Second</option>
+                            <option value="third">Third</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <label
+                          for="session-forwklyattendancereport"
+                          class="form-label"
+                          >Session <span class="text-danger">*</span></label
+                        >
+                        <div class="input-group">
+                          <select
+                            style="background-color: white"
+                            id="session-forwklyattendancereport"
+                          >
+                            <option value="2023/2024">2023/2024</option>
+                            <option value="2024/2025">2024/2025</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col"></div>
+                      <div class="col-12 col-md-4 btn-block">
+                        <button
+                          type="button"
+                          id="viewwklyattendancereport-btn"
+                          href="/"
+                        >
+                          View
+                        </button>
+                      </div>
+                      <div class="col"></div>
+                    </div>
+                  </form>
+                  <div>
+                    <p id="student-number" class="mt-2 mb-2"></p>
+                  </div>
+                  <div>
+                    <p
+                      id="wklyattendance-label"
+                      class="mt-4 mb-2 green-text"
+                    ></p>
+                  </div>
+                  <div
+                    class="table-responsive overflow-auto"
+                    style="display: none"
+                    id="wklyattendancereport-table"
+                  >
+                    <table
+                      class="table table-light bsb-table-xl text-nowrap align-middle text-center"
+                    >
+                      <thead id="wklyattendance-tblhead"></thead>
+                      <tbody id="wklyattendance-tblbody"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- scores report form -->
+      <section
+        class="bg-light pt-5 pb-5 reportscores-form"
+        id="reportscores-form"
+      >
+        <div class="container" style="position: relative">
+          <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+              <h3 class="mb-3 display-5 text-center">
+                Term Result and Attendance Report
+              </h3>
+              <p class="text-secondary mb-1 text-center">
+                To view result or attendance for your ward, input the admission
+                number as well as the term and session in the form below. Scores
+                are only available at the end of the term, but you can monitor
+                your ward's attendance anytime during the term using the weekly
+                attendance link on the sidebar.
+              </p>
+              <p class="mb-1 text-center" style="color: rgb(156, 5, 5)">
+                Please note that attendance records may not be available beyond
+                the present term.
+              </p>
+              <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+            </div>
+          </div>
+          <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+              <div class="testbox">
+                <form
+                  action="/"
+                  class="py-4 px-md-4 px-2"
+                  id="scoresreport"
+                  style="background-color: #d0f1c1; box-shadow: none"
+                >
                   <div class="row gy-4 gy-xl-5 mb-3">
                     <div class="col-12 col-md-4">
-                      <label for="admno-forattendance" class="form-label" id="admnolabel-forattendance">Admission
-                        Number <span class="text-danger">*</span></label>
-                      <div class="input-group">
-                        <input id="admno-forattendance">
+                      <label for="admNo-forreport" class="form-label"
+                        >Admission No <span class="text-danger">*</span></label
+                      >
+                      <div class="">
+                        <input
+                          name="admNo-forreport"
+                          id="admNo-forreport"
+                          style="background-color: white"
+                        />
                       </div>
                     </div>
                     <div class="col-12 col-md-4">
-                      <label for="term-forwklyattendancereport" class="form-label">Term <span
-                          class="text-danger">*</span></label>
+                      <label for="term-forreport" class="form-label"
+                        >Term <span class="text-danger">*</span></label
+                      >
                       <div class="input-group">
-                        <select style="background-color: white" id="term-forwklyattendancereport">
+                        <select
+                          style="background-color: white"
+                          id="term-forreport"
+                        >
                           <option value="first">First</option>
                           <option value="second">Second</option>
                           <option value="third">Third</option>
@@ -203,83 +435,417 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4">
-                      <label for="session-forwklyattendancereport" class="form-label">Session <span
-                          class="text-danger">*</span></label>
+                      <label for="session-forreport" class="form-label"
+                        >Session <span class="text-danger">*</span></label
+                      >
                       <div class="input-group">
-                        <select style="background-color: white" id="session-forwklyattendancereport">
+                        <select
+                          style="background-color: white"
+                          id="session-forreport"
+                        >
                           <option value="2023/2024">2023/2024</option>
                           <option value="2024/2025">2024/2025</option>
                         </select>
                       </div>
                     </div>
                   </div>
-                  <div class="row mt-5">
-                    <div class="col"></div>
-                    <div class="col-12 col-md-4 btn-block">
-                      <button type="button" id="viewwklyattendancereport-btn" href="/">
-                        View
+                  <div class="row mt-0 mb-3" id="student-namebar">
+                    <h3 id="namebar"></h3>
+                  </div>
+                  <label for="table" class="form-label mb-0">Scores</label>
+                  <div class="table">
+                    <table
+                      class="table table-bordered bsb-table-xl mt-2 px-0 mb-3"
+                      id="table-report"
+                    >
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Subject</th>
+                          <th scope="col">Test</th>
+                          <th scope="col">Exam</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody id="result-body"></tbody>
+                    </table>
+                  </div>
+                  <div class="table-responsive mb-3">
+                    <table
+                      class="table table-bordered bsb-table-xl text-nowrap align-middle"
+                      id="table-report-thirdterm"
+                    >
+                      <thead>
+                        <tr id="">
+                          <th scope="col">#</th>
+                          <th scope="col">Subject</th>
+                          <th scope="col">Test</th>
+                          <th scope="col">Exam</th>
+                          <th scope="col">Total</th>
+                          <th scope="col">Second Term</th>
+                          <th scope="col">First Term</th>
+                          <th scope="col">Cumulative Score</th>
+                          <th scope="col">Cumulative Average</th>
+                          <th scope="col">Remark</th>
+                        </tr>
+                      </thead>
+                      <tbody id="thirdterm-resultbody"></tbody>
+                    </table>
+                  </div>
+                  <form action="#!">
+                    <div class="row gy-4 gy-xl-5 mb-3">
+                      <div class="col-4">
+                        <label for="grandtotal" class="form-label-marks"
+                          >Grand Total
+                        </label>
+                        <input type="text" placeholder="" id="grandtotal" />
+                      </div>
+                      <div class="col-4">
+                        <label for="marksobtained" class="form-label-marks"
+                          >Marks Obtained
+                        </label>
+                        <input type="text" placeholder="" id="marksobtained" />
+                      </div>
+                      <div class="col-4">
+                        <label for="avgpercent" class="form-label-marks"
+                          >Average Percentage
+                        </label>
+                        <input type="text" placeholder="" id="avgpercent" />
+                      </div>
+                    </div>
+                    <div class="row gy-4 gy-xl-5">
+                      <div class="col-12">
+                        <label for="comment" class="form-label">Comment</label>
+                        <textarea
+                          class="form-control"
+                          id="comment-report"
+                          rows="3"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="row mt-4">
+                      <p>Term Attendance</p>
+                      <div class="table-responsive">
+                        <table
+                          class="table table-light bsb-table-xl text-nowrap align-middle text-center"
+                          id="table-attendance"
+                        >
+                          <thead id="classattendance-tblhead">
+                            <tr id="stdattendance-tblheadrow"></tr>
+                          </thead>
+                          <tbody id="stdattendance-tblbody">
+                            <tr id="stdattendance-tblbodyrow"></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="row mt-4" style="padding-left: 0">
+                      <div class="col-12 col-md-6 btn-block">
+                        <button type="button" id="viewreport-btn" href="/">
+                          View Report
+                        </button>
+                      </div>
+                      <div class="col-12 col-md-6 btn-block">
+                        <button type="button" id="closereportform-btn" href="/">
+                          Close Form
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- student report by chart-->
+      <section class="py-3 py-md-5" id="performance-report">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
+              <div class="card widget-card border-light shadow-sm">
+                <div class="card-body p-4">
+                  <button
+                    type="button"
+                    class="btn-close btn-close closebtn-icon"
+                    id="performancereportclose-icon"
+                    aria-label="Close"
+                  ></button>
+                  <div class="mb-4">
+                    <h5 class="card-title widget-card-title">
+                      Performance Report
+                    </h5>
+                    <p class="green-text">
+                      <b>Note: </b> You can view report by subject/term/session.
+                      Click on 'select view' below to change views. Please check
+                      that all fields are filled/selected correctly before
+                      clicking the 'View Report' button.
+                    </p>
+                  </div>
+                  <div class="row justify-content-md-center mb-3">
+                    <div class="col-6">
+                      <div>
+                        <label for="admNo-visualreport" class="form-label"
+                          >Admission No:
+                        </label>
+                        <input
+                          name=""
+                          id="admNo-forvisualreport"
+                          style="
+                            background-color: white;
+                            border: 1px solid rgb(216, 213, 213);
+                          "
+                        />
+                      </div>
+                    </div>
+                    <div class="col-6 mt-4 mt-md-0">
+                      <button
+                        type="button"
+                        id="viewprogressreport-btn"
+                        href="/"
+                        class="mt-1 mt-md-0"
+                      >
+                        View Report
                       </button>
                     </div>
-                    <div class="col"></div>
                   </div>
-                </form>
-                <div>
-                  <p id="student-number" class="mt-2 mb-2"></p>
-                </div>
-                <div>
-                  <p id="wklyattendance-label" class="mt-4 mb-2 green-text"></p>
-                </div>
-                <div class="table-responsive overflow-auto" style="display: none;" id="wklyattendancereport-table">
-                  <table class="table table-light bsb-table-xl text-nowrap align-middle text-center">
-                    <thead id="wklyattendance-tblhead">
-                    </thead>
-                    <tbody id="wklyattendance-tblbody">
-                    </tbody>
-                  </table>
+                  <div class="row justify-content-md-center">
+                    <div class="col-4">
+                      <select
+                        class="text-secondary border-light-subtle"
+                        id="viewselect-forvisualreport"
+                      >
+                        <option selected>select view</option>
+                        <option value="subject">By Subject</option>
+                        <option value="term">By Term</option>
+                        <option value="session">By Session</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select
+                        class="text-secondary border-light-subtle"
+                        id="sessionselect-forvisualreport"
+                      >
+                        <option selected>select session</option>
+                        <option value="2023/2024">2023/2024</option>
+                        <option value="2024/2025">2024/2025</option>
+                      </select>
+                    </div>
+                    <div class="col-4">
+                      <select
+                        class="text-secondary border-light-subtle"
+                        id="termselect-forvisualreport"
+                      >
+                        <option selected>select term</option>
+                        <option value="first">First</option>
+                        <option value="second">Second</option>
+                        <option value="third">Third</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div
+                    id="bsb-chart-4"
+                    class="mt-4 mt-md-5"
+                    style="display: none"
+                  >
+                    <canvas
+                      id="progressChart"
+                      style="width: 100%; max-width: 700px; height: 600px"
+                    ></canvas>
+                  </div>
+                  <div
+                    id="bsb-chart-5"
+                    class="mt-4 mt-md-5"
+                    style="display: none"
+                  >
+                    <canvas
+                      id="progressChartTermly"
+                      style="width: 100%; max-width: 700px; height: 600px"
+                    ></canvas>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- scores report form -->
-    <section class="bg-light pt-5 pb-5 reportscores-form" id="reportscores-form">
-      <div class="container" style="position: relative">
-        <div class="row justify-content-md-center">
-          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
-            <h3 class="mb-3 display-5 text-center">
-              Term Result and Attendance Report
-            </h3>
-            <p class="text-secondary mb-1 text-center">
-              To view result or attendance for your ward, input the admission number
-              as well as the term and session in the form below. Scores are only available at the end of the term, but you can monitor your 
-              ward's attendance anytime during the term using the weekly attendance link on the sidebar.
-            </p>
-            <p class="mb-1 text-center" style="color: rgb(156, 5, 5);">
-              Please note that attendance records may not be available beyond the present term. 
-            </p>
-            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+      <!-- Take assessment -->
+      <section
+        class="bg-light py-3 studentassessment-form"
+        id="studentassessment-form"
+      >
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form action="/" id="student-assessment" style="width: 90%">
+                <div class="banner">
+                  <h1>View Lessons and Assessments</h1>
+                </div>
+                <h2 class="mt-4 mb-2">Student Details</h2>
+                <p class="green-text">
+                  Fill in your ward's details to get the link to lessons and/or
+                  assessments for their class
+                </p>
+                <div class="item">
+                  <select id="takeassessment-studentclass">
+                    <option selected>select class</option>
+                    <option value="tamhidi">tamhidi</option>
+                    <option value="hadoonah">hadoonah</option>
+                    <option value="rawdoh">rawdoh</option>
+                    <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                    <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                    <option value="thaalith ibtidaahiy">
+                      thaalith ibtidaahiy
+                    </option>
+                    <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                    <option value="khaamis ibtidaahiy">
+                      khaamis ibtidaahiy
+                    </option>
+                    <option value="awwal idaadiy">awwal idaadiy</option>
+                    <option value="thaani idaadiy">thaani idaadiy</option>
+                    <option value="thaalith idaadiy">thaalith idaadiy</option>
+                    <option value="mutawasith">mutawasith</option>
+                  </select>
+                </div>
+                <div class="item">
+                  <select id="takeassessment-studentprogramme">
+                    <option selected>select programme</option>
+                    <option value="children madrasah">Children Madrasah</option>
+                    <option value="adult madrasah">Adult Madrasah</option>
+                    <option value="female madrasah">Female Madrasah</option>
+                    <option value="barnamij">Barnamij</option>
+                  </select>
+                </div>
+                <p id="assessmentlink-text" class="mt-3 mb-4">
+                  Copy the link for a lesson/assessment and paste it in your
+                  browser to get access to it.
+                </p>
+                <div class="table-responsive">
+                  <table
+                    id="tableOfLessons"
+                    class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3"
+                  >
+                    <thead>
+                      <tr id="tableOfLessonsHead"></tr>
+                    </thead>
+                    <tbody id="tableofLessonsBody"></tbody>
+                  </table>
+                </div>
+                <div class="btn-block">
+                  <button
+                    class="mt-2"
+                    type="submit"
+                    href="/"
+                    id="assessment-btn"
+                  >
+                    Get Link
+                  </button>
+                </div>
+                <div class="d-flex gap-2 justify-content-around mt-5">
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="cancelassessment-btn"
+                    >Reload</a
+                  >
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="closeassessment-btn"
+                    >Close</a
+                  >
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <div class="row justify-content-lg-center">
-          <div class="col-12 col-lg-9">
-            <div class="testbox">
-              <form action="/" class="py-4 px-md-4 px-2" id="scoresreport"
-                style="background-color: #d0f1c1; box-shadow: none">
-                <div class="row gy-4 gy-xl-5 mb-3">
+      </section>
+
+      <!-- get quiz -->
+      <section class="bg-light py-3 studentassessment-form" id="getquiz-form">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form action="/" id="student-assessment" style="width: 90%">
+                <div class="banner">
+                  <h1>View Monthly Quiz</h1>
+                </div>
+                <div class="item">
+                  <p id="quizlink-text" class="mt-3 mb-4">
+                    Copy the link and paste it in your browser to get access to
+                    the quiz. It is important that you take it on time, as you
+                    will no longer have access after the 30-minute deadline.
+                  </p>
+                  <input type="text" name="" placeholder="" id="quizlink" />
+                </div>
+                <div class="d-flex gap-2 justify-content-around mt-5">
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="clearquizform-btn"
+                    >Clear Form</a
+                  >
+                  <a
+                    href="#!"
+                    class="green-text fw-bold text-decoration-none"
+                    id="closequizform-btn"
+                    >Close</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Result download -->
+      <section
+        class="bg-light py-3 px-4 studentassessment-form"
+        id="studentresult-form"
+      >
+        <div class="container green-text">
+          <div class="row justify-content-center mb-3">
+            <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                class="py-2 px-4"
+                id="studentreportsheet-info"
+                style="background-color: #d0f1c1; box-shadow: none"
+              >
+                <div class="row justify-content-center mb-3 mt-2">
+                  <div class="text-center">
+                    <p>
+                      Input/select the details below for your child/ward and
+                      click the button to populate the result sheet.
+                    </p>
+                  </div>
                   <div class="col-12 col-md-4">
-                    <label for="admNo-forreport" class="form-label">Admission No <span
-                        class="text-danger">*</span></label>
-                    <div class="">
-                      <input name="admNo-forreport" id="admNo-forreport" style="background-color: white" />
+                    <label for="resultsheet-admNumber" class="form-label"
+                      >Admission No <span class="text-danger">*</span></label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="resultsheet-admNumber"
+                        value=""
+                        required
+                      />
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <label for="term-forreport" class="form-label">Term <span class="text-danger">*</span></label>
+                    <label for="resultsheet-term" class="form-label"
+                      >Term <span class="text-danger">*</span></label
+                    >
                     <div class="input-group">
-                      <select style="background-color: white" id="term-forreport">
+                      <select
+                        style="background-color: white"
+                        id="resultsheet-term"
+                      >
                         <option value="first">First</option>
                         <option value="second">Second</option>
                         <option value="third">Third</option>
@@ -287,21 +853,155 @@
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
-                    <label for="session-forreport" class="form-label">Session <span class="text-danger">*</span></label>
+                    <label for="resultsheet-session" class="form-label"
+                      >Session <span class="text-danger">*</span></label
+                    >
                     <div class="input-group">
-                      <select style="background-color: white" id="session-forreport">
+                      <select
+                        style="background-color: white"
+                        id="resultsheet-session"
+                      >
                         <option value="2023/2024">2023/2024</option>
                         <option value="2024/2025">2024/2025</option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <div class="row mt-0 mb-3" id="student-namebar">
-                  <h3 id="namebar"></h3>
+                <div class="row" style="padding-left: 0">
+                  <div class="col-12 btn-block">
+                    <button type="button" id="genresult-btn" href="/">
+                      Generate Result
+                    </button>
+                  </div>
                 </div>
-                <label for="table" class="form-label mb-0">Scores</label>
-                <div class="table">
-                  <table class="table table-bordered bsb-table-xl mt-2 px-0 mb-3" id="table-report">
+              </form>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                id="student-reportcard"
+                name="student-reportcard"
+              >
+                <div class="row text-center report-heading">
+                  <div class="col-9 mt-1 schoolnamendaddress">
+                    <h3 class="green-text arabic-detail">
+                      مدرسة رياض الصالحين للدراسات العربية والإسلامية
+                    </h3>
+                    <h3 class="green-text arabic-detail">
+                      منطقة أولمبي، ولاية أوغن، نيجيريا
+                    </h3>
+                    <h2 class="green-text fw-bold" style="font-size: 22px">
+                      RIYAD SALIHEEN
+                    </h2>
+                    <h4 class="green-text fw-bold" style="font-size: 20px">
+                      ARABIC AND ISLAMIC INSTITUTE
+                    </h4>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Saint Lucy Estate, House 9 Road D, Olambe, Ogun State
+                    </p>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Tel: 08029710300, 08028924949, 08020721422, 08163068097
+                    </p>
+                  </div>
+                  <div class="col-3">
+                    <img
+                      src="../images/logo2.png"
+                      alt="Logo"
+                      width="80px"
+                      height="80px"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="greenbkgd-heading text-white mt-1">
+                    <p>Student Report Sheet</p>
+                    <p class="arabic-detail">كشف درجات الطالب</p>
+                  </div>
+                </div>
+                <div class="std-details mt-3">
+                  <!-- <div class="left-details"> -->
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Name:<span
+                        class="detail-left-span"
+                        id="detail-name"
+                      ></span
+                      ><span class="detail-right"> اسم الطالب</span>
+                    </p>
+                    <p class="detail-left">
+                      Class:
+                      <span class="detail-left-span" id="detail-class"></span
+                      ><span class="detail-right"> الفصل</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Session:
+                      <span class="detail-left-span" id="detail-session"></span
+                      ><span class="detail-right"> العام الدراسي</span>
+                    </p>
+                    <p class="detail-left">
+                      Term:
+                      <span class="detail-left-span" id="detail-term"></span
+                      ><span class="detail-right"> الفترة</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      No. in Class:
+                      <span
+                        class="detail-left-span"
+                        id="detail-classnumber"
+                      ></span
+                      ><span class="detail-right"> عدد الطالب في الفصل</span>
+                    </p>
+                    <p class="detail-left">
+                      Position:
+                      <span class="detail-left-span" id="detail-position"></span
+                      ><span class="detail-right"> الترتيب</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      Average percentage:
+                      <span
+                        class="detail-left-span"
+                        id="detail-avgpercent"
+                      ></span
+                      ><span class="detail-right"> المعدل المئوي</span>
+                    </p>
+                    <p class="detail-left">
+                      Max. Attendance:
+                      <span
+                        class="detail-left-span"
+                        id="detail-maxattendance"
+                      ></span
+                      ><span class="detail-right"> أقصى الحضور</span>
+                    </p>
+                  </div>
+                  <div class="dsply-flex">
+                    <p class="detail-left">
+                      No. of times present:
+                      <span class="detail-left-span" id="detail-present"></span
+                      ><span class="detail-right"> عدد الحضور</span>
+                    </p>
+                    <p class="detail-left">
+                      No. of times absent:
+                      <span class="detail-left-span" id="detail-absent"></span
+                      ><span class="detail-right"> عدد الغياب</span>
+                    </p>
+                  </div>
+                  <!-- </div> -->
+                  <!-- <div class="right-details"> -->
+                  <!-- </div> -->
+                </div>
+                <div class="table" id="firstsecondterm-table">
+                  <table
+                    class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3"
+                    id="table-reportdwn"
+                  >
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -312,11 +1012,14 @@
                         <th scope="col">Remark</th>
                       </tr>
                     </thead>
-                    <tbody id="result-body"></tbody>
+                    <tbody id="result-bodydwn"></tbody>
                   </table>
                 </div>
-                <div class="table-responsive mb-3">
-                  <table class="table table-bordered bsb-table-xl text-nowrap align-middle" id="table-report-thirdterm">
+                <div class="table-responsive mb-3" id="thirdterm-table">
+                  <table
+                    class="table table-bordered table-light bsb-table-xl align-middle"
+                    id="table-report-thirdtermdwn"
+                  >
                     <thead>
                       <tr id="">
                         <th scope="col">#</th>
@@ -324,566 +1027,583 @@
                         <th scope="col">Test</th>
                         <th scope="col">Exam</th>
                         <th scope="col">Total</th>
-                        <th scope="col">Second Term</th>
                         <th scope="col">First Term</th>
+                        <th scope="col">Second Term</th>
                         <th scope="col">Cumulative Score</th>
                         <th scope="col">Cumulative Average</th>
                         <th scope="col">Remark</th>
                       </tr>
                     </thead>
-                    <tbody id="thirdterm-resultbody"></tbody>
+                    <tbody id="thirdterm-resultbodydwn"></tbody>
                   </table>
                 </div>
-                <form action="#!">
-                  <div class="row gy-4 gy-xl-5 mb-3">
-                    <div class="col-4">
-                      <label for="grandtotal" class="form-label-marks">Grand Total
-                      </label>
-                      <input type="text" placeholder="" id="grandtotal" />
+                <div class="signaturesndremarks mt-3">
+                  <div class="displayflex-col">
+                    <p class="detail-left">
+                      Class Teacher's Comment:
+                      <span class="detail-right"> تعليق مدرس الفصل</span>
+                    </p>
+                    <p class="detail-left-span" id="detail-tcomment"></p>
+                  </div>
+                  <p class="detail-left">
+                    Class Teacher's Signature:
+                    <span class="detail-left-span" id="detail-tsignature"></span
+                    ><span class="detail-right"> توقيع مدرس الفصل</span>
+                  </p>
+                  <div class="displayflex-col">
+                    <p class="detail-left">
+                      Principal's Remark:
+                      <span class="detail-right"> ملاحظة العميد</span>
+                    </p>
+                    <p class="detail-left-span" id="detail-ameedcomment"></p>
+                  </div>
+                  <p class="detail-left">
+                    Next Term Begins:
+                    <span
+                      class="detail-left-span"
+                      id="detail-nexttermdate"
+                    ></span
+                    ><span class="detail-right"> بداية فترة الجديدة</span>
+                  </p>
+                  <div class="pndpsignatures">
+                    <div class="">
+                      <p class="detail-left psign">
+                        <span
+                          class="detail-left-span"
+                          id="detail-principalsign"
+                        ></span
+                        ><span class="detail-right"></span
+                        ><span class="detail-right">
+                          توقيع العميد مع التاريخ</span
+                        >Principal's Signature:
+                      </p>
                     </div>
-                    <div class="col-4">
-                      <label for="marksobtained" class="form-label-marks">Marks Obtained
-                      </label>
-                      <input type="text" placeholder="" id="marksobtained" />
-                    </div>
-                    <div class="col-4">
-                      <label for="avgpercent" class="form-label-marks">Average Percentage
-                      </label>
-                      <input type="text" placeholder="" id="avgpercent" />
+                    <div class="">
+                      <p class="detail-left psign">
+                        <span
+                          class="detail-left-span"
+                          id="detail-proprietorsign"
+                        ></span
+                        ><span class="detail-right"></span
+                        ><span class="detail-right">
+                          توقيع المدير مع التاريخ</span
+                        >Proprietor's Signature:
+                      </p>
                     </div>
                   </div>
-                  <div class="row gy-4 gy-xl-5">
-                    <div class="col-12">
-                      <label for="comment" class="form-label">Comment</label>
-                      <textarea class="form-control" id="comment-report" rows="3" required></textarea>
-                    </div>
-                  </div>
-                  <div class="row mt-4">
-                    <p>Term Attendance</p>
-                    <div class="table-responsive">
-                      <table class="table table-light bsb-table-xl text-nowrap align-middle text-center"
-                        id="table-attendance">
-                        <thead id="classattendance-tblhead">
-                          <tr id="stdattendance-tblheadrow"></tr>
-                        </thead>
-                        <tbody id="stdattendance-tblbody">
-                          <tr id="stdattendance-tblbodyrow"></tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <div class="row mt-4" style="padding-left: 0">
-                    <div class="col-12 col-md-6 btn-block">
-                      <button type="button" id="viewreport-btn" href="/">
-                        View Report
-                      </button>
-                    </div>
-                    <div class="col-12 col-md-6 btn-block">
-                      <button type="button" id="closereportform-btn" href="/">
-                        Close Form
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                </div>
               </form>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- student report by chart-->
-    <section class="py-3 py-md-5" id="performance-report">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-lg-9 col-xl-8 col-xxl-7">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <button type="button" class="btn-close btn-close closebtn-icon" id="performancereportclose-icon"
-                  aria-label="Close"></button>
-                <div class="mb-4">
-                  <h5 class="card-title widget-card-title">
-                    Performance Report
-                  </h5>
-                  <p class="green-text"><b>Note: </b> You can view report by subject/term/session. Click on 'select
-                    view' below to change views. Please check that all fields are filled/selected correctly before
-                    clicking the 'View Report' button.</p>
-                </div>
-                <div class="row justify-content-md-center mb-3">
-                  <div class="col-6">
-                    <div>
-                      <label for="admNo-visualreport" class="form-label">Admission No:
-                      </label>
-                      <input name="" id="admNo-forvisualreport"
-                        style="background-color: white; border: 1px solid rgb(216, 213, 213);" />
-                    </div>
-                  </div>
-                  <div class="col-6 mt-4 mt-md-0">
-                    <button type="button" id="viewprogressreport-btn" href="/" class="mt-1 mt-md-0">
-                      View Report
-                    </button>
-                  </div>
-                </div>
-                <div class="row justify-content-md-center">
-                  <div class="col-4">
-                    <select class="text-secondary border-light-subtle" id="viewselect-forvisualreport">
-                      <option selected>select view</option>
-                      <option value="subject">By Subject</option>
-                      <option value="term">By Term</option>
-                      <option value="session">By Session</option>
-                    </select>
-                  </div>
-                  <div class="col-4">
-                    <select class="text-secondary border-light-subtle" id="sessionselect-forvisualreport">
-                      <option selected>select session</option>
-                      <option value="2023/2024">2023/2024</option>
-                      <option value="2024/2025">2024/2025</option>
-                    </select>
-                  </div>
-                  <div class="col-4">
-                    <select class="text-secondary border-light-subtle" id="termselect-forvisualreport">
-                      <option selected>select term</option>
-                      <option value="first">First</option>
-                      <option value="second">Second</option>
-                      <option value="third">Third</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="bsb-chart-4" class="mt-4 mt-md-5" style="display: none;">
-                  <canvas id="progressChart" style="width:100%;max-width:700px;height:600px;"></canvas>
-                </div>
-                <div id="bsb-chart-5" class="mt-4 mt-md-5" style="display: none;">
-                  <canvas id="progressChartTermly" style="width:100%;max-width:700px;height:600px;"></canvas>
-                </div>
-              </div>
+          <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col-12 col-md-4 btn-block">
+              <button type="button" id="dwnbtn" href="/">Download</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Take assessment -->
-    <section class="bg-light py-3 studentassessment-form" id="studentassessment-form">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
-            <form action="/" id="student-assessment" style="width: 90%;">
-              <div class="banner">
-                <h1>View Lessons and Assessments</h1>
-              </div>
-              <h2 class="mt-4 mb-2">Student Details</h2>
-              <p class="green-text">Fill in your ward's details to get the link to lessons and/or assessments for their
-                class</p>
-              <div class="item">
-                <select id="takeassessment-studentclass">
-                  <option selected>select class</option>
-                  <option value="tamhidi">tamhidi</option>
-                  <option value="hadoonah">hadoonah</option>
-                  <option value="rawdoh">rawdoh</option>
-                  <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
-                  <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
-                  <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
-                  <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
-                  <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
-                  <option value="awwal idaadiy">awwal idaadiy</option>
-                  <option value="thaani idaadiy">thaani idaadiy</option>
-                  <option value="thaalith idaadiy">thaalith idaadiy</option>
-                </select>
-              </div>
-              <div class="item">
-                <select id="takeassessment-studentprogramme">
-                  <option selected>select programme</option>
-                  <option value="children madrasah">Children Madrasah</option>
-                  <option value="adult madrasah">Adult Madrasah</option>
-                  <option value="female madrasah">Female Madrasah</option>
-                  <option value="barnamij">Barnamij</option>
-                </select>
-              </div>
-              <p id="assessmentlink-text" class="mt-3 mb-4">Copy the link for a lesson/assessment and paste it in your browser
-                to get access to it.</p>
-              <div class="table-responsive">
-                <table id="tableOfLessons"
-                  class="table table-dark table-bordered bsb-table-xl text-nowrap align-middle mt-2 px-0 mb-3">
-                  <thead>
-                    <tr id="tableOfLessonsHead"></tr>
-                  </thead>
-                  <tbody id="tableofLessonsBody"></tbody>
-                </table>
-              </div>
-              <div class="btn-block">
-                <button class="mt-2" type="submit" href="/" id="assessment-btn">Get Link</button>
-              </div>
-              <div class="d-flex gap-2 justify-content-around mt-5">
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="cancelassessment-btn">Reload</a>
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="closeassessment-btn">Close</a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- get quiz -->
-    <section class="bg-light py-3 studentassessment-form" id="getquiz-form">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
-            <form action="/" id="student-assessment" style="width: 90%;">
-              <div class="banner">
-                <h1>View Monthly Quiz</h1>
-              </div>
-              <div class="item">
-                <p id="quizlink-text" class="mt-3 mb-4">Copy the link and paste it in your browser to get access to the
-                  quiz. It is important that you take it on time, as you will no longer have access after the 30-minute
-                  deadline.</p>
-                <input type="text" name="" placeholder="" id="quizlink" />
-              </div>
-              <div class="d-flex gap-2 justify-content-around mt-5">
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="clearquizform-btn">Clear Form</a>
-                <a href="#!" class="green-text fw-bold text-decoration-none" id="closequizform-btn">Close</a>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Result download -->
-    <section class="bg-light py-3 px-4 studentassessment-form" id="studentresult-form" >
-      <div class="container green-text">
-        <div class="row justify-content-center mb-3">
-          <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
-            <form action="/" class="py-2 px-4" id="studentreportsheet-info"
-              style="background-color: #d0f1c1; box-shadow: none">
-              <div class="row justify-content-center mb-3 mt-2">
-                <div class="text-center">
-                  <p>Input/select the details below for your child/ward and click the button to populate the result sheet.</p>
-                </div>
-                <div class="col-12 col-md-4">
-                  <label for="resultsheet-admNumber" class="form-label">Admission No <span class="text-danger">*</span></label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="resultsheet-admNumber" value="" required />
-                  </div>
-                </div>
-                <div class="col-12 col-md-4">
-                  <label for="resultsheet-term" class="form-label">Term <span class="text-danger">*</span></label>
-                  <div class="input-group">
-                    <select style="background-color: white" id="resultsheet-term">
-                      <option value="first">First</option>
-                      <option value="second">Second</option>
-                      <option value="third">Third</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-12 col-md-4">
-                  <label for="resultsheet-session" class="form-label">Session <span class="text-danger">*</span></label>
-                  <div class="input-group">
-                    <select style="background-color: white" id="resultsheet-session">
-                      <option value="2023/2024">2023/2024</option>
-                      <option value="2024/2025">2024/2025</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="padding-left: 0">
-                <div class="col-12 btn-block">
-                  <button type="button" id="genresult-btn" href="/">
-                    Generate Result
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row justify-content-center">
-          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
-            <form action="/" id="student-reportcard" name="student-reportcard">
-              <div class="row text-center report-heading">
-                <div class="col-9 mt-1 schoolnamendaddress">
-                  <h3 class="green-text arabic-detail"> مدرسة رياض الصالحين للدراسات العربية والإسلامية</h3>
-                  <h3 class="green-text arabic-detail">منطقة أولمبي، ولاية أوغن، نيجيريا</h3>
-                  <h2 class="green-text fw-bold" style="font-size: 22px;">RIYAD SALIHEEN</h2>
-                  <h4 class="green-text fw-bold" style="font-size: 20px;">ARABIC AND ISLAMIC INSTITUTE </h4>
-                  <p class="mt-0 mb-0 green-text addrndphone">Saint Lucy Estate, House 9 Road D, Olambe, Ogun State</p>
-                  <p class="mt-0 mb-0 green-text addrndphone">Tel: 08029710300, 08028924949, 08020721422, 08163068097</p>
-                </div>
-                <div class="col-3">
-                  <img src="../images/logo2.png" alt="Logo" width="80px" height="80px">
-                </div>
-              </div>
-              <div class="row">
-                <div class="greenbkgd-heading text-white mt-1">
-                  <p>Student Report Sheet</p>
-                  <p class="arabic-detail">كشف درجات الطالب</p>
-                </div>
-              </div>
-              <div class="std-details mt-3">
-                <!-- <div class="left-details"> -->
-                  <div class="dsply-flex">
-                    <p class="detail-left">Name:<span class="detail-left-span" id="detail-name"></span><span class="detail-right"> اسم الطالب</span></p>
-                  <p class="detail-left">Class: <span class="detail-left-span" id="detail-class"></span><span class="detail-right"> الفصل</span></p>
-                  </div>
-                  <div class="dsply-flex">
-                    <p class="detail-left">Session: <span class="detail-left-span" id="detail-session"></span><span class="detail-right">  العام الدراسي</span></p>
-                    <p class="detail-left">Term: <span class="detail-left-span" id="detail-term"></span><span class="detail-right"> الفترة</span></p>
-                  </div>
-                  <div class="dsply-flex">
-                    <p class="detail-left">No. in Class: <span class="detail-left-span" id="detail-classnumber"></span><span class="detail-right"> عدد الطالب في الفصل</span></p>
-                    <p class="detail-left">Position: <span class="detail-left-span" id="detail-position"></span><span class="detail-right"> الترتيب</span></p>
-                  </div>
-                  <div class="dsply-flex">
-                    <p class="detail-left">Average percentage: <span class="detail-left-span" id="detail-avgpercent"></span><span class="detail-right"> المعدل المئوي</span></p>
-                    <p class="detail-left">Max. Attendance: <span class="detail-left-span" id="detail-maxattendance"></span><span class="detail-right"> أقصى الحضور</span></p>
-                  </div>
-                  <div class="dsply-flex">
-                    <p class="detail-left">No. of times present: <span class="detail-left-span" id="detail-present"></span><span class="detail-right"> عدد الحضور</span></p> 
-                    <p class="detail-left">No. of times absent: <span class="detail-left-span" id="detail-absent"></span><span class="detail-right"> عدد الغياب</span></p>
-                  </div>
-                <!-- </div> -->
-                <!-- <div class="right-details"> -->
-              <!-- </div> -->
-              </div>
-              <div class="table" id="firstsecondterm-table">
-                <table class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3" id="table-reportdwn">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Subject</th>
-                      <th scope="col">Test</th>
-                      <th scope="col">Exam</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Remark</th>
-                    </tr>
-                  </thead>
-                  <tbody id="result-bodydwn"></tbody>
-                </table>
-              </div>
-              <div class="table-responsive mb-3" id="thirdterm-table">
-                <table class="table table-bordered table-light bsb-table-xl align-middle"
-                  id="table-report-thirdtermdwn">
-                  <thead>
-                    <tr id="">
-                      <th scope="col">#</th>
-                      <th scope="col">Subject</th>
-                      <th scope="col">Test</th>
-                      <th scope="col">Exam</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">First Term</th>
-                      <th scope="col">Second Term</th>
-                      <th scope="col">Cumulative Score</th>
-                      <th scope="col">Cumulative Average</th>
-                      <th scope="col">Remark</th>
-                    </tr>
-                  </thead>
-                  <tbody id="thirdterm-resultbodydwn"></tbody>
-                </table>
-              </div>
-              <div class="signaturesndremarks mt-3">
-                  <div class="displayflex-col">
-                    <p class="detail-left">Class Teacher's Comment: <span class="detail-right"> تعليق مدرس الفصل</span></p>
-                    <p class="detail-left-span" id="detail-tcomment"></p>
-                  </div>
-                  <p class="detail-left">Class Teacher's Signature: <span class="detail-left-span" id="detail-tsignature"></span><span class="detail-right"> توقيع مدرس الفصل</span></p>
-                  <div class="displayflex-col">
-                    <p class="detail-left">Principal's Remark: <span class="detail-right"> ملاحظة العميد</span></p>
-                    <p class="detail-left-span" id="detail-ameedcomment"></p>
-                  </div>
-                  <p class="detail-left">Next Term Begins: <span class="detail-left-span" id="detail-nexttermdate"></span><span class="detail-right"> بداية فترة الجديدة</span></p> 
-                <div class="pndpsignatures">
-                  <div class="">
-                    <p class="detail-left psign"><span class="detail-left-span" id="detail-principalsign"></span><span class="detail-right"></span><span class="detail-right"> توقيع العميد مع التاريخ</span>Principal's Signature: </p> 
-                  </div>
-                  <div class="">
-                    <p class="detail-left psign"><span class="detail-left-span" id="detail-proprietorsign"></span><span class="detail-right"></span><span class="detail-right"> توقيع المدير مع التاريخ</span>Proprietor's Signature: </p> 
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col"></div>
-          <div class="col-12 col-md-4 btn-block">
-            <button type="button" id="dwnbtn" href="/">
-              Download
-            </button>
-          </div>
-          <!-- <div class="col-12 col-md-3 btn-block">
+            <!-- <div class="col-12 col-md-3 btn-block">
             <button type="button" id="pdfdownload-btn" href="/">
               Download PDF
             </button>
           </div> -->
-          <div class="col-12 col-md-4 btn-block">
-            <button type="button" id="closeresultsheet-btn" href="/">
-              Close Form
-            </button>
-          </div>
-           <div class="col"></div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Footer  -->
-    <footer class="footer">
-      <!-- Widgets - Bootstrap Brain Component -->
-      <section class="py-4 py-md-5 py-xl-8 border-top border-light">
-        <div class="container overflow-hidden">
-          <div class="row gy-4 gy-lg-0 justify-content-xl-between">
-            <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-              <div class="widget mt-2">
-                <a href="../index.html">
-                  <img src="../images/logowhite.jpg" alt="Logo" width="40" height="40" />
-                </a>
-                <p class="mb-1 logo-paragh">
-                  Riyad Saliheen School of Arabic and Islamic Studies
-                </p>
-              </div>
+            <div class="col-12 col-md-4 btn-block">
+              <button type="button" id="closeresultsheet-btn" href="/">
+                Close Form
+              </button>
             </div>
-            <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-              <div class="widget">
-                <h4 class="widget-title">Get in Touch</h4>
-                <p class="mb-4">House 9, Road D, Saint Lucy Estate, Olambe</p>
-                <p class="mb-1">
-                  <a class="text-decoration-none" href="tel:+2348163068097">+234 816 306 8097</a>
-                  <a class="text-decoration-none" style="display: block" href="tel:+2348020721422">+234 802 072 1422</a>
-                  <a class="text-decoration-none" style="display: block" href="tel:+2348028924949">+234 802 892 4949</a>
-                </p>
-                <p class="mb-0">
-                  <a class="text-decoration-none"
-                    href="mailto:Madrasaturiyaadisaliheen@gmail.com">Madrasaturiyaadisaliheen@gmail.com</a>
-                </p>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 col-xl-2">
-              <div class="widget">
-                <h4 class="widget-title">Quick Links</h4>
-                <ul class="list-unstyled">
-                  <li class="mb-2">
-                    <a href="calendar.html" class="text-decoration-none">Term Calendar</a>
-                  </li>
-                  <li class="mb-2">
-                    <a href="newsandevents.html" class="text-decoration-none">News & Events</a>
-                  </li>
-                  <li class="mb-2">
-                    <a href="gallery.html" class="text-decoration-none">Gallery</a>
-                  </li>
-                  <li class="mb-2">
-                    <a href="assessments.html" class="text-decoration-none">Knowledge Test</a>
-                  </li>
-                  <li class="mb-2">
-                    <a href="donate.html" class="text-decoration-none">Support Us</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-12 col-lg-3 col-xl-4">
-              <div class="widget">
-                <h4 class="widget-title">Our Monthly Digest</h4>
-                <p class="mb-4">
-                  Subscribe to our monthly digest to get religious articles
-                  delivered to you.
-                </p>
-                <form action="#!">
-                  <div class="row gy-4">
-                    <div class="col-12">
-                      <div class="input-group">
-                        <span class="input-group-text" id="email-newsletter-addon">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-envelope" viewBox="0 0 16 16">
-                            <path
-                              d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
-                          </svg>
-                        </span>
-                        <input type="email" class="form-control" id="email-newsletter" value=""
-                          placeholder="Email Address" aria-label="email-newsletter"
-                          aria-describedby="email-newsletter-addon" required />
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="d-grid">
-                        <button class="btn subscribe-btn" type="submit">
-                          Subscribe
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <div class="col"></div>
           </div>
         </div>
       </section>
 
-      <!-- footer bottom -->
-      <div class="py-4 py-md-5 py-xl-2 border-top border-light-subtle">
-        <div class="container overflow-hidden">
-          <div class="row gy-4 gy-md-0">
-            <div class="col-xs-12 col-md-7 order-1 order-md-0">
-              <div class="copyright text-center text-md-start text-faint">
-                &copy; 2024. All Rights Reserved.
+      <!-- Student Bill -->
+      <section
+        class="bg-light py-3 px-4 studentassessment-form"
+        id="studentbill-form"
+      >
+        <div class="container green-text">
+          <div class="row justify-content-center mb-3">
+            <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                class="py-2 px-4"
+                id="studentreportsheet-info"
+                style="background-color: #d0f1c1; box-shadow: none"
+              >
+                <div class="row justify-content-center mb-3 mt-2">
+                  <div class="text-center mb-2">
+                    <p style="color: rgb(2, 36, 9)">
+                      Input the admission number then click the button to view
+                      your latest bill. You should also see your last payment
+                      and balance due for this billing.
+                    </p>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="billview-admNumber" class="form-label"
+                      >Admission No <span class="text-danger">*</span></label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="billview-admNumber"
+                        value=""
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="billview-lastpay" class="form-label"
+                      >Last Payment Made</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        class="form-control"
+                        id="billview-lastpay"
+                        value=""
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <label for="billview-baldue" class="form-label"
+                      >Balance Due</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        min="0"
+                        placeholder="0"
+                        class="form-control"
+                        id="billview-baldue"
+                        value=""
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row" style="padding-left: 0; padding-bottom: 10px">
+                  <div class="col"></div>
+                  <div class="col-12 col-md-4 btn-block">
+                    <button type="button" id="billview-btn" href="/">
+                      Generate Bill
+                    </button>
+                  </div>
+                  <div class="col"></div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+              <form
+                action="/"
+                id="student-reportcard"
+                name="student-reportcard"
+              >
+                <div class="row text-center report-heading">
+                  <div class="col-12 mt-1 schoolnamendaddress">
+                    <h3 class="green-text arabic-detail">
+                      مدرسة رياض الصالحين للدراسات العربية والإسلامية
+                    </h3>
+                    <h3 class="green-text arabic-detail">
+                      منطقة أولمبي، ولاية أوغن، نيجيريا
+                    </h3>
+                    <h2 class="green-text fw-bold" style="font-size: 22px">
+                      RIYAD SALIHEEN
+                    </h2>
+                    <h4 class="green-text fw-bold" style="font-size: 20px">
+                      ARABIC AND ISLAMIC INSTITUTE
+                    </h4>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Saint Lucy Estate, House 9 Road D, Olambe, Ogun State
+                    </p>
+                    <p class="mt-0 mb-0 green-text addrndphone">
+                      Tel: 07014509569
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="greenbkgd-heading text-white mt-1">
+                    <p>MODRSASAH BILL</p>
+                    <p class="arabic-detail">الفاتورة</p>
+                  </div>
+                </div>
+                <div class="std-details mt-3">
+                  <p class="detail-left">
+                    Name:<span
+                      class="detail-left-span"
+                      id="detail-billname"
+                    ></span
+                    ><span class="detail-right"> اسم الطالب</span>
+                  </p>
+                  <p class="detail-left">
+                    Class:
+                    <span class="detail-left-span" id="detail-billclass"></span
+                    ><span class="detail-right"> الفصل</span>
+                  </p>
+                  <p class="detail-left">
+                    Session:
+                    <span
+                      class="detail-left-span"
+                      id="detail-billsession"
+                    ></span
+                    ><span class="detail-right"> العام الدراسي</span>
+                  </p>
+                  <p class="detail-left">
+                    Term:
+                    <span class="detail-left-span" id="detail-billterm"></span
+                    ><span class="detail-right"> الفترة</span>
+                  </p>
+                </div>
+                <div class="table" id="bill-table">
+                  <table
+                    class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3"
+                    id=""
+                  >
+                    <thead>
+                      <tr>
+                        <th scope="col">Items</th>
+                        <th scope="col">#</th>
+                        <th scope="col">k</th>
+                      </tr>
+                    </thead>
+                    <tbody id="billingview-tbody">
+                      <tr>
+                        <th>
+                          Tuition Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم
+                          المدرسة
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Textbooks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; الكراسة
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Development Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; المبلغ
+                          المفروض للتطور
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Graduation Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم
+                          التخريج
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Portal Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم البوابة
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Examination Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم
+                          الإمتحنات
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Uniform(1) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; بذلة نظامية
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Last Term Balance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; باقية
+                          الفترة السابقة
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Full Quranic Memorisation Fees
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم تحفيظ القرآن
+                          الكريم كاملا
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Admission Form &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; استمارة
+                          القبول
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>Parent Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      </tr>
+                      <tr>
+                        <th>Staff Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Scholarship Grant &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          Total Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; مجموع
+                          المبلغ
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col"></div>
+            <div class="col-12 col-md-3 btn-block">
+              <button type="button" id="billviewform-closebtn" href="/">
+                Close Form
+              </button>
+            </div>
+            <div class="col"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer  -->
+      <footer class="footer">
+        <!-- Widgets - Bootstrap Brain Component -->
+        <section class="py-4 py-md-5 py-xl-8 border-top border-light">
+          <div class="container overflow-hidden">
+            <div class="row gy-4 gy-lg-0 justify-content-xl-between">
+              <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                <div class="widget mt-2">
+                  <a href="../index.html">
+                    <img
+                      src="../images/logowhite.jpg"
+                      alt="Logo"
+                      width="40"
+                      height="40"
+                    />
+                  </a>
+                  <p class="mb-1 logo-paragh">
+                    Riyad Saliheen School of Arabic and Islamic Studies
+                  </p>
+                </div>
               </div>
-              <div class="credits text-md-start text-center fs-7 text-faint">
-                Built by
-                <a href="" class="text-decoration-none">Heizanden Solutions</a>
+              <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                <div class="widget">
+                  <h4 class="widget-title">Get in Touch</h4>
+                  <p class="mb-4">House 9, Road D, Saint Lucy Estate, Olambe</p>
+                  <p class="mb-1">
+                    <a class="text-decoration-none" href="tel:+2348163068097"
+                      >+234 816 306 8097</a
+                    >
+                    <a
+                      class="text-decoration-none"
+                      style="display: block"
+                      href="tel:+2348020721422"
+                      >+234 802 072 1422</a
+                    >
+                    <a
+                      class="text-decoration-none"
+                      style="display: block"
+                      href="tel:+2348028924949"
+                      >+234 802 892 4949</a
+                    >
+                  </p>
+                  <p class="mb-0">
+                    <a
+                      class="text-decoration-none"
+                      href="mailto:Madrasaturiyaadisaliheen@gmail.com"
+                      >Madrasaturiyaadisaliheen@gmail.com</a
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 col-lg-3 col-xl-2">
+                <div class="widget">
+                  <h4 class="widget-title">Quick Links</h4>
+                  <ul class="list-unstyled">
+                    <li class="mb-2">
+                      <a href="calendar.html" class="text-decoration-none"
+                        >Term Calendar</a
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <a href="newsandevents.html" class="text-decoration-none"
+                        >News & Events</a
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <a href="gallery.html" class="text-decoration-none"
+                        >Gallery</a
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <a href="assessments.html" class="text-decoration-none"
+                        >Knowledge Test</a
+                      >
+                    </li>
+                    <li class="mb-2">
+                      <a href="donate.html" class="text-decoration-none"
+                        >Support Us</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-12 col-lg-3 col-xl-4">
+                <div class="widget">
+                  <h4 class="widget-title">Our Monthly Digest</h4>
+                  <p class="mb-4">
+                    Subscribe to our monthly digest to get religious articles
+                    delivered to you.
+                  </p>
+                  <form action="#!">
+                    <div class="row gy-4">
+                      <div class="col-12">
+                        <div class="input-group">
+                          <span
+                            class="input-group-text"
+                            id="email-newsletter-addon"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-envelope"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"
+                              />
+                            </svg>
+                          </span>
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email-newsletter"
+                            value=""
+                            placeholder="Email Address"
+                            aria-label="email-newsletter"
+                            aria-describedby="email-newsletter-addon"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="d-grid">
+                          <button class="btn subscribe-btn" type="submit">
+                            Subscribe
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div class="col-xs-12 col-md-5 order-0 order-md-1">
-              <ul class="nav justify-content-center justify-content-md-end">
-                <li class="nav-item">
-                  <a class="nav-link link-dark" href="#!">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-facebook" viewBox="0 0 16 16">
-                      <path
-                        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
-                    </svg>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-dark" href="#!">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-youtube" viewBox="0 0 16 16">
-                      <path
-                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
-                    </svg>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-dark" href="#!">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-twitter" viewBox="0 0 16 16">
-                      <path
-                        d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                    </svg>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link link-dark" href="#!">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                      class="bi bi-instagram" viewBox="0 0 16 16">
-                      <path
-                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
+        <!-- footer bottom -->
+        <div class="py-4 py-md-5 py-xl-2 border-top border-light-subtle">
+          <div class="container overflow-hidden">
+            <div class="row gy-4 gy-md-0">
+              <div class="col-xs-12 col-md-7 order-1 order-md-0">
+                <div class="copyright text-center text-md-start text-faint">
+                  &copy; 2024. All Rights Reserved.
+                </div>
+                <div class="credits text-md-start text-center fs-7 text-faint">
+                  Built by
+                  <a href="" class="text-decoration-none"
+                    >Heizanden Solutions</a
+                  >
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-5 order-0 order-md-1">
+                <ul class="nav justify-content-center justify-content-md-end">
+                  <li class="nav-item">
+                    <a class="nav-link link-dark" href="#!">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        class="bi bi-facebook"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link link-dark" href="#!">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        class="bi bi-youtube"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link link-dark" href="#!">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        class="bi bi-twitter"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link link-dark" href="#!">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        class="bi bi-instagram"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
-  </main>
-  <!-- <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-  <script src="https://kit.fontawesome.com/0a5d1384fe.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="./js/parentportal.js" type="text/javascript"></script>
-  <!-- <script src="../media/arialuni-normal.js"></script> -->
-</body>
-
+      </footer>
+    </main>
+    <!-- <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script
+      src="https://kit.fontawesome.com/0a5d1384fe.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/parentportal.js" type="text/javascript"></script>
 </html>

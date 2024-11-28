@@ -396,9 +396,16 @@ const downloadScores = (admNo, term, session) => {
             reportCardTeacherComment.innerText = response.data.comment
             reportCardAmeedComment.innerText = response.data.ameedComment
             reportCardNextTermBegins.innerText = response.data.nextTermDate
-            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.teacherSignature} alt="teacher signature" width="60">`
-            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.principalSign} alt="teacher signature" width="60">`
-            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= ${response.data.proprietorSign} alt="teacher signature" width="60">`
+            // set max height for signatures
+            reportCardTeacherSignature.classList.add("signatureimages")
+            reportCardPrincipalSignature.classList.add("signatureimages")
+            reportCardProprietorSignature.classList.add("signatureimages")
+            // to ensure signature is not loaded from cache, in case there's a change
+            let timestamp = new Date().getTime();
+            reportCardTeacherSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.teacherSignature}?t= + ${timestamp}" alt="teacher signature" width="60">`
+            reportCardPrincipalSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.principalSign}?t= + ${timestamp}" alt="principal signature" width="60">`
+            reportCardProprietorSignature.innerHTML = `<img crossorigin="anonymous" src= "${response.data.proprietorSign}?t= + ${timestamp}" alt="proprietor signature" width="60">`
+    
             function calculateAttendance() {
                 let maxAttendance = response.data.maxAttendance;
                 let timesPresent = 0;
@@ -546,7 +553,195 @@ const downloadScores = (admNo, term, session) => {
 };
 
 
+// ******************* VIEW BILL *********************
+// ***************************************************
+const billingViewLink = document.getElementById("billing-view")
+const billingViewForm = document.getElementById("studentbill-form")
+const billingViewAdmNo = document.getElementById("billview-admNumber")
+const billingViewLastPayment = document.getElementById("billview-lastpay")
+const billingViewBalanceDue = document.getElementById("billview-baldue")
+const billingViewGenerateBtn = document.getElementById("billview-btn")
+const billingViewCloseForm = document.getElementById("billviewform-closebtn")
+const billingViewTableBody = document.getElementById("billingview-tbody")
+const billingViewStudentName = document.getElementById("detail-billname")
+const billingViewClassName = document.getElementById("detail-billclass")
+const billingViewSession = document.getElementById("detail-billsession")
+const billingViewTerm = document.getElementById("detail-billterm")
 
+// show bill
+billingViewLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    billingViewForm.style.display = "block";
+    billingViewLastPayment.setAttribute("disabled", true)
+    billingViewBalanceDue.setAttribute("disabled", true)
+    sidebar.style.display = "none";
+});
+
+// close bill
+billingViewCloseForm.addEventListener("click", (e) => {
+    e.preventDefault();
+    billingViewAdmNo.value = "";
+    billingViewLastPayment.value = ""
+    billingViewBalanceDue.value = ""
+    for (let i = 0; i < billingViewTableBody.childElementCount; i++) {
+        console.log(billingViewTableBody.children[i])
+        console.log(billingViewTableBody.children[i].children[1])
+        if (billingViewTableBody.children[i].children[1]) {
+            billingViewTableBody.children[i].children[1].innerText = ""
+        }
+    }
+    billingViewForm.style.display = "none";
+});
+
+//  view a student's bill
+const viewBill = (admNo) => {
+    let errorMsg;
+    axios
+        .get(`${baseUrl}/billing/viewbill/?admNo=${admNo}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(function (response) {
+            console.log(response)
+            Swal.fire({
+                icon: "success",
+                title: "Successful",
+                text: response.data.message
+            });
+
+            billingViewStudentName.innerText = response.data.astudentbill.studentName
+            billingViewClassName.innerText = response.data.astudentbill.classname
+            billingViewSession.innerText = response.data.astudentbill.session
+            billingViewTerm.innerText = response.data.astudentbill.term
+           console.log(response.data.astudentbill.session)
+            console.log(response.data.astudentbill.term)
+            billingViewLastPayment.value = response.data.astudentbill.lastpaymentmade
+            billingViewBalanceDue.value = response.data.astudentbill.balancedue
+
+            let tblrowtuition = billingViewTableBody.children[0]
+            let tblcoltuition = document.createElement("td")
+            tblcoltuition.innerText = response.data.astudentbill.latestBill.tuitionfee
+            tblrowtuition.appendChild(tblcoltuition)
+
+            let tblrowtxtbk = billingViewTableBody.children[1]
+            let tblcoltxtbk = document.createElement("td")
+            tblcoltxtbk.innerText = response.data.astudentbill.latestBill.txtbkfee
+            tblrowtxtbk.appendChild(tblcoltxtbk)
+
+            let tblrowdevp = billingViewTableBody.children[2]
+            let tblcoldevp = document.createElement("td")
+            tblcoldevp.innerText = response.data.astudentbill.latestBill.developmentfee
+            tblrowdevp.appendChild(tblcoldevp)
+
+            let tblrowgrad = billingViewTableBody.children[3]
+            let tblcolgrad = document.createElement("td")
+            tblcolgrad.innerText = response.data.astudentbill.latestBill.graduationfee
+            tblrowgrad.appendChild(tblcolgrad)
+
+            let tblrowptl = billingViewTableBody.children[4]
+            let tblcolptl = document.createElement("td")
+            tblcolptl.innerText = response.data.astudentbill.latestBill.portalfee
+            tblrowptl.appendChild(tblcolptl)
+
+            let tblrowexam = billingViewTableBody.children[5]
+            let tblcolexam = document.createElement("td")
+            tblcolexam.innerText = response.data.astudentbill.latestBill.examfee
+            tblrowexam.appendChild(tblcolexam)
+
+            let tblrowufrm = billingViewTableBody.children[6]
+            let tblcolufrm = document.createElement("td")
+            tblcolufrm.innerText = response.data.astudentbill.latestBill.uniformfee
+            tblrowufrm.appendChild(tblcolufrm)
+
+            let tblrowltbal = billingViewTableBody.children[7]
+            let tblcolltbal = document.createElement("td")
+            tblcolltbal.innerText = response.data.astudentbill.latestBill.lasttermbalance
+            tblrowltbal.appendChild(tblcolltbal)
+
+            let tblrowtahfiz = billingViewTableBody.children[8]
+            let tblcoltahfiz = document.createElement("td")
+            tblcoltahfiz.innerText = response.data.astudentbill.latestBill.fulltahfizfee
+            tblrowtahfiz.appendChild(tblcoltahfiz)
+
+            let tblrowadm = billingViewTableBody.children[9]
+            let tblcoladm = document.createElement("td")
+            tblcoladm.innerText = response.data.astudentbill.latestBill.admissionformfee
+            tblrowadm.appendChild(tblcoladm)
+
+            let tblrowprtdt = billingViewTableBody.children[10]
+            let tblcolprtdt = document.createElement("td")
+            tblcolprtdt.innerText = response.data.astudentbill.latestBill.parentdiscount
+            tblrowprtdt.appendChild(tblcolprtdt)
+
+            let tblrowstfdt = billingViewTableBody.children[11]
+            let tblcolstfdt = document.createElement("td")
+            tblcolstfdt.innerText = response.data.astudentbill.latestBill.staffdiscount
+            tblrowstfdt.appendChild(tblcolstfdt)
+
+            let tblrowsch = billingViewTableBody.children[12]
+            let tblcolsch = document.createElement("td")
+            tblcolsch.innerText = response.data.astudentbill.latestBill.scholarshipgrant
+            tblrowsch.appendChild(tblcolsch)
+
+            let tblrowtotal = billingViewTableBody.children[13]
+            let tblcoltotal = document.createElement("td")
+            tblcoltotal.innerText = response.data.astudentbill.latestBill.totalfeesdue
+            tblcoltotal.style.fontWeight = "Bold"
+            tblcoltotal.style.color = "rgb(4, 109, 4)"
+            tblrowtotal.appendChild(tblcoltotal)
+
+        })
+        .catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                errorMsg = error.response.data.message
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+                errorMsg = "Network Error"
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                errorMsg = error.message
+            }
+            Swal.fire({
+                icon: "error",
+                title: "Error Processing Input",
+                text: errorMsg
+            });
+        });
+};
+
+// view bill for a student
+billingViewGenerateBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    billingViewLastPayment.value = ""
+    billingViewBalanceDue.value = ""
+    for (let i = 0; i < billingViewTableBody.childElementCount; i++) {
+        if (billingViewTableBody.children[i].children[1]) {
+            billingViewTableBody.children[i].children[1].innerText = ""
+            billingViewTableBody.children[i].removeChild(billingViewTableBody.children[i].children[1])
+        }
+    }
+    const admno = billingViewAdmNo.value
+    if (admno == "") {
+        Swal.fire({
+            icon: "error",
+            title: "Empty Input Detected",
+            text: "Admission number cannot be empty"
+        });
+    }
+    else {
+        viewBill(admno)
+    }
+});
 
 
 
@@ -557,7 +752,7 @@ const logoutLink= document.getElementById("logout")
 logoutLink.addEventListener("click", (e) => {
     e.preventDefault(); 
     localStorage.clear()
-    window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+    window.location.href = "https://riyadarabicschool.netlify.app/frontend/login.html"
     // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
 });
 

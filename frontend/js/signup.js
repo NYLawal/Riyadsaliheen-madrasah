@@ -109,20 +109,20 @@ function Redirect() {
                     denyButtonText: `No, ${userRole}`
                 }).then((result) => {
                     if (result.isConfirmed) {
-                          window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+                          window.location.href = "https://riyadarabicschool.netlify.app/frontend/parentPortal.html"
                         // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
                     
                     } else if (result.isDenied) {
                         if (userRole == 'superadmin' || userRole == 'admin') {
-                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+                            window.location.href = "https://riyadarabicschool.netlify.app/frontend/adminPortal.html"
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
                         }
                         else if (userRole == 'bursar') {
-                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/bursarPortal.html"
+                            window.location.href = "https://riyadarabicschool.netlify.app/frontend/bursarPortal.html"
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
                         }
                         else if (userRole == 'teacher') {
-                            window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                            window.location.href = "https://riyadarabicschool.netlify.app/frontend/teacherPortal.html"
                             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
                         }
                     }
@@ -130,27 +130,27 @@ function Redirect() {
             }
            
             else if (userRole  == 'superadmin' || userRole == 'admin') {
-                 window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/adminPortal.html"
+                 window.location.href = "https://riyadarabicschool.netlify.app/frontend/adminPortal.html"
                 //  window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/adminPortal.html"
             }
             else if (userRole == 'bursar') {
-                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/bursarPortal.html"
+                window.location.href = "https://riyadarabicschool.netlify.app/frontend/bursarPortal.html"
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/bursarPortal.html"
             }
             else if (userRole == 'teacher') {
-                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/teacherPortal.html"
+                window.location.href = "https://riyadarabicschool.netlify.app/frontend/teacherPortal.html"
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/teacherPortal.html"
             }
             else if (userRole == 'student') {
-                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/studentPortal.html"
+                window.location.href = "https://riyadarabicschool.netlify.app/frontend/studentPortal.html"
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/studentPortal.html"
             }
             else if (userRole == 'parent') {
-                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/parentPortal.html"
+                window.location.href = "https://riyadarabicschool.netlify.app/frontend/parentPortal.html"
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/parentPortal.html"
             }
             else {
-                window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/index.html"
+                window.location.href = "https://riyadarabicschool.netlify.app/index.html"
                 // window.location.href = "http://127.0.0.1:5500/RiyadNew/index.html"
             }
 

@@ -229,29 +229,14 @@
                 </li>
               </ul>
             </li>
-
-            <li class="" style="display: none;">
-              <a
-                href=""
-                data-bs-toggle="collapse"
-                aria-expanded="false"
-                role="button"
-                class="dropdown-toggle"
-                data-bs-target="#updateStudentPayment"
-                aria-controls="updateStudentPayment"
-                >Update Payment Status</a
-              >
-              <ul class="collapse list-unstyled" id="updateStudentPayment">
-                <li>
-                  <a href="#" id="paymentstatus-byclass">by class</a>
-                </li>
-                <li>
-                  <a href="#" id="paymentstatus-bystudent">by student</a>
-                </li>
-              </ul>
-            </li>
             <li>
               <a href="#" id="weeklyattendance">Class Attendance</a>
+            </li>
+            <li>
+              <a href="#" id="billing">Prepare Bill</a>
+            </li>
+            <li>
+              <a href="#" id="billing-view">View Bill</a>
             </li>
           </ul>
           <ul class="list-unstyled components components2">
@@ -355,12 +340,10 @@
                     aria-label="Close"
                   ></button>
                   <h4 class="mb-2">View Students</h4>
-                  <!-- <div class="d-grid gap-2 d-sm-flex mb-5"> -->
                   <div class="item mb-4">
                     <select id="viewstudent-select">
                       <option value="all">All</option>
                       <option value="bycriteria">By Search</option>
-                      <!-- <option value="one">One</option> -->
                     </select>
                   </div>
                   <div id="search-students" class="pt-3 pb-4">
@@ -522,6 +505,7 @@
                           <option value="awwal idaadiy">awwal idaadiy</option>
                           <option value="thaani idaadiy">thaani idaadiy</option>
                           <option value="thaalith idaadiy">thaalith idaadiy</option>
+                          <option value="mutawasith">mutawasith</option>
                         </select>
                       </div>
                     </div>
@@ -567,6 +551,11 @@
                         View Report
                       </button>
                     </div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="downloadclassreport-btn" href="/">
+                        Download
+                      </button>
+                    </div>
                     <div class="col"></div>
                   </div>
                 </form>
@@ -591,6 +580,379 @@
       </div>
     </section>
 
+
+    <!-- Set Bill Details -->
+    <section class="py-5 py-md-3 mb-5" id="bill-form">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8">
+            <h3 class="mb-3 display-5 text-center">Termly Billing Details</h3>
+            <p class="text-secondary mb-1 text-center">
+              Set billing details for students.
+            </p>
+            <hr class="w-50 mx-auto mb-3 mb-xl-9 border-dark-subtle" />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-9">
+            <div class="card widget-card border-light">
+              <div class="card-body p-4">
+                <button type="button" class="btn-close closebtn-icon" id="bill-icon"
+                  aria-label="Close"></button>
+                <form action="/" class="py-3 px-md-4 px-2" id="billdetails" style=" box-shadow: none">
+                  <div class="row gy-4 gy-xl-5 mb-3">
+                    <div class="col-12 col-md-6" id="admno-biilingdiv">
+                      <label for="admNo-forbill" class="form-label" id="billing-admnolabel">Admission Number <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="admNo-forbill" value="" required />
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3" id="classname-biilingdiv">
+                      <label for="classname-forbill" class="form-label"  id="billing-classlabel">Class <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="classname-forbill">
+                          <option selected>select a class</option>
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                          <option value="mutawasith">mutawasith</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3" id="programme-biilingdiv">
+                      <label for="programme-forbill" class="form-label" id="billing-programmelabel">Programme <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select id="programme-forbill">
+                          <option selected>select a programme</option>
+                          <option value="children madrasah">children madrasah</option>
+                          <option value="adult madrasah">adult madrasah</option>
+                          <option value="female madrasah">female madrasah</option>
+                          <option value="barnamij">barnamij</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="term-forbill" class="form-label">Term <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="term-forbill">
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <label for="session-forbill" class="form-label">Session <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="session-forbill">
+                          <!-- <option value="2023/2024">2023/2024</option> -->
+                          <option value="2024/2025">2024/2025</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row gy-4 gy-xl-5 mt-3">
+                    <div class="item col-12 col-md-6">
+                      <label for="choice-forbill" class="form-label">What do you intend doing? <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="choice-forbill">
+                          <option selected>Select Task</option>
+                          <option value="student bill">Prepare bill for one student</option>
+                          <option value="class bill">Prepare bill for a class</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="item col-12 col-md-3">
+                      <label for="feechoice-forbill" class="form-label">Fee <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="feechoice-forbill">
+                          <option selected>Select Fee</option>
+                          <option value="tuition">Tuition</option>
+                          <option value="textbook">Textbook</option>
+                          <option value="development">Development Fee</option>
+                          <option value="graduation">Graduation Fee</option>
+                          <option value="portal">Portal Fee</option>
+                          <option value="exam">Exam Fee</option>
+                          <option value="uniform">Uniform</option>
+                          <option value="balance">Last Term Balance</option>
+                          <option value="tahfiz">Full Tahfiz Fee</option>
+                          <option value="admission form">Admission Form</option>
+                          <option value="parent discount">Parent Discount</option>
+                          <option value="staff discount">Staff Discount</option>
+                          <option value="scholarship">Scholarship Grant</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="item col-12 col-md-3">
+                      <label for="amount-forbill" class="form-label">Amount <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <input type="number"  min="0" class="form-control" id="amount-forbill" value="" required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="viewstudentsforbill-btn" href="/">
+                        View Student(s)
+                      </button>
+                    </div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="setbilldetails-btn" href="/">
+                        Set Fee
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                  <div class="table-responsive overflow-auto mt-4" style="height: 400px;" id="billing-table">
+                    <table class="table table-light table-bordered bsb-table-xl text-nowrap align-middle text-center">
+                      <thead id="billing-tblhead">
+                        <tr>
+                          <th>Serial No</th>
+                          <th>Admission Number</th>
+                          <th>Name</th>
+                          <th>Tuition</th>
+                          <th>Textbook</th>
+                          <th>Development</th>
+                          <th>Graduation</th>
+                          <th>Portal</th>
+                          <th>Exam</th>
+                          <th>Uniform</th>
+                          <th>Balance</th>
+                          <th>Full Tahfiz</th>
+                          <th>Admission Form</th>
+                          <th>Parent Discount</th>
+                          <th>Staff Discount</th>
+                          <th>Scholarship</th>
+                          <th style="color: rgb(4, 109, 4);">TOTAL FEES</th>
+                        </tr>
+                      </thead>
+                      <tbody id="billing-tblbody">
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="row gy-4 gy-xl-5 mt-1">
+                    <div class="col-12 col-md-4" id="">
+                      <label for="billingforclass" class="form-label"  id="billingforclass-label">Billing for?</label>
+                      <div class="input-group">
+                        <select id="billingforclass">
+                          <option selected>select a class</option>
+                          <option value="tamhidi">tamhidi</option>
+                          <option value="hadoonah">hadoonah</option>
+                          <option value="rawdoh">rawdoh</option>
+                          <option value="awwal ibtidaahiy">awwal ibtidaahiy</option>
+                          <option value="thaani ibtidaahiy">thaani ibtidaahiy</option>
+                          <option value="thaalith ibtidaahiy">thaalith ibtidaahiy</option>
+                          <option value="raabi ibtidaahiy">raabi ibtidaahiy</option>
+                          <option value="khaamis ibtidaahiy">khaamis ibtidaahiy</option>
+                          <option value="awwal idaadiy">awwal idaadiy</option>
+                          <option value="thaani idaadiy">thaani idaadiy</option>
+                          <option value="thaalith idaadiy">thaalith idaadiy</option>
+                          <option value="mutawasith">mutawasith</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="billingforterm" class="form-label">Term <span
+                          class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <select style="background-color: white" id="billingforterm">
+                          <option value="first">First</option>
+                          <option value="second">Second</option>
+                          <option value="third">Third</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <label for="billingforsession" class="form-label">Session <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <input type="text" placeholder="e.g 2024/2025" class="form-control" id="billingforsession" value="" required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col"></div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="generatetotal-btn" href="/">
+                        Generate Total
+                      </button>
+                    </div>
+                    <div class="col-12 col-md-4 btn-block">
+                      <button type="button" id="updatebill-btn" href="/">
+                        Update Bill
+                      </button>
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </form> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Student Bill -->
+    <section class="bg-light py-3 px-4 studentassessment-form" id="studentbill-form">
+      <div class="container green-text">
+        <div class="row justify-content-center mb-3">
+          <div class="col-12 col-md-10 col-lg-12 col-xl-8 col-xxl-6">
+            <form action="/" class="py-2 px-4" id="studentreportsheet-info"
+              style="background-color: #d0f1c1; box-shadow: none">
+              <div class="row justify-content-center mb-3 mt-2">
+                <div class="text-center mb-2">
+                  <p style="color: rgb(2, 36, 9);">Input the admission number then click the button to view the student's bill. To update ther bill, input the details then use the other button.</p>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-admNumber" class="form-label">Admission No <span
+                      class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="billview-admNumber" value="" required />
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-lastpay" class="form-label">Last Payment Made</label>
+                  <div class="input-group">
+                    <input type="number" min="0" placeholder="0" class="form-control" id="billview-lastpay" value="" required />
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <label for="billview-baldue" class="form-label">Balance Due</label>
+                  <div class="input-group">
+                    <input type="number" min="0" placeholder="0" class="form-control" id="billview-baldue" value="" required />
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding-left: 0; padding-bottom: 10px;">
+                <div class="col"></div>
+                <div class="col-12 col-md-4 btn-block">
+                  <button type="button" id="billview-btn" href="/">
+                    Generate Bill
+                  </button>
+                </div>
+                <div class="col-12 col-md-4 btn-block">
+                  <button type="button" id="billupdatepayment-btn" href="/">
+                    Update Payment
+                  </button>
+                </div>
+                <div class="col"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="testbox col-12 col-md-10 col-lg-8 col-xl-8 col-xxl-6">
+            <form action="/" id="student-reportcard" name="student-reportcard">
+              <div class="row text-center report-heading">
+                <div class="col-12 mt-1 schoolnamendaddress">
+                  <h3 class="green-text arabic-detail"> مدرسة رياض الصالحين للدراسات العربية والإسلامية</h3>
+                  <h3 class="green-text arabic-detail">منطقة أولمبي، ولاية أوغن، نيجيريا</h3>
+                  <h2 class="green-text fw-bold" style="font-size: 22px;">RIYAD SALIHEEN</h2>
+                  <h4 class="green-text fw-bold" style="font-size: 20px;">ARABIC AND ISLAMIC INSTITUTE </h4>
+                  <p class="mt-0 mb-0 green-text addrndphone">Saint Lucy Estate, House 9 Road D, Olambe, Ogun State</p>
+                  <p class="mt-0 mb-0 green-text addrndphone">Tel: 07014509569
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="greenbkgd-heading text-white mt-1">
+                  <p>MODRSASAH BILL</p>
+                  <p class="arabic-detail">الفاتورة</p>
+                </div>
+              </div>
+              <div class="std-details mt-3">
+                  <p class="detail-left">Name:<span class="detail-left-span" id="detail-name"></span><span
+                      class="detail-right"> اسم الطالب</span></p>
+                  <p class="detail-left">Class: <span class="detail-left-span" id="detail-class"></span><span
+                      class="detail-right"> الفصل</span></p>
+                  <p class="detail-left">Session: <span class="detail-left-span" id="detail-session"></span><span
+                      class="detail-right"> العام الدراسي</span></p>
+                  <p class="detail-left">Term: <span class="detail-left-span" id="detail-term"></span><span
+                      class="detail-right"> الفترة</span></p>
+              </div>
+              <div class="table" id="bill-table">
+                <table class="table table-bordered table-light bsb-table-xl mt-2 px-0 mb-3" id="">
+                  <thead>
+                    <tr>
+                      <th scope="col">Items</th>
+                      <th scope="col">#</th>
+                      <th scope="col">k</th>
+                    </tr>
+                  </thead>
+                  <tbody id="billingview-tbody">
+                    <tr>
+                      <th>Tuition Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم المدرسة</th>
+                    </tr>
+                    <tr>
+                      <th>Textbooks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; الكراسة</th>
+                    </tr>
+                    <tr>
+                      <th>Development Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; المبلغ المفروض للتطور</th>
+                    </tr>
+                    <tr>
+                      <th>Graduation Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم التخريج</th>
+                    </tr>
+                    <tr>
+                      <th>Portal Fee &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم البوابة</th>
+                    </tr>
+                    <tr>
+                      <th>Examination Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم الإمتحنات</th>
+                    </tr>
+                    <tr>
+                      <th>Uniform(1) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; بذلة نظامية</th>
+                    </tr>
+                    <tr>
+                      <th>Last Term Balance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; باقية الفترة السابقة</th>
+                    </tr>
+                    <tr>
+                      <th>Full Quranic Memorisation Fees &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; رسوم تحفيظ القرآن الكريم كاملا</th>
+                    </tr>
+                    <tr>
+                      <th>Admission Form &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; استمارة القبول</th>
+                    </tr>
+                    <tr>
+                      <th>Parent Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>Staff Discount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>Scholarship Grant &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    </tr>
+                    <tr>
+                      <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Total Amount &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; مجموع المبلغ</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col"></div>
+          <div class="col-12 col-md-3 btn-block">
+            <button type="button" id="billviewform-closebtn" href="/">
+              Close Form
+            </button>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </section>
 
 
       <!-- Footer  -->

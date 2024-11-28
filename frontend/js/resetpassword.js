@@ -74,7 +74,7 @@ const resetPassword = (userData, userId, token) => {
         // denyButtonText: `No, ${userRole}`
     }).then((result) => {
         if (result.isConfirmed) {
-              window.location.href = "https://madrasatu-riyadsaliheen.netlify.app/frontend/login.html"
+              window.location.href = "https://riyadarabicschool.netlify.app/frontend/login.html"
             // window.location.href = "http://127.0.0.1:5500/RiyadNew/frontend/login.html"
         
         }
